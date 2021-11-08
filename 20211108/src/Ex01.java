@@ -29,9 +29,10 @@ public class Ex01 {
 			System.out.println(d[i]);
 		}
 		// score에 있는 값을 모두 더하시오.
-		
-		
-		
-		
+		int sum = 0;
+		for(int i = 0; i <= 9 ; i++) {
+			sum += score[i];
+		}
+		System.out.println(sum);
 	}
 }

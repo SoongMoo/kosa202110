@@ -14,5 +14,4 @@ public class Ex03 {
 		return val ;
 		
 	}
-	
 }

@@ -40,9 +40,5 @@ public class ArrayTest {
 		    System.out.print(n.getContent()+ "   ");
 		    System.out.println(n.getReadCount());
 		}
-		
-		
-		
-		
 	}
 }

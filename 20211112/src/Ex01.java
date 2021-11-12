@@ -1,7 +1,8 @@
 
-public class Ex01 {
+public  class Ex01 {
 	int radius;
 	double pi;
+
 	public void setRadius(int radius) {
 		this.radius = radius;
 	}

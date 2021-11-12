@@ -1,6 +1,6 @@
 package polymorphism;
-
-public class HankookTire extends Tire {
+ //              B                 A  ; a = b
+public class HankookTire extends Tire { // tire = HankookTire
 	public HankookTire(String location, int maxRotation) {
 		super(location, maxRotation);
 	}

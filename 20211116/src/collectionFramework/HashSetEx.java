@@ -30,5 +30,9 @@ public class HashSetEx {
 			}
 		}
 		System.out.println(set.size());
+		
+		set.clear();
+		System.out.println(set.isEmpty());
 	}
 }
+

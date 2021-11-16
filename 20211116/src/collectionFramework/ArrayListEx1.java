@@ -31,5 +31,6 @@ public class ArrayListEx1 {
 			System.out.println(s.getContent());
 			System.out.println(list1.get(i).getContent());
 		}
+		 
 	}
 }

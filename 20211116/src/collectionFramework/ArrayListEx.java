@@ -11,6 +11,7 @@ public class ArrayListEx {
 		list.add("이상범");
 		list.add("이장범");
 		list.add("이장범"); // 리스트에서는 같은 값이 저장이 된다.
+		list.set(3, "이길무"); // 리스트에 있는 값 수정
 		for(int i = 0; i < list.size() ; i++) {
 			String s = (String)list.get(i);
 			System.out.println(s);
@@ -40,7 +41,7 @@ public class ArrayListEx {
 		System.out.println(list.size());
 		list.remove("이상범");
 		System.out.println(list.size());
-		list.removeAll(list);
+		list.clear();
 		System.out.println(list.size());
 		System.out.println(list.isEmpty());
 		list.add("이숭무");

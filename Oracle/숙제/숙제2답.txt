@@ -1,0 +1,263 @@
+--- 19. 성이 모두 소문자인 grant와 모두 대문자인 'GRANT'로 직원테이블에서
+--- 해당 사원을 찾으려 한다.
+select * from hr.employees
+where last_name = initcap('grant') or last_name = initcap('GRANT');
+
+select * from hr.employees
+where lower(last_name) = 'grant' or upper(last_name) = 'GRANT';
+
+---20. 'GranT'로 입력했을때 사원테이블에서 성이 'Grant'인 사원을 찾으시오
+select * from hr.employees where last_name = initcap('GranT');
+select * from hr.employees where lower(last_name) = lower('GranT');
+select * from hr.employees where upper(last_name) = upper('GranT');
+
+
+-- 21. 성은 모두 대문자로 변환하고 이름 모두 소문자로 변환하여
+-- 성과 이름을 붙여 출력할 때 ' 나는 GRANT douglas 입니다'로 
+-- 출력되게 하시오
+select '나는 ' || upper(last_name) || ' ' || lower(first_name) || '입니다.'
+from hr.employees;
+
+-- 22. 성과 이름을 붙여 출력
+select concat(last_name, first_name) from hr.employees;
+
+--- 23. 성이 Davies에서 av만 출력하시오.
+select SUBSTR(last_name,2,2) from hr.employees;
+
+--- 24. 성이 두번째 글자부터 모두 출력하시오.
+select substr(last_name,2) from hr.employees;
+
+--- 25. 성의 마지막 글자에서 두글자만 가져오시오.
+select substr(last_name,-2,2) from HR.employees;
+
+--- 26. 성의 뒤에 on으로 끝나는 사람을 찾으시오
+select * from hr.employees where last_name like '%on';
+
+-- 27. 성의 뒤에 세번째 글자가 so인 사람을 출력하시오
+select * from hr.employees where last_name like '%so_';
+
+-- 28. 직원 정보를 출력하는데 이메일은 왼쪽에서 3글자만 출력하시오.
+--     직원번호, 성, 급여, 직무, 이메일
+select employee_id, last_name, salary, job_id, substr(email,1,3)
+from hr.employees;
+
+-- 29. 직원 정보를 출력하는데 이메일은 오른쪽에서 3글자만 출력하시오.
+-- 직원번호, 성, 급여, 직무, 이메일
+select employee_id, last_name, salary, job_id, substr(email,-3)
+from hr.employees;
+
+-- 30. 직원 정보를 출력하는데 이메일은 오른쪽에서 3글자만 출력하고 나머지는 ‘-’로 출력
+---    직원번호, 성, 급여, 직무, 이메일
+select employee_id, last_name, salary, job_id, 
+       lpad(substr(email,-3),length(email),'-') email
+from hr.employees;
+
+
+--- 31. o가 있는 성중 o가 몇번째에 있는 위치인지 출력하시오. 
+--      직원번호 성, 성의 위치, 직무
+select employee_id, last_name, instr(last_name,'o')
+from HR.employees;
+
+--- 32. oc가 있는 성중 oc가 몇번째에 있는 위치인지 출력하시오.  
+-- 직원번호 성, 성의 위치, 직무
+select employee_id, last_name, instr(last_name, 'oc')
+from hr.employees;
+
+--33. 직무에 RE가 있는 경우 RE부터 3글자만 출력하시오.
+--    직원번호 성,  직무, 가공된 직무
+select employee_id, last_name, job_id, substr(job_id, instr(job_id,'RE'), 3)
+from hr.employees;
+
+--- 34. 직원번호, 성, 입사일 , 급여, 
+--- 급여를 10칸에 출력하고 나머지 공간 앞에 * 표시가 되게 하자.
+select employee_id, last_name, hire_date, lpad(salary, 10, '*')
+from hr.employees;
+
+-- 35. 직원번호, 성, 입사일 , 급여, 
+--- 급여를 10칸에 출력하고 나머지 공간 뒤에 * 표시가 되게 하자.
+select employee_id, last_name, hire_date, rpad(salary, 10, '*')
+from hr.employees;
+
+-- 36. 직원번호, 성, 입사일, 직무를 출력하는데 
+---    직무에 RE가 있다면 RE를 AB로 변경하여 출력.
+select employee_id, last_name, hire_date, replace(job_id,'RE','AB')
+from hr.employees;
+
+-- 37. 직원번호, 연락처, 커미션, 부서번호,급여
+-- 급여를 3000으로 나누었을 때의 나머지를 출력하시오.
+select employee_id, phone_number, commission_pct, department_id, salary,
+       mod(salary, 3000)
+from hr.employees;
+
+-- 38. 2002년도부터 입사한 직원들을 출력하시오
+select * from HR.employees where to_char(hire_date,'yyyy') >= '2002';
+
+select * from HR.employees where hire_date >= '02/01/01';
+
+-- 39. 올해는 오늘까지 몇주가 지났는지 확인하시오.
+select trunc((sysdate - to_date('2021/01/01')) / 7, 0)
+from dual;
+
+-- 40. 직원마다 몇년 근무했지를 출력하시오. 직원번호, 성, 연락처,부서, 근무년수
+select employee_id, last_name, phone_number, department_id,
+       trunc(((sysdate - hire_date) / 365), 0)
+from hr.employees;
+
+-- 41. 근속년수 8년 이상인 사원들만 출력하시오
+select * from hr.employees
+where (sysdate-hire_date) / 365 >= 8;
+
+-----------------------------------------------------------------------
+--- 42. 예시 : 게시판리스트에서 제목을 5글자****인 것 처럼 
+--- 직원의 성을 3글자만 출력 뒤에 *을 세번찍어서 출력하시오.
+--- 직원번호, 입사일, 성
+select employee_id, hire_date , rpad(substr(last_name,1,3),6, '*')
+from hr.employees;
+-------------------------------------------------------------------------
+--- 43. 홍길동은 몇글자입니까?
+select length('홍길동') from dual;
+-------------------------------------------------------------------------
+
+--- 44. )"홍길동 \n"으로 되어 있는 것을 html에서 행 바꿈이되도록
+---      "홍길동 <br>"변경하시오.
+select replace('홍길동 \n','\n','<br />')
+from dual;
+-----------------------------------------------------------------------
+--- 45. 입사일이 'YYYY-MM-DD'인 날짜를 31-05-2019 16:24:30 오전인 형태로 출력하자
+select to_char(hire_date, 'dd-mm-yyyy hh24:Mi:ss AM')
+from hr.employees;
+
+--- 46. 숫자(3333333)를 3자리마다 쉼표를 찍어서 출력
+select to_char('3333333', 'L999,999,999')
+from dual;
+
+--- 47. 직원테이블에서 급여를 W33,333,333식으로 출력하시오
+select to_char(salary, 'l999,999,999')
+from hr.employees;
+
+-- 48. 직원의 2018-10-25까지의 근무일수를 계산하시오.
+--  직원번호, 부서번호, 입사일, 근무일수
+select employee_id, department_id, hire_date, 
+       to_date('2018-10-25','yyyy-mm-dd') - hire_date
+from hr.employees;
+
+-- 49. 직원의 25-10-2018까지의 근무일수를 계산하시오.
+---    직원번호, 부서번호, 입사일, 근무일수
+select employee_id, department_id, hire_date, 
+       to_date('25-10-2018','dd-mm-yyyy') - hire_date
+from hr.employees;
+
+--- 50. 직원의 10-25-2018까지의 근무일수를 계산하시오.
+---   직원번호, 부서번호, 입사일, 근무일수
+select employee_id, department_id, hire_date, 
+       to_date('10-25-2018','mm-dd-yyyy') - hire_date
+from hr.employees;
+
+-- 51. '10-25-2002'에 입사한 사원을 출력하시오.
+-- 직원번호, 부서번호, 입사일, 근무일수
+select employee_id, department_id, hire_date
+from hr.employees
+where hire_date = to_date('10-25-2002','mm-dd-yyyy');
+
+--- 52. 연말정산을 하려고 합니다.
+--      연봉(급여*12) : 급여는 커미션까지 포함된다.
+---     직원의 연봉을 구하시오. 직원번호, 부서번호, 급여, 연봉
+select employee_id, department_id, salary, 
+        salary *( 1 + nvl(commission_pct,0)) * 12 yearsal
+from hr.employees;
+
+--- 53. 부서가 90이거나 30인 부서의 직원의 연봉을 구하시오
+---     직원번호, 부서번호, 급여, 연봉
+select employee_id, department_id, salary, salary * 12 
+from hr.employees
+where department_id in (90,30);
+
+--- 54. 급여가 10000이상이면 "이사급입니다"
+--             7000이상이면 "부장급입니다"
+--             5000이상이면 "과장급입니다"
+--             나머지는 사원으로 출력하시오.
+--            성과 급여를 같이 출력한다
+select last_name, salary, case  when salary > 10000 then '이사급입니다'
+                                when salary > 7000 then '부장급입니다'
+                                when salary > 5000 then '과장급입니다'
+                                else '사원' end emp
+from hr.employees;
+
+-- 55. ) 급여를 2000으로 나눈 값의 몫이 
+---       0이면 0.00
+---       1이면 0.09
+---       2이면 0.20
+---       3이면 0.30
+---       4이면 0.40
+---       5이면 0.42
+---       6이면 0.44
+--        0.45 만큼 세금이 부여된다.
+---부여되는 세금을 출력하시오.
+---성과 급여도 같이 출력하시오.(단, 부서가 80인 사원만)
+select last_name, salary,
+       case trunc(salary / 2000) when 0 then 0.00
+                                 when 1 then 0.09
+                                 when 2 then 0.20
+                                 when 3 then 0.30
+                                 when 4 then 0.40
+                                 when 5 then 0.42
+                                 when 6 then 0.44
+                                 else 0.45 end tex
+from hr.employees
+where department_id = 80;
+
+--- 56. 직원 전체에서 입사일이 제일빠른 사람과 최근에 입사한 사원을 출력하시오
+select min(hire_date), max(hire_date) from hr.employees;
+
+-- 57. 사원의 수를 출력하시오
+select count(*) from hr.employees;
+                
+-- 58. 직원테이블에서 부서가 몇개인지를 출력하시오.
+select count(distinct department_id)
+from hr.employees;
+
+-- 59. 사원 테이블에서 각부서별 급여평균을 구하자
+select department_id, avg(salary)
+from hr.employees
+group by department_id;
+
+-- 60. 위 문제에서 부서를 오름차순으로 정렬하여 출력하시오
+select department_id, avg(salary)
+from hr.employees
+group by department_id
+order by department_id asc;
+
+-- 61. 각부서별 급여의 평균을 구하는 평균값이 낮은 것부터 출력하시오
+select department_id, avg(salary)
+from hr.employees
+group by department_id
+order by 2;
+
+-- 62. 각 부서에 있는 사원의 직무별 급여의 평균을 구하시오.
+select department_id, job_id, avg(salary)
+from hr.employees
+group by department_id, job_id;
+
+-- 63. 급여의 1000단위를 반올림하여 출력하시오.
+select round(salary,-4) from hr.employees;
+
+-- 64.  사원번호가 짝수인 사원만 출력하시오
+select * from hr.employees
+where mod(employee_id , 2) = 0; 
+
+-- 65. 사원번호가 홀수인 사원을 출력하시오.
+select * from hr.employees
+where mod(employee_id , 2) = 1; 
+
+-- 66. 사원의 급여가 3000에서 6000 사이의 사원을 출력하시오,
+select * from hr.employees where salary BETWEEN 3000 and 6000;
+
+-- 67. 사원의 급여가 3000에서 6000 사이의 급여를 받지 못하는 사원을 출력하시오,
+select * from hr.employees where salary not BETWEEN 3000 and 6000;
+
+-- 68. 사원들 중 1000주가 지난 사원들만 출력하시오
+select * from hr.employees
+where ( sysdate - hire_date ) / 7 >= 1000;
+
+--- 69. 50, 60, 90인 부서가 아닌 사원들을 구하시오
+select * from hr.employees where department_id not in (50, 60, 90);

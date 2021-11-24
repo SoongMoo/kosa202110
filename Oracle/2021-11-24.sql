@@ -358,9 +358,200 @@ rollback;
 --- DML작업들을 모두 취소하게 된다.
 commit 
 --- DML작업들을 모두 마무리하게 된다.
--- 자동 commit이 되는 경우 DDL(create)문을 사용한 경우,
+-- 자동 commit이 되는 경우 DDL(create, alter, drop)문을 사용한 경우,
 -- 작업 창을 닫는 경우
 select * from aa2;
+
+create table dept
+as 
+select * from departments;
+
+select * from dept;
+
+--36. 부서명에 Public이 포함된 부서의 사원들을 모두 삭제 하세요.
+select department_id from dept where department_name like '%Public%';
+
+delete from emp
+where department_id in (
+  select department_id from dept where department_name like '%Public%'
+  );
+select * from emp
+where department_id in (
+    select department_id from dept where department_name like '%Public%'
+    );
+    
+truncate table emp;
+select * from emp;
+rollback;
+
+---37. 데이터 복사
+insert into emp
+select * from employees;
+
+select * from emp;
+commit;
+
+--------------update------
+-- 38. emp에서 60번 부서의 사원들을 출력하세요.
+select * from emp where department_id = 60; 
+      --  60인 부서를 120번 부서로 변경
+update emp
+set department_id = 120
+where department_id = 60;
+
+select * from emp where department_id = 60; 
+select * from emp where department_id = 120; 
+
+--- 38. 120인부서를 60부서변경
+update emp
+set department_id = 60
+where department_id = 120;
+
+-- 39.사원번호 113인 사원의 부서를 70부서로 변경
+update emp
+set department_id = 70
+where employee_id = 113;
+select * from emp where employee_id = 113;
+
+update emp 
+set department_id = 130;
+
+select * from emp;
+rollback;
+
+--  40. 205번 사원의 직무 출력
+select job_id from emp where employee_id = 205;
+--      205번 사원의 급여를 출력
+select salary from emp where employee_id = 205;
+-- 이때 114번의 직무와 급여를 205번의 직무와 급여로 변경하시오.
+update emp
+set job_id = 
+        (select job_id from emp where employee_id = 205),
+    slary = 
+        (select salary from emp where employee_id = 205)
+where employee_id = 114;
+
+-- 41. 200번 사원의 직무와 140번 사원의 직속상사를 
+--     130번 사원에 적용시키세요.
+select * from emp where employee_id = 130;-- ST_CLERK, 121
+
+update emp
+set job_id =(select job_id from emp where employee_id = 200),
+    manager_id = (select manager_id from emp where employee_id = 140)
+where employee_id = 130;
+
+rollback;
+
+-- 42. employees테이블에 있는 100번 사원의 급여와 
+--     employees테이블에 있는 114번 사원의 직무를
+--     emp테이블에 있는 130번 사원에게 적용시키세요.
+update emp
+set salary = (select salary from employees where employee_id = 100),
+    job_id =(select job_id from employees where employee_id = 114)
+where employee_id = 130;
+
+--43. 200번 사원이 가진 직무와 같은 사원들의 부서를 사원번호 114인 부서로 변경하시오.
+update emp
+set department_id = 
+        (select department_id from emp where employee_id = 114)
+where job_id = (select job_id from emp where employee_id = 200);
+
+-- 44. 114번의 직무와 급여를 205번 사원과 같게 변경하시오.
+update emp
+set job_id = (select job_id from emp where employee_id = 205), 
+    salary = (select salary from emp where employee_id = 205)
+where employee_id = 114;
+
+
+rollback;
+-- 45. 부서명에 대소문자 구분 없이 pu가 포함되어 있는 부서의 직원들을 
+--    120번 사원의 급여로 변경하시오.
+update emp 
+set salary = (select salary from emp where employee_id = 120)
+where department_id in (
+    select department_id from dept 
+    where lower(department_name) like '%pu%'  
+);
+--- insert, select , update, delete
+---   C       R        U       D  : DML
+insert into (select employee_id, first_name, last_name, hire_date, salary,
+                    department_id, email, job_id
+             from emp
+             where department_id = 50)
+values(300, 'SoongMoo', 'Rhee' , sysdate, 15000, 10, 'highland0','AP');
+
+insert into (select employee_id, first_name, last_name, hire_date, salary,
+                    department_id, email, job_id
+             from emp
+             where department_id = 50 with check option) --- 50부서만 insert 
+values(300, 'SoongMoo', 'Rhee' , sysdate, 15000, 50, 'highland0','AP');
+
+--DML문 끝----
+-- DML -- insert, select , update, delete
+-- DDL -- create, alter, drop
+-- TCL -- rollback, commit, savepoint
+-- DCL -- grant, revoke 
+--grant resource, connect, dba to kosa;
+-- revoke resource, connect, dba from kosa;
+rollback;
+commit;
+select * from emp;
+--------------------------------------------------
+delete from emp
+where job_id like '%REP';
+select * from emp;
+savepoint a; ---------------------------------------
+delete from emp
+where department_id = 90;
+select * from emp;
+savepoint b; ---------------------------------------
+delete from emp;
+select * from emp;
+rollback to a;
+select * from emp;
+rollback;
+---- TCL 끝 -------
+--- view object -----
+---  46. 사원번호, 이름 , 이메일, 입사일, 급여 , 커미션,
+--       커미션을 포함한 년봉을 출력하는데 null값은 0으로 적용
+--      부서 이름이 대소문자 구분없이 'pu'가 있는 부서의 사원
+select employee_id, first_name, email, hire_date, commission_pct,
+        (salary + salary * nvl(commission_pct,0)) * 12
+from emp
+where department_id in 
+    (select department_id from dept 
+      where lower(department_name) like '%pu%');
+    
+--47. 46번을  view로 만들자.
+create view vw_pu
+as
+select employee_id, first_name, email, hire_date, commission_pct,
+        (salary + salary * nvl(commission_pct,0)) * 12 year_sal
+from emp
+where department_id in 
+    (select department_id from dept 
+      where lower(department_name) like '%pu%');
+
+select * from emp;
+
+select * from vw_pu;
+
+--- 48. 90번부서의 사원들 정보 중에 이름 전화번호 부서, 사원번호를 출력
+select first_name, phone_number, department_id, employee_id
+from employees
+where department_id = 90;
+
+create view vw_90
+as 
+select first_name, phone_number, department_id, employee_id
+from employees
+where department_id = 90;
+
+select * from vw_90;
+
+select * from employees;
+
+
 
 
 

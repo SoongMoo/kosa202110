@@ -366,6 +366,142 @@ group by cube (department_id, job_id, hire_date);
 -- hire_date
 -- ()
 
+-- grouping 함수 집계된 컬럼을 확인
+-- 집계된 컬럼 0, 집계되지 않은 컬럼 1
+select department_id, job_id, sum(salary)
+       , grouping(department_id)
+       , grouping(job_id)
+from employees
+group by rollup (department_id, job_id);
+
+--- 각 부서의 직무별 같은 상사를 가지고 있는 사원의 급여 평균
+--- 각 부서별 같은 상사를 가진 사원들의 급여의 평균
+--  직무별 같은 상사를 가진 사원들의 급여의 평균을 구하세요.
+select department_id, job_id, manager_id, avg(salary)
+from employees
+group by grouping sets ((department_id, job_id, manager_id),
+                        (department_id, manager_id),
+                        (job_id, manager_id));
+                         
+select department_id, job_id, manager_id, sum(salary)
+from employees
+group by rollup (department_id, (job_id, manager_id));
+--- (department_id, (job_id, manager_id))
+--- (job_id, manager_id)
+--- (department_id)
+-- ()
+
+select department_id, job_id , manager_id , sum(salary)
+from employees
+group by  department_id, rollup(job_id), cube(manager_id);
+
+--- group by  department_id, rollup(job_id), rollup(manager_id)
+
+-- department_id, job_id, manager_id
+-- department_id, job_id
+-- department_id
+-- department_id, manager_id
+
+--- 104번 사원의 부서와 상사가 같은 사원을 출력하시오.
+select * from employees
+where department_id = (select department_id from employees 
+                        where employee_id = 104)
+and  manager_id = (select manager_id from employees 
+                        where employee_id = 104);
+
+-- 50인 부서에서 하는 업무 같은 업무 담당하는 직원들 찾으세요.
+select * from employees 
+where job_id in (select job_id from employees 
+                 where department_id = 50); 
+
+
+-- EMPLOYEE_ID가 178 또는 174인 사원의 관리자 및 부서와 같은 관리자 및 부서를 
+--- 갖는 사원의 정보를 표시한다. 단, 178과 174번은 출력하지 말것
+select * from employees
+where manager_id = (select manager_id from employees
+                    where employee_id = 178)
+ and department_id = (select department_id from employees
+                    where employee_id = 178)
+union
+select * from employees
+where manager_id = (select manager_id from employees
+                    where employee_id = 174)
+ and department_id = (select department_id from employees
+                    where employee_id = 174);
+
+-- 쌍비교
+select * from employees
+where (manager_id, department_id) in (
+        select manager_id, department_id
+        from employees
+        where employee_id in (178, 174)
+)and employee_id not in (178,174);
+
+--- window함수
+-- 1. RANK() --- 동일한 값인 경우 동일한 순위, 다음 등수는 
+-- 1,2,2,4
+
+--- 급여를 제일 많이 받는 사람 부터 순위를 출력하시오.
+select first_name,salary, job_id, 
+       rank() over (order by salary desc) all_rank
+from employees;
+
+select rownum , first_name, salary, job_id
+from(select first_name,salary, job_id
+    from employees
+    order by salary desc); 
+    
+-- 직무별 급여의 순위를 내림차순으로 출력하세요.
+select first_name, salary, job_id,
+    rank() over (PARTITION BY job_id order by salary desc)JOB_RANK
+from employees;
+
+--group by job_id     
+--order by salary desc
+
+--- 각부서에서 입사일이 빠른 사원부터 이름 직무 입사일, 랭킹을  출력하세요. 
+select first_name, job_id, hire_date, 
+       rank() over (PARTITION by department_id order by hire_date asc)
+from employees;
+
+--- 급여를 제일 많이 받는 사람 부터 순위와 직무별 급여의 순위를 출력하시오.
+select first_name, salary, job_id, 
+       rank() over (PARTITION BY JOB_ID ORDER BY SALARY DESC) JOB_RANK,
+       rank() over (order by salary desc) all_rank
+FROM EMPLOYEES;
+
+-- 2. DENSE_RANK() --- 동률일 경우 같은 등수이고 다음 등수는 연속적인 값을 갖는다.   
+select first_name, salary, job_id, 
+       rank() over (order by salary desc) all_rank,
+       DENSE_RANK() over (order by salary desc) DENSE_RANK
+FROM EMPLOYEES;
+
+---3. row_number() -- 동율도 계속 증가하는 값을 갖는다.
+select first_name, salary, job_id, 
+       rank() over (order by salary desc) all_rank,
+       row_number() over (order by salary desc) row_number
+FROM EMPLOYEES;
+
+-- 사번, 이름, 이메일 , 직무,급여, 부서별 평균 급여를 출력하세요.
+select first_name , employee_id, email, job_id , salary,
+       d.department_id, avgsal
+from employees e, (select department_id , avg(salary) avgsal
+                  from employees
+                  group by department_id) d
+where e.department_id = d.department_id;
+
+select first_name , employee_id, email, job_id , salary, department_id,
+       avg(salary) over (PARTITION by department_id) avgsal
+from employees;
+
+
+
+
+
+
+
+
+
 
 
 

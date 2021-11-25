@@ -1,0 +1,62 @@
+create table member(
+    user_id VARCHAR2(20) not null,
+    USER_PW  VARCHAR2(200) not null,
+    USER_NAME VARCHAR2(40) not null,
+    USER_BIRTH TIMESTAMP not null,
+    USER_GENDER VARCHAR2(1) not null,  
+    USER_ADDR  VARCHAR2(200)   not null,  
+    USER_PH1 VARCHAR2(13)  not null, 
+    USER_PH2 VARCHAR2(13),
+    USER_REGIST TIMESTAMP,
+    USER_EMAIL VARCHAR2(200)
+);
+
+create table board(
+   BOARD_NUM   NUMBER   not null,
+   USER_ID   VARCHAR2(20)  not null,
+   BOARD_NAME    VARCHAR2(20)  not null,
+   BOARD_PASS VARCHAR2(200)  NOT NULL,
+   BOARD_SUBJECT VARCHAR2(100)  NOT NULL,
+   BOARD_CONTENT VARCHAR2(2000) ,
+   BOARD_DATE TIMESTAMP,
+   IP_ADDR VARCHAR2(15)
+);
+
+alter table member
+add ( constraint member_user_id_pk primary key (user_id),
+	constraint member_user_email_UU unique(user_email));
+
+
+alter table board
+add constraint board_board_num_pk primary key(board_num);
+
+alter table board
+add constraint board_user_id_fk foreign key (user_id)
+REFERENCES member(user_id);
+
+alter table board 
+add (read_count number); 
+alter table member
+add (join_ok varchar2(500));
+
+alter table member
+modify (user_regist default sysdate);
+
+alter table board
+modify (read_count default 0);
+
+UPDATE MEMBER 
+SET USER_NAME = '이상범', USER_PH2 = '02-1234-9876'
+WHERE USER_id = 'highland0';
+
+
+select rpad(substr(user_id,1,3),length(user_id),'*')
+from member
+where user_name = '이상범' and user_ph1 = '010-1234-1234';
+
+
+delete from board
+where user_id = 'highland0';
+delete from member
+where user_id = 'highland0';
+

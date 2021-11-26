@@ -185,4 +185,3 @@ delete from board1
 where user_id = 'highland0' and board_num = 1;
 select * from board1
 where user_id = 'highland0' and board_num = 1;
-

@@ -173,3 +173,16 @@ delete member1
 where user_name = '이숭무';
 select * from member1 where user_name = '이숭무';
 select * from board1 where user_id = 'highland0'; 
+
+-- '이숭무' 회원이 탈퇴하는 것이 아니었는 데 잘 못 삭제를 하였다 . 
+-- 정상적으로 '이숭무'회원에 대한 모든 내용이(게시판 포함) 존재 할 수 있게 하시오.
+rollback;
+select * from member1 where user_name = '이숭무';
+select * from board1 where user_id = 'highland0'; 
+-- ‘highland0’인 회원이 로그인을 하여 자신이 쓴 글인 1번 게시글을 삭제하려고 한다.
+-- 해당 게시물이 삭제 되게 하시오.
+delete from board1
+where user_id = 'highland0' and board_num = 1;
+select * from board1
+where user_id = 'highland0' and board_num = 1;
+

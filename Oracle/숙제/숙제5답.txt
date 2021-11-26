@@ -1,62 +1,175 @@
-create table member(
-    user_id VARCHAR2(20) not null,
-    USER_PW  VARCHAR2(200) not null,
-    USER_NAME VARCHAR2(40) not null,
-    USER_BIRTH TIMESTAMP not null,
-    USER_GENDER VARCHAR2(1) not null,  
-    USER_ADDR  VARCHAR2(200)   not null,  
-    USER_PH1 VARCHAR2(13)  not null, 
+-- 문제 1.
+drop table member1;
+
+create table member1(
+    user_id varchar2(20) constraint mem_user_id_nn not null,
+    user_pw varchar2(200) constraint mem_user_pw_nn not null,
+    user_name VARCHAR2(40)constraint mem_user_name_nn not null,
+    user_birth TIMESTAMP constraint mem_user_birth_nn not null,
+    USER_GENDER VARCHAR2(1)constraint mem_USER_GENDER_nn not null,
+    USER_ADDR VARCHAR2(200)constraint mem_USER_ADDR_nn not null,
+    USER_PH1  VARCHAR2(13)constraint mem_USER_PH1_nn not null,
     USER_PH2 VARCHAR2(13),
     USER_REGIST TIMESTAMP,
-    USER_EMAIL VARCHAR2(200)
+    USER_EMAIL VARCHAR2(200),
+    JOIN_OK VARCHAR2(500)    -- Y, null:N
 );
+-- table레벨
+alter table member1 
+add (constraint mem_user_id_pk PRIMARY key( user_id ),
+     CONSTRAINT mem_USER_EMAIL_uu unique(user_email));
 
-create table board(
-   BOARD_NUM   NUMBER   not null,
-   USER_ID   VARCHAR2(20)  not null,
-   BOARD_NAME    VARCHAR2(20)  not null,
-   BOARD_PASS VARCHAR2(200)  NOT NULL,
-   BOARD_SUBJECT VARCHAR2(100)  NOT NULL,
-   BOARD_CONTENT VARCHAR2(2000) ,
-   BOARD_DATE TIMESTAMP,
-   IP_ADDR VARCHAR2(15)
+-- 열레벨
+alter table member1
+modify (user_id constraint mem_user_id_pk PRIMARY key,
+        user_email CONSTRAINT mem_USER_EMAIL_uu unique);
+
+alter table member1
+modify (USER_REGIST  DEFAULT sysdate);
+DROP table BOARD1;
+create table BOARD1(
+    board_num number CONSTRAINT BOARD_BOARD_NUM_NN not null,
+    user_id varchar2(20) CONSTRAINT BOARD_user_id_NN not null,
+    board_name varchar2(20) CONSTRAINT BOARD_board_name_NN not null,
+    board_pass varchar2(200) CONSTRAINT BOARD_board_pass_NN not null,
+    board_subject varchar2(100) CONSTRAINT BOARD_board_subject_NN not null, 
+    board_content varchar2(2000),
+    board_date timestamp,
+    ip_addr varchar2(15),
+    read_count number
 );
+alter table board1
+add constraint board1_board_num_pk PRIMARY key (board_num);
 
-alter table member
-add ( constraint member_user_id_pk primary key (user_id),
-	constraint member_user_email_UU unique(user_email));
+alter table board1
+modify board_num constraint board1_board_num_pk PRIMARY key;
 
+alter table board1
+add constraint board1_user_id_fk foreign key(user_id)
+    REFERENCES member1(user_id);
+    
+alter table board1
+modify user_id constraint board1_user_id_fk 
+               REFERENCES member1(user_id);
 
-alter table board
-add constraint board_board_num_pk primary key(board_num);
+alter table board1
+modify READ_COUNT default 0; 
 
-alter table board
-add constraint board_user_id_fk foreign key (user_id)
-REFERENCES member(user_id);
+select * from user_constraints where table_name = 'MEMBER1';
+select * from user_cons_columns where table_name = 'MEMBER1';
 
-alter table board 
-add (read_count number); 
-alter table member
-add (join_ok varchar2(500));
+select * from user_constraints where table_name = 'BOARD1';
+select * from user_cons_columns where table_name = 'BOARD1';
 
-alter table member
-modify (user_regist default sysdate);
+desc member1;
+insert into member1 (USER_ID, USER_PW, USER_NAME, USER_BIRTH, USER_GENDER, 
+    USER_ADDR, USER_PH1, USER_PH2, USER_REGIST, USER_EMAIL, JOIN_OK)
+values('highland0', '1234', '이숭무', '1995-05-05','1', '성남', '010-7146-1970'
+, null, default, 'highland0@nate.com', null);
 
-alter table board
-modify (read_count default 0);
+insert into member1 (USER_ID, USER_PW, USER_NAME, USER_BIRTH, USER_GENDER, 
+    USER_ADDR, USER_PH1, USER_PH2, USER_REGIST, USER_EMAIL, JOIN_OK)
+values('highland1', '1234', '이상범', '1990-05-05','1', '성남', '010-1237-1970'
+, null, sysdate, 'highland1@nate.com', null);
 
-UPDATE MEMBER 
-SET USER_NAME = '이상범', USER_PH2 = '02-1234-9876'
-WHERE USER_id = 'highland0';
+insert into member1 (USER_ID, USER_PW, USER_NAME, USER_BIRTH, USER_GENDER, 
+    USER_ADDR, USER_PH1, USER_PH2, USER_REGIST, USER_EMAIL, JOIN_OK)
+values('highland2', '1234', '이장범', '1989-01-05','1', '성남', '010-4567-1970'
+, '02-123-1234', '2021-11-26', 'highland2@nate.com', null);
 
+desc board1;
+insert into board1(BOARD_NUM, USER_ID, BOARD_NAME,BOARD_PASS, BOARD_SUBJECT,
+BOARD_CONTENT,BOARD_DATE, IP_ADDR,  READ_COUNT)
+values((select nvl(max(BOARD_NUM),0) + 1 from board1), 'highland0', 
+'상장범아빠','1234', '제목1',' 내용1', sysdate , '123-123-123-123', 0);
 
-select rpad(substr(user_id,1,3),length(user_id),'*')
-from member
-where user_name = '이상범' and user_ph1 = '010-1234-1234';
+insert into board1(BOARD_NUM, USER_ID, BOARD_NAME,BOARD_PASS, BOARD_SUBJECT,
+BOARD_CONTENT,BOARD_DATE, IP_ADDR,  READ_COUNT)
+values((select nvl(max(BOARD_NUM),0) + 1 from board1), 'highland1', 
+'장군','1234', '제목2',' 내용2', sysdate , '123-123-123-123', 0);
 
+select * from board1;
 
-delete from board
+--highland0회원의 회원아이디, 회원명, 이메일, 게시글 번호, 게시글 제목, READ_COUNT를 출력하시오.
+select m.user_id, user_name, user_email, board_num, board_subject, read_count
+from member1 m, board1 b
+where m.user_id = b.user_id and m.user_id = 'highland0';
+
+update board1    ---  게시글 상세페이지, 제품 상세페이지
+set read_count = read_count+ 1
+where board_num =1;
+
+select * from board1 where board_num = 1;
+
+--  게시글 2번에 해당하는 회원을 출력하시오.
+select * from member1
+where user_id = (select user_id from board1 where board_num = 2);
+
+-- 등록된 게시글의 개수를 출력하시오.
+select count(*) from board1;
+
+-- 각 회원의 게시글의 갯수를 출력하시오.
+select user_id, count(*)
+from board1
+group by user_id;
+
+-- 회원의 수를 출력하시오.
+select count(*) from member1;
+
+-- 아이디가 'highland0'인 회원의 전화번호를 '02-9876-1234', 
+-- 이메일을 'highland0@nate.com', 비밀번호를 '22222'로 변경하시오.]
+update member1  --- 회원 수정
+set user_ph1 = '02-9876-1234',
+    user_email = 'highland0@nate.com' ,
+    user_pw = '2222'    
 where user_id = 'highland0';
-delete from member
-where user_id = 'highland0';
+-- 회원 상세 페이지
+select * from member1 where user_id = 'highland0';
 
+-- 게시글 상세페이지 1번글
+select * from board1 where board_num = 1;
+-- 게시글 1번의 제목을 '나는 열심히 공부할래',
+-- 내용을 '열심히 공부해서 \n 빨리 취업이 될 수 있게 노력해야지'로  수정하시오.
+update board1
+set board_subject = '나는 열심히 공부할래',
+    board_content = '열심히 공부해서 \n 빨리 취업이 될 수 있게 노력해야지'
+where board_num = 1;
+select * from board1 where board_num = 1;
+-- 1번 게시글을 출력할 때 내용의 \n을 <br /> 로 출력되게 하시오.
+select board_num, user_id, board_subject, read_count,
+       replace(board_content,'\n','<br />') content
+from board1
+where board_num = 1;
+
+-- 게시글 제목이 너무 길어서 화면에 다 출력되기 어렵다 . 
+-- 제목을 첫번째 글자 부터 5글자를 출력하고 뒤에는 *를 5개가 출력되게 하시오.
+select  substr(board_subject, 1, 5) || '*****'
+from board1;
+
+-- '이숭무'회원이 아이디를 잊어버렸다고 한다. 이메일과 전화번호를 이용해서 
+-- 아이디를 출력하는 데 아이디는 모두 출력해서는 안되고 첫글자부터 세글자 
+-- 나머지는 '*'로 출력되게 하시오.
+select rpad(substr(user_id,1,5), length(user_id), '*')
+from member1
+where user_email = 'highland0@nate.com' 
+and user_ph1 = '02-9876-1234';
+
+-- 게시판 테이블에서 게시글을 많이 쓴 게시글의 
+-- user_id를 게시글 갯수와 같이 출력하시오.
+select user_id ,cnt
+from(select user_id, count(*) cnt from board1
+    group by user_id 
+    order by cnt desc)
+where rownum = 1;
+
+-- 지금까지의 작업을 모두 정상 종료 시키시오.
+commit;
+-- '이숭무'회원이 탈퇴하려고 한다. 이숭무 회원이 탈퇴 할수 있게 삭제하시오.
+delete from board1
+where user_id = ( select user_id 
+                    from member1 
+                 where user_name = '이숭무');
+delete member1
+where user_name = '이숭무';
+select * from member1 where user_name = '이숭무';
+select * from board1 where user_id = 'highland0'; 

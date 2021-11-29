@@ -71,6 +71,11 @@ DBMS_OUTPUT.PUT_LINE('YOUR CONTRIBUTION TOWARDS PF: '||emp_sal*:basic_percent/10
 
 
 8. 
+create table employee_details 
+as
+select * from employees;
+
+
 SET SERVEROUTPUT ON 
 SET VERIFY OFF 
 ACCEPT emp_id PROMPT 'Please enter your employee number'; 

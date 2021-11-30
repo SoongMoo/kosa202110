@@ -311,26 +311,153 @@ BEGIN
 end;
 /
 
+select * from emp3_7
+for update nowait; --- 잠금
 
+DECLARE
+    CURSOR emp_cursor IS 
+        select * from emp3_7
+        where department_id = 80 for update of salary;
+        emp emp3_7%rowtype;
+BEGIN
+    OPEN emp_cursor ;
+    loop 
+    fetch emp_cursor into emp;
+    EXIT when emp_cursor%notfound;
+     DBMS_OUTPUT.PUT_LINE(emp.last_name || '  ' || emp.salary);
+    end loop;
+end;
+/
 
+DECLARE
+    CURSOR emp_cursor(deptno NUMBER) is
+        select * from emp3_7 where department_id = deptno
+        for update;
+    emp emp3_7%rowtype;
+begin
+    OPEN emp_cursor (10);
+    loop
+        FETCH emp_cursor into emp;
+        EXIT when emp_cursor%notfound;
+        update emp3_7 
+        set salary = salary * 1.1
+        where  CURRENT of emp_cursor; -- 현재 커서에 해당하는 행을 update
+    end loop;
+end;
+/
 
+DECLARE
+    lname VARCHAR2(200);
+BEGIN
+    SELECT last_name INTO lname FROM employees 
+    WHERE first_name='John'; 
+    DBMS_OUTPUT.PUT_LINE (lname);
+    EXCEPTION 
+    when TOO_MANY_ROWS then
+    DBMS_OUTPUT.PUT_LINE('행의 수가 너무 많아요');     
+    when NO_DATA_FOUND then
+    DBMS_OUTPUT.PUT_LINE('데이터가 없습니다.');   
+    when INVALID_CURSOR or  ZERO_DIVIDE  or DUP_VAL_ON_INDEX then
+    DBMS_OUTPUT.PUT_LINE('커서가 정확하지 않다. 0으로 나누지 못함.');
+    WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('나머지.');
+END;
+/
 
+create SEQUENCE dept_NUM
+INCREMENT BY 10
+start WITH 400;
 
+-- 프로시저 및 함수
+CREATE or REPLACE PROCEDURE add_dept 
+is
+    dept_id dept.department_id%TYPE;
+    dept_name dept.department_name%TYPE;
+BEGIN
+    dept_id := 320;
+    dept_name:='개발부';
+    INSERT INTO dept(department_id, department_name)
+    values(DEPT_NUM.nextval, dept_name);
+    DBMS_OUTPUT.PUT_LINE(' Inserted '|| SQL%ROWCOUNT ||' row ');
+end;
+/
+exec add_dept;
+select * from dept where department_id = 320;
 
+CREATE OR REPLACE PROCEDURE update_sal 
+(v_empno    IN    NUMBER) 
+is 
+begin
+    update emp3_7
+    set salary = salary * 1.1
+    where employee_id =  v_empno;
+end;
+/
+exec update_sal(100);
+select * from emp3_7 where employee_id = 100;
 
+CREATE OR REPLACE PROCEDURE prc_tree 
+(
+    v_emp_code IN VARCHAR2,
+    p_code OUT VARCHAR2,
+    t_code OUT VARCHAR2
+)    
+is 
+begin
+    select department_id, job_id  into p_code, t_code
+    from employees
+    where employee_id = v_emp_code;
+end prc_tree;
+/
 
+declare
+    aaa VARCHAR2(20);
+    bbb VARCHAR2(20);
+begin
+    prc_tree ('100', aaa, bbb);
+    dbms_output.put_line(aaa || '   ' || bbb);
+end;
+/
 
+CREATE OR REPLACE PROCEDURE sal_mng
+(
+    empid in varchar2,
+    sal out number,
+    mng out number    
+)
+is
+begin 
+    select salary, manager_id into sal, mng
+    from employees where employee_id = empid;
+end;
+/
 
+DECLARE
+    aaa number;
+    bbb number;
+begin
+    sal_mng('110', aaa, bbb);
+    dbms_output.put_line(aaa || '   ' || bbb);
+end;
+/
 
+CREATE OR REPLACE PROCEDURE emp_del_proc
+(empid in number)
+is
+begin
+    delete from emp3_7
+    where employee_id = empid;
+    commit;
+end;
+/
+exec emp_del_proc(300);
 
+--- 1. 프로시져를 이용해서 emp3_7에 직원정보를 입력하세요.
 
-
-
-
-
-
-
-
+--- 2. jobs_exam을 만들어서 'AD_PRES'를 프로시저에 인자값으로 전달하고
+--- 없으면 jobs 에서  insert 있으면 min_salary는 2000, max_salary는 6000
+--- 으로 update 하시오
+--- EXEC my_new_job_proc ('AD_PRES', 2000, 6000);
 
 
 

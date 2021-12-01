@@ -229,4 +229,153 @@ exec :refire_money := get_refire_money(100);
 print refire_money;
 
 
+insert into emp3_8    
+select * from employees;
+--- trigger
+-- old테이블 : 변경전 데이터나 삭제 된데이터
+-- new테이블 : 변경되거나 새로 입력데이터  
+create or replace trigger emp_tri_row
+after update of salary on emp3_7
+for each row
+begin
+     if :old.salary < :new.salary then
+        update emp3_8
+        set salary = :old.salary * 1.1
+        where employee_id = :new.employee_id;
+    end if;
+end;
+/
+select * from emp3_7 where employee_id = 174;
+select * from emp3_8 where employee_id = 174;
 
+update emp3_7
+set salary = 12000
+where employee_id = 174;
+select * from emp3_7 where employee_id = 174;
+select * from emp3_8 where employee_id = 174;
+
+select * from emp3_7;
+
+delete from emp3_7 where employee_id = 170;
+delete from emp3_8 where employee_id = 170;
+--- emp3_7에 170 번 사원의 데이터를 employees테이블에서 불러와 저장한다면
+-- emp3_8에 170 번 사원의 데이터가 저장되게 하시오.
+create or replace trigger emp_test_ins
+after insert on emp3_7
+for each row
+begin
+insert into emp3_8
+select * from employees where employee_id = :new.employee_id;
+end;
+/
+
+insert into emp3_7
+select * from employees where employee_id = 170;
+
+select * from emp3_7 where employee_id = 170;
+select * from emp3_8 where employee_id = 170;
+
+--- emp3_7에 employees에서 145사원의 데이터를 저장하고  emp3_7에 있는 145번사원의 커미션을
+--  0.5로 변경할 때 변경 전 값이 변경 후 값보다 작은 경우  emp3_8의 145사원의 급여를
+--  15%인상하여 저장하시오.
+create or replace trigger emp_aft_udt_row
+after update  of commission_pct on emp3_7
+for each row
+begin
+    if :old.commission_pct < :new.commission_pct then
+        update emp3_8
+        set salary = salary * 1.15
+        where employee_id = :new.employee_id;
+    end if;
+end;
+/
+select * from emp3_8 where employee_id = 150;
+update emp3_7
+set commission_pct = 0.5
+where employee_id = 150;
+
+select * from emp3_8 where employee_id = 150;
+
+
+-- emp3_7에 151사원의 직무를 'ST_CLERK'로 변경되었다면 emp3_8의 커미션을 0.6으로 변경
+create or replace trigger test_up_tri
+after update of job_id on emp3_7
+for each row
+begin
+    if :new.job_id = 'ST_CLERK' then
+        update emp3_8
+        set commission_pct = 0.6
+        where employee_id = :new.employee_id;
+    end if;
+end;
+/
+update emp3_7 set job_id = 'ST_CLERK'
+where employee_id = 151;
+select * from emp3_8 where employee_id = 151;
+
+create table emp_empty
+AS
+select * from employees
+where 1=2;
+CREATE OR REPLACE TRIGGER emp_test_del
+AFTER DELETE ON emp3_7
+FOR EACH ROW
+begin
+    INSERT INTO emp_empty(employee_id,last_name,email,hire_date,job_id)
+    values(:old.employee_id, :old.last_name,:old.email,:old.hire_date,
+            :old.job_id);
+end;
+/
+
+delete from emp3_7
+where employee_id = 110;
+
+select * from emp_empty;
+
+create table old_new
+(
+	old_first_name varchar2(20),
+	new_first_name varchar2(20)
+);
+
+CREATE OR REPLACE TRIGGER emp_test_upd
+AFTER update ON emp3_7
+FOR EACH ROW
+BEGIN
+    insert into old_new
+    values(:old.first_name, :new.first_name);
+END;
+/
+
+update emp3_7
+set first_name = 'Park'
+where employee_id = 100;
+
+select * from old_new;
+
+CREATE OR REPLACE TRIGGER emp_test_ins
+AFTER INSERT ON emp3_7
+FOR EACH ROW
+begin
+    insert into emp_empty(employee_id,last_name,email,hire_date,job_id)
+    values(:new.employee_id,:new.last_name,:new.email,:new.hire_date,:new.job_id);
+end;
+/
+
+insert into emp3_7
+select * from employees where employee_id = 200;
+
+select * from emp_empty where employee_id = 200;
+
+
+
+
+
+
+
+
+
+
+
+
+--- 

@@ -5,7 +5,7 @@
   <title>Document</title>
  </head>
  <body>
-  <form action="#" method="get" name="frm">
+  <form action="#" method="post" name="frm" enctype="multipart/form-data">
   <input type="hidden" name="num" value="100" />
   	<fieldset>
 		<legend>from 태그만 get/post를 사용</legend>
@@ -159,6 +159,14 @@
 			<td>
 				<input type="search" name="serch"/>
 			</td>
+		</tr>
+		<tr>
+			<th>파일</th>
+			<td><input type="file" name="upFile"/> </td>
+		</tr>
+		<tr>
+			<th>파일(multiple)</th>
+			<td><input type="file" name="upFile1" multiple/> </td>
 		</tr>
 		</tbody>
 	</table>

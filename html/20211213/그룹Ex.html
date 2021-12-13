@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <style>
+body{font-size:12px;}
+.hidden{display:none;}
+#wrap{width:650px;margin:auto; background-color:red}
+#header h1{float:left;}
+#gnb{float:right;margin-top:10px;}
+#header #gnbmenu li{list-style:none;float:left;padding-left:20px;}
+#contentwrap{height:80px;}
+#contentwrap #left{float:left;padding-right:100px;border-right:1px solid #ccc;}
+#contentwrap #center{float:left;padding-right:80px; 
+					padding-left:40px; }
+#contentwrap #right{float:right; border-left:1px solid #ccc;
+padding-left:50px; padding-right:40px;}
+hr{clear:both; height:1px; border:none; background:#ccc;}
+  </style>
+  <title>그룹Ex</title>
+ </head>
+ <body>
+<div id="wrap">
+	<div id="skipnav" class="hidden">
+		<a href="#contentwarp">컨텐츠 바로가기</a>
+	</div>
+	<div id="header">
+		<h1>RHEE</h1>
+		<h2 class="hidden">메인메뉴</h2>
+		<div id="gnb">
+			<ul id="gnbmenu">
+				<li>Rhee</li>
+				<li>도서소개</li>
+				<li>Rhee자료실</li>
+			</ul>
+		</div>
+	</div>
+	<hr />
+	<div id="contentwrap">
+		<div id="left">
+			<h2>왼쪽 컨텐츠</h2>
+			<p>내용...</p>
+		</div>
+		<div id="center">
+			<h2>가운데 컨텐츠</h2>
+			<p>내용...</p>
+		</div>
+		<div id="right">
+			<h2>오른쪽 컨텐츠</h2>
+			<p>내용...</p>
+		</div>
+	</div>
+</div>
+ </body>
+</html>

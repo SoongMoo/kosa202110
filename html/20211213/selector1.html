@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>선택자</title>
+  <style type="text/css">
+   *{ 
+    margin: 0px;
+	padding: 0px;
+   }
+   .ctxt{color:blue;}
+   ul > li{color:blue;}
+   li > p{color:red;}
+   h3 + p{color:gray;}
+   h3 + p > span{color:yellow;}
+   h4[class]{color:red }
+   img[alt]{width:50px;height:50px;}
+   *[title]{width:100px;height:100px;}
+   a:hover{color:green}
+   a:visited{color:black} /*active*/
+   a:focus{color:red}
+  </style>
+ </head>
+ <body>
+  <h1>선택자</h1>
+  <h2>class 선택자</h2>
+  <p class="ctxt">css는 참 신기해요.</p>
+  <h2>자식 선택자</h2>
+  <ul>
+	<li>7월여행지</li>
+	<li><p>8월여행지</p></li>
+  </ul>
+  <h2>인접 선택자</h2>
+  <h3>엑스포 안내</h3>
+  <p>책자를 배부하고 있습니다.</p>
+  <p>안내 데스크를 활용해 주세요.</p>
+
+  <h3>건강해지는 차</h3>
+  <p>머리와 피부에 좋은 차는 어떤 것들일까. <span>차종류</span>에 대해서 알아보자.</p>
+
+  <h2>속성 선택자</h2>
+  <h4 class="logo">서울특별시</h4>
+  <p>주소록을 작성합니다.</p>
+  <h4>경기도</h4>
+  <p>전화번호부를 작성합니다.</p>
+  <img src="images/집.jfif" alt="집" />
+  <img src="images/집.jfif" title="집" />
+  <img src="images/집.jfif" />
+  <h2>가상 클래스 선택자</h2>
+  <ul>
+	<li><a href="http://www.naver.com">COMPANY</a></li>
+	<li><a href="#">PRODUCT</a></li>
+	<li><a href="#">SERVICE</a></li>
+  </ul>
+  <h2>수도 클래스 선택자</h2>
+  <style>
+	.box > p:first-letter{font-size:300%;}
+	.box > p{border-top:solid 1px #E5E5E5;}
+    .box > p:first-child{border-top:none}
+	.box:first-line{color:red;}
+	.box > p:last-child{color:blue;}
+    .box:after{content : "텍스트를 작성" ; color:red;}/*가상요소 */
+	.box:before{content : "텍스트를 작성" ; color:black;}/*가상요소 */
+  </style>
+	<!--first-letter, first-line,first-child, last-child ,after-->
+	<div class="box">
+	    <!-- before -->
+		<p>COMPANY</p>
+		<p>PRODUCT</p>
+		<p>SERVICE</p>
+		<!-- after -->
+	</div>
+   <h2>하위 선택자</h2>
+   <style>
+    ol li{color:green;}
+	ol p{color:blue;}
+   </style>
+   <ol>
+		<li>메뉴1</li>
+		<li><p>메뉴2</p></li>
+		<li>메뉴3</li>
+   </ol>
+   <h2>종속 선택자</h2>
+   <style>
+	p.more a{color:aqua;}
+   </style>
+   <p class="bcycle">안녕하세요</p>
+   <p class="more"><a href="#">더보기</a></p>
+   <ul class="more">
+		<li>1</li>
+		<li>2</li>
+   </ul>
+   <h2>그룹 선택자</h2>
+   <style>
+	.htag,.ptag,.ptag2{color:aqua;font-size:12px;}
+   </style>
+   <h1 class="htag">웹 표준 퍼블리싱</h1>
+   <p class="ptag">웹디자인의 한 분야로 원래 용어는 웹콘텐츠 UI 디자인이다.</p>
+   <p class="ptag2">안녕하세요. 이숭무입니다.</p>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+</body>
+</html>

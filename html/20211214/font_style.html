@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+	h1{
+		font-family: "굴림", Gulim; 
+		/* 글자의 크기 */
+		font-size : 25px; /* 1em : M ; 0.1em  */
+		/* 글자의 굵기 */
+		font-weight : bold; /* nomal, bolder, 100, 200,300,400,...,900 */
+		/* 대문자를 소문자 크기에 맞추어 작게 표시 */
+		font-variant: small-caps; /* nomal */
+		font-style : italic; /* nomal */
+		/* 줄간 */
+		line-height : 120%;
+		/* 글자 색 */
+		color : aqua; /* #223344 : #234 */
+	}
+	/* 문단의 정렬 */
+	#txt2{
+		text-align : justify;
+	}
+	#txt1{
+		text-align : center; /* right, left  */
+	}
+	/* 이미지와 글자가 같이 있을 때 글자의 위치 */ 
+	img{
+		vertical-align : top; /* middle */
+	}
+	.school{
+		 text-indent : 30px;
+	}
+	#lower{ /* 대소문자 변경을 실행한다.*/
+		text-transform : lowercase; /* 모두 소문자 */
+	}
+	#upper{
+		text-transform: uppercase; /* 모두 대문자 */
+	}
+	#capitalize{
+		text-transform: capitalize; /* 첫 글자만 대문자 */
+	}
+	#over{
+		text-decoration:overline;
+	}
+	#line-th{
+		text-decoration:line-through;
+	}
+	#under{
+		text-decoration: underline;
+	}
+	a{ 
+		text-decoration:none;
+	}
+	.letter{
+		letter-spacing:20px;
+	}
+
+	.content{
+		width:300px;
+		border:1px solid #ccc;  
+		white-space:nowrap; /*줄바꿈이 없음*/
+		overflow:hidden;
+		text-overflow:clip; /* clip , ellipsis(...) */
+	}
+	.content:hover{
+		overflow:visible;
+	}
+  </style>
+ </head>
+ <body>
+  <h1>Web Standard Publishing !</h1>
+  <p>웹디자인의 한 분야로 원래 용어는 웹콘텐츠 UI 디자인이다.</p>
+  <p id="txt1">5일 국토교통부 실거래가 공개시스템을 보면 안양시 동안구 인덕원역 인근에 있는 대단지 아파트 A단지(전용면적 85㎡)는 올해 초 9억원 대에 거래되다가 지난 6월 GTX C노선 추가 정차역이 확정된 이후 12억4000만원(8월3일 계약·16층)까지 치솟았다. 그러나 이후 전국적으로 매수세가 꺾이면서 지난 8월과 10월 거래된 4건 모두 9억2000만~9억5000만원에 팔렸다. 전고가 대비 3억원 가량 급락했다.</p>
+  <p id="txt2">5일 국토교통부 실거래가 공개시스템을 보면 안양시 동안구 인덕원역 인근에 있는 대단지 아파트 A단지(전용면적 85㎡)는 올해 초 9억원 대에 거래되다가 지난 6월 GTX C노선 추가 정차역이 확정된 이후 12억4000만원(8월3일 계약·16층)까지 치솟았다. 그러나 이후 전국적으로 매수세가 꺾이면서 지난 8월과 10월 거래된 4건 모두 9억2000만~9억5000만원에 팔렸다. 전고가 대비 3억원 가량 급락했다.</p>
+
+  <p id="image">나의 집입니다.<img src="images/집.jfif" /></p>
+
+  <h2 >CSS는 정말 신기해요.</h2>
+  <h2 class="school">CSS는 정말 신기해요.</h2>
+  <p id="lower">Happy Birth Day!!</p>
+  <p id="upper">happy birth day!!</p>
+  <p id="capitalize">happy birth day!!</p>
+
+  <ul>
+	  <li id="over">YI</li> 
+	  <li id="line-th">LEE</li>
+	  <li id="under">RHEE</li>
+	  <li id="none"><a href="#">SOONG</a></li>
+  </ul>
+
+  <h1 class="letter">속담과 표준말의 상호관계</h1>
+
+  <p class="content">귀리는 베타글루칸(항암 및 면역증강작용을 가지고 있는 불소화성 다당류) 성분을 포함하고 있다.</p>
+
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+ </body>
+</html>

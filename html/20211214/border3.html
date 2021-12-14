@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    *{
+		margin:0;
+		padding:0;
+	}
+	body{
+		background:url("images/bg_grid.gif")
+	}
+	div{
+		width:200px; height:100px; 
+		border:3px solid aqua;
+		margin:30px; /* overlap : 중첩이 된 경우 한번만 적용 */
+	}
+	#box4,#box5,#box6{
+		display:inline-block; 
+		margin:30px; /* 가로는 overlap되지 않는다. */
+	}
+	#box4{background:rgb(0, 77, 243);}
+	#box5{background:rgb(255, 72, 0);}
+	#box6{background:rgb(18, 219, 0);}
+
+  </style>
+ </head>
+ <body>
+    <div id="box1">ABCD</div>
+	<div id="box2"></div>
+	<div id="box3"></div>
+	<div id="box4"></div>
+	<div id="box5"></div>
+	<div id="box6"></div>
+</body>
+</html>

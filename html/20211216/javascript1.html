@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link src="" type="" />
+  <style></style>
+  <script src="note.js"></script>
+  <script >
+	document.write("<br />이숭무");
+  </script>
+  <script>
+	document.write("선생님<br />");
+  </script>
+  <script>
+	var num = 10;
+	document.write(num + "<br />");
+	var num = "이숭무";
+	document.write(num + "<br />");
+	num = 10.5;
+	document.write(num + "<br />");
+	var firstNum = 10;
+	var nextNum = 10.5;
+	var result = firstNum + nextNum;
+	document.write(result + "<br />")
+	var name='이상범';
+	document.write(name + "<br />")
+	var result = true; // 부울타입 //
+	document.write(result + "<br />")
+	var result = null;
+	document.write(result + "<br />")
+	var b1 = true;
+	var b2 = false;
+	result = b1 && b2;
+	document.write(result + "<br />")
+	var num1 = 100;
+	document.write(num1++  + "<br />"); // System.out.print() 
+	document.write(num1  + "<br />");
+	var num1 = 100;
+	document.write(++num1  + "<br />");
+	document.write(num1  + "<br />");
+	
+	var num2 = 200;
+	var num3 = 150;
+
+	document.write(num1 < num2 && num1 > num3 );
+	document.write("<br />");
+	var b1 = true;
+	document.write(!b1 + "<br />");
+
+	var korNum = 60;//Number(prompt("국어 점수를 입력해주세요", "0"));
+	var engNum = 70;//Number(prompt("영어 점수를 입력해주세요", "0"));
+	var mathNum = 80;//Number(prompt("수학 점수를 입력해주세요", "0"));
+	var avg = (korNum+engNum+mathNum) / 3;
+	var result = avg >= 70 && engNum >= 60 && korNum >= 60 && mathNum >= 60;
+	document.write(result);
+	var num1 =100;  // 숫자
+	var num2 = 200; // 숫자
+	var txt5 = String(1000); // 문자
+	document.write(num1 + num2 + txt5 + "<br />");//3001000
+	document.write(num1 + txt5 + num2  + "<br />");
+	document.write(txt5 + num1 +  num2  + "<br />");// 1000100200
+
+	 // 삼항 연산자
+	 var num1 = 10;
+	 var num2 = 20;
+	 var result = num1 > num2? num1 + num2 : num1 - num2;
+	 document.write(result + "<br />")
+	
+	var result=confirm("당신은 자바스크립트를 하세요?"); //확인:true/취수:false
+	var txt = result ? "good" : "No-Good";
+	document.write(txt + "<br />");
+  </script>
+ </head>
+ <body>
+
+ </body>
+</html>
+
+
+
+

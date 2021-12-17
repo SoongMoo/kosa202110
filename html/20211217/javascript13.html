@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	function p1(){
+		document.getElementById("p1").innerHTML = "내용이 변경 되었어요."
+	}	
+	function image(){
+		//document.getElementById("image").src="images/img2.jpg";
+		document.getElementById("image").setAttribute("src","images/img2.jpg");
+	}
+	var fontColor = ["#123456","#987654","#abcdef","#abc","#123"];
+	var i = -1;
+	function font_color(){
+		i++;
+		if(i==fontColor.length) i = 0;
+		//document.querySelector("#p2").style.color = fontColor[i];
+		document.getElementById("p2").style.color = fontColor[i];
+	}
+  </script>
+ </head>
+ <body>	
+ 		<h1 id="p2">글자 색상이 변경 된다.</h1>	
+		<button onclick="font_color();">글자 색 바꾸기</button>
+		<p id="p1">글씨가 있어요.</p>		
+		<button onclick="p1();">innerHTML</button><br/>
+		<img id="image" src="images/img7.jpg"/><br/>
+		<button onclick="image();">이미지 변경</button>
+ </body>
+</html>

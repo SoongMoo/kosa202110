@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	function p_tag(){
+		///첫번째 하나만 적용
+		document.querySelector("p").style.backgroundColor="red";
+	}
+	function p_tag_all(){
+		// 모두 선택
+		var p_tag = document.querySelectorAll("p");
+		console.log(p_tag);
+	}
+	function p_class_ex(){
+		document.querySelector(".ex").style.backgroundColor="blue";
+	}
+	function span_id(){
+		document.querySelector("#sample").innerHTML = "이숭무";
+	}
+	function div_p(){
+		document.querySelector("div p").style.backgroundColor="blue";
+	}
+	function a_target(){
+		document.querySelector("a[target='_blank']").style.border="10px solid gray";
+	}
+  </script>
+ </head>
+ <body>
+  <h2>Element Control</h2>
+  <h3>query selector</h3> 
+  <p>쿼리 셀렉터는 css 의 셀렉터를 차용 한 것 입니다.</p>
+  <p class='ex'>하지만 복수개의 엘리먼트는 수용 하지 못합니다.</p>
+  <span id="sample"></span><br>
+  <a href="http://www.naver.com" target="_blank">네이버</a>
+  <div>
+	<p>특정 요소의 자식 요소를 선택 할 수도 있습니다.</p>
+  </div>
+  <button onclick="p_tag();">버튼1</button>
+  <button onclick="p_tag_all();">버튼2</button>
+  <button onclick="p_class_ex();">버튼3</button>
+  <button onclick="span_id();">버튼4</button>
+  <button onclick="div_p();">버튼5</button>
+  <button onclick="a_target();">버튼6</button>
+ </body>
+</html>

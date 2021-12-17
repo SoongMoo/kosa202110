@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	document.write("<h3>배열 객체 : Array 객체</h3>");
+	/* int [] i = new int[3]; 
+	   int [] i = {1,2,3,5};
+	*/
+	var name3 = new Array(); 
+	name3[0] = "이숭무";
+	name3[1] = "이상범";
+	name3[2] = "이장범";
+	name3[3] = "김찬중";
+	document.write("1" + name3[1] + "<br />");
+
+	var name1 = ["이숭무", "이상범", "이장범", "김찬중"]
+	document.write("2" + name1[1] + "<br />");
+
+	var name2 = new Array(4);
+	name2[0] = "이숭무";
+	name2[1] = "이상범";
+	name2[2] = "이길무";
+	document.write("3" + name2[1] + "<br />");
+	
+	var money=[100,100,200,50];
+	var theLen=money.length;
+	var total=0;
+	document.write(money[0] + "<br />");
+	/* 배열 안에 있는 값의 합을 구하시오. */
+	for (var i = 0; i <money.length ; i++ ){
+		total += money[i]; // money[0], money[1], money[2], money[3]
+	}
+	document.write(total + "<br />");
+	
+	var theFood=["짜장면","냉면","갈비탕","돈까스","삼겹살"];
+	theFood.reverse();
+	document.write(theFood + "<br />"); // 역순으로 저장
+	theFood.sort();
+	document.write(theFood + "<br />"); // 오름차순으로 저장
+	var Mountain2=["설악산","지리산","한라산","속리산"];
+	var result = theFood.concat(Mountain2);
+	document.write(result + "<br />");
+	result = theFood.slice(2,4)
+	document.write(result + "<br />");
+	result = theFood.join("-");
+	document.write(result + "<br />");
+
+	var theSubway=["2호선","9호선","7호선","4호선","3호선"];
+	var newLine1="1호선";
+	var newLine2="분당선";
+	theSubway.pop();
+	document.write(theSubway + "<br />");
+	theSubway.shift();
+	document.write(theSubway + "<br />");
+	theSubway.unshift(newLine1);
+	document.write(theSubway + "<br />");
+	theSubway.push(newLine2);
+	document.write(theSubway + "<br />");
+
+	console.log(theSubway);
+  </script>
+ </head>
+ <body>
+  
+ </body>
+</html>

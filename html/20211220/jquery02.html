@@ -18,6 +18,37 @@
 		$("#btn").click(function(){
 			$("h1").css("color","blue");
 		});
+		$("#btn4").click(function(){
+			$(".obj3 > .theObj1").css("color","purple")
+		});
+		$("#btn5").click(function(){
+			$(".obj3").children(".theObj2").css("color", "aqua");
+		});
+		$("#btn6").click(function(){
+			$(".obj5").parent().css("border","2px solid #f00")
+		});
+		$("#btn7").click(function(){
+			$(".obj4").next().css("color","orange");
+		});
+		$("#btn8").click(function(){
+			$(".obj4").prev().css("text-align","right")
+		});
+		$("#btn9").click(function(){
+			$(".obj6").siblings("li").css("text-align","center");
+		});
+		$("#btn10").click(function(){
+			$(":text").css("background","#c00");	
+		});
+		$("#btn11").click(function(){
+			if($("input:checkbox[id='chk']").is(":checked") == true){
+				$("input:checkbox[value='농구']").prop("checked",false)
+			}else{
+				$("input:checkbox[value='농구']").prop("checked",true)
+			}
+		});
+		$("#btn12").click(function(){
+			$("a[target='_blank']").css("border","2px solid #f00");
+		});
 	});
   </script>
  </head>
@@ -27,11 +58,38 @@
 	<h2 id="firstTitle">선택자</h2><button type="button" id="btn1">버튼1</button>
 	<h3 class="nextTitle">선택자 2</h3><button type="button" id="btn2">버튼2</button>
 	<ul class="obj3">
-		<li>리스트1</li>
-		<li class="theObj1">리스트2</li>
-		<li>리스트3</li>
+		<li class="theObj1">리스트1</li>
+		<li class="theObj2">리스트2</li>
+		<li >리스트3</li>
 	</ul>
 	<button type="button" id="btn3">버튼3</button>
+	<button type="button" id="btn4">버튼4</button>
+	<button type="button" id="btn5">버튼5</button>
+	<ul>
+		<li>리스트7</li>
+		<li class="obj5">리스트8</li>
+		<li>리스트9</li>
+	</ul>
+	<button type="button" id="btn6">버튼6</button>
+	<ul>
+		<li>리스트4</li>
+		<li class="obj4">리스트5</li>
+		<li>리스트6</li>
+	</ul>
+	<button type="button" id="btn7">버튼7</button>
+	<button type="button" id="btn8">버튼8</button>
+	<ul>
+		<li>리스트10</li>
+		<li class="obj6">리스트11</li>
+		<li>리스트12</li>
+	</ul>
+	<button type="button" id="btn9">버튼9</button>
+	<input type="text" id = "userName" name="userName" />
+	<button type="button" id="btn10">버튼10</button><br/>
+	<input type="checkbox" id="chk" name="chk" checked  value="농구"/>농구<br />
+	<button type="button" id="btn11">버튼11</button><br />
+	<a href="#" target="_blank">링크</a>
+	<button type="button" id="btn12">버튼12</button><br />
  </div>
  </body>
 </html>

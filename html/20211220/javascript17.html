@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script> /* window.open(), location.href, navicator.userAgent, 
+				confirm, alert, prompt,
+				setInterval(), clearInterval(), setTimeout()
+				: BOM
+			*/
+	function cart(){
+		var con = confirm("장바구니로 이동하시겠습니까?"); //true/false
+		if (con) // true
+		{
+			location.href="http://www.naver.com"
+		}
+	}
+	function conf(){
+		var con = confirm("정말로 리얼 진짜 사실 탈퇴할시겠습니까?");
+		if (con)
+		{
+			alert("탈퇴되었습니다.");
+			location.href="#";
+		}
+	}
+
+  </script>
+ </head>
+ <body>
+   청바지<br />
+   가격 : 5000원<br />
+   <button type="button" onclick="cart()">장바구니</button><br />
+   <hr />
+   회원 수정<br />
+   <button type="button" onclick="conf()">회원 탈퇴</button>
+   <hr />
+   <script>
+	function btn(){
+		var cnt = 10;
+		var msg = document.getElementById("count");
+		interval = setInterval(function(){
+			cnt--;
+			msg.innerHTML = cnt;
+		}, 1000); // 1000이 1초
+		setTimeout(function(){
+			clearInterval(interval);
+			alert("페이지를 이동합니다.");
+			location.href="http://www.naver.com"
+		},10000); // 10초 후에 setTimeout()함수가 실행
+	}
+   </script>
+   <h3><span id="count">10</span>초 후에 이동을 합니다.</h3>
+   <button type="button" onclick="btn()">버튼</button>
+ </body>
+</html>

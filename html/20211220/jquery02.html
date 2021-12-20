@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>jquery에서의 selector</title>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+  <script>
+	$(function(){
+		$("#btn1").click(function(){
+			$("#firstTitle").css("color","red");
+		});
+		$("#btn2").click(function(){
+			$(".nextTitle").css("font-size", "12px");
+		});
+		$("#btn3").click(function(){
+			$(".obj3 > li").css("font-weight","bold");
+		});
+		$("#btn").click(function(){
+			$("h1").css("color","blue");
+		});
+	});
+  </script>
+ </head>
+ <body>
+ <div id = "wrap">
+	<h1>jQuery</h1><button type="button" id="btn">버튼</button>
+	<h2 id="firstTitle">선택자</h2><button type="button" id="btn1">버튼1</button>
+	<h3 class="nextTitle">선택자 2</h3><button type="button" id="btn2">버튼2</button>
+	<ul class="obj3">
+		<li>리스트1</li>
+		<li class="theObj1">리스트2</li>
+		<li>리스트3</li>
+	</ul>
+	<button type="button" id="btn3">버튼3</button>
+ </div>
+ </body>
+</html>

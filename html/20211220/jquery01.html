@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  
+  <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+  
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>
+ 
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-latest.js"></script>
+
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
+
+  <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+  <script>
+  $(document).ready(function(){
+	document.getElementById("txt").value="10";
+  });
+
+  $(function(){
+	document.getElementById("txt1").value="10";
+	//document.getElementsByTagName("txt1").value="10";
+	//document.getElementsByCalssName("txt1").value="10";
+  });
+
+  $(function(){ // jquery : DOM대신 selector를 사용할 수 있게 $()를 사용
+		  $("#txt2").val("이숭무");
+		  $(".txt3").val("이장무");
+  });
+  </script>   
+
+  <title>Document</title>
+ </head>
+ <body>
+  <input type="text" id="txt" />
+  <input type="text" id="txt1" />
+  <input type="text" id="txt2" />
+  <input type="text" class="txt3" />
+ </body>
+</html>

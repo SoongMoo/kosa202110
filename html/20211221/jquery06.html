@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+  <script>
+	$(function(){
+		$("#btn1").bind("mouseover focus",function(){
+			$("#textZone").css("color","red");
+		});
+		$("#btn2").mouseover(function(){
+			$("#textZone").css("color","black");
+		});
+		$("#btn3").mouseenter(function(){
+			$("#textZone").css("border","1px dotted aqua")
+		});
+		$("#btn3").mouseleave(function(){
+			$("#textZone").css("border","none")
+		});
+		$("#textZone").mouseenter(function(){
+			$("#textZone").css("border","1px dotted aqua")
+		});
+		$("#textZone").mouseleave(function(){
+			$("#textZone").css("border","none")
+		});
+	});
+  </script>
+ </head>
+ <body>
+  <div id="wrap">
+  	<p id="textZone">
+		어느덧 검은 호랑이의 해인 2022 임인년을 맞이하기까지 약 2주 가량 남았습니다! 과학기술정보통신부가 발표한 2022년도 월력요항에 따르면, 2022년에는 52일의 일요일과 국경
+	</p>
+	<p><button type="button" id="btn1">bind</button></p>
+	<p><button type="button" id="btn2">mouseover</button></p>
+	<p><button type="button" id="btn3">mouseenter/mouseleave</button></p>
+  </div>
+ </body>
+</html>

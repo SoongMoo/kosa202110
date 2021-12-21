@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+  <script>
+	$(function(){
+		$("#btn4").click(function(){
+			$(this).parent().next().slideUp(1000);
+		});
+		$("#btn5").click(function(){
+			$(this).parent().next().slideDown("fast");
+		});
+		$("#btn6").click(function(){
+			$(this).parent().next().slideToggle("slow");
+		});
+	});
+  </script>
+ </head>
+ <body>
+  <div id="wrap" style="border:2px solid red">
+  		<p>
+			<button id="btn4">slideUp</button>
+			<button id="btn5">slideDown</button>
+			<button id="btn6">slideToggle</button>
+		</p>
+		<p>
+		어느덧 검은 호랑이의 해인 2022 임인년을 맞이하기까지 약 2주 가량 남았습니다! 과학기술정보통신부가 발표한 2022년도 월력요항에 따르면, 2022년에는 52일의 일요일과 국경
+		</p>
+ </div>
+ </body>
+</html>

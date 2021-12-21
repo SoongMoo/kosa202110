@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    *{ margin:0; padding:0;}
+	#wrap{
+		height:19px; overflow:hidden; width:200px;
+		border:1px solid red;
+		padding:2px;
+	}
+  </style>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+  <script>
+	$(function(){
+		up_interval = setInterval(down_content, 1000);
+		$("#right_content").mouseenter(function(){
+			clearInterval(down_content);
+		});
+		$("#right_content").mouseleave(function(){
+			up_interval = setInterval(down_content, 1000);
+		});
+	});
+	function up_content(){
+		$("#right_content li:last").after($("#right_content li:first"));
+	}
+	function down_content(){
+		$("#right_content li:first").before($("#right_content li:last"));
+	}
+  </script>
+ </head>
+ <body>
+  <div id="wrap" >
+	<ul class="right_content" id="right_content">
+		<li><a href="#">이숭무</a></li>
+		<li><a href="#">이상범</a></li>
+		<li><a href="#">이장범</a></li>
+		<li><a href="#">이길무</a></li>
+		<li><a href="#">이충무</a></li>
+		<li><a href="#">이상무</a></li>
+	</ul>
+  </div>
+ </body>
+</html>

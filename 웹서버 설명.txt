@@ -3,7 +3,7 @@ WAS (Web Application Server) : jsp 문서를 html로 변환
                           Web Server로 부터 요청 받은   Web Application문서를
                           HTML로 변경하여 Web Server에 전달
 
-                                  80                    8080
+                                    80                     8080
 웹 브라우저 =======> W/S ========>WAS
                 <=======      <========
 

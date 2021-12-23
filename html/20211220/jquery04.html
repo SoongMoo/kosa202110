@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>문서 객체 조작 메서드</title>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+  <script>
+	$(function(){
+		$("#btn1").click(function(){
+			// 요소로 바꾸는 경우에는 html로
+			$(".theTitle").html("<a href='#'>요소가 있는 내용으로 변경</a>");
+		});
+		// list_2 ==> 리스트2
+		$("#btn2").click(function(){
+			// $(".obj1").text("리스트2");
+			$(".obj1").html("리스트2");
+		});
+		// id="list3"인 요소에 마지막 위치에 새요소를 추가합니다.
+		$("#btn3").click(function(){
+			$("#list3").append("<li>list_6</li>");
+		});
+		// id="list3"인 요소에 처음 위치에 새요소를 추가합니다.
+		$("#btn4").click(function(){
+			$("#list3").prepend("<li>list_1</li>");	
+		});
+		// id="list3"인 3번째 li요소 이전에 새요소를 중간 추가합니다.insert
+		$("#btn5").click(function(){
+			$("<li>이전에 추가된 요소</li>").insertBefore($("#list3 li").eq(2));
+		});
+		// id="list3"인 3번째 li요소 다음에 새요소를 중간 추가합니다.insert
+		$("#btn6").click(function(){
+			$("<li>이후에 추가된 요소</li>").insertAfter($("#list3 li").eq(2));
+		});
+		// id="list3"인 요소에 하위 <li>요소중 첫번째 요소 삭제
+		$("#btn7").click(function(){
+			$("#list3 li").eq(0).remove();
+		});
+		// 두번째요소에 속성 추가
+		$("#btn8").click(function(){
+			$("#list3 li").eq(1).addClass("obj3");
+		});
+		// 첫번째 요소의 class명을 변경하자., class를 추가
+		$("#btn9").click(function(){
+			$("#list3 li").eq(0).attr("class","obj2");
+			$(".obj2").css("color", "purple")
+			$("#list3 li").eq(0).addClass("obj4");
+			$(".obj4").css("border","2px solid #ccc");
+		});
+		// class값 가지고 오기.
+		$("#btn10").click(function(){
+			$(".theTitle").html($("#list3 li").eq(0).attr("class"));
+		});
+	});
+  </script>
+ </head>
+ <body>
+  
+  <button type="button" id="btn10">버튼10</button>
+
+  <button type="button" id="btn1">버튼1</button>
+  <button type="button" id="btn2">버튼2</button>
+  <button type="button" id="btn3">버튼3</button>
+  <button type="button" id="btn4">버튼4</button>
+  <button type="button" id="btn5">버튼5</button>
+  <button type="button" id="btn6">버튼6</button>
+  <button type="button" id="btn7">버튼7</button>
+  <button type="button" id="btn8">버튼8</button>
+  <button type="button" id="btn9">버튼9</button>
+  
+  <h2 class="theTitle">html 조작</h2>
+  <ul  id="list3">
+	<li class="obj1">list_2</li>
+	<li>list_3</li>
+	<li>list_4</li>
+	<li>list_5</li>
+  </ul>
+
+	
+ </body>
+</html>

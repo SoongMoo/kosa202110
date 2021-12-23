@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+	div{
+		margin-bottom:20px;
+	}
+	button{
+		width:140px;
+		height:50px;
+		background-color: rgb(0, 110, 255);
+		border-radius:8px;
+		color:#fff;
+		font-weight:bold;
+	}
+	#bg1{
+		background-image:url("images/light.png");
+		background-repeat:no-repeat;
+		background-position:5px 7px;
+	}
+	#bg2{
+		background-image:url("images/light.png");
+		background-repeat:no-repeat;
+		background-position:right center;
+	}
+	.bg3,.bg4,.bg5{
+		width:400px;
+		height:200px;
+		padding: 35px;
+		border: 15px  solid #ccc;        
+		margin-bottom:20px;
+		background:url("images/bg3.jpg")  no-repeat;   
+	}
+	.bg3{background-origin:border-box;}
+	.bg4{background-origin:padding-box;}
+	.bg5{background-origin:content-box;}
+  </style>
+ </head>
+ <body>
+  <div>
+    <button id="bg1"> 
+      IDEA
+    </button>
+  </div>
+  <div>
+    <button id="bg2">
+      IDEA
+    </button>
+  </div>  
+  <div class="bg3"></div>
+  <div class="bg4"></div>
+  <div class="bg5"></div>
+ </body>
+</html>

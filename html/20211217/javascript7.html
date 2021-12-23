@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+   <script>
+   var num1 = 0; 
+   function test(){
+		var num =30;	  //지역변수이므로 함수안에서 만 사용 가능
+		num1 = 100; // 전역변수이므로 지역에서도 사용 가능
+		document.write(num);
+	}
+	console.log(num1) // 0
+	test();
+	console.log(num1)  // 100
+	//console.log(num);
+	document.write("<h3>내장함수</h3>");
+	document.write("10+20" + "<br />" );
+	document.write(eval("10+20")  + "<br />"); // 문자열을 자바스크립트코드로 변환
+	var num = 100;
+	document.write("num" + 10 + "<br />");
+	document.write(eval("num") + 10 + "<br />");
+	// isNaN(): 숫자로만 되어 있지 않은지 확인 is Not a Number 
+	document.write(isNaN("100") + "<br />");  // false
+	document.write(isNaN("031-1234-1234") + "<br />"); //true
+	document.write(isNaN("03112341234") + "<br />"); // false
+	document.write( Number("10") + parseInt("20") + "<br />");
+	document.write( String(10) + String(20) + "<br />");
+  </script>
+ <body>
+
+ </body>
+</html>
+

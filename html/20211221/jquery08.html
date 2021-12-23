@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+  <script>
+	$(function(){
+		$(".list1").css("display","none");
+		$("#listWrap").hover(function(){
+			$(".list1").show(1000);
+		},
+		function(){
+			$(".list1").hide("fast"); // slow, nomal
+		});
+	});
+  </script>
+  <title>효과</title>
+ </head>
+ <body>
+  <div  id="listWrap">
+		<h3>관련 사이트</h3>
+		<ul class="list1">
+		  <li><a href="#">list1</a></li>
+		  <li><a href="#">list2</a></li>
+		  <li><a href="#">list3</a></li>
+		  <li><a href="#">list3</a></li>
+		</ul>
+	</div>
+ </body>
+</html>

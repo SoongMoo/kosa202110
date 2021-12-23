@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	var theText="Web Js Hi Ciy";
+	document.write(theText + "<br />");
+	document.write(theText.bold()+"<br />");
+	document.write(theText.link("http://www.naver.com") + "<br />");
+	document.write(theText.length + "<br />");
+	document.write(theText.toLowerCase() +"<br />");
+	document.write(theText.toUpperCase() +"<br />");
+	document.write(theText.indexOf("i") + "<br />");
+	document.write(theText.lastIndexOf("i") + "<br />");
+	document.write(theText.charAt(5) + "<br />" );
+	
+	document.write(theText.substring(4, 6) + "<br />" );
+	document.write(theText.slice(4, 6) + "<br />" );
+
+	document.write(theText.substr(4, 2) + "<br />" );
+	document.write(theText.replace("Web", "bye") + "<br />" );
+
+	document.write(theText.concat(" good") + "<br />" );
+	document.write(theText.split(" ") + "<br />" );
+
+	var theText1=new String("Web:Js:Hi:Ciy");
+	document.write(theText1 + "<br />");
+	document.write(theText1.split(":") + "<br />" );
+	document.write(theText1.split(":")[0] + "<br />");
+	document.write(theText1.split(":")[1] + "<br />");
+	document.write(theText1.split(":")[2] + "<br />");
+	document.write(theText1.split(":")[3] + "<br />");
+	
+	var theText2="images/img10.jpg";
+	document.write(theText2.split("/")[0]);
+	document.write(theText2.split("/")[1]);
+	var theText3 = theText2.split("/")[1];
+	document.write("<h3>img10.jpg에서 숫자 10만 출력하세요.</h3>");
+	document.write(theText3.substr(3,2));
+	
+	document.write("<h3>마지막 문자 추출</h3>");
+	document.write(theText2.charAt(theText2.length -1) + "<br />");
+	
+
+  </script>
+ </head>
+ <body>
+  
+ </body>
+</html>

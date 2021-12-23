@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	// Date 객체
+	var todate = new Date();
+	var toMonth  = todate.getMonth() + 1 ;
+	document.write("오늘은 "+toMonth+"월 입니다.<br />"); 
+	// 현재 달 , 0 ~ 11
+	document.write("오늘은 "+ todate.getDate() + "일입니다.<br />");
+	document.write(todate.getDay()); // 일요일 : 0 , ~  토요일 : 6
+	document.write("<br />");
+	switch(todate.getDay()){
+		case 0: document.write("일요일입니다.");break;
+		case 1: document.write("월요일입니다.");break;
+		case 2: document.write("화요일입니다.");break;
+		case 3: document.write("수요일입니다.");break;
+		case 4: document.write("목요일입니다.");break;
+		case 5: document.write("금요일입니다.");break;
+		case 6: document.write("토요일입니다.");break;
+	}
+	document.write("<br />");
+	// 현재시간
+	document.write(todate.getHours()+"시");
+	document.write(todate.getMinutes()+"분");
+	document.write(todate.getSeconds()+"초");
+	document.write("<br />");
+	document.write(todate.getTime()); // ms출력, Timestamp
+	document.write("<br />");
+
+	var day = new Date(2021,9,10,14,02,15); // 날짜 설정도 가능
+	//                  년, 월,일, 시, 분,초
+	document.write(day.getMonth() + 1);
+	document.write("<br />");
+	document.write(day.getFullYear());
+	document.write("<br />");
+	day.setFullYear(2019);
+	document.write(day.getFullYear());
+	document.write("<br />");
+	///Math class
+	var maxNum = Math.max(30, 75.5, 50); // static 메세드
+	document.write("큰 값은 " + maxNum + "<br />")
+	var minNum=Math.min(8,10,15);
+	document.write("작은 값은 " + minNum + "<br />")
+	var roundNum = Math.round(30.4);
+	document.write("값은 " + roundNum + "<br />")
+	var roundNum = Math.round(30.5);
+	document.write("값은 " + roundNum + "<br />")
+	var ceilNum=Math.ceil(5.1); // 소수점이 있는 경우 무조건 올림
+	document.write("값은 " + ceilNum + "<br />")
+	var floorNum=Math.floor(10.5); // trunc:절삭 , 정수만 가져오는 경우
+	document.write("값은 " + floorNum + "<br />")
+	var absNum=Math.abs(-10); // |-10| = 10
+	document.write("값은 " + absNum + "<br />")
+	var ranNum=Math.random(); // 0 >= ranNum < 1
+	document.write("값은 " + ranNum + "<br />")
+	/* 1 부터 45사이의 값을 무작위로 가지고 오시오. */
+	var ranNum=Math.floor(Math.random() * 45) + 1  /// 1 ~ 45.99999999999
+	document.write("값은 " + ranNum + "<br />")
+	document.write("<br /><br /><hr /><br /><br />")
+	ranNum=Math.floor(Math.random() * 7) + 1
+	document.write("<img src='images/img"+ranNum+".jpg' />");
+
+  </script>
+ </head>
+ <body>
+  
+ </body>
+</html>

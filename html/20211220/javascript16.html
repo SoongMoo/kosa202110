@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	function valCk(){
+		if(document.getElementById("userName").value =="" ){
+			alert("이름을 입력해 주세요.");
+			document.getElementById("userName").focus();
+			return false;
+		}
+		if(document.getElementById("userId").value =="" ){
+			alert("아이디를 입력해 주세요.");
+			document.getElementById("userId").focus();
+			return false;
+		}
+		if(document.getElementById("userPw").value =="" ){
+			alert("비밀번호를 입력해 주세요.");
+			document.getElementById("userPw").focus();
+			return false;
+		}
+		if(document.getElementById("userPwCon").value =="" ){
+			alert("비밀번호확인을 입력해 주세요.");
+			document.getElementById("userPwCon").focus();
+			return false;
+		}
+		if(document.getElementById("userPw").value != 
+			document.getElementById("userPwCon").value){
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			document.getElementById("userPw").value="";
+			document.getElementById("userPwCon").value = "";
+			document.getElementById("userPw").focus();
+			return false;
+		}
+		if(document.getElementById("email").value =="" ){
+			alert("이메일을 입력해 주세요.");
+			document.getElementById("email").focus();
+			return false;
+		}
+		if(document.getElementById("userTel").value =="" ){
+			alert("연락처를 입력해 주세요.");
+			document.getElementById("userTel").focus();
+			return false;
+		}
+	}
+  </script>
+ </head>
+ <body>
+ <form action="#" method="get" name="frm" onsubmit="return valCk()">
+  <table border = 1>
+  	<tr><th>*이름</th>
+		<td><input type="text" id="userName" name="userName" /></td>
+	</tr>
+	<tr><th>*아이디</th>
+		<td><input type="text" id="userId" name="userId" /></td>
+	</tr>
+	<tr><th>*비밀번호</th>
+		<td><input type="password" id="userPw" name="userPw" /></td></tr>
+	<tr><th>*비밀번호 확인</th>
+		<td><input type="password" id="userPwCon" name="userPwCon" /></td></tr>
+	<tr><th>*이메일</th>
+		<td><input type="password" id="email" name="email" /></td></tr>
+	<tr><th>*연락처</th>
+		<td><input type="tel" id="userTel" name="userTel" /></td></tr>
+	<tr><th colspan=2><input type="submit" value="전송" /></th></tr>
+  </table>
+</form>
+ </body>
+</html>

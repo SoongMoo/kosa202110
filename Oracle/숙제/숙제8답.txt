@@ -1,0 +1,179 @@
+1.
+a 의 블록은 실행 섹션에 명령문이 없기 때문에 실행되지 않습니다.
+b 의 블록에는 BEGIN 키워드로 시작하는 필수 실행 섹션이 없습니다.
+c 의 블록에는 필요한 항목이 모두 있지만 실행 섹션에 명령문이 없습니다. 
+
+
+2. 
+SET SERVEROUTPUT ON 
+BEGIN 
+DBMS_OUTPUT.PUT_LINE(' Hello World '); 
+END; 
+
+3. 
+a. 블록이 성공적으로 실행되고 "fernandez"가 출력됩니다.
+
+4.
+DECLARE 
+today DATE:=SYSDATE;
+tomorrow today%TYPE;
+BEGIN 
+tomorrow:=today +1; 
+DBMS_OUTPUT.PUT_LINE(' Hello World '); 
+DBMS_OUTPUT.PUT_LINE('TODAY IS : '|| today); 
+DBMS_OUTPUT.PUT_LINE('TOMORROW IS : ' || tomorrow); 
+END; 
+
+5.
+VARIABLE basic_percent NUMBER 
+VARIABLE pf_percent NUMBER 
+:basic_percent:=45; 
+:pf_percent:=12;
+/
+PRINT basic_percent 
+PRINT pf_percen
+
+6.
+a. 위치 1 에서의 weight 값:
+2
+데이터 유형은 NUMBER
+b. 위치 1 에서의 new_locn 값:
+Western Europe 
+데이터 유형은 VARCHAR2
+c. 위치 2 에서의 weight 값:
+601
+데이터 유형은 NUMBER
+d. 위치 2 에서의 message 값:
+Product 10012 is in stock. 
+데이터 유형은 VARCHAR
+e. 위치 2 에서의 new_locn 값: 
+new_locn 은 하위 블록 외부에서 볼 수 없기 때문에 잘못된 구문이다.
+
+
+7.
+-- VARIABLE basic_percent NUMBER 
+-- VARIABLE pf_percent NUMBER
+
+/* :basic_percent:=45; 
+:pf_percent:=12; */
+
+fname VARCHAR2(15); 
+emp_sal NUMBER(10);
+
+SELECT first_name, salary INTO fname, emp_sal 
+FROM employees WHERE employee_id=110; 
+
+DBMS_OUTPUT.PUT_LINE(' Hello '|| fname);
+
+
+DBMS_OUTPUT.PUT_LINE('YOUR SALARY IS : '||emp_sal); 
+DBMS_OUTPUT.PUT_LINE('YOUR CONTRIBUTION TOWARDS PF: '||emp_sal*:basic_percent/100*:pf_percent/100);
+
+
+8. 
+create table employee_details 
+as
+select * from employees;
+
+
+SET SERVEROUTPUT ON 
+SET VERIFY OFF 
+ACCEPT emp_id PROMPT 'Please enter your employee number'; 
+ACCEPT emp_deptid PROMPT 'Please enter the department number for which 
+salary revision is being done'; 
+DECLARE 
+ emp_authorization NUMBER(5); 
+ emp_id NUMBER(5):=&emp_id; 
+ emp_deptid NUMBER(6):=&emp_deptid; 
+ no_such_employee EXCEPTION; 
+.. 나머지는 직접 해 보세요.
+
+9.
+ a. departments 테이블에서 최대 부서 ID 를 선택하여 max_deptno 변수에 저장하는
+PL/SQL 블록을 생성합니다. 최대 부서 ID 를 표시합니다.
+SET SERVEROUTPUT ON
+DECLARE
+ max_deptno NUMBER;
+b. BEGIN 키워드로 실행 섹션을 시작하고 departments 테이블에서 최대
+department_id 를 검색하는 SELECT 문을 포함시킵니다.
+BEGIN
+ SELECT MAX(department_id) INTO max_deptno FROM departments;
+c. max_deptno 를 표시하고 실행 블록을 종료합니다.
+DBMS_OUTPUT.PUT_LINE('The maximum department_id is : ' || max_deptno);
+END;
+
+10.
+VARIABLE dept_id NUMBER 
+… 
+dept_name departments.department_name%TYPE:= 'Education';
+
+dept_id := 10 + max_deptno
+
+INSERT INTO departments (department_id, department_name, location_id) 
+VALUES (:dept_id,dept_name, NULL);
+
+DBMS_OUTPUT.PUT_LINE (' SQL%ROWCOUNT gives ' || SQL%ROWCOUNT);
+
+/ 
+SELECT * FROM departments WHERE department_id=:dept_id;
+
+
+11. 
+BEGIN 
+ UPDATE departments SET location_id=3000 WHERE 
+ department_id=280;
+END; 
+/ 
+SELECT * FROM departments WHERE department_id=:dept_id
+
+DELETE FROM departments WHERE department_id=280;
+
+
+12.
+BEGIN 
+FOR i in 1..10 LOOP 
+ IF i = 6 or i = 8 THEN 
+ null; 
+ ELSE 
+ INSERT INTO messages(results) 
+ VALUES (i); 
+ END IF; 
+END LOOP; 
+COMMIT; 
+END; 
+/
+
+13.
+SET VERIFY OFF 
+DEFINE empno = 176 
+
+
+DECLARE 
+ empno emp.employee_id%TYPE := TO_NUMBER(&empno); 
+ asterisk emp.stars%TYPE := NULL; 
+ sal emp.salary%TYPE;
+
+BEGIN 
+ SELECT NVL(ROUND(salary/1000), 0) INTO sal 
+ FROM emp WHERE employee_id = empno; 
+ FOR i IN 1..sal 
+ LOOP 
+ asterisk := asterisk ||'*'; 
+ END LOOP;
+
+UPDATE emp SET stars = asterisk 
+ WHERE employee_id = empno; 
+ COMMIT; 
+END; 
+
+
+SELECT employee_id,salary, stars 
+FROM emp WHERE employee_id=&empno;
+
+
+
+
+
+
+
+

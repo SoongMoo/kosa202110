@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>탐색 선택자</title>
+   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+   <script>
+	$(function(){
+		// 1.id="list1"인 요소에 <li> 요소중  홀수 인덱스만 선택후 배경색상 노랑색으로 적용
+		$("#btn1").click(function(){
+			$("#list1 li:odd").css("background","yellow")
+		});
+		//2.id="list1"인 요소에 <li> 요소중   짝수 인덱스만 선택후 배경색상 회색으로 적용
+		$("#btn2").click(function(){
+			$("#list1 li:even").css("background","gray");
+		});
+		//3.id="list1"인 요소에 <li> 요소중   첫번째 <li>요소만 선택후 폰트색상을 빨강색 적용
+		$("#btn3").click(function(){
+			$("#list1 li:first").css("color", "red");
+		});
+		//3.id="list1"인 요소에 <li> 요소중 마지막 <li>요소만 선택후 폰트색상을 녹색 적용
+		$("#btn4").click(function(){
+			$("#list1 li:last").css("color", "green");
+		});
+		//5.id="list1"인 요소에 <li> 요소중 두번째 <li>요소만 선택후 폰트스타일 기울임 적용
+		$("#btn5").click(function(){
+			$("#list1 li").eq(1).css("font-style","italic")
+		});
+		//6.id="list1"인 요소에 <li> 요소중 세번째 이전요소만 선택후 테두리를 선 2px 하늘색 적용, 이전 모두
+		$("#btn6").click(function(){ // 0, 1
+			$("#list1 li:lt(2)").css("border","2px solid aqua");
+		});
+		//7.id="list1"인 요소에 <li> 요소중 세번째 이후요소 모두 선택후 테두리를 선 2px 보라색 적용
+		$("#btn7").click(function(){
+			$("#list1 li:gt(2)").css("border","2px solid purple");
+		});
+		//8. id="list1"인 요소에 <li> 요소중  2의 배수번째 요소만 선택(인덱스와 상관 없음)
+		//    배경색을 오렌지색으로
+		$("#btn8").click(function(){
+			$("#list1 li:nth-child(2n)").css("background","orange");
+		});
+		//9. id="list1"인 요소에 <li> 요소중  내용이 "리스트11"이 포함된 <li>요소만 선택
+		// 글자색을 빨간색 :                       contains
+		$("#btn9").click(function(){
+			$("#list1 li:contains('리스트11')").css("color","red");
+		});
+		//10. id="list1"인 요소에 <li> 요소중  태그 <span>이 포함된 <li>요소만 선택
+		// 글자색을 녹색으로
+		$("#btn10").click(function(){
+			$("#list1 li:has('span')").css("color", "green");
+		});
+		/*$("#btn10").click(function(){
+			$("#list1 li").find('span').css("color", "green");
+		});*/
+
+		//11.id="list1"인 요소에 <li> 요소중  class="theObj"인 <li>요소만 선택
+		/*$("#btn10").click(function(){
+			$("#list1 li").filter('.theObj').css("color", "green");
+		});*/
+	});
+   </script>
+ </head>
+ <body>
+  <div id="wrap">
+	<h2>탐색 선택자</h2>
+	<ul id="list1">
+		<li>리스트1</li>  <!-- 0 -->
+		<li>리스트2</li>  <!-- 1 -->
+		<li>리스트3</li>
+		<li>리스트4</li>
+		<li>리스트5</li>
+		<li>리스트6</li>
+		<li>리스트7</li>
+		<li class="theObj">리스트8</li>
+		<li><span>리스트9</span></li>
+		<li>리스트10</li>
+		<li>리스트11</li>
+		<li><a href="#">리스트12</a></li>
+		<li>리스트13</li>
+		<li>리스트14</li>
+	</ul>
+	<button type="button" id="btn1">버튼1</button> 
+	<button type="button" id="btn2">버튼2</button> 
+	<button type="button" id="btn3">버튼3</button>
+	<button type="button" id="btn4">버튼4</button> 
+	<button type="button" id="btn5">버튼5</button> 
+	<button type="button" id="btn6">버튼6</button> 
+	<button type="button" id="btn7">버튼7</button> 
+	<button type="button" id="btn8">버튼8</button> 
+	<button type="button" id="btn9">버튼9</button> 
+	<button type="button" id="btn10">버튼10</button> 
+  </div>
+ </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	function attr(val){
+		var tags = document.getElementsByTagName("a");
+		for(var i = 0; i < tags.length; i++){
+			if( val == 'header'){
+				tags[0].innerHTML = "<h2>HEADER</h2>"
+			}else if(val == 'main'){
+				tags[1].innerHTML = "<h2>MAIN</h2>"
+			}else if(val == 'footer'){
+				tags[2].innerHTML = "<h2>FOOTER</h2>"
+			}
+		}
+	}
+  </script>
+ </head>
+ <body>
+	<a href="javascript:attr('header')" data-role="header">링크 클릭</a>
+	<a href="javascript:attr('main')" data-role="main">링크 클릭</a>
+	<a href="javascript:attr('footer')" data-role="footer">링크 클릭</a>
+ </body>
+</html>

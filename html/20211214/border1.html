@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+	.box1{
+		width:400px;
+		height:100px;
+		background:#ff6a00; 
+	}
+	.box2{
+		width:50%;
+		height:100px;
+		background:#012; 
+	}
+	div{margin:20px; }
+	img{ margin:20px; }
+	#block img{	display:block;	}
+	nav ul { list-style-type: none; }
+	nav ul li{display:inline-block;  /* block, inline, inline-block */
+			  padding:10px 15px;
+			  margin-right:20px;
+			  border-top:3px solid #222;
+			  }
+	nav ul li:hover{background-color:rgb(196, 196, 196);}
+	nav > ul > li > a{
+		color:black;
+		text-decoration: none;
+	}
+
+  </style>
+ </head>
+ <body>
+	<nav>
+		<ul>
+			<li><a href="#">애완견 종류</a></li>
+			<li><a href="#">입양하기</a></li>
+			<li><a href="#">건강돌보기</a></li>
+			<li><a href="#">더불어살기</a></li>
+		</ul>
+	</nav>
+	<div class="box1"></div>
+	<div class="box2"></div>
+	<div id="inline">
+		<img src="images/pic1.jpg">
+		<img src="images/pic2.jpg">
+		<img src="images/pic3.jpg">
+	</div>
+	<div id="block">
+		<img src="images/pic1.jpg">
+		<img src="images/pic2.jpg">
+		<img src="images/pic3.jpg">
+	</div>
+
+ </body>
+</html>

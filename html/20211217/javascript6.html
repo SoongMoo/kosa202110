@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	document.write("<h3>함수(Function)</h3>");
+	function greet(){
+		alert("안녕하세요");
+	}
+	var num = 1;
+	function nextGallery(){
+		num++;
+		if(num > 7) num = 1;
+		document.getElementById("gallery").src = "images/img"+num+".jpg";
+	}
+	function prevGallery(){
+		num--;
+		if(num < 1 ) num = 7;
+		document.getElementById("gallery").src = "images/img"+num+".jpg";
+	}
+	function  greet1(text){
+		alert(text);
+	}
+  </script>
+ </head>
+ <body>
+  <a href="javascript:prevGallery();"><img src="images/left_btn.png" /></a>
+  <img src= "images/img1.jpg" id="gallery" />
+  <a href="javascript:nextGallery();"><img src="images/right_btn.png" /></a>
+  <button onclick="greet();">버튼</button>
+
+  <button onclick="greet1('안녕하세요.');">버튼1</button>
+  <button onclick="greet1('안녕히 가세요.');">버튼2</button>
+  <input type="text" id="ctxt" /><br />
+ </body>
+</html>
+  <script>
+	var num1=10;
+	function theFnc(num2){
+		var sum=num1+num2;
+		return sum;
+	}
+	var result = theFnc(40);
+	document.write(result);
+	document.getElementById("ctxt").value = result;
+</script>

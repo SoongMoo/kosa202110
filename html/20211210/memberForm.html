@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <form action="#" method="get" name="frm">
+	<fieldset>
+		<legend>회원가입</legend>
+		<table border=1 width="400">
+			<caption>회원가입 서식 작성</caption>
+			<colgroup>
+				<col width ="30%">
+				<col width ="70%">
+			</colgroup>
+			<tfoot>
+				<tr><th colspan=2>
+						<input type="submit" value="전송" />
+						<input type="reset" value="취소" />
+				</th></tr>
+			</tfoot>
+			<tbody>
+				<tr>
+					<td><label for="userName">이름</label></td>
+					<td><input type="text" id="userName" name ="userName"/></td>
+				</tr>
+				<tr>
+					<td><label for="userId">아이디</label></td>
+					<td><input type="text" id="userId" name ="userId"/></td>
+				</tr>
+				<tr>
+					<td><label for="userPw">비밀번호</label></td>
+					<td><input type="password" id="userPw" name ="userPw"/></td>
+				</tr>
+				<tr>
+					<td><label for="userPwCon">비밀번호확인</label></td>
+					<td><input type="password" id="userPwCon" name ="userPwCon"/></td>
+				</tr>
+				<tr>
+					<td><label for="userPh">핸드폰 번호</label></td>
+					<td><input type="tel" id="userPh" name ="userPh" placeholder="-대신 없이 숫자로만"/></td>
+				</tr>
+				<tr>
+					<label for ="userBirth"><th>생일</th></label>
+					<td><input type="date" id="userBirth" name="userBirth" /></td>
+				</tr>
+				<tr>
+					<label for ="userUrl"><th>SNS</th></label>
+					<td><input type="url" id="userUrl" name="userUrl" /></td>
+				</tr>
+				<tr>
+					<label for ="userEmail"><th>이메일</th></label>
+					<td><input type="email" id ="userEmail" name="userEmail" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</fieldset>
+  </form>
+ </body>
+</html>

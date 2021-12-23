@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="UTF-8">
+  <title>select</title>
+ </head>
+ <body>
+  <form action = "#" name="frm">
+  <p>
+	<select name="subject">
+		<option>HTML</option>
+		<option>CSS</option>
+		<option selected>JAVA</option>
+		<option>JAVASCRIPT</option>
+	</select>
+	</p>
+	<p>
+	<select name="exercise">
+		<option value="1">농구</option>
+		<option value="2" selected>배구</option>
+		<option value="3">야구</option>
+		<option value="4">골프</option>
+	</select>
+	</p>
+	<p>스터디 지역
+		<select name="location">
+		<optgroup label="관악구">
+			<option>봉천동</option>
+			<option selected>신림동</option>
+			<option>남현동</option>
+		</optgroup>
+		<optgroup label="동대문구">
+			<option>전농동</option>
+			<option>답십리</option>
+			<option>신설동</option>
+		</optgroup>
+		</select>
+	</p>
+	<p>학과
+		<select name="class" multiple>
+			<option >건축학과</option>
+			<option >기계공학과</option>
+			<option >산업공학</option>
+			<option >전기공학과</option>
+			<option >경영학과</option>
+			<option >화학공학과</option>
+			<option >컴퓨터공학과</option>
+		</select>
+	</p>
+	<p>
+		<input type="text" name="interest" list="choices"/>
+		<datalist id = "choices">
+			<option value="문법" label="문법"></option>
+			<option value="어휘" label="어휘"></option>
+			<option value="회화" label="회화"></option>
+			<option value="리스닝" label="리스닝"></option>
+			<option value="뉴스청취" label="뉴스청취"></option>
+		</datalist>
+	</p>
+	<input type="submit" value="전송" />	
+  </form>
+ </body>
+</html>

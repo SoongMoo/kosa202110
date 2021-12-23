@@ -1,0 +1,85 @@
+--- 1. 틀린 곳을 찾으시오
+---select employee_id, last_name sal x 12 ANNUAL SALARY
+---FROM employees
+--1. last_name 다음에 ','없음
+-- 2.sal대신 salary 
+--3. x대신 * 
+-- 4. ANNUAL SALARY => ANNUAL_SALARY, "ANNUAL SALARY"
+
+
+-- 2. departments테이블의 구조를 표시하고 모든 데이터를 출력하시오.
+desc departments;
+select * from departments;
+
+-- 3. employees테이블 구조를 표시하고,
+-- 이름, 직무, 입사일이 출력되도록 하시오.
+desc employees;
+select first_name, job_id, hire_date from employees;
+
+-- 4. 사원번호, 성, 직무, 입사일을 출력하시오
+select employee_id, last_name, job_id, hire_date  from employees;
+
+-- 5. 사원테이블에서 직무를 출력할 때 중복 없이 출력하시오.
+select distinct job_id from employees;
+
+-- 6. 사원 번호는 Emp #, 이름은 employee, 직무는 job,입사일은 
+-- Hire Date로 heading name이 출력되게 하시오
+select employee_id "Emp #", first_name "employee", job_id "job",
+       hire_date "Hire Date"
+from employees;
+
+-- 7. 직무와 이름을 붙여서 출력하되 사이에 ', '들어가도록 출력하시오
+select job_id || ',' || first_name from employees;
+
+-- 8. 사원 테이블에서 모든 열을 붙여서 출력하되 각각 사이에 ','가 들어가도록 하시오.
+
+-- 9. 급여가 12,000넘는 사원의 이름과 급여를 출력하시오
+select first_name, salary from employees
+where salary > 12000;
+
+--- 10. 사원 번호 176인 사원의 이름과 부서번호를 출력하시오.
+select first_name , department_id
+from employees
+where employee_id = 176;
+
+-- 11 입사일이 2002년 2월 20일 부터 2002년 5월1일 사이에 입사한 
+-- 사원의 이름, 직무 및 입사일을 출력하시오.
+select first_name, job_id, hire_date from employees
+where hire_date between '02/02/20' and '02/05/01';
+
+--- 12. 관리자(manager_id)가 없는 사원을 출력하시오.
+select * from employees where manager_id is null;
+
+-- 13 직무에 'AP'가 포함되어 있는 사원들을 모두 출력하시오.
+select * from employees where job_id like '%AP%';
+
+-- 14. 사원테이블에서 직무에 MAN를 포함하고 급여가 10000이상인 
+-- 사원을 사원번호와 성과 직무 그리고 급여를 출력하시오.
+select employee_id, last_name, job_id, salary from employees
+where job_id like '%MAN%' and salary >= 10000;
+
+-----------------------
+-- 15. 직무가 SA_REP이거나 AD_PRES 이면서 급여가 15000을 초과하는 사원을 출력하시오.
+-- 단, 성, 직무, 급여만 출력 or와 and만 사용
+select last_name, job_id, salary from employees
+where (job_id = 'SA_REP' or job_id = 'AD_PRES') and salary > 15000;
+-----------------------
+
+--- 16. 직원테이블에서 부서번호를 오름차순으로 정렬하여 출력하시오.
+--      부서번호 , 급여, 입사일, 성
+select department_id, salary, hire_date, last_name
+from employees
+order by department_id asc;
+
+--- 17. 부서는 내림차순으로 정렬하고 입사일도 내림차순으로 정렬
+---     부서번호 , 급여, 입사일, 성
+select department_id, salary, hire_date, last_name
+from employees
+order by department_id desc, hire_date desc;
+
+--- 18. 부서는 내림차순으로 정렬하고 입사일은 오름차순으로 정렬하여 
+--- 급여를 내림차순으로 정렬하여 출력
+--- 부서번호 ,  입사일, 급여, 성
+select department_id, hire_date, salary, last_name
+from employees
+order by department_id desc, hire_date asc, salary desc;

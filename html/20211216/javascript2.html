@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	var myAge=20; //Number(prompt("당신의 나이를 입력하세요","20"));
+	if(myAge >= 20){
+		document.write("당신은 성인입니다.<br />");
+	}
+	var mathNum = 50;
+	var korNum = 70;
+	var avg = (mathNum + korNum) / 2
+	document.write(mathNum >= 60 && korNum >= 60 && avg >= 70);
+	document.write("<br />");
+	if (mathNum >= 60 && korNum >= 60 && avg >= 70) 
+	{
+		document.write("합격입니다.<br />");
+	}else{
+		document.write("불 합격입니다.<br />");
+	}
+	/*  90점이상이면 “A학점”, 80점 이상이면 “B학점”, 70점이상이면“C학점”, 60점이상이면“D학점”, 그밖에 60점 미만이면 “F학점” */
+	/* if ~ elif ~ elif ~ else , if ~elsif ~ elsif ~ else ~ end if */
+	var score = 87;//Number(prompt("점수를 입력하세요","0"));
+	if(score>= 90){
+		document.write("A")
+	}else if(score >= 80){
+		document.write("B")
+	}else if(score >= 70){
+		document.write("C")
+	}else if(score >= 60){
+		document.write("D")
+	}else{
+		document.write("F")
+	}
+	document.write("<br />")
+	var num = "031";
+	if (num == "02"){
+		document.write("서울");
+	}else if (num == "031"){
+		document.write("경기도");
+	}else if(num == "032"){
+		document.write("인천");
+	}else if(num == "051"){
+		document.write("부산");
+		
+	}else{
+		document.write("타 지역입니다.");		
+		}
+	document.write("<br />");
+	// switch~case
+	switch(num){
+		case "02" : document.write("서울");break;
+		case "031" : document.write("경기도");break;
+		default: document.write("타 지역입니다.");break;
+		case "032" : document.write("인천");break;
+		case "051" : document.write("부산");			
+	}
+	document.write("<br />");
+	
+	document.write("1입니다.<br />");
+	document.write("2입니다.<br />");
+	document.write("3입니다.<br />");
+	document.write("4입니다.<br />");
+	document.write("5입니다.<br />");
+	
+	for (var i = 1; i <= 5 ; i++ )
+	{
+		document.write( i + "입니다.<br />");
+	}
+
+	document.write("<table border=1 width = 100>")
+	for (var i = 1; i <= 8 ; i++)
+	{
+		document.write("<tr><td>"+i+"</td><td>"+i+"</td><td>"+i+"</td></tr>");
+	}
+	document.write("</table>");
+
+	/* 구구단 출력 3단  */
+	for (var gop = 1; gop <= 9 ; gop++ )
+	{
+		document.write("3 * " + gop + " = " + (3 * gop) + "<br />");
+	}
+	/* 구구단 출력 3단을 내림차순으로 */
+	for (var gop = 9; gop >= 1 ; gop-- )
+	{
+		document.write("3 * " + gop + " = " + (3 * gop) + "<br />");
+	}
+	/* 구구단 출력 3단을 내림차순으로 짝수 곱만 출력하세요. */
+	for (var gop = 9; gop >= 1 ; gop-- )
+	{
+		if (gop % 2 == 0){
+			document.write("3 * " + gop + " = " + (3 * gop) + "<br />");
+		}
+	}
+	/* for => while */
+	var gop = 9;
+	while (gop >= 1)
+	{
+		document.write("3 * " + gop + " = " + (3 * gop) + "<br />");
+		gop--;
+	}
+	document.write("<br /><br /><hr /><br /><br />");
+	document.write("<table border=1 width = 100>");
+	var i = 5;
+	var y = 1;
+	while(i >= 1){
+		document.write("<tr><td>"+y+"</td><td>"+y+"</td><td>"+y+"</td></tr>");
+		y++;
+		i--;
+	}
+	document.write("</table>");
+	document.write("<br /><br /><hr /><br /><br />");
+	/* 구구단의 원하는 단을 입력 받아 출력하세요. */
+	var dan = 2;//Number(prompt("단을 입력하세요.","2"));
+	var gop = 9;
+	while (gop >= 1)
+	{
+		document.write(dan + " * " + gop + " = " + (dan * gop) + "<br />");
+		gop--;
+	}
+	document.write("<br /><br /><hr /><br /><br />");
+	/* 2중 반복문 */
+	/* 2~5단 까지 출력 */
+	for(var gop = 1 ; gop <= 9 ; gop ++){
+		document.write("2 * " + gop + " = " + (2 * gop) + "<br />");
+	}
+	for(var gop = 1 ; gop <= 9 ; gop ++){
+		document.write("3 * " + gop + " = " + (3 * gop) + "<br />");
+	}
+	for(var gop = 1 ; gop <= 9 ; gop ++){
+		document.write("4 * " + gop + " = " + (4 * gop) + "<br />");
+	}
+	document.write("<br /><br /><hr /><br /><br />");
+	for(var dan = 2; dan<= 5; dan++){
+		for(var gop = 1 ; gop <= 9 ; gop ++){
+		document.write(dan + " * " + gop + " = " + (dan * gop) + "<br />");
+		}
+	}
+	/* 원하는 단의 범위와 곱의 범위를 입력 받아 출력하세요. */
+	var startDan = 2;//Number(prompt("원하는 시작단을 입력하세요.", "2"));
+	var endDan = 2; //Number(prompt("원하는 마지막단을 입력하세요.", "9"));
+	var startGop = 1;//Number(prompt("원하는 시작곱을 입력하세요.", "1"));
+	var endGop = 2;//Number(prompt("원하는 마지막곱을 입력하세요.", "9"));
+	for(var dan = startDan; dan<= endDan; dan++){
+		for(var gop = startGop ; gop <= endGop ; gop ++){
+		document.write(dan + " * " + gop + " = " + (dan * gop) + "<br />");
+		}
+	}
+	
+	document.write("<br /><br /><hr /><br /><br />");
+	var dan = 2;
+	while (dan<=5)
+	{
+		for(var gop = 1 ; gop <= 9 ; gop ++){
+			document.write(dan + " * " + gop + " = " + (dan * gop) + "<br />");
+		}
+		dan++;
+	}
+	document.write("<br /><br /><hr /><br /><br />");
+	/* while문 2단 출력 */
+	var gop = 1
+	while (gop <= 9)
+	{
+		document.write("2 * " + gop + " = " + (2 * gop) + "<br />");
+		gop++;
+	}
+	var gop = 1
+	while (gop <= 9)
+	{
+		document.write("3 * " + gop + " = " + (3 * gop) + "<br />");
+		gop++;
+	}
+	document.write("<br /><br /><hr /><br /><br />");
+	var dan = startDan
+	while(dan <= endDan){
+		var gop = startGop
+		while (gop <= endGop)
+		{
+			document.write(dan + " * " + gop + " = " + (dan * gop) + "<br />");
+			gop++;
+		}
+		dan++;
+	}
+	document.write("<br /><br /><hr /><br /><br />");
+	for (var dan = 2; dan <= 9 ; dan++)
+	{
+		var gop = 1
+		while (gop <= 9)
+		{
+			document.write(dan+" * " + gop + " = " + (dan * gop) + "<br />");
+			gop++;
+		}
+	}
+	document.write("<br /><br /><hr /><br /><br />");
+	document.write("while문으로 4단출력");
+	// while문으로 4단출력
+	var gop = 1;
+	while (gop <= 9)
+	{
+		document.write(" 4 * " + gop + " = " + (4 * gop) + "<br />");
+		gop++; // 10
+	}
+	document.write("while문으로 5단 출력");
+	// while문으로 5단 출력
+	var gop = 1;
+	while (gop <= 9)
+	{
+		document.write(" 5 * " + gop + " = " + (5 * gop) + "<br />");
+		gop++;
+	}
+	// while문으로 6단 출력
+	var gop = 1;
+	while (gop <= 9)
+	{
+		document.write(" 6 * " + gop + " = " + (6 * gop) + "<br />");
+		gop++;
+	}
+	document.write("for문안 에 while문<br />");
+	for(var dan = 4; dan <= 6; dan++){
+		var gop = 1;
+		while (gop <= 9)
+		{
+			document.write(dan + "  * " + gop + " = " + (dan * gop) + "<br />");
+			gop++;
+		}
+	}
+	document.write("while문안 에 for문<br />");
+	/* 2단 */
+	for(var gop = 1; gop <= 9; gop ++){
+		document.write("2 * "+ gop + " = " + (2 * gop) + "<br />");
+	}
+	document.write("<br />");
+	var dan = startDan;
+	while(dan <= endDan){
+		for(var gop = startGop; gop <= endGop; gop ++){
+			document.write(dan + " * "+ gop + " = " + (dan * gop) + "<br />");
+		}
+		dan++;
+	}
+	document.write("2단중 홀수곱만 출력하세요");
+	for(var gop = 1; gop <= 9; gop ++){
+		if(gop % 2 == 1)
+		document.write("2 * "+ gop + " = " + (2 * gop) + "<br />");
+	}
+	document.write("2단중 홀수곱만 출력하세요");
+	for(var gop = 1; gop <= 9; gop ++){
+		if(gop % 2 == 0) continue;
+		document.write("2 * "+ gop + " = " + (2 * gop) + "<br />");
+	}
+	/* 입력 받은 범위의 값 중 홀수의  합을 구하세요 continue를 이용*/
+	var startNum = 1;//Number(prompt("시작 숫자를 입력하세요", "1"));
+	var endNum = 100;//Number(prompt("마지막 숫자를 입력하세요", "100"));
+	var result=0;
+	for(var num = startNum; num <= endNum; num++){
+		if(num % 2==0)continue;
+		result+=num
+	}
+	document.write(startNum + "부터 " + endNum +"까지의 합은 "+ result +"입니다.<br />");
+	/* 1부터 100이상의 값을 입력 받아 범위의 합이 4000이 안되었을 때의 합의 값이 얼마일까?.. */
+	var start = 1;
+	var end = Number(prompt("마지막 범위 값을 입력하세요.", "100"));
+	var result=0;
+	for(var i = start; i <= end; i++){
+		result += i; 
+		if(result > 4000) {
+			result -= i; 
+			break;
+		}		
+	}
+	document.write("result = " + result);
+  </script>
+ </head>
+ <body>
+  <table border=1 width = 100>
+	<tr><td>1</td><td>1</td><td>1</td></tr>
+	<tr><td>2</td><td>2</td><td>2</td></tr>
+	<tr><td>3</td><td>3</td><td>3</td></tr>
+	<tr><td>4</td><td>4</td><td>4</td></tr>
+  </table>
+ </body>
+</html>

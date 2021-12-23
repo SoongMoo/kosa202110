@@ -1,0 +1,141 @@
+-- 강사
+create table teacher(
+    teach_no NUMBER not null,
+    teach_name VARCHAR2(10) not null,
+    teach_tel VARCHAR2(11) not null,
+    teach_email VARCHAR2(30) not null,
+    teach_addr VARCHAR2(255) not null,
+    teach_carr VARCHAR2(1000),   --- 강사경력
+    teach_viol VARCHAR2(1000),   --- 결함 사항
+    teach_certi VARCHAR2(1000)   --- 자격증
+);
+create table subject(
+    subj_no NUMBER not null,
+    subj_name VARCHAR2(100) not null,
+    subj_cnt VARCHAR2(1000),
+    subj_group NUMBER not null,
+    subj_day NUMBER not null,
+    subj_time NUMBER not null
+);
+create table employment(
+    employment_no NUMBER not null,
+    emp_no NUMBER not null,
+    employment_sign VARCHAR2(1000) not null,
+    employment_sal NUMBER not null,
+    employment_posi VARCHAR2(10) not null,
+    employment_date TIMESTAMP not null
+);
+create table leceval( -- 강의 평가
+    leceval_no NUMBER not null,
+    emp_no NUMBER not null,
+    lec_no NUMBER not null,
+    leceval_substfy NUMBER not null,
+    leceval_relate NUMBER not null,
+    leceval_lecstfy NUMBER not null,
+    leceval_etc VARCHAR2(1000)
+);
+create table leccontract(
+    lec_no NUMBER not null,
+    teach_no NUMBER,
+    subj_no NUMBER,
+    lec_date TIMESTAMP not null,
+    lec_pay NUMBER not null,
+    lec_sign VARCHAR2(1000) not null,
+    lec_unit NUMBER
+);
+create table jobintv(  -- 면접
+    jobintv_no NUMBER not null,
+    emp_no NUMBER not null,
+    jobintv_lang NUMBER not null,
+    jobintv_serv NUMBER not null,
+    jobintv_task NUMBER not null,
+    jobintv_social NUMBER not null,
+    jobintv_solve NUMBER not null
+);
+create table employee(
+    emp_no NUMBER not null,
+    dept_no NUMBER,
+    emp_name VARCHAR2(10) not null,
+    emp_tel VARCHAR2(11) not null,
+    emp_email VARCHAR2(30) not null,
+    emp_addr VARCHAR2(255) not null,
+    emp_date TIMESTAMP,
+    emp_carr VARCHAR2(1000),
+    emp_certi VARCHAR2(1000)
+);
+create table attend( --출석부
+    attend_no NUMBER not null,
+    emp_no NUMBER not null,
+    lec_no NUMBER not null,
+    attend_date TIMESTAMP not null,
+    attend_time NUMBER not null,
+    compl_date TIMESTAMP not null
+);
+create table department(
+    dept_no NUMBER not null,
+    dept_name VARCHAR2(100) not null,
+    dept_tel VARCHAR2(11) not null,
+    dept_addr VARCHAR2(255) not null
+);
+--------------------------------------------------------
+alter table teacher
+add constraint teach_teach_no_pk PRIMARY key (teach_no);
+
+alter table subject
+add constraint subject_subj_no_pk primary key (subj_no);
+
+alter table employment
+add constraint emp_mnt_no_emp_no_pk primary key(employment_no,emp_no); 
+
+alter table leceval 
+add constraint  leceval_lece_no_emp_no_lec_no_pk 
+    primary key(leceval_no, emp_no, lec_no);
+
+alter table leccontract
+add constraint lecontract_lec_no_pk primary key (lec_no);
+
+alter table jobintv
+add constraint jobintv_no_emp_no_pk primary key (jobintv_no, emp_no);
+
+alter table employee
+add constraint empoyee_emp_no_pk primary key(emp_no);
+
+alter table attend
+add constraint attend_no_emp_no_lec_no_pk 
+    primary key(attend_no,emp_no,lec_no); --- 복합키
+    
+alter table department
+add constraint dept_no_pk primary key(dept_no);
+
+--------------------------------------------------------------
+--- foreign key
+alter table employment
+add constraint employment_emp_no_fk foreign key(emp_no)
+    REFERENCES employee(emp_no) on delete cascade;
+    
+alter table leceval
+add (constraint leceval_emp_no_fk foreign key(emp_no)
+        REFERENCES employee(emp_no) on delete cascade,
+    constraint leceval_lec_no_fk foreign key (lec_no)
+        REFERENCES leccontract (lec_no) on delete cascade);
+
+alter table leccontract
+add (constraint leccontract_teach_no_fk foreign key (teach_no)
+        REFERENCES teacher(teach_no) on delete set null,
+     constraint leccontract_subj_no_fk foreign key (subj_no)
+        REFERENCES subject(subj_no) on delete set null);
+
+alter table jobintv
+add (constraint jobintv_emp_no_fk foreign key (emp_no)
+        REFERENCES employee(emp_no) on delete cascade);
+    
+alter table employee
+add constraint employee_dept_no_fk foreign key(dept_no)
+    REFERENCES department(dept_no) on delete set null;
+    
+alter table attend
+add (constraint attend_emp_no_fk foreign key (emp_no)
+        REFERENCES employee(emp_no) on delete cascade,
+    constraint attend_lec_no_fk foreign key (lec_no)
+        REFERENCES leccontract(lec_no) on delete cascade
+);

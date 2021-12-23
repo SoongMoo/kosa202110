@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	function popup(){
+		window.open("popup.html", "popName", "width=600px , height=300px, left=50px, top=100px , scrollbars=yes, toolbar=yes , location=no");
+	}
+
+	document.write("코드명: "+ navigator.appCodeName + "<br />");
+	document.write("브라우저명: "+navigator.appName+"<br />");
+	document.write("플랫폼버전: "+navigator.appVersion+"<br />");
+	document.write("전체정보: "+navigator.userAgent+"<br />");
+	
+	var myAgent=navigator.userAgent.toLowerCase();
+	var mobile=["iphone","ipod","android","blackberry","window ce","nokia","webos","opera mini","sonyericsson"];
+	for (var i = 0; i < mobile.length ; i++)
+	{
+		if(myAgent.indexOf(mobile[i]) >= 0 ){
+			document.write("mobile버전입니다.<br />"); 
+			location.href="http://m.naver.com";
+			break;
+		}
+	}
+  </script>
+ </head>
+ <body>
+    <button onclick="popup();">팦업</button>
+ </body>
+</html>

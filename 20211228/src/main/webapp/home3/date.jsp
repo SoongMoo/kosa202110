@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <%
-	String start = "[";
-	String end = "]";
+	String date_jsp_var = "좋은 시간되세요.";
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>includer.jsp</title>
+<title>date.jsp</title>
 </head>
 <body>
-현재의 날짜와 시각은 <%@ include file="date.jsp" %> 입니다.
-<br />
-<%= date_jsp_var %>
+<%= start + new Date() + end %>
 </body>
 </html>

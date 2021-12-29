@@ -15,6 +15,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>index</servlet-name>
-    <url-pattern>*.nhn</url-pattern>
+    <url-pattern>*.naver</url-pattern>
   </servlet-mapping>
 </web-app>

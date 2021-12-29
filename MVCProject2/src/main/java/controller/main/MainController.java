@@ -1,6 +1,8 @@
 package controller.main;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
@@ -13,10 +15,11 @@ public class MainController extends HttpServlet implements Servlet{
 	@Override
 	protected void doGet(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
-		String requestURI = request.getRequestURI();
+		String requestURI = URLDecoder.decode(request.getRequestURI(),"UTF-8");
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
-		if(command.equals("/main.nhn")) {
+		System.out.println(command);
+		if(command.equals("/한글.naver")) {
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/main/main.jsp");
 			dispatcher.forward(request, response);

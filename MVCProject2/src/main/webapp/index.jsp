@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="main.nhn">메인으로 가기</a>
+<a href="한글.naver">메인으로 가기</a>
 </body>
 </html>

@@ -2,6 +2,7 @@ package controller.board;
 
 import javax.servlet.http.HttpServletRequest;
 
+import model.DAO.BoardDAO;
 import model.DTO.BoardDTO;
 
 public class BoardWriteController {
@@ -19,5 +20,8 @@ public class BoardWriteController {
 		boardDTO.setBoardSubject(boardSubject);
 		boardDTO.setBoardWriter(boardWriter);
 		boardDTO.setWriterIp(writeIp);	
+		
+		BoardDAO dao = new BoardDAO();
+		dao.boardInsert(boardDTO);
 	}
 }

@@ -27,6 +27,7 @@ public class BoardFrontController extends HttpServlet implements Servlet{
 					request.getRequestDispatcher("/board/boardWrite.jsp");
 			dispatcher.forward(request, response);
 		}else if(command.equals("/boardWriteOk.bd")) {
+			System.out.println("aasaaa");
 			BoardWriteController action = new BoardWriteController();
 			action.execute(request);			
 			response.sendRedirect(URLEncoder.encode("게시글목록.bd","UTF-8"));
@@ -39,6 +40,7 @@ public class BoardFrontController extends HttpServlet implements Servlet{
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
 		if(command.equals("/boardWriteOk.bd")) {
+			System.out.println("aasaaa");
 			BoardWriteController action = new BoardWriteController();
 			action.execute(request);
 			response.sendRedirect(URLEncoder.encode("게시글목록.bd","UTF-8"));

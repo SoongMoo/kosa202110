@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>     
 <a href="한글.naver">메인으로 가기</a>
 </body>
 </html>

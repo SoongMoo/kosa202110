@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>     
 <a href="게시글목록.bd" >게시글 목록</a>
 </body>
 </html>

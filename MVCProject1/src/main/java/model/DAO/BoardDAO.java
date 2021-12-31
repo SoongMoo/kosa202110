@@ -28,6 +28,20 @@ public class BoardDAO {
 		}catch(Exception e) {e.printStackTrace();}
 		return conn;
 	}
+	public void boardDel(String num) {
+		con = getConnection();
+		String sql = "delete from board where board_num = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, num);
+			int i = pstmt.executeUpdate();
+			System.out.println(i +" 개 행이(가) 삭제되었습니다.");
+		}catch(Exception e) {e.printStackTrace();
+		} finally {
+			if(pstmt != null) try{pstmt.close();}catch(Exception e) {}
+			if(con != null) try{con.close();}catch(Exception e) {}
+		}
+	}
 	public BoardDTO selectOne(String num) {
 		BoardDTO dto = new BoardDTO();
 		con = getConnection(); // con = conn;

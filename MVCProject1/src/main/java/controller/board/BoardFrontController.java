@@ -39,6 +39,16 @@ public class BoardFrontController
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/board/boardInfo.jsp");
 			dispatcher.forward(request, response);
+		}else if(command.equals("/boardDel.kosa")) {
+			BoardDelController action = new BoardDelController();
+			action.execute(request);
+			response.sendRedirect("boardList.kosa");
+		}else if(command.equals("/boardUpdate.kosa")) {
+			BoardDetailController action = new BoardDetailController();
+			action.execute(request);
+			RequestDispatcher dispatcher = 
+					request.getRequestDispatcher("/board/boardModifyForm.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 	

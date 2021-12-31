@@ -28,6 +28,42 @@ public class BoardDAO {
 		}catch(Exception e) {e.printStackTrace();}
 		return conn;
 	}
+	public void visitCount(String num) {
+		con = getConnection();
+		String sql = " update board "
+				+ "    set visit_count = visit_count + 1 "
+				+ "    where board_num = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, num);
+			int i = pstmt.executeUpdate();
+			System.out.println(i + "개 행이(가) 수정되었습니다.");
+		}catch(Exception e) {e.printStackTrace();		
+		}finally {
+			if(pstmt != null) try{pstmt.close();}catch(Exception e) {}
+			if(con != null) try{con.close();}catch(Exception e) {}
+		}
+	}
+	public void boardUpdate(BoardDTO dto) {
+		con = getConnection();
+		String sql = "update board"
+				+ " set BOARD_WRITER = ? , BOARD_SUBJECT = ?, "
+				+ "     BOARD_CONTENT = ? "
+				+ " where board_num = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getBoardWriter());
+			pstmt.setString(2, dto.getBoardSubject());
+			pstmt.setString(3, dto.getBoardContent());
+			pstmt.setInt(4, dto.getBoardNum());
+			int i = pstmt.executeUpdate();
+			System.out.println(i + "개 행이(가) 수정되었습니다.");
+		}catch(Exception e) {e.printStackTrace();			
+		}finally {
+			if(pstmt != null) try{pstmt.close();}catch(Exception e) {}
+			if(con != null) try{con.close();}catch(Exception e) {}
+		}
+	}
 	public void boardDel(String num) {
 		con = getConnection();
 		String sql = "delete from board where board_num = ?";

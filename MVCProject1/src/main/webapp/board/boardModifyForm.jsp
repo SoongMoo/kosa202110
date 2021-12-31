@@ -21,7 +21,9 @@
 			<td><textarea rows="6" cols="40" name="boardContent">${dto.boardContent }</textarea></td>
 		</tr>
 		<tr><th colspan=2>
-				<input type="submit" value="게시글 수정 완료"> 
+				<input type="submit" value="게시글 수정 완료" /> 
+				<input type="button" value="뒤로가기" 
+						onclick="javascript:history.back()" />
 			</th></tr>
 	</table>
 </form>

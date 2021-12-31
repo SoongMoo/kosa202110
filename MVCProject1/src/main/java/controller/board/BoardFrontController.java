@@ -34,6 +34,8 @@ public class BoardFrontController
 			System.out.println(request.getParameter("boardWriter"));
 			response.sendRedirect("boardList.kosa");
 		}else if(command.equals("/boardDetail.kosa")) {
+			BoardVisitCountController visit = new BoardVisitCountController();
+			visit.execute(request);
 			BoardDetailController action = new BoardDetailController();
 			action.execute(request);
 			RequestDispatcher dispatcher =
@@ -49,6 +51,11 @@ public class BoardFrontController
 			RequestDispatcher dispatcher = 
 					request.getRequestDispatcher("/board/boardModifyForm.jsp");
 			dispatcher.forward(request, response);
+		}else if(command.equals("/boardModify.kosa")) {
+			BoardModifyController action = new BoardModifyController();
+			action.execute(request);
+			response.sendRedirect("boardDetail.kosa?num="+
+										request.getParameter("boardNum"));
 		}
 	}
 	

@@ -13,6 +13,7 @@
 제목 : ${dto.boardSubject }<br />
 내용 : ${dto.boardContent }<br />
 <a href="boardUpdate.kosa?num=${dto.boardNum}">수정</a> | 
-<a href="boardDel.kosa?num=${dto.boardNum}">삭제</a>
+<a href="boardDel.kosa?num=${dto.boardNum}">삭제</a> | 
+<a href="boardList.kosa" >게시글 리스트</a>
 </body>
 </html>

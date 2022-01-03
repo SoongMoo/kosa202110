@@ -13,4 +13,5 @@ public class BoradListController {
 		List<BoardDTO> list = dao.selectAll();
 		request.setAttribute("list", list);
 	}
+	
 }

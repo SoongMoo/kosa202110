@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class BoardFrontController 
-		extends HttpServlet 
+		extends HttpServlet
 		implements javax.servlet.Servlet{
 	public void doProcess(HttpServletRequest request, 
 			HttpServletResponse response) 
@@ -58,7 +58,6 @@ public class BoardFrontController
 										request.getParameter("boardNum"));
 		}
 	}
-	
 	@Override
 	protected void doGet(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {

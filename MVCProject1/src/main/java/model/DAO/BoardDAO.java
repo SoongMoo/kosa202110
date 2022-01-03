@@ -10,26 +10,11 @@ import java.util.List;
 
 import model.DTO.BoardDTO;
 
-public class BoardDAO {
-	String jdbcDriver;
-	String jdbcUrl;
-	Connection con;
-	PreparedStatement pstmt;
-	ResultSet rs;
-	public BoardDAO() {
-		jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-		jdbcUrl = "jdbc:oracle:thin:@localhost:1521:xe";
-	}
-	public Connection getConnection() {
-		Connection conn = null;
-		try {
-			Class.forName(jdbcDriver);	
-			conn = DriverManager.getConnection(jdbcUrl,"kosa12", "oracle");
-		}catch(Exception e) {e.printStackTrace();}
-		return conn;
-	}
+public class BoardDAO extends DataBaseInfo {
+
 	public void visitCount(String num) {
 		con = getConnection();
+
 		String sql = " update board "
 				+ "    set visit_count = visit_count + 1 "
 				+ "    where board_num = ?";

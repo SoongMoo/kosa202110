@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="boardList.kosa">게시글 목록</a>
-<a href="employeeList.emp">직원 리스트</a>
+직원등록이 완료되었습니다.<br />
+<a href="employeeList.emp">직원리스트</a>
 </body>
 </html>

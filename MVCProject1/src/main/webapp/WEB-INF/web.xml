@@ -17,4 +17,20 @@
   	<servlet-name>board</servlet-name>
   	<url-pattern>*.kosa</url-pattern>
   </servlet-mapping>
+  
+	<servlet>
+		<servlet-name>emp</servlet-name>
+		<servlet-class>controller.employee.EmployeeFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>emp</servlet-name>
+		<url-pattern>*.emp</url-pattern>
+	</servlet-mapping>
 </web-app>
+
+
+
+
+
+
+

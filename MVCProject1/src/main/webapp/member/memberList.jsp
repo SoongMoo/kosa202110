@@ -4,11 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>memberList.jsp</title>
 </head>
 <body>
-<a href="boardList.kosa">게시글 목록</a>
-<a href="employeeList.emp">직원 리스트</a>
-<a href="memberList.mem">회원리스트</a>
+회원리스트 페이지입니다.<br />
+<a href="memberRegist.mem">회원등록</a>
 </body>
 </html>

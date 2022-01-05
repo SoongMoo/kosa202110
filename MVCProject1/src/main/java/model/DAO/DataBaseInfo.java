@@ -13,7 +13,7 @@ public class DataBaseInfo {
 	ResultSet rs;
 	public DataBaseInfo() {
 		jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-		jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
+		jdbcURL = "jdbc:oracle:thin:@192.168.0.56:1521:xe";
 	}
 	public Connection getConnection() {
 		Connection conn = null;

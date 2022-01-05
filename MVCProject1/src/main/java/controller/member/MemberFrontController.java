@@ -61,6 +61,20 @@ public class MemberFrontController extends HttpServlet
 			action.execute(request);
 			response.sendRedirect("memberDetail.mem?num="
 							+request.getParameter("memNum"));
+		}else if(command.equals("/memberAgree.mem")) {
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher("/member/agree.jsp");
+			dispatcher.forward(request, response);
+		}else if(command.equals("/memberJoin.mem")) {
+			RequestDispatcher dispatcher = 
+					request.getRequestDispatcher("/member/memberJoinForm.jsp");
+			dispatcher.forward(request, response);
+		}else if(command.equals("/memberJoinOk.mem")) {
+			MemberJoinController action = new MemberJoinController();
+			action.execute(request);
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher("/member/welcome.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 	@Override

@@ -75,6 +75,46 @@ public class MemberFrontController extends HttpServlet
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/member/welcome.jsp");
 			dispatcher.forward(request, response);
+		}else if(command.equals("/memberDscript.mem")) {
+			MemberDscriptController action =
+					new MemberDscriptController();
+			action.execute(request);
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher("/myPage/memberDetail.jsp");
+			dispatcher.forward(request, response);
+		}else if(command.equals("/memberInfoModify.mem")) {
+			MemberDscriptController action =
+					new MemberDscriptController();
+			action.execute(request);
+			
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher("/myPage/memberModidy.jsp");
+			dispatcher.forward(request, response);
+		}else if(command.equals("/memberInfoUpdate.mem")) {
+			MemberMyUpdateContoller action =
+					new MemberMyUpdateContoller();
+			action.execute(request ,response);
+		}else if(command.equals("/memberDrop.mem")) {
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher("/myPage/memberDrop.jsp");
+			dispatcher.forward(request, response);
+		}else if(command.equals("/memberDropOk.mem")) {
+			MemberDropController action = new MemberDropController();
+			action.execute(request, response);
+		}else if(command.equals("/memberPass.mem")) {
+			RequestDispatcher dispatcher = 
+			   request.getRequestDispatcher("/myPage/memberPass.jsp");
+			dispatcher.forward(request, response);
+		}else if(command.equals("/memberPassword.mem")) {
+			MemberPassController action = new MemberPassController();
+			String path = action.execute(request);
+			RequestDispatcher dispatcher =
+					request.getRequestDispatcher(path);
+			dispatcher.forward(request, response);
+		}else if(command.equals("/memberPassModify.mem")) {
+			MemberPassModifyController action =
+					new MemberPassModifyController();
+			action.execute(request, response);
 		}
 	}
 	@Override

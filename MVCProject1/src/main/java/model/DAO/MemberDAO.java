@@ -9,6 +9,72 @@ public class MemberDAO extends DataBaseInfo{
 	final String COLUMNS = "MEM_NUM,MEM_NAME,MEM_REGI_DATE,"
 			+ "MEM_ID, MEM_PW,MEM_PHONE1, MEM_PHONE2,MEM_ADDR,"
 			+ "MEM_EMAIL,MEM_GENDER,MEM_birth ";
+	public void memberPassUpdate(String memId, String memPw) {
+		con = getConnection();
+		String sql = " update member "
+				+ "    set mem_pw = ?"
+				+ "    where mem_id  = ? ";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memPw);
+			pstmt.setString(2, memId);
+			int i = pstmt.executeUpdate();
+			System.out.println(i + "개 행이(가) 수정되었습니다.");
+		}catch(Exception e) {e.printStackTrace();}
+		finally {close();}
+	}
+	public void memberMyUpdate(MemberDTO dto) {
+		con = getConnection();
+		String sql = " update member "
+				+ " set MEM_NAME = ?, MEM_PHONE1 = ?,  "
+				+ "     MEM_PHONE2 = ? , MEM_ADDR = ? ,"
+				+ "     MEM_EMAIL = ? , MEM_GENDER = ?, "
+				+ "     MEM_birth =? "
+				+ " where MEM_ID = ? ";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMemName());
+			pstmt.setString(2, dto.getMemPhone1());
+			pstmt.setString(3, dto.getMemPhone2());
+			pstmt.setString(4, dto.getMemAddr());
+			pstmt.setString(5, dto.getMemEmail());
+			pstmt.setString(6, dto.getMemGender());
+			pstmt.setTimestamp(7, dto.getMemBirth());
+			pstmt.setString(8, dto.getMemId());
+			int i = pstmt.executeUpdate();
+			System.out.println(i + " 개 행이(가) 수정되었습니다.");
+		}catch(Exception e) {e.printStackTrace();}
+		finally {close();}
+		
+	}
+	public MemberDTO selectUser(String memId) {
+		MemberDTO dto = new MemberDTO();
+		con = getConnection();
+		String sql = "select " + COLUMNS + " from member "
+				+ " where MEM_ID = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setMemAddr(rs.getString("mem_addr"));
+				dto.setMemBirth(rs.getTimestamp("mem_birth"));
+				dto.setMemEmail(rs.getString("mem_email"));
+				dto.setMemGender(rs.getString("mem_gender"));
+				dto.setMemId(rs.getString("mem_id"));
+				dto.setMemName(rs.getString("mem_name"));
+				dto.setMemNum(rs.getString("mem_num"));
+				dto.setMemPhone1(rs.getString("mem_phone1"));
+				dto.setMemPhone2(rs.getString("mem_phone2"));
+				dto.setMemPw(rs.getString("mem_pw"));
+				dto.setMemRegiDate(
+						new java.util.Date(
+								rs.getDate("mem_regi_date").getTime()));
+			}
+		}catch(Exception e) {e.printStackTrace();}
+		finally {close();}
+		return dto;
+	}
 	public void memberJoin(MemberDTO dto) {
 		con = getConnection();
 		String sql = "insert into member ( " + COLUMNS + ") "

@@ -9,8 +9,7 @@
 </head>
 <body>
 메인페이지입니다.<br />
-<c:if test="${empty id }">
-로그인되지 않은 상태: ${id }<br />
+<c:if test="${empty authInfo }">
 <form action="loginPro.login"  method="post" name="frm" id="frm">
 <table>
 <tr><td colspan=2>
@@ -29,13 +28,21 @@
 </form>
 </c:if>
 
-<c:if test="${!empty id }">
-${id }님 방문을 환영합니다.<br />
-<a href="boardList.kosa">게시글 목록</a>
-<a href="employeeList.emp">직원 리스트</a>
-<a href="memberList.mem">회원리스트</a>
-<a href="mypage.html">마이페이지</a>
+<c:if test="${!empty authInfo }">
+${authInfo.userId }님 방문을 환영합니다.<br />
+<a href="boardList.kosa">게시글 목록</a> | 
+
+	<c:if test="${authInfo.grade == 'emp' }">
+	<a href="employeeList.emp">직원 리스트</a> |
+	<a href="memberList.mem">회원리스트</a> |
+	</c:if>
+	
+	<c:if test="${authInfo.grade == 'mem' }">
+	<a href="mypage.html">마이페이지</a> |
+	</c:if>
+
 <a href="logout.login">로그아웃</a>
+
 </c:if>
 </body>
 </html>

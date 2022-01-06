@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.DAO.LoginDAO;
+import model.DTO.AuthInfo;
 
 public class LoginProController {
 	public void execute(HttpServletRequest request,
@@ -17,27 +18,28 @@ public class LoginProController {
 		String pw = request.getParameter("pw");
 		
 		LoginDAO dao = new LoginDAO();
-		int i = dao.loginCk(id, pw);
-		System.out.println(i); // 1 =  아이디와 비밀번호가 일치 , 0 = 아이디는 존재하지만 비밀번호가 틀림
-		                       // -1 = 아이디가 존재하지 않음
+		AuthInfo authInfo = dao.loginCk(id, pw);
+		
 		HttpSession session = request.getSession(); // 세션 생성
 		
-		if(i == 1) {
-			//session속성이 id라는 속성이 있다면 로그인된 상태로 정함.
-			session.setAttribute("id", id); 
-			String contextPath = request.getContextPath();
-			response.sendRedirect(contextPath + "/");
-		}else if(i == 0){ // 비밀번호가 틀림
-			request.setAttribute("pwErr", "비밀번호가 틀렸습니다.");
-			request.setAttribute("userId", id);
-			RequestDispatcher dispatcher = 
-					request.getRequestDispatcher("/login.jsp");
-			dispatcher.forward(request, response);
-		}else if(i == -1) {  // 아이디가 존재하지 않음
+		if(authInfo==null) {// 아이디가 존재 하지 않음 i == -1
 			request.setAttribute("idErr", "아이디가 존재하지 않습니다.");
 			RequestDispatcher dispatcher = 
 					request.getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
+		}else {
+			if(pw.equals(authInfo.getUserPw())) {//아이디와 비밀번호가 같음 i == 1
+				//session속성이 id라는 속성이 있다면 로그인된 상태로 정함.
+				session.setAttribute("authInfo", authInfo); 
+				String contextPath = request.getContextPath();
+				response.sendRedirect(contextPath + "/");
+			}else { // i == 0
+				request.setAttribute("pwErr", "비밀번호가 틀렸습니다.");
+				request.setAttribute("userId", id);
+				RequestDispatcher dispatcher = 
+						request.getRequestDispatcher("/login.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
 	}
 }

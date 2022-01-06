@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.DAO.MemberDAO;
+import model.DTO.AuthInfo;
 import model.DTO.MemberDTO;
 
 public class MemberMyUpdateContoller {
@@ -19,7 +20,7 @@ public class MemberMyUpdateContoller {
 			request.setCharacterEncoding("utf-8");
 		}catch(Exception e) {e.printStackTrace();}
 		HttpSession session = request.getSession();
-		String memId = (String)session.getAttribute("id"); // 로그인 사용자의 세션 
+		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo"); // 로그인 사용자의 세션 
 		
 		String memPw = request.getParameter("memPw");
 		String memName = request.getParameter("memName");
@@ -40,7 +41,7 @@ public class MemberMyUpdateContoller {
 		MemberDAO dao = new MemberDAO();
 		// 입력한 비밀번호와 디비에 있는 비밀번호가 서로 일치하는 지 확인
 		// 일치하지 않는 경우  alert창을 출력
-		MemberDTO dto = dao.selectUser(memId);
+		MemberDTO dto = dao.selectUser(authInfo.getUserId());
 		if(!dto.getMemPw().equals(memPw)) {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset=UTF-8");
@@ -58,7 +59,7 @@ public class MemberMyUpdateContoller {
 			dto.setMemAddr(memAddr);
 			dto.setMemEmail(memEmail);
 			dto.setMemGender(memGender);
-			dto.setMemId(memId);
+			dto.setMemId(authInfo.getUserId());
 			dto.setMemName(memName);
 			dto.setMemPhone1(memPhone1);
 			dto.setMemPhone2(memPhone2);

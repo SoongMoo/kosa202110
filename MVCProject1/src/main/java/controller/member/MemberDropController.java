@@ -7,13 +7,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.DAO.MemberDAO;
+import model.DTO.AuthInfo;
 import model.DTO.MemberDTO;
 
 public class MemberDropController {
 	public void execute(HttpServletRequest request,
 			HttpServletResponse response) {
+		
 		HttpSession session = request.getSession();
-		String memId = (String)session.getAttribute("id"); //로그인 세션 사용자 아이디
+		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
+		String memId = authInfo.getUserId(); //로그인 세션 사용자 아이디
+		
 		String memPw = request.getParameter("memPw");
 		
 		MemberDAO dao = new MemberDAO();

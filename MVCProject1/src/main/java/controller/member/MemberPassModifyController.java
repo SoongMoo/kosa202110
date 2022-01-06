@@ -9,14 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.DAO.MemberDAO;
+import model.DTO.AuthInfo;
 import model.DTO.MemberDTO;
 
 public class MemberPassModifyController {
 	public void execute(HttpServletRequest request,
 			HttpServletResponse response) 
 					throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
-		String memId= (String)session.getAttribute("id");
+		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
+		String memId= authInfo.getUserId();				
+				
 		String memPw= request.getParameter("memPw");
 		String newMemPw = request.getParameter("newMemPw");
 		

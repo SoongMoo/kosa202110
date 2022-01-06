@@ -6,6 +6,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.DAO.MemberDAO;
 import model.DTO.MemberDTO;
@@ -14,7 +15,8 @@ public class MemberPassModifyController {
 	public void execute(HttpServletRequest request,
 			HttpServletResponse response) 
 					throws ServletException, IOException {
-		String memId= "highland2";
+		HttpSession session = request.getSession();
+		String memId= (String)session.getAttribute("id");
 		String memPw= request.getParameter("memPw");
 		String newMemPw = request.getParameter("newMemPw");
 		

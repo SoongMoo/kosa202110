@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.DAO.MemberDAO;
 import model.DTO.MemberDTO;
@@ -11,7 +12,8 @@ import model.DTO.MemberDTO;
 public class MemberDropController {
 	public void execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		String memId = "highland2"; //임의의 사용자 아이디
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("id"); //로그인 세션 사용자 아이디
 		String memPw = request.getParameter("memPw");
 		
 		MemberDAO dao = new MemberDAO();

@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.DAO.MemberDAO;
 import model.DTO.MemberDTO;
@@ -17,7 +18,9 @@ public class MemberMyUpdateContoller {
 		try {
 			request.setCharacterEncoding("utf-8");
 		}catch(Exception e) {e.printStackTrace();}
-		String memId = "highland2"; //임의의 사용자 아이디
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("id"); // 로그인 사용자의 세션 
+		
 		String memPw = request.getParameter("memPw");
 		String memName = request.getParameter("memName");
 		String memPhone1= request.getParameter("memPhone1");

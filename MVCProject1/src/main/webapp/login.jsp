@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,8 @@
 <table>
 <tr><td colspan=2>
 	<input type="checkbox" value="autoLogin" name="autoLogin">로그인 유지 |
-	<input type="checkbox" value="storeId" name="storeId"> 아이디 저장
+	<input type="checkbox" value="store" name="storeId" 
+	<c:if test="${!empty isId }">checked</c:if> /> 아이디 저장
 	</td></tr>
 <tr><td><input type="text" name="id" placeholder="아이디입력" value="${userId }"/><br />
 	<span style="color:red">${idErr }</span>	

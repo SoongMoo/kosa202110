@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="javax.servlet.http.Cookie" %>
+<%@ page import="model.DAO.*, model.DTO.*" %>
+<%
+	Cookie [] cookies = request.getCookies();
+	if(cookies != null && cookies.length > 0) {
+		for(Cookie cookie: cookies) {
+			if(cookie.getName().equals("storeId")) {
+				request.setAttribute("isId", cookie.getValue());
+			}
+			if(cookie.getName().equals("autoLogin")){
+				LoginDAO dao = new LoginDAO();
+				AuthInfo authInfo = dao.loginCk(cookie.getValue(), "abcd");
+				session.setAttribute("authInfo", authInfo);
+			}
+		}
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +31,11 @@
 <table>
 <tr><td colspan=2>
 	<input type="checkbox" value="autoLogin" name="autoLogin">로그인 유지 |
-	<input type="checkbox" value="storeId" name="storeId"> 아이디 저장
+	<input type="checkbox" value="store" name="storeId" 
+		<c:if test="${!empty isId}">checked</c:if> /> 아이디 저장
 	</td></tr>
-<tr><td><input type="text" name="id" placeholder="아이디입력"/></td>
+<tr><td><input type="text" name="id" placeholder="아이디입력" 
+		value="${isId }"/></td>
 	<td rowspan=2>
 		<input type="image" src="images/img1.jpg" width="50px" height="50px"/>
 	</td></tr>

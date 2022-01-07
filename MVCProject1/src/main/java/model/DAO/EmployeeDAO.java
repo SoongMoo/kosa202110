@@ -9,6 +9,21 @@ import model.DTO.EmployeeDTO;
 public class EmployeeDAO extends DataBaseInfo{
 	final String COLUMNS = "EMP_NUM,EMP_NAME,EMP_ID, EMP_PW,"
 			+ "EMP_HIRE_DATE, EMP_EMAIL,EMP_SALARY,EMP_PHONE"; 
+	public String selectEmpNum(String empId) {
+		String empNum = null;
+		con = getConnection();
+		String sql = "select emp_num from employees where emp_id = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, empId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				empNum= rs.getString(1);
+			}
+		}catch(Exception e) {e.printStackTrace();}
+		finally{close();};
+		return empNum;
+	}
 	public void empDelete(String num) {
 		con = getConnection();
 		String sql = " delete from employees where emp_num = ? ";

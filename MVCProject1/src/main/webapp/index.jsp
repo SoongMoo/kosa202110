@@ -54,6 +54,7 @@ ${authInfo.userId }님 방문을 환영합니다.<br />
 	<c:if test="${authInfo.grade == 'emp' }">
 	<a href="employeeList.emp">직원 리스트</a> |
 	<a href="memberList.mem">회원리스트</a> |
+	<a href="goodsList.gd" >상품 리스트</a> |
 	</c:if>
 	
 	<c:if test="${authInfo.grade == 'mem' }">

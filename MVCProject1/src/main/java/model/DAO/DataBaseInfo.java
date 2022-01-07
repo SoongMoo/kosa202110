@@ -13,13 +13,13 @@ public class DataBaseInfo {
 	ResultSet rs;
 	public DataBaseInfo() {
 		jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-		jdbcURL = "jdbc:oracle:thin:@192.168.0.56:1521:xe";
+		jdbcURL = "jdbc:oracle:thin:@192.168.0.69:1521:xe";
 	}
 	public Connection getConnection() {
 		Connection conn = null;
 		try {
 			Class.forName(jdbcDriver);
-			conn = DriverManager.getConnection(jdbcURL,"kosa12","oracle");
+			conn = DriverManager.getConnection(jdbcURL,"kosa123","oracle");
 		}catch(Exception e) {e.printStackTrace();}
 		return conn;
 	}

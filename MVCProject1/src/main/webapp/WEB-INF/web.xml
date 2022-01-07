@@ -10,6 +10,14 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
+  	<servlet-name>goods</servlet-name>
+  	<servlet-class>controller.goods.GoodsFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>goods</servlet-name>
+  	<url-pattern>*.gd</url-pattern>
+  </servlet-mapping>
+  <servlet>
   	<servlet-name>login</servlet-name>
   	<servlet-class>controller.login.LoginFrontController</servlet-class>
   </servlet>

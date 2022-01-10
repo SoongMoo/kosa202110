@@ -51,10 +51,3 @@
 		<url-pattern>*.emp</url-pattern>
 	</servlet-mapping>
 </web-app>
-
-
-
-
-
-
-

@@ -10,6 +10,59 @@ public class GoodsDAO extends DataBaseInfo{
 			+ "goods_content, goods_images, goods_qty, goods_company, emp_num,"
 			+ "ip_addr";
 	String sql;
+	public void goodsUpdate(GoodsDTO dto) {
+		con = getConnection();
+		sql = " update goods "
+		    + " set goods_name = ? , goods_price = ?, goods_date=?,"
+		    + "     goods_content =?, goods_images = ?, goods_qty = ?,"
+		    + "     goods_company= ?, emp_num= ?, ip_addr = ?"
+		    + " where goods_num = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getGoodsName());
+			pstmt.setInt(2, dto.getGoodsPrice());
+			pstmt.setTimestamp(3, dto.getGoodsDate());
+			pstmt.setString(4, dto.getGoodsContent());
+			pstmt.setString(5, dto.getGoodsImages());
+			pstmt.setInt(6, dto.getGoodsQty());
+			pstmt.setString(7, dto.getGoodsCompany());
+			pstmt.setString(8, dto.getEmpNum());
+			pstmt.setString(9, dto.getIpAddr());
+			pstmt.setString(10, dto.getGoodsNum());
+			
+			int i = pstmt.executeUpdate();
+			System.out.println(i + "개 행이(가) 수정되었습니다.");
+			
+		}catch(Exception e) {e.printStackTrace();}
+		finally {close();}
+	}
+	public void goodsDelete(String goodsNum) {
+		con = getConnection();
+		sql = "delete from goods where goods_num = ? ";
+		try {
+			pstmt = con .prepareStatement(sql);
+			pstmt.setString(1, goodsNum);
+			int i = pstmt.executeUpdate();
+			System.out.println(i +" 개 행이(가) 삭제되었습니다.");
+		}catch(Exception e) {e.printStackTrace();}
+		finally {close();}
+	}
+	public String getImages(String goodsNum) {
+		String goodsImages=null;
+		con = getConnection();
+		sql = "select goods_images from goods "
+				+ " where goods_num = ? ";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, goodsNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				goodsImages = rs.getString(1);
+			}
+		}catch(Exception e) {e.printStackTrace();}
+		finally {close();}
+		return goodsImages;
+	}
 	public GoodsDTO selectOne(String goodsNum) {
 		GoodsDTO dto = new GoodsDTO();
 		con = getConnection();

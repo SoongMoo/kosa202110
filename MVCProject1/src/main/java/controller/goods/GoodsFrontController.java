@@ -41,6 +41,21 @@ public class GoodsFrontController extends HttpServlet implements Servlet{
 			RequestDispatcher dispatcher = 
 					request.getRequestDispatcher("/goods/goodsInfo.jsp");
 			dispatcher.forward(request, response);
+		}else if(command.equals("/goodsDelete.gd")) {
+			GoodsDeleteController action = new GoodsDeleteController();
+			action.execute(request);
+			response.sendRedirect("goodsList.gd");
+		}else if(command.equals("/goodsModify.gd")) {
+			GoodsModifyController action = new GoodsModifyController();
+			action.execute(request);
+			RequestDispatcher dispatcher = 
+					request.getRequestDispatcher("/goods/goodsModify.jsp");
+			dispatcher.forward(request, response);
+		}else if(command.equals("/goodsUpdate.gd")) {
+			GoodsUpdateController action = new GoodsUpdateController();
+			action.execute(request, response);
+			/*response.sendRedirect("goodsInfo.gd?num="
+								+multi.getParameter("goodsNum"));*/
 		}
 	}
 	@Override

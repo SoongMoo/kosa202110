@@ -15,6 +15,9 @@
 </head>
 <body>
 상세페이지입니다.<br />
+<a href="goodsModify.gd?goodsNum=${dto.goodsNum }">수정</a> | 
+<a href="goodsDelete.gd?goodsNum=${dto.goodsNum }">상품 삭제</a><br />
+
 관리자 번호 : ${dto.empNum } | ip : ${dto.ipAddr }<br />
 제품번호 : ${dto.goodsNum }<br />
 제품이름 : ${dto.goodsName }<br />

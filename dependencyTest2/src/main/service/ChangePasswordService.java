@@ -1,11 +1,16 @@
 package main.service;
 
-import main.DTO.CachedMemberDao;
 import main.DTO.MemberDTO;
+import main.DTO.MemberDao;
 
 public class ChangePasswordService {
 	// 의존객체 
-	CachedMemberDao memberDao = new CachedMemberDao();
+	MemberDao memberDao;
+	
+	//
+	public ChangePasswordService(MemberDao memberDao) {
+		this.memberDao = memberDao;
+	}
 	public void execute(String email, String oldPw, 
 			String newPw) {
 		MemberDTO dto = memberDao.selectByEmail(email);

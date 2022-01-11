@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   "
+>
+	<!-- MemberDAO memberDAO = new MemberDAO() -->
+	<bean id="memberDao" 
+			class="spring.dependencyTest4.DTO.MemberDao"/>
+	<!--  MemberPrinter printer = new MemberPrinter() -->
+	<bean id="printer" 
+			class="spring.dependencyTest4.service.MemberPrinter" />
+	
+	<!-- MemberRegisterService memberRegisterService = 
+				new MemberRegisterService(memberDAO)-->
+	<bean id="memberRegisterService" 
+	 class="spring.dependencyTest4.service.MemberRegisterService" >
+	 <constructor-arg name="memberDao" ref="memberDao"/>
+	</bean>
+	
+	<!-- MemberListPrinter memberListPrinter =
+				new MemberListPrinter(memberDao,printer) -->
+	<bean id="memberListPrinter" 
+			class="spring.dependencyTest4.service.MemberListPrinter">
+	<constructor-arg name="memberDao" ref="memberDao"/>
+	<constructor-arg name="print" ref="printer"/>
+	</bean>
+	
+	<bean id="changePasswordService" 
+		class="spring.dependencyTest4.service.ChangePasswordService">
+	<constructor-arg name="memberDao" ref="memberDao"/>
+	</bean>
+	
+	<bean id="memberInfoPrinter" 
+		class="spring.dependencyTest4.service.MemberInfoPrinter">
+		<constructor-arg name="memberDao" ref="memberDao"/>
+	</bean>
+	
+</beans>
+
+
+
+
+
+

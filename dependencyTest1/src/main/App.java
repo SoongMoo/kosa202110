@@ -3,6 +3,8 @@ package main;
 import java.util.Scanner;
 
 import main.DTO.RegisterRequest;
+import main.service.ChangePasswordService;
+import main.service.MemberInfoPrinter;
 import main.service.MemberListPrinter;
 import main.service.MemberRegisterService;
 public class App {
@@ -41,6 +43,24 @@ public class App {
 				MemberListPrinter listPrint =
 						new MemberListPrinter();
 				listPrint.printAll();
+			}else if(command.startsWith("change ")) {
+				String [] arg = command.split(" ");
+				if(arg.length != 4) {
+					printHelp();
+					continue;
+				}
+				ChangePasswordService action = 
+						new ChangePasswordService();
+				action.execute(arg[1], arg[2], arg[3]);
+			}else if(command.startsWith("info ")) {
+				String [] arg = command.split(" ");
+				if(arg.length != 2) {
+					printHelp();
+					continue;
+				}
+				MemberInfoPrinter action =
+						new MemberInfoPrinter();
+				action.execute(arg[1]);
 			}else if(command.equals("exit")) {
 				System.out.println("프로그램이 종료되었습니다.");
 				System.exit(0);

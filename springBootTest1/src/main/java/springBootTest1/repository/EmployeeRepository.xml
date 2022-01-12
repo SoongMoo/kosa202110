@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springBootTest1.repository.EmployeeRepository">
+<sql id="baseColumns">
+	emp_num, emp_name, emp_id, emp_pw, emp_hire_date, emp_email,
+	emp_salary, emp_phone
+</sql>
+
+<insert id="employeeInsert" 
+	parameterType="springBootTest1.domain.EmployeeDTO">
+	insert into employees( <include refid="baseColumns" /> )
+	values(#{empNum},#{empName},#{empId},#{empPw},#{empHireDate},
+	#{empEmail}, #{empSalary},#{empPhone})
+</insert>
+</mapper>

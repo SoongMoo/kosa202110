@@ -1,20 +1,23 @@
-package main;
+package spring.dependencyTest5;
 
 import java.util.Scanner;
 
-import main.DTO.CachedMemberDao;
-import main.DTO.MemberDao;
-import main.DTO.RegisterRequest;
-import main.service.ChangePasswordService;
-import main.service.MemberInfoPrinter;
-import main.service.MemberListPrinter;
-import main.service.MemberPrinter;
-import main.service.MemberRegisterService;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+import spring.dependencyTest5.DTO.RegisterRequest;
+import spring.dependencyTest5.service.ChangePasswordService;
+import spring.dependencyTest5.service.MemberInfoPrinter;
+import spring.dependencyTest5.service.MemberListPrinter;
+import spring.dependencyTest5.service.MemberRegisterService;
+
+
+
 public class App {
-	//static MemberDao memberDao = new MemberDao();
-	static MemberDao memberDao = new CachedMemberDao();
-	static MemberPrinter printer = new MemberPrinter();
+	// 의존 객체 조립기 생성 
+	//static Assembler assembler = new Assembler();
+	static GenericXmlApplicationContext ctx;
 	public static void main(String[] args) {
+		ctx = new GenericXmlApplicationContext("classpath:appCtx.xml");
 		Scanner sc = new Scanner(System.in);
 		while(true) {
 			System.out.println("명렁어를 입력하세요:");
@@ -41,13 +44,14 @@ public class App {
 				}
 				// 의존객체
 				MemberRegisterService action= 
-						new MemberRegisterService();
-				action.setMemberDao(memberDao);
+						ctx.getBean("memberRegisterService",
+								MemberRegisterService.class);
 				action.execute(req);
 			}else if(command.equals("list")) {
 				// 의존 객체
 				MemberListPrinter listPrint =
-						new MemberListPrinter(memberDao, printer);
+						ctx.getBean("memberListPrinter",
+								MemberListPrinter.class);
 				listPrint.printAll();
 			}else if(command.startsWith("change ")) {
 				String [] arg = command.split(" ");
@@ -56,7 +60,8 @@ public class App {
 					continue;
 				}
 				ChangePasswordService action = 
-						new ChangePasswordService(memberDao);
+						ctx.getBean("changePasswordService",
+								ChangePasswordService.class);
 				action.execute(arg[1], arg[2], arg[3]);
 			}else if(command.startsWith("info ")) {
 				String [] arg = command.split(" ");
@@ -65,7 +70,8 @@ public class App {
 					continue;
 				}
 				MemberInfoPrinter action =
-						new MemberInfoPrinter(memberDao);
+						ctx.getBean("memberListPrinter",
+								MemberInfoPrinter.class);
 				action.execute(arg[1]);
 			}else if(command.equals("exit")) {
 				System.out.println("프로그램이 종료되었습니다.");

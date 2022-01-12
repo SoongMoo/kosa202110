@@ -1,11 +1,14 @@
-package main.service;
+package spring.dependencyTest5.service;
 
-import main.DTO.MemberDTO;
-import main.DTO.MemberDao;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import spring.dependencyTest5.DTO.MemberDTO;
+import spring.dependencyTest5.DTO.MemberDao;
 
 public class ChangePasswordService {
-	// 의존객체 
-	MemberDao memberDao = new MemberDao();
+	@Autowired
+	MemberDao memberDao;
+	
 	public void execute(String email, String oldPw, 
 			String newPw) {
 		MemberDTO dto = memberDao.selectByEmail(email);

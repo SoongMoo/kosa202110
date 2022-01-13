@@ -1,4 +1,4 @@
-package springBootTest2.controller.main;
+package springBootTest2.controller;
 
 import javax.servlet.http.HttpServlet;
 
@@ -11,5 +11,4 @@ public class MainController {
 	public String home() {
 		return "thymeleaf/index";
 	}
-	
 }

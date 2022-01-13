@@ -1,4 +1,4 @@
-package springBootTest2.controller.employees;
+package springBootTest2.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

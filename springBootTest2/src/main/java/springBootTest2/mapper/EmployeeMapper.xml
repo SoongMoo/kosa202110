@@ -40,12 +40,4 @@ select emp_num empNum, emp_name empName, emp_id empId,
 	emp_salary empSalary, emp_phone empPhone
 from employees
 </select>
-
-
-
-
-
-
-
-
 </mapper>

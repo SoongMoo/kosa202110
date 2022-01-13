@@ -17,6 +17,7 @@ public class SpringBootTest2Application {
 //		return "스프링부트가 잘 실행되네요.";
 //	}
 	public static void main(String[] args) {
+		
 		SpringApplication.run(SpringBootTest2Application.class, args);
 	}
 }

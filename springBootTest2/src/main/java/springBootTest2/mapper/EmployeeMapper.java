@@ -12,4 +12,7 @@ import springBootTest2.domain.EmployeeDTO;
 public interface EmployeeMapper {
 	public Integer employeeInsert(EmployeeDTO dto); 
 	public List<EmployeeDTO> selectAll();
+	public EmployeeDTO selectOne(String empNum);
+	public Integer empDelete(String empNum);
+	public Integer empUpdate(EmployeeDTO dto);
 }

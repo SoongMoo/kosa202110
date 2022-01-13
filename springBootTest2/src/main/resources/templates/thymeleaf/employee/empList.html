@@ -9,15 +9,17 @@
 <table border = 1>
 	<tr><td>직원번호</td><td>직원이름</td><td>아이디</td><td>입사일</td></tr>
 	<th:block th:each ="dto : ${list}">
-	<tr><td><a href="#">[[${dto.empNum }]]</a></td>
+	<tr><td><a th:href="@{employeeInfo(num=${dto.empNum })}">[[${dto.empNum }]]</a></td>
 		<td>[[${dto.empName }]]</td>
-		<td><a href="#">[[${dto.empId }]]</a></td>
-		<td> <span 
-		th:text="${#dates.format(dto.empHireDate, 'yyyy-MM-dd')}"></span> 
+		<td><a th:href="@{/emp/employeeInfo(num=${dto.empNum })}">[[${dto.empId }]]</a></td>
+		<td> <span th:text="${#dates.format(dto.empHireDate,'yyyy-MM-dd')}"></span> 
 		</td></tr>
 	</th:block>
 </table>
 
+<!--  
+/emp/employeeInfo(num=${dto.empNum })
+-->
 <a href="employeeRegist">직원등록</a><br />
 </body>
 </html>

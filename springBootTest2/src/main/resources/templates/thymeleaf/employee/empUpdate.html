@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+직원 수정
+<form action="employeeUpdate" method="get" name="frm" id="frm" >
+	직원번호 : <input type="text" name="empNum" th:value="${dto.empNum}" 
+					readonly="readonly"/><br />
+	직원이름 : <input type="text" name="empName"  th:value="${dto.empName}"/><br />
+	직원아이디: <input type="text" name="empId" th:value="${dto.empId}"/><br />
+	입사일 : <input type="date" name="empHireDate" 
+			th:value="${#dates.format(dto.empHireDate,'yyyy-MM-dd')}" readonly="readonly"/><br />
+	직원이메일 : <input type="email" name="empEmail" th:value="${dto.empEmail}"/><br />
+	직원 급여 : <input type="number" min="100"  value="100" 
+					name="empSalary" th:value="${dto.empSalary}"/><br />
+	직원연락처 : <input type="tel" name="empPhone" placeholder="031-1234-1234" 
+					th:value="${dto.empPhone}"/><br />
+	<input type="submit" value="직원등록"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springBootTest2.mapper.BoardMapper">
+<sql id="baseColumns">
+	BOARD_NUM, BOARD_WRITE, BOARD_SUBJECT,
+	BOARD_CONTENT, WRITER_IP, VISIT_COUNT
+</sql>
+<sql id="maxNum">
+	select nvl(max(board_num),0) + 1 from board
+</sql>
+<insert id="boardInsert" 
+		parameterType="springBootTest2.domain.BoardDTO">
+	insert into board( <include refid="baseColumns" /> )
+	values(( <include refid="maxNum" />) , 
+	#{boardWriter}, #{boardSubject}, #{boardContent}, #{writerIp}, 0)
+</insert>
+</mapper>

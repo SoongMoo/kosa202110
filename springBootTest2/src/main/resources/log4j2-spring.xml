@@ -13,7 +13,7 @@
     <Loggers>
         <!-- 기본 패키지 경로 -->
         <logger name="springBootTest2" level="debug"/>
-<Logger name="jdbc.connection"      level="OFF" additivity="false"><AppenderRef ref="console" /></Logger>
+		<Logger name="jdbc.connection"      level="OFF" additivity="false"><AppenderRef ref="console" /></Logger>
         <Logger name="jdbc.audit"           level="WARN" additivity="false"><AppenderRef ref="console" /></Logger>
         <Logger name="jdbc.sqlonly"         level="OFF" additivity="false"><AppenderRef ref="console" /></Logger>
         <Logger name="jdbc.sqltiming"       level="DEBUG" additivity="false"><AppenderRef ref="console" /></Logger>

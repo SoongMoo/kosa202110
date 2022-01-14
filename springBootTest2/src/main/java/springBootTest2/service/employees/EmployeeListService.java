@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import springBootTest2.domain.EmployeeDTO;
-import springBootTest2.mapper.EmployeeMapper;
+import springBootTest2.repository.EmployeeRepository;
 
 @Component
 @Service
 public class EmployeeListService {
 	@Autowired
-	EmployeeMapper employeeMapper;
-	//EmployeeRepository employeeRepository;
+	//EmployeeMapper employeeMapper;
+	EmployeeRepository employeeRepository;
 	public void execute(Model model) {
-		List<EmployeeDTO> list = employeeMapper.selectAll();
-		//List<EmployeeDTO> list = employeeRepository.selectAll();
+		//List<EmployeeDTO> list = employeeMapper.selectAll();
+		List<EmployeeDTO> list = employeeRepository.selectAll();
 		model.addAttribute("list", list);
 	}
 }

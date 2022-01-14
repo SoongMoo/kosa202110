@@ -4,14 +4,44 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="springBootTest2.mapper.BoardMapper">
 <sql id="baseColumns">
-	BOARD_NUM, BOARD_WRITE, BOARD_SUBJECT,
+	BOARD_NUM, BOARD_WRITER, BOARD_SUBJECT,
 	BOARD_CONTENT, WRITER_IP, VISIT_COUNT
 </sql>
 <sql id="maxNum">
 	select nvl(max(board_num),0) + 1 from board
 </sql>
-<insert id="boardInsert" 
-		parameterType="springBootTest2.domain.BoardDTO">
+<update id="boardUpdate" 
+				parameterType="springBootTest2.domain.BoardDTO">
+	UPDATE BOARD 
+	SET BOARD_WRITER = #{boardWriter}, BOARD_SUBJECT = #{boardSubject},
+		BOARD_CONTENT = #{boardContent}
+	WHERE BOARD_NUM = #{boardNum}  
+</update>
+<delete id="boardDel" parameterType="int">
+	delete from board
+	where BOARD_NUM = #{boardNum}
+</delete>
+<update id="visitCount" parameterType="int" >
+	update board 
+	set VISIT_COUNT = VISIT_COUNT + 1
+	where BOARD_NUM = #{boardNum}
+</update>
+<select id="selectOne" parameterType="integer" 
+	resultType="springBootTest2.domain.BoardDTO">
+	select BOARD_NUM boardNum, BOARD_WRITER boardWriter, 
+			BOARD_SUBJECT boardSubject, BOARD_CONTENT boardContent, 
+			WRITER_IP writerIp, VISIT_COUNT visitCount
+	from board
+	where BOARD_NUM = #{boardNum}
+</select>
+<select id="selectAll" resultType="springBootTest2.domain.BoardDTO">
+	select BOARD_NUM boardNum, BOARD_WRITER boardWriter, 
+			BOARD_SUBJECT boardSubject, BOARD_CONTENT boardContent, 
+			WRITER_IP writerIp, VISIT_COUNT visitCount
+	from board
+	order by BOARD_NUM desc
+</select>
+<insert id="boardInsert" parameterType="springBootTest2.domain.BoardDTO">
 	insert into board( <include refid="baseColumns" /> )
 	values(( <include refid="maxNum" />) , 
 	#{boardWriter}, #{boardSubject}, #{boardContent}, #{writerIp}, 0)

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC 	
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mappers.EmployeeMapper">
+<mapper namespace="mappers.employees.employeeMapper">
 <sql id="baseColumns">
 	emp_num, emp_name, emp_id, emp_pw, emp_hire_date, emp_email,
 	emp_salary, emp_phone	

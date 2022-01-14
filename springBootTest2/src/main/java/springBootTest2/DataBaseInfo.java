@@ -12,25 +12,21 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DataBaseInfo {
-	@Autowired
-	private ApplicationContext applicationContext;
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(
-			DataSource dataSource) throws Exception {
+			DataSource dataSource,ApplicationContext applicationContext) throws Exception {
 		SqlSessionFactoryBean sessionFactory =
 				new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
-		sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*.xml"));
+		//sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*.xml"));
 		return sessionFactory.getObject();
 	}
-	
-	/*
+
 	  @Bean 
 	  public SqlSessionTemplate sqlSession ( 
 			  SqlSessionFactory sqlSessionFactory) 
 					  throws Exception{ 
 		  return new SqlSessionTemplate(sqlSessionFactory); 
 	  }
-	 */
-	 
+
 }

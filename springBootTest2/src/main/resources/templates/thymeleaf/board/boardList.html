@@ -6,7 +6,16 @@
 </head>
 <body>
 게시글 리스트<br />
-
+<table border= 1 width="600px">
+	<tr><th>글번호</th><th>글쓴이</th><th>제목</th><th>조회수</th></tr>
+	<th:block th:each=" dto : ${list}">
+		<tr><td><a th:href="@{boardDetail(num=${dto.boardNum })}">[[${dto.boardNum }]]</a></td>
+			<td>[[${dto.boardWriter }]]</td>
+			<td><a th:href="@{boardDetail(num=${dto.boardNum })}">[[${dto.boardSubject }]]</a></td>
+			<td>[[${dto.visitCount }]]</td>
+		</tr>
+	</th:block>
+</table>
 <a href="boardWrite">게시글쓰기</a>
 </body>
 </html>

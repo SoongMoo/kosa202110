@@ -15,8 +15,10 @@ import springBootTest2.mapper.EmployeeMapper;
 public class EmployeeListService {
 	@Autowired
 	EmployeeMapper employeeMapper;
+	//EmployeeRepository employeeRepository;
 	public void execute(Model model) {
 		List<EmployeeDTO> list = employeeMapper.selectAll();
+		//List<EmployeeDTO> list = employeeRepository.selectAll();
 		model.addAttribute("list", list);
 	}
 }

@@ -10,13 +10,14 @@ import springBootTest2.repository.EmployeeRepository;
 @Component
 @Service
 public class EmployeeDeleteService {
+	@Autowired 
+	EmployeeMapper employeeMapper;
 	/*
-	 * @Autowired EmployeeMapper employeeMapper;
-	 */
 	@Autowired
 	EmployeeRepository employeeRepository;
+	*/
 	public void execute(String empNum) {
-		//employeeMapper.empDelete(empNum);
-		employeeRepository.empDelete(empNum);
+		employeeMapper.empDelete(empNum);
+		//employeeRepository.empDelete(empNum);
 	}
 }

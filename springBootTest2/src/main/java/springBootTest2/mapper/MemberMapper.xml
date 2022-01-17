@@ -27,8 +27,7 @@ order by MEM_NUM desc
 <select id="numberGenerate" resultType="string">
 select concat('kosa',nvl(max(substr(MEM_NUM,5)),100000) + 1) from member
 </select>
-<insert id="memberInsert" 
-	parameterType="memberVO">
+<insert id="memberInsert" parameterType="memberVO">
 insert into member(MEM_NUM,MEM_NAME,MEM_REGI_DATE, MEM_ID, MEM_PW,
 				   MEM_PHONE1,MEM_PHONE2,MEM_ADDR,MEM_EMAIL,MEM_GENDER,
 				   MEM_BIRTH)
@@ -36,8 +35,7 @@ values(#{memNum},#{memName},sysdate,#{memId},
 		#{memPw},#{memPhone1},#{memPhone2},#{memAddr},#{memEmail},
 		#{memGender},#{memBirth})
 </insert>
-<select id="selectOne" parameterType="string" 
-			resultType="memberVO">
+<select id="selectOne" parameterType="string" resultType="memberVO">
 select MEM_NUM memNum, MEM_NAME memName, MEM_REGI_DATE memRegiDate, 
 		MEM_ID memId, MEM_PW memPw, MEM_PHONE1 memPhone1,
 		MEM_PHONE2 memPhone2, MEM_ADDR memAddr, MEM_EMAIL memEmail, 

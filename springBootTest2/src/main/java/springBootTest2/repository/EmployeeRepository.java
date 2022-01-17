@@ -12,7 +12,7 @@ import springBootTest2.domain.EmployeeDTO;
 @Component
 @Repository
 public class EmployeeRepository {
-	private final String namespace="mappers.employees.employeeMapper";
+	private final String namespace="springBootTest2.mapper.EmployeeMapper";
 	@Autowired 
 	private SqlSession sqlSession;
 	public List<EmployeeDTO> selectAll() {

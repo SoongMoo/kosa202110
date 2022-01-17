@@ -68,13 +68,14 @@
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 		<!-- mybatis -->
-		<!--
+
 		<dependency> 
 			<groupId>org.mybatis.spring.boot</groupId> 
 			<artifactId>mybatis-spring-boot-starter</artifactId> 
 			<version>2.2.0</version> 
 		</dependency>
-		-->
+
+		<!--
 		<dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
@@ -85,6 +86,7 @@
             <artifactId>mybatis</artifactId>
             <version>3.2.8</version> 
         </dependency>
+        -->
         <!-- setter/getter 자동 생성 -->
 	    <dependency>
 	    	<groupId>org.projectlombok</groupId>

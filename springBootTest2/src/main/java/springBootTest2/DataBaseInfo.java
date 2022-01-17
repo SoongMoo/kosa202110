@@ -19,6 +19,7 @@ public class DataBaseInfo {
 				new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
 		sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*.xml"));
+		sessionFactory.setTypeAliasesPackage("springBootTest2.domain");
 		return sessionFactory.getObject();
 	}
 
@@ -28,5 +29,4 @@ public class DataBaseInfo {
 					  throws Exception{ 
 		  return new SqlSessionTemplate(sqlSessionFactory); 
 	  }
-
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springBootTest2.mapper.MemberShipMapper">
+<sql id="AutoNum">
+	select nvl(max(substr(MEM_NUM,5)),100000) + 1 from member
+</sql>
+<insert id="memberInsert" 
+	parameterType="springBootTest2.domain.MemberDTO">
+insert into member(MEM_NUM,MEM_NAME,MEM_REGI_DATE, MEM_ID, MEM_PW,
+				   MEM_PHONE1,MEM_PHONE2,MEM_ADDR,MEM_EMAIL,MEM_GENDER,
+				   MEM_BIRTH)
+values(concat('kosa',( <include refid="AutoNum" /> )),#{memName},sysdate,#{memId},
+		#{memPw},#{memPhone1},#{memPhone2},#{memAddr},#{memEmail},
+		#{memGender},#{memBirth})
+</insert>
+</mapper>

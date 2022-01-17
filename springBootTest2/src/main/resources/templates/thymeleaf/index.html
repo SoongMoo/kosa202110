@@ -6,8 +6,27 @@
 </head>
 <body>
 첫 페이지입니다.<br />
+<form action="loginPro"  method="post" name="frm" id="frm">
+<table>
+<tr><td colspan=2>
+	<input type="checkbox" value="autoLogin" name="autoLogin">로그인 유지 |
+	<input type="checkbox" value="store" name="storeId" /> 아이디 저장
+	</td></tr>
+<tr><td><input type="text" name="id" placeholder="아이디입력" /></td>
+	<td rowspan=2>
+		<input type="submit" width="50px" height="50px" value="로그인"/>
+	</td></tr>
+<tr><td><input type="password" name="pw" placeholder="비밀번호"/></td></tr>
+<tr><td colspan=2>
+	아이디/비밀번호 찾기 | <a href="/membership/memberAgree">회원가입</a>
+	</td></tr>
+</table>
+</form>
+
+
 <a href="/emp/employeeList">직원 리스트</a> | 
 <a href="/board/boardList">게시글 목록</a> |
-<a href="/qna/qnaList">QnA 목록</a> 
+<a href="/qna/qnaList">QnA 목록</a> |
+<a href="/mem/memberList">회원리스트</a>
 </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+회원 수정 페이지 입니다.<br />
+<form action="memberUpdate" method="post" name="frm" id="frm">
+고객 번호 : <input type="text" name="memNum" th:value="${memberDTO.memNum }" 
+			readonly="readonly" required="required">:번호 자동부여<br />
+고객 이름 : <input type="text" name="memName" th:value="${memberDTO.memName }" 
+			required="required"><br />
+고객 생년월일 : <input type="date" 
+			th:value="${#dates.format(memberDTO.memBirth,'yyyy-MM-dd') }"
+			name="memBirth" required="required" /><br />
+고객 성별 : <input type="radio" name="memGender" value="F" 
+			 th:checked="${memberDTO.memGender=='F'}" />여자
+          <input type="radio" name="memGender" value="M" 
+             th:checked="${memberDTO.memGender=='M'}"  />남자<br />
+고객 가입일 : <input type="date" th:value="${#dates.format(memberDTO.memRegiDate,'yyyy-MM-dd') }" name="memRegiDate" 
+			required="required"/><br />
+고객 아이디 : <input type="text" th:value="${memberDTO.memId }" 
+				name="memId" required="required"><br />
+고객 연락처1 : <input type="tel" th:value="${memberDTO.memPhone1 }"  
+				name="memPhone1" placeholder="031-1234-1234"><br />
+고객 연락처2 : <input type="tel" th:value="${memberDTO.memPhone2 }" 
+				name="memPhone2" placeholder="031-1234-1234"><br />
+고객 주소 : <input type="text" th:value="${memberDTO.memAddr }" 
+				name="memAddr"><br />
+고객 이메일 : <input type="email" th:value="${memberDTO.memEmail }"  
+				name="memEmail"><br />
+<input type="submit" value="회원 수정 완료" />
+</form>
+</body>
+</html>

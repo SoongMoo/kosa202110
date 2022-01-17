@@ -7,7 +7,7 @@ import org.apache.ibatis.type.Alias;
 import lombok.Data;
 
 @Data
-@Alias("memberVO")
+@Alias("memberDTO")
 public class MemberDTO {
 	String memNum; 
 	String memName;

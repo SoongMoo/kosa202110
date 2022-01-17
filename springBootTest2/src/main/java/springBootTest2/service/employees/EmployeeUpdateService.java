@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 import springBootTest2.command.EmployeeCommand;
 import springBootTest2.domain.EmployeeDTO;
 import springBootTest2.mapper.EmployeeMapper;
+import springBootTest2.repository.EmployeeRepository;
 @Component
 @Service
 public class EmployeeUpdateService {
 	@Autowired
-	EmployeeMapper employeeMapper;
+	//EmployeeMapper employeeMapper;
+	EmployeeRepository employeeRepository;
 	public void execute(EmployeeCommand employeeCommand) {
 		EmployeeDTO dto = new EmployeeDTO();
 		dto.setEmpEmail(employeeCommand.getEmpEmail());
@@ -22,6 +24,7 @@ public class EmployeeUpdateService {
 		dto.setEmpPhone(employeeCommand.getEmpPhone());
 		dto.setEmpSalary(employeeCommand.getEmpSalary());
 		
-		employeeMapper.empUpdate(dto);
+		//employeeMapper.empUpdate(dto);
+		employeeRepository.empUpdate(dto);
 	}
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @ComponentScan(value = "springBootTest2")
-@MapperScan(value = "springBootTest2")
+@MapperScan(value = {"springBootTest2"})
 //@RestController
 public class SpringBootTest2Application {
 //	@RequestMapping("/")

@@ -18,7 +18,7 @@ public class DataBaseInfo {
 		SqlSessionFactoryBean sessionFactory =
 				new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
-		//sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*.xml"));
+		sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*.xml"));
 		return sessionFactory.getObject();
 	}
 

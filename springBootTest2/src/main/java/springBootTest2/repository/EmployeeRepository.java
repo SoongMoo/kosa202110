@@ -22,5 +22,16 @@ public class EmployeeRepository {
 	public Integer empDelete(String empNum) {
 		String statement = namespace + ".empDelete";
 		return sqlSession.update(statement,empNum);
+	}public EmployeeDTO selectOne(String empNum) {
+		String statement = namespace + ".selectOne";
+		return sqlSession.selectOne(statement,empNum);
+	}
+	public Integer empUpdate(EmployeeDTO dto) {
+		String statement = namespace + ".empUpdate";
+		return sqlSession.update(statement,dto);
+	}
+	public Integer employeeInsert(EmployeeDTO dto) {
+		String statement = namespace + ".employeeInsert";
+		return sqlSession.update(statement,dto);
 	}
 }

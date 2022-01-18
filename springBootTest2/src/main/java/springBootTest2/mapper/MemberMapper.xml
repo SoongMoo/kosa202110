@@ -6,7 +6,7 @@
 
 <update id="memberUpdate" parameterType="memberDTO">
 	update member
-	set MEM_REGI_DATE=#{memRegiDate},
+	set MEM_REGI_DATE=#{memRegiDate},MEM_NAME =#{memName},
 	    MEM_PHONE1 = #{memPhone1}, MEM_PHONE2=#{memPhone2},
 	    MEM_ADDR = #{memAddr} , MEM_EMAIL =#{memEmail},
 	    MEM_GENDER = #{memGender}, MEM_BIRTH = #{memBirth} 

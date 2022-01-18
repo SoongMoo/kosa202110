@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springBootTest2.mapper.LibraryMapper">
+
+
+<insert id="libInsert" parameterType="libdto">
+insert into library_1(lib_num, lib_writer, lib_subject,lib_content,mem_id,ip_addr, lib_pw)
+values(seq_num1.nextval, #{libWriter}, #{libSubject}, #{libContent}, #{memId}, 
+		#{ipAddr}, #{libPw})
+</insert>
+<sql id="baseColumns">
+lib_num libNum, lib_writer libWriter, lib_subject libSubject,
+lib_content libContent,mem_id memId,ip_addr ipAddr, lib_pw libPw
+</sql>
+<select id="selectAll" resultType="libdto">
+	select <include refid="baseColumns" />
+	from library_1
+</select>
+<select id="selectOne" resultType="libdto">
+    select <include refid="baseColumns" />
+	from library_1
+	where lib_num = #{libNum}
+</select>
+</mapper>

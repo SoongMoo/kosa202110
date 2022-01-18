@@ -6,6 +6,33 @@
 <sql id="AutoNum">
 	select nvl(max(substr(MEM_NUM,5)),100000) + 1 from member
 </sql>
+<update id="updatePassword" 
+	parameterType="springBootTest2.domain.MemberDTO">
+	update member
+	set mem_pw = #{memPw}
+	where mem_id = #{memId}
+</update>
+<delete id="memberDrop" parameterType="string">
+	delete from member
+	where mem_id = #{memId}
+</delete>
+<update id="memberUpdate" parameterType="springBootTest2.domain.MemberDTO">
+	update member
+	set MEM_NAME =#{memName},
+	    MEM_PHONE1 = #{memPhone1}, MEM_PHONE2=#{memPhone2},
+	    MEM_ADDR = #{memAddr} , MEM_EMAIL =#{memEmail},
+	    MEM_GENDER = #{memGender}, MEM_BIRTH = #{memBirth} 
+	where MEM_NUM = #{memNum}
+</update>
+<select id="selectOne" parameterType="string" 
+	resultType="springBootTest2.domain.MemberDTO">
+	select MEM_NUM memNum,MEM_NAME memName,MEM_REGI_DATE memRegiDate,
+	       MEM_ID memId, MEM_PW memPw, MEM_PHONE1 memPhone1,
+	       MEM_PHONE2 memPhone2,MEM_ADDR memAddr,MEM_EMAIL memEmail,
+	       MEM_GENDER memGender, MEM_BIRTH memBirth
+	from member
+	where mem_id = #{memId}
+</select>
 <insert id="memberInsert" 
 	parameterType="springBootTest2.domain.MemberDTO">
 insert into member(MEM_NUM,MEM_NAME,MEM_REGI_DATE, MEM_ID, MEM_PW,

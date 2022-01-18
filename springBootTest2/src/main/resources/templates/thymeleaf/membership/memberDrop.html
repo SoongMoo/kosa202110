@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>memberDrop</title>
+</head>
+<body>
+<form action="memberDropOk" method="post" name="frm" id="frm">
+	비밀번호 : <input type="password" name="memPw" />
+	<span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span>
+	<input type="submit" value="탈퇴하기"/>
+</form>
+</body>
+</html>

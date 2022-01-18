@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springBootTest2.mapper.LoginMapper">
+<select id="loginSelect" parameterType="string" 
+			resultType="springBootTest2.domain.AuthInfo">
+	select mem_Id userId, mem_pw userPw, 'mem' grade
+	from member
+	where mem_id = #{id}
+	union
+	select emp_id, emp_pw ,'emp'
+	from employees
+	where emp_id= #{id}
+</select>
+</mapper>

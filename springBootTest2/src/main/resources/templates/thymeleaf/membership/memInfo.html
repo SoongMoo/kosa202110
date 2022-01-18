@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+내정보 보기<br />
+고객 번호 :[[${dto.memNum}]]<br />
+이름 :[[${dto.memName}]]<br />
+가입일 :[[${#dates.format(dto.memRegiDate,'yyyy-MM-dd')}]]<br />
+아이디:[[${dto.memId}]]<br />
+연락처1 :[[${dto.memPhone1}]]<br />
+연락처2 :[[${dto.memPhone2}]]<br />
+주소 :[[${dto.memAddr}]]<br />
+이메일 :[[${dto.memEmail}]]<br />
+성별 : <span th:if= "${dto.memGender == 'M'}" th:text="남자"></span>
+	  <span th:if= "${dto.memGender == 'F'}" th:text="여자"></span><br />
+생년월일 :[[${#dates.format(dto.memBirth,'yyyy-MM-dd')}]]<br />
+<a href="memberInfoModify">내정보 수정</a> | 
+<a href="memberPass" >비밀번호 변경</a> | 
+<a href="memberDrop">탈퇴</a>
+</body>
+</html>
+
+
+

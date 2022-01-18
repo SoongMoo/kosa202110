@@ -13,14 +13,14 @@ import org.springframework.core.io.ClassPathResource;
 @Configuration
 public class DataBaseInfo {
 	@Bean
-	public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ApplicationContext applicationContext)
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource, 
+			ApplicationContext applicationContext)
 			throws Exception {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
+		sessionFactory.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
 		sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*.xml"));
 		sessionFactory.setTypeAliasesPackage("springBootTest2.domain");
-		sessionFactory.setConfigLocation(
-				new ClassPathResource("mybatis-config.xml"));
 		return sessionFactory.getObject();
 	}
 	@Bean

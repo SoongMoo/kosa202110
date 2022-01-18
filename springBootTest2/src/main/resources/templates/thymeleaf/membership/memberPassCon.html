@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="memberPassModify" name="frm" id="frm" method="post">
+현재 비밀번호 : <input type="password" name="memPw" />
+<span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span><br />
+바꿀 비밀번호 : <input type="password" name="newMemPw" id ="newMemPw" /><br />
+비밀번호 확인 : <input type="password" name="newMemPwCon" id="newMemPwCon" />
+<span th:if="${err_pwCon != null}" th:text="${err_pwCon}" style="color:red"></span><br />
+<input type="submit" value="비밀번호 변경하기" />
+</form>
+</body>
+</html>

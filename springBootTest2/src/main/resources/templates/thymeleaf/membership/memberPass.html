@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="memberPasswordPro" method="post">
+비밀번호 : <input type="password" name="memPw" />
+<span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span>
+<input type="submit" value="비밀번호 확인" />
+</form>
+</body>
+</html>

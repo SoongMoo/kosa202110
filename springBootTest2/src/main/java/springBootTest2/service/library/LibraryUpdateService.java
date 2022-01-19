@@ -23,8 +23,8 @@ public class LibraryUpdateService {
 		LibraryDTO dto = libraryMapper.selectOne(libraryCommand.getLibNum());
 		if(!dto.getLibPw().equals(libraryCommand.getLibPw()) || 
 				!dto.getMemId().equals(authInfo.getUserId())) {
-			// 수정한 내용을 수정 페이지에 전달
-			// selectOne으로 가져온 내용을 전달하면 이전 내용이 적용
+			// selectOne으로 가져온 내용을 전달하면 이전 내용이 적용이 되므로
+			// 수정한 내용을 수정 페이지에 전달하기 위해 libraryCommand를 전달
 			model.addAttribute("dto", libraryCommand);
 			model.addAttribute("err_pw","비밀번호가 틀리거나 작성자가 아닙니다.");
 			path = "thymeleaf/lib/libModify";

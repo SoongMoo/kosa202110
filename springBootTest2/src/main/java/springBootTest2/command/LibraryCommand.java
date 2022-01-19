@@ -8,4 +8,5 @@ public class LibraryCommand {
 	String libSubject;
 	String libContent;
 	String libPw;
+	String libNum;
 }

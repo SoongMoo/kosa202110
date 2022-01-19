@@ -3,8 +3,16 @@
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="springBootTest2.mapper.LibraryMapper">
-
-
+<update id="libraryUpdate" parameterType="libdto">
+	update library_1
+	set lib_writer = #{libWriter}, lib_subject = #{libSubject},
+	    lib_content = #{libContent}
+	where lib_num = #{libNum}
+</update>
+<delete id="libDelete" parameterType="string">
+	delete from library_1
+	where lib_num = #{libNum}
+</delete>
 <insert id="libInsert" parameterType="libdto">
 insert into library_1(lib_num, lib_writer, lib_subject,lib_content,mem_id,ip_addr, lib_pw)
 values(seq_num1.nextval, #{libWriter}, #{libSubject}, #{libContent}, #{memId}, 

@@ -69,8 +69,8 @@ public class LibraryController {
 		return "thymeleaf/lib/libForm";
 	}
 	@RequestMapping("libList")
-	public String libList(Model model) {
-		libraryListService.execute(model);
+	public String libList(Model model,HttpServletRequest request) {
+		libraryListService.execute(model, request);
 		return "thymeleaf/lib/libList";
 	}
 }

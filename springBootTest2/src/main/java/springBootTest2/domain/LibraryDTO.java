@@ -14,4 +14,7 @@ public class LibraryDTO {
 	String memId;
 	String ipAddr;
 	String libPw;
+	String originalFileName;
+	String storeFileName;
+	String fileSize;
 }

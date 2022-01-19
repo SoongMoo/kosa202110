@@ -25,6 +25,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="lombok.hwp">다운로드</a>
 메인페이지입니다.<br />
 <c:if test="${empty authInfo }">
 <form action="loginPro.login"  method="post" name="frm" id="frm">

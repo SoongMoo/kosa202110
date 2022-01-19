@@ -17,6 +17,14 @@ $(function(){
 글쓴이 : [[${dto.libWriter}]]  || ip주소 : [[${dto.ipAddr}]]<br />
 제목 : [[${dto.libSubject}]] <br />
 내용 : [[${dto.libContent}]] <br />
+파일 : 
+<div th:each="file , idx : ${#strings.arraySplit(dto.originalFileName,'`')}" >
+		<a th:href="|/lib/${#strings.arraySplit(dto.storeFileName,'`')[idx.index]}|"> 
+		[[${file}]]</a> || 
+		size : [[${#numbers.formatInteger(
+					#strings.arraySplit(dto.fileSize,'`')[idx.index],0,'COMMA'
+				  )}]]Byte
+</div>
 <form action="libModify" method="post" id="frm">
 <input type="hidden" name="libNum" th:value="${dto.libNum}" />
 게시글 비밀번호 : <input type="password" name="libPw" id="libPw" required="required"/>

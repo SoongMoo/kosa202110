@@ -5,7 +5,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-첫 페이지입니다.<br />
+<a href="/board/boardList">자유 게시판 게시판</a>
+<p></p>
 <th:block th:if="${session.authInfo == null}">
 <!-- 로그인 안되었을 때 -->
 <form action="loginPro"  method="post" name="frm" id="frm">
@@ -17,17 +18,20 @@
 <tr><td><input type="text" name="id" placeholder="아이디입력" /><br />
         <span th:if="${err_id != null}" th:text="${err_id}"  style="color:red"></span></td>
 	<td rowspan=2>
-		<input type="submit" width="50px" height="50px" value="로그인"/>
+	<input type="image" th:src="@{/static/images/img1.jpg}" 
+			width="80" height="80" id="imgSubmit">
+	<!-- <input type="image" src="/static/images/img1.jpg" width="80" height="80" id="imgSubmit"> -->
 	</td></tr>
 <tr><td><input type="password" name="pw" placeholder="비밀번호"/><br />
 		<span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span></td></tr>
 <tr><td colspan=2>
 	아이디/비밀번호 찾기 | <a href="/membership/memberAgree">회원가입</a>
 	</td></tr>
-</table>
+</table>  
 </form>
 </th:block>
-<a href="/board/boardList">자유 게시판 게시판</a>
+
+
 
 <span th:if="${session.authInfo != null}">
 <!-- 로그인되었을 때 -->

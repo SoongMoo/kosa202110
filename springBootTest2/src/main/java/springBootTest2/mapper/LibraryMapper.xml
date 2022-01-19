@@ -14,13 +14,17 @@
 	where lib_num = #{libNum}
 </delete>
 <insert id="libInsert" parameterType="libdto">
-insert into library_1(lib_num, lib_writer, lib_subject,lib_content,mem_id,ip_addr, lib_pw)
+insert into library_1(lib_num, lib_writer, lib_subject,lib_content,mem_id,ip_addr, lib_pw,
+             original_file_name, store_file_name, file_size)
 values(seq_num1.nextval, #{libWriter}, #{libSubject}, #{libContent}, #{memId}, 
-		#{ipAddr}, #{libPw})
+		#{ipAddr}, #{libPw},#{originalFileName},#{storeFileName},
+		#{fileSize})
 </insert>
 <sql id="baseColumns">
 lib_num libNum, lib_writer libWriter, lib_subject libSubject,
-lib_content libContent,mem_id memId,ip_addr ipAddr, lib_pw libPw
+lib_content libContent,mem_id memId,ip_addr ipAddr, lib_pw libPw,
+original_file_name originalFileName, store_file_name storeFileName,
+file_size fileSize
 </sql>
 <select id="selectAll" resultType="libdto">
 	select <include refid="baseColumns" />

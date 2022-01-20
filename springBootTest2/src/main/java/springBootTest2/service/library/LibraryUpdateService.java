@@ -26,9 +26,9 @@ public class LibraryUpdateService {
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
 		LibraryDTO dto = libraryMapper.selectOne(libraryCommand.getLibNum());
 		
-		String originalTotal = null;
-		String storeTotal = null;
-		String fileSizeTotal = null;
+		String originalTotal = "";
+		String storeTotal = "";
+		String fileSizeTotal = "";
 		
 		String [] fileNames = null;
 		if( dto.getStoreFileName() != null) {
@@ -40,9 +40,7 @@ public class LibraryUpdateService {
 		
 		if(!dto.getLibPw().equals(libraryCommand.getLibPw()) || 
 				!dto.getMemId().equals(authInfo.getUserId())) {
-			// selectOne으로 가져온 내용을 전달하면 이전 내용이 적용이 되므로
-			// 수정한 내용을 수정 페이지에 전달하기 위해 libraryCommand를 전달
-			model.addAttribute("dto", libraryCommand);
+			model.addAttribute("dto", dto);
 			model.addAttribute("err_pw","비밀번호가 틀렸습니다.");
 			path = "thymeleaf/lib/libModify";
 		}else {
@@ -54,14 +52,12 @@ public class LibraryUpdateService {
 				originalTotal = dto.getOriginalFileName();
 				storeTotal = dto.getStoreFileName();
 				fileSizeTotal = dto.getFileSize();
-			}else {
+			}
+
+			if(!libraryCommand.getReport()[0].getOriginalFilename().isEmpty()) {
 				originalTotal = "";
 				storeTotal = "";
 				fileSizeTotal = "";
-			}
-			
-			if(!libraryCommand.getReport()[0].getOriginalFilename().isEmpty()) {
-				
 				for(MultipartFile mf : libraryCommand.getReport()) {
 					String originalFile = mf.getOriginalFilename();
 					String extension = originalFile.substring(

@@ -30,7 +30,7 @@ public class LibraryDeleteService {
 			path = "thymeleaf/lib/libInfo";
 		}else {
 			Integer i = libraryMapper.libDelete(libraryCommand.getLibNum());
-			if(i > 0) {
+			if(i > 0 && dto.getStoreFileName() != null) {
 				String [] fileNames = dto.getStoreFileName().split("`");
 				String filePath ="/view/lib";
 				String fileDir = session.getServletContext()

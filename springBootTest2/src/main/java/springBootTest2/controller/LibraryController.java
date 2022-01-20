@@ -1,6 +1,7 @@
 package springBootTest2.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import lombok.val;
 import springBootTest2.command.LibraryCommand;
+import springBootTest2.service.library.FileDownLoadService;
 import springBootTest2.service.library.LibraryDeleteService;
 import springBootTest2.service.library.LibraryInfoService;
 import springBootTest2.service.library.LibraryListService;
@@ -33,6 +36,14 @@ public class LibraryController {
 	LibraryUpdateService  libraryUpdateService ;
 	@Autowired
 	LibraryDeleteService  libraryDeleteService ;
+	@Autowired
+	FileDownLoadService fileDownLoadService;
+	@RequestMapping("fileDown")
+	public void fileDown(@RequestParam(value="sfile") String sfileName,
+			@RequestParam(value="ofile") String ofileName,
+			HttpServletRequest request, HttpServletResponse response) {
+		fileDownLoadService.fileDownLoad(sfileName,ofileName,request,response);
+	}
 	@RequestMapping("libDetele")
 	public String libDetele(LibraryCommand libraryCommand, 
 			HttpSession session,Model model) {
@@ -54,8 +65,9 @@ public class LibraryController {
 	}
 	@RequestMapping("libInfo")
 	public String libInfo(@RequestParam(value="num") String libNum,
-			Model model) {
-		libraryInfoService.execute(libNum, model);
+			Model model,HttpSession session) {
+		model.addAttribute("newLineChar", '\n');
+		libraryInfoService.execute(libNum, model,session);
 		return "thymeleaf/lib/libInfo";
 	}
 	@RequestMapping(value="libWrite" , method=RequestMethod.POST)

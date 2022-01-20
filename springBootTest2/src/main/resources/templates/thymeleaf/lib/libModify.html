@@ -5,13 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="libUpdate" method="post">
+<form action="libUpdate" method="post" enctype="multipart/form-data">
 <input type="hidden" name="libNum" th:value="${dto.libNum}" /><br />
 글쓴이 : <input type="text" name="libWriter" 
 			th:value="${dto.libWriter}" required="required"/><br />
 제목 : <input type="text" name="libSubject" 
 			th:value="${dto.libSubject}" required="required"/><br />
 내용 : <textarea rows="6" cols="50" name="libContent" required="required">[[${dto.libContent}]]</textarea><br />
+파일 : <input type="file" name="report" multiple="multiple"/><br />
+
+<div th:each="file , idx : ${#strings.arraySplit(dto.originalFileName,'`')}">
+	[[${file}]] || [[${#strings.arraySplit(dto.fileSize,'`')[idx.index]}]]
+</div>
+
 게시글 비밀번호 : <input type="password" name="libPw"  required="required"/>
 <span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span><br />
 <input type="submit" value="수정완료"/>

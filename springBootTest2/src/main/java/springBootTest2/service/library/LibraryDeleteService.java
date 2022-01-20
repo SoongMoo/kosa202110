@@ -1,5 +1,7 @@
 package springBootTest2.service.library;
 
+import java.io.File;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,20 @@ public class LibraryDeleteService {
 			model.addAttribute("err_pw","비밀번호가 틀리거나 작성자가 아닙니다.");
 			path = "thymeleaf/lib/libInfo";
 		}else {
-			libraryMapper.libDelete(libraryCommand.getLibNum());
+			Integer i = libraryMapper.libDelete(libraryCommand.getLibNum());
+			if(i > 0) {
+				String [] fileNames = dto.getStoreFileName().split("`");
+				String filePath ="/view/lib";
+				String fileDir = session.getServletContext()
+						                .getRealPath(filePath);
+				File file = null;
+				try {
+					for(String fileName : fileNames) {
+						file = new File(fileDir + "/" + fileName);
+						if(file.exists()) file.delete();
+					}
+				}catch(Exception e) {}
+			}
 			path = "redirect:libList";
 		}
 		return path;

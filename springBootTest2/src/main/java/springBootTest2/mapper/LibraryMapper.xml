@@ -6,7 +6,10 @@
 <update id="libraryUpdate" parameterType="libdto">
 	update library_1
 	set lib_writer = #{libWriter}, lib_subject = #{libSubject},
-	    lib_content = #{libContent}
+	    lib_content = #{libContent},
+	    original_file_name = #{originalFileName},
+	    store_file_name = #{storeFileName},
+	    file_size = #{fileSize}
 	where lib_num = #{libNum}
 </update>
 <delete id="libDelete" parameterType="string">

@@ -26,11 +26,17 @@ public class LibraryUpdateService {
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
 		LibraryDTO dto = libraryMapper.selectOne(libraryCommand.getLibNum());
 		
-		String [] fileNames = dto.getStoreFileName().split("`");
+		String originalTotal = null;
+		String storeTotal = null;
+		String fileSizeTotal = null;
+		
+		String [] fileNames = null;
+		if( dto.getStoreFileName() != null) {
+			fileNames = dto.getStoreFileName().split("`");
+		}
 		
 		String filePath = "/view/lib";
-		String fileDir = 
-				session.getServletContext().getRealPath(filePath);
+		String fileDir = session.getServletContext().getRealPath(filePath);
 		
 		if(!dto.getLibPw().equals(libraryCommand.getLibPw()) || 
 				!dto.getMemId().equals(authInfo.getUserId())) {
@@ -44,14 +50,18 @@ public class LibraryUpdateService {
 			dto.setLibNum(Integer.parseInt(libraryCommand.getLibNum()));
 			dto.setLibSubject(libraryCommand.getLibSubject());
 			dto.setLibWriter(libraryCommand.getLibWriter());
-			String originalTotal = dto.getOriginalFileName();
-			String storeTotal = dto.getStoreFileName();
-			String fileSizeTotal = dto.getFileSize();
-			/////
-			if(!libraryCommand.getReport()[0].getOriginalFilename().isEmpty()) {
+			if(dto.getOriginalFileName() != null) {
+				originalTotal = dto.getOriginalFileName();
+				storeTotal = dto.getStoreFileName();
+				fileSizeTotal = dto.getFileSize();
+			}else {
 				originalTotal = "";
 				storeTotal = "";
-				fileSizeTotal ="";
+				fileSizeTotal = "";
+			}
+			
+			if(!libraryCommand.getReport()[0].getOriginalFilename().isEmpty()) {
+				
 				for(MultipartFile mf : libraryCommand.getReport()) {
 					String originalFile = mf.getOriginalFilename();
 					String extension = originalFile.substring(

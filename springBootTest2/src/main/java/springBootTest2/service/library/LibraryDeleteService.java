@@ -21,6 +21,7 @@ public class LibraryDeleteService {
 	public String execute(LibraryCommand libraryCommand, HttpSession session,Model model) {
 		String path = null;
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
+		model.addAttribute("memId",authInfo.getUserId());
 		LibraryDTO dto = libraryMapper.selectOne(libraryCommand.getLibNum());
 		model.addAttribute("dto", dto);
 		if(!dto.getLibPw().equals(libraryCommand.getLibPw()) || 

@@ -47,6 +47,7 @@ public class LibraryController {
 	@RequestMapping("libDetele")
 	public String libDetele(LibraryCommand libraryCommand, 
 			HttpSession session,Model model) {
+		model.addAttribute("newLineChar", '\n');
 		String path = libraryDeleteService.execute(libraryCommand,session,model);
 		return path;
 	}
@@ -60,6 +61,7 @@ public class LibraryController {
 	public String libModify(@RequestParam(value="libNum") String libNum,
 			@RequestParam(value="libPw") String libPw, Model model,
 			HttpSession session) {
+		model.addAttribute("newLineChar", '\n');
 		String path = libraryModifyService.execute(libNum,libPw,model,session);
 		return path;
 	}

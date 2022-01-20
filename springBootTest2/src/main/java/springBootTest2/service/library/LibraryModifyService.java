@@ -19,6 +19,7 @@ public class LibraryModifyService {
 			HttpSession session) {
 		String path = "thymeleaf/lib/libModify";
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
+		model.addAttribute("memId",authInfo.getUserId());
 		LibraryDTO dto = libraryMapper.selectOne(libNum);
 		model.addAttribute("dto", dto);
 		if(!dto.getLibPw().equals(libPw) || 

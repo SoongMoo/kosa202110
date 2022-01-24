@@ -41,9 +41,5 @@ public class FileDownLoadService {
 			out1.close();
 		}catch(Exception e) {e.printStackTrace();}
 		finally {if(fis != null){try{fis.close();}catch(Exception e){}}}
-		
-		
-		
-		
 	}
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springBootTest2.mapper.EmpLibraryMapper">
+<update id="libraryUpdate" parameterType="emplibdto">
+	update emp_library
+	set lib_writer = #{libWriter}, lib_subject = #{libSubject},
+	    lib_content = #{libContent}
+	where lib_num = #{libNum}
+</update>
+<delete id="libDelete" parameterType="string">
+	delete from emp_library
+	where lib_num = #{libNum}
+</delete>
+<insert id="libInsert" parameterType="emplibdto">
+insert into emp_library(lib_num, lib_writer, lib_subject,lib_content,emp_num,ip_addr, lib_pw
+             , ORIGINAL_FILE_NAME, STORE_FILE_NAME, FILE_SIZE)
+values(seq_num1.nextval, #{libWriter}, #{libSubject}, #{libContent}, #{empNum}, 
+		#{ipAddr}, #{libPw}, #{originalFileName},#{storeFileName},
+		#{fileSize})
+</insert>
+<sql id="baseColumns">
+lib_num libNum, lib_writer libWriter, lib_subject libSubject,
+lib_content libContent,emp_num empNum,ip_addr ipAddr, lib_pw libPw,
+ORIGINAL_FILE_NAME originalFileName,STORE_FILE_NAME storeFileName ,
+FILE_SIZE fileSize
+</sql>
+<select id="selectAll" resultType="emplibdto">
+	select <include refid="baseColumns" />
+	from emp_library
+</select>
+<select id="selectOne" resultType="emplibdto">
+    select <include refid="baseColumns" />
+	from emp_library
+	where lib_num = #{libNum}
+</select>
+</mapper>

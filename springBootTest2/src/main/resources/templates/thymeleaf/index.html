@@ -30,17 +30,21 @@
 </table>  
 </form>
 </th:block>
-
-
-
 <span th:if="${session.authInfo != null}">
 <!-- 로그인되었을 때 -->
-<a href="/emp/employeeList">직원 리스트</a> | 
-<a href="/goods/goodsList">상품 리스트</a>
 <a href="/lib/libList">자료실</a> |
 <a href="/qna/qnaList">QnA 목록</a> |
-<a href="/mem/memberList">회원리스트</a> |
-<a href="/membership/memInfo">내정보 보기</a> |
+<span th:switch="${session.authInfo.grade}">
+	<span th:case="emp">
+		<a href="/mem/memberList">회원리스트</a> |
+		<a href="/emp/employeeList">직원 리스트</a> | 
+		<a href="/goods/goodsList">상품 리스트</a> |
+		<a href="/empLib/libList">직원 자료실</a>
+	</span>
+	<span th:case="mem">
+		<a href="/membership/memInfo">내정보 보기</a> |
+	</span>
+</span>
 <a href="/logout">로그아웃</a>
 </span>
 </body>

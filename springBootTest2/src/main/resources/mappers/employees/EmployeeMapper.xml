@@ -7,6 +7,9 @@
 	emp_num, emp_name, emp_id, emp_pw, emp_hire_date, emp_email,
 	emp_salary, emp_phone	
 </sql>
+<select id="selectEmpNum" parameterType="string" resultType="string">
+	select emp_num from employees where emp_id = #{empId}
+</select>
 <update id="empUpdate" parameterType="springBootTest2.domain.EmployeeDTO">
 	update employees
 	set emp_name = #{empName}, emp_email = #{empEmail} , 

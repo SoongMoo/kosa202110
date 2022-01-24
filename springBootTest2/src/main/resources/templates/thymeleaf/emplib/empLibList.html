@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+자료실<br />
+<table border=1>
+	<tr><td>번호</td><td>이름</td><td>제목</td></tr>
+	<th:block th:each="dto : ${list}">
+	<tr><td><a th:href="@{libInfo(num=${dto.libNum})}">[[${dto.libNum}]]</a></td>
+		<td><a th:href="@{libInfo(num=${dto.libNum})}">[[${dto.libWriter}]]</a></td>
+		<td><a th:href="@{libInfo(num=${dto.libNum})}">[[${dto.libSubject}]]</a></td></tr>
+	</th:block>
+</table>
+<a href="libForm">자료실 등록</a>
+</body>
+</html>

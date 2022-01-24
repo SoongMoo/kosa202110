@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<a th:href="@{goodsModify(num=${dto.goodsNum })}">수정</a> | 
+<a th:href="@{goodsDelete(num=${dto.goodsNum })}">상품 삭제</a><br />
+
+관리자 번호 : [[${dto.empNum }]]<br />
+제품번호 : [[${dto.goodsNum }]]<br />
+제품이름 : [[${dto.goodsName }]]<br />
+제품가격 : [[${#numbers.formatCurrency(dto.goodsPrice) }]] <br />
+제조일 : [[${#dates.format(dto.goodsDate,'yyyy-MM-dd') }]]<br />
+제품설명 : <span th:utext="${#strings.replace(
+						dto.goodsContent, 
+						newLineChar ,
+						'&lt;br /&gt;'
+						)}"></span><br />
+수량 : [[${dto.goodsQty }]]<br />
+제조사 : [[${dto.goodsCompany }]]<br />
+</body>
+</html>

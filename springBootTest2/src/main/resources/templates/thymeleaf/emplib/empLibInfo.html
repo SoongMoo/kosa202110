@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script>
+$(function(){
+	$("#update").click(function(){
+		location.href="libDetele?libNum=[[${dto.libNum}]]&libPw="+$("#libPw").val()
+	});
+});
+</script>
+</head>
+<body>
+게시글 내용<br />
+관리자 번호 :  [[${dto.empNum}]]<br />
+글쓴이 : [[${dto.libWriter}]] <br />
+제목 : [[${dto.libSubject}]] <br />
+내용 : <span th:utext="${#strings.replace(
+						dto.libContent, 
+						newLineChar ,
+						'&lt;br /&gt;'
+						)}"></span><br />
+파일:<br /><!-- img1.jpg`img2.jpg`img3.jpg` -->
+<div th:each="file, idx : ${#strings.arraySplit(dto.originalFileName,'`')}" >
+	<!-- 
+	<a th:href="|/empLib/${#strings.arraySplit(dto.storeFileName,'`')[idx.index]}|">
+		[[${file }]]
+	</a>  -->
+	<a th:href="@{
+				  fileDown(sfile=${#strings.arraySplit(dto.storeFileName,'`')[idx.index]},
+	                  ofile=${file })
+	              }">[[${file }]]</a> |
+	[[${#numbers.formatInteger(
+		#strings.arraySplit(dto.fileSize,'`')[idx.index],0,'COMMA'
+		)
+		}]] Byte
+</div>
+
+
+
+						
+						
+						
+						
+<th:block th:if="${dto.empNum == empNum}">
+<form action="libModify" method="post" id="frm">
+<input type="hidden" name="libNum" th:value="${dto.libNum}" />
+게시글 비밀번호 : <input type="password" name="libPw" id="libPw" required="required"/>
+<span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span>
+<br />
+<input type="submit" value="수정"/>
+<input type="button" value="삭제"  id="update"/>
+</form>
+</th:block>
+</body>
+</html>

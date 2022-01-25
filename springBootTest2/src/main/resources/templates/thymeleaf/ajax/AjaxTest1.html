@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script>
+
+	function beforeTest() {
+		if ($("#n").val() == "") {
+			alert("값을 입력해주세요.");
+			$("#n").focus();
+			return false;
+		}
+	}
+	function okTest(result, statusText, xhr, $form) {
+		if (statusText == "success") {
+			$("#notice_content").html(result);
+			$form.css('background', 'red');
+		}
+	}
+	function errorTest() {
+		alert('에러가 나왔다 홀홀홀~');
+		return false;
+	}
+	$(function() {
+		$("#dtn1").click(function() {
+			$("#frm").ajaxSubmit({
+				type : "post",
+				dataType : "html",
+				beforeSubmit : beforeTest, // 자바스크립트 함수명
+				success : okTest,
+				error : errorTest
+			});
+		});
+		bbb = {
+			type : "post",
+			dataType : "html",
+			beforeSubmit : beforeTest, // 자바스크립트 함수명
+			success : okTest,
+			error : errorTest
+		}
+		$("#dtn2").click(function() {
+			$("#frm").ajaxSubmit(bbb);
+		});
+
+		$("#dtn").click(function() {
+			$("#frm").ajaxSubmit({
+				type : "post",
+				dataType : "html",
+				beforeSubmit : function() {
+					if ($("#n").val() == "") {
+						alert("값을 입력해주세요.");
+						$("#n").focus();
+						return false;
+					}
+				},
+				success : function(result) {
+					$("#notice_content").html(result);
+				},
+				error : function() {
+					alert('에러가 나왔다 홀홀홀~');
+					return;
+				}
+
+			});
+		});
+	});
+	function testDiv(num) {
+		//location.href="ajax2?num="+num+"&num1";
+		$.ajax({
+			type : "post",
+			url : "ajax2",
+			dataType : "html",
+			data : "num=" + num,
+			success : function(result) {
+				$("#notice_content").html(result);
+			},
+			error : function() {
+				alert('에러가 나왔다 홀홀홀~');
+				return;
+			}
+		});
+
+	}
+
+	function testDiv1(num) {
+		options = {
+			type : "post",
+			url : "ajax2",
+			dataType : "html",
+			data : "num=" + num,
+			success : function(result) {
+				$("#notice_content").html(result);
+			},
+			error : function() {
+				alert('에러가 나왔다 홀홀홀~');
+				return;
+			}
+		}
+		$.ajax(options);
+	}
+</script>
+</head>
+<body>
+<ul>
+	<li onclick="testDiv(1)">tv</li>
+	<li onclick="testDiv(2)">맛집</li>
+	<li onclick="testDiv(3)">뷰티</li>
+</ul>
+<div id="notice_content"></div>
+<form id="frm" action="ajax2" >
+	<input type="text" id = "n" name="num">
+</form>
+<button type="button" id="dtn">전송</button>
+<button type="button" id="dtn1">전송1</button>
+<button type="button" id="dtn2">전송2</button>
+</body>
+</html>

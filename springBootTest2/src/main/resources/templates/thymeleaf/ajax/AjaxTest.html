@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function testDiv(num){
+		if(num == 1){
+			op1.style.display="";
+			op2.style.display="none";
+			op3.style.display="none";
+		}else if(num == 2){
+			op1.style.display="none";
+			op2.style.display="";
+			op3.style.display="none";
+		}else if(num == 3){
+			op1.style.display="none";
+			op2.style.display="none";
+			op3.style.display="";
+		}
+	}
+</script>
+</head>
+<body>
+<ul>
+	<li onclick="testDiv(1)">tv</li>
+	<li onclick="testDiv(2)">맛집</li>
+	<li onclick="testDiv(3)">뷰티</li>
+</ul>
+<div id="op1">
+TV
+</div>
+<div id="op2"  style="display:none">
+맛집
+</div>
+<div id="op3"  style="display:none">
+뷰티
+</div>
+</body>
+</html>

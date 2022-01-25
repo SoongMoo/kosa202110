@@ -5,7 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="/board/boardList">자유 게시판 게시판</a>
+<a href="/board/boardList">자유 게시판 게시판</a>  |
+<a href="/ajax/ajax1">ajax</a> |
+<a href="/ajax/ajax3">ajax1</a>
 <p></p>
 <th:block th:if="${session.authInfo == null}">
 <!-- 로그인 안되었을 때 -->
@@ -34,6 +36,7 @@
 <!-- 로그인되었을 때 -->
 <a href="/lib/libList">자료실</a> |
 <a href="/qna/qnaList">QnA 목록</a> |
+
 <span th:switch="${session.authInfo.grade}">
 	<span th:case="emp">
 		<a href="/mem/memberList">회원리스트</a> |

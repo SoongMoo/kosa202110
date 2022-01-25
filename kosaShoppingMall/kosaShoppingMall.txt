@@ -1,123 +1,123 @@
-¼îÇÎ¸ô(kosaShoppingMall)
-È¸¿ø        : È¸¿ø¹øÈ£ , È¸¿ø¾ÆÀÌµð, È¸¿øºñ¹Ð¹øÈ£, È¸¿øÀÌ¸§, È¸¿ø ÁÖ¼Ò, µî·ÏÀÏ, ¼ºº°
-               ¿¬¶ôÃ³, »ý³â¿ùÀÏ 
-»óÇ°ÀÔ°í : ¼ö·®, ÀÔ°í ÀÏÀÚ, Á¦Á¶ÀÏ 
-»óÇ°       : »óÇ° ¹øÈ£, »óÇ°¸í, °¡°Ý, »óÇ°Á¤º¸, ÀÌ¹ÌÁö, ´ë¹®ÀÌ¹ÌÁö, ¹è¼Ûºñ   
-»óÇ°¹®ÀÇ : ¹®ÀÇ¹øÈ£, ¹®ÀÇ Á¦¸ñ, ¹®ÀÇ ³»¿ë, ¹®ÀÇ Á¾·ù, ¹®ÀÇ ´ä±Û
-ÈÄ±â : ÈÄ±â¹øÈ£, ÈÄ±âµî·ÏÀÏ, º°Á¡, ÈÄ±â³»¿ë
-±¸¸Å : ±¸¸Å¹øÈ£, ±¸¸ÅÀÏ , ±¸¸Å±Ý¾×, ¹è¼ÛÁö, ¹Þ´Â »ç¶÷¿¬¶ôÃ³, ¿äÃ»»çÇ×, ±¸¸Å»óÅÂ  
-±¸¸Å¸®½ºÆ® : ¼ö·®, °¡°Ý
-Àå¹Ù±¸´Ï : Àå¹Ù±¸´Ï ¹øÈ£ , ¼ö·®
-°ü½É»óÇ° : µî·ÏÀÏ
-¹è¼Û : ¼ÛÀå¹øÈ£, ¹è¼Û¾÷Ã¼¸í,
-°áÁ¦ : °áÁ¦¼ö´Ü, °áÁ¦ ±Ý¾×, °áÁ¦ÀÏ , ½ÂÀÎ ¹øÈ£, Ä«µå¹øÈ£,
-/* È¸¿ø */
+ï»¿ì‡¼í•‘ëª°(kosaShoppingMall)
+íšŒì›        : íšŒì›ë²ˆí˜¸ , íšŒì›ì•„ì´ë””, íšŒì›ë¹„ë°€ë²ˆí˜¸, íšŒì›ì´ë¦„, íšŒì› ì£¼ì†Œ, ë“±ë¡ì¼, ì„±ë³„
+               ì—°ë½ì²˜, ìƒë…„ì›”ì¼ 
+ìƒí’ˆìž…ê³  : ìˆ˜ëŸ‰, ìž…ê³  ì¼ìž, ì œì¡°ì¼ 
+ìƒí’ˆ       : ìƒí’ˆ ë²ˆí˜¸, ìƒí’ˆëª…, ê°€ê²©, ìƒí’ˆì •ë³´, ì´ë¯¸ì§€, ëŒ€ë¬¸ì´ë¯¸ì§€, ë°°ì†¡ë¹„   
+ìƒí’ˆë¬¸ì˜ : ë¬¸ì˜ë²ˆí˜¸, ë¬¸ì˜ ì œëª©, ë¬¸ì˜ ë‚´ìš©, ë¬¸ì˜ ì¢…ë¥˜, ë¬¸ì˜ ë‹µê¸€
+í›„ê¸° : í›„ê¸°ë²ˆí˜¸, í›„ê¸°ë“±ë¡ì¼, ë³„ì , í›„ê¸°ë‚´ìš©
+êµ¬ë§¤ : êµ¬ë§¤ë²ˆí˜¸, êµ¬ë§¤ì¼ , êµ¬ë§¤ê¸ˆì•¡, ë°°ì†¡ì§€, ë°›ëŠ” ì‚¬ëžŒì—°ë½ì²˜, ìš”ì²­ì‚¬í•­, êµ¬ë§¤ìƒíƒœ  
+êµ¬ë§¤ë¦¬ìŠ¤íŠ¸ : ìˆ˜ëŸ‰, ê°€ê²©
+ìž¥ë°”êµ¬ë‹ˆ : ìž¥ë°”êµ¬ë‹ˆ ë²ˆí˜¸ , ìˆ˜ëŸ‰
+ê´€ì‹¬ìƒí’ˆ : ë“±ë¡ì¼
+ë°°ì†¡ : ì†¡ìž¥ë²ˆí˜¸, ë°°ì†¡ì—…ì²´ëª…,
+ê²°ì œ : ê²°ì œìˆ˜ë‹¨, ê²°ì œ ê¸ˆì•¡, ê²°ì œì¼ , ìŠ¹ì¸ ë²ˆí˜¸, ì¹´ë“œë²ˆí˜¸,
+/* íšŒì› */
 CREATE TABLE member (
-	member_Num VARCHAR2(10) NOT NULL, /* È¸¿ø¹øÈ£ */
-	member_Id VARCHAR2(15), /* È¸¿ø¾ÆÀÌµð */
-	member_Pw VARCHAR2(200), /* È¸¿øºñ¹Ð¹øÈ£ */
-	member_Name VARCHAR2(15), /* È¸¿øÀÌ¸§ */
-	member_addr VARCHAR2(100), /* È¸¿ø ÁÖ¼Ò */
-	member_regist DATE, /* µî·ÏÀÏ */
-	gender CHAR(1), /* ¼ºº° */
-	member_phone VARCHAR2(13), /* ¿¬¶ôÃ³ */
-	member_birth DATE, /* »ý³â¿ùÀÏ */
-	member_ok VARCHAR2(100), /* º»ÀÎÈ®ÀÎ */
-	member_email VARCHAR2(100) /* È¸¿øÀÌ¸ÞÀÏ */
+	member_Num VARCHAR2(10) NOT NULL, /* íšŒì›ë²ˆí˜¸ */
+	member_Id VARCHAR2(15), /* íšŒì›ì•„ì´ë”” */
+	member_Pw VARCHAR2(200), /* íšŒì›ë¹„ë°€ë²ˆí˜¸ */
+	member_Name VARCHAR2(15), /* íšŒì›ì´ë¦„ */
+	member_addr VARCHAR2(100), /* íšŒì› ì£¼ì†Œ */
+	member_regist DATE, /* ë“±ë¡ì¼ */
+	gender CHAR(1), /* ì„±ë³„ */
+	member_phone VARCHAR2(13), /* ì—°ë½ì²˜ */
+	member_birth DATE, /* ìƒë…„ì›”ì¼ */
+	member_ok VARCHAR2(100), /* ë³¸ì¸í™•ì¸ */
+	member_email VARCHAR2(100) /* íšŒì›ì´ë©”ì¼ */
 );
 
-/* »óÇ°ÀÔ°í */
+/* ìƒí’ˆìž…ê³  */
 CREATE TABLE goodsIpgo (
-	ipgo_date DATE NOT NULL, /* ÀÔ°í ÀÏÀÚ */
-	goods_num VARCHAR2(10) NOT NULL, /* »óÇ° ¹øÈ£ */
-	ipgo_qty NUMBER, /* ¼ö·® */
-	made_date DATE /* Á¦Á¶ÀÏ */
+	ipgo_date DATE NOT NULL, /* ìž…ê³  ì¼ìž */
+	goods_num VARCHAR2(10) NOT NULL, /* ìƒí’ˆ ë²ˆí˜¸ */
+	ipgo_qty NUMBER, /* ìˆ˜ëŸ‰ */
+	made_date DATE /* ì œì¡°ì¼ */
 );
 
-/* »óÇ° */
+/* ìƒí’ˆ */
 CREATE TABLE goods (
-	goods_num VARCHAR2(10) NOT NULL, /* »óÇ° ¹øÈ£ */
-	goods_name VARCHAR2(100), /* »óÇ°¸í */
-	goods_price NUMBER, /* °¡°Ý */
-	goods_content VARCHAR2(2000), /* »óÇ°Á¤º¸ */
-	goods_images VARCHAR2(200), /* ÀÌ¹ÌÁö */
-	goods_main VARCHAR2(200), /* ´ë¹®ÀÌ¹ÌÁö */
-	delivery_cost NUMBER, /* ¹è¼Ûºñ */
-	visit_count NUMBER /* Á¶È¸¼ö */
+	goods_num VARCHAR2(10) NOT NULL, /* ìƒí’ˆ ë²ˆí˜¸ */
+	goods_name VARCHAR2(100), /* ìƒí’ˆëª… */
+	goods_price NUMBER, /* ê°€ê²© */
+	goods_content VARCHAR2(2000), /* ìƒí’ˆì •ë³´ */
+	goods_images VARCHAR2(200), /* ì´ë¯¸ì§€ */
+	goods_main VARCHAR2(200), /* ëŒ€ë¬¸ì´ë¯¸ì§€ */
+	delivery_cost NUMBER, /* ë°°ì†¡ë¹„ */
+	visit_count NUMBER /* ì¡°íšŒìˆ˜ */
 );
 
-/* »óÇ°¹®ÀÇ */
+/* ìƒí’ˆë¬¸ì˜ */
 CREATE TABLE goods_inquire (
-	inquire_num NUMBER NOT NULL, /* ¹®ÀÇ¹øÈ£ */
-	goods_num VARCHAR2(10) NOT NULL, /* »óÇ° ¹øÈ£ */
-	member_Num VARCHAR2(10) NOT NULL, /* È¸¿ø¹øÈ£ */
-	inquire_subject VARCHAR2(100), /* ¹®ÀÇ Á¦¸ñ */
-	inquire_content VARCHAR2(2000), /* ¹®ÀÇ ³»¿ë */
-	inquire_kind VARCHAR2(20), /* ¹®ÀÇ Á¾·ù */
-	inquire_answer VARCHAR2(2000), /* ¹®ÀÇ ´ä±Û */
-	inquire_date DATE, /* ¹®ÀÇ ³¯Â¥ */
-	answer_date DATE /* ´äº¯ ³¯Â¥ */
+	inquire_num NUMBER NOT NULL, /* ë¬¸ì˜ë²ˆí˜¸ */
+	goods_num VARCHAR2(10) NOT NULL, /* ìƒí’ˆ ë²ˆí˜¸ */
+	member_Num VARCHAR2(10) NOT NULL, /* íšŒì›ë²ˆí˜¸ */
+	inquire_subject VARCHAR2(100), /* ë¬¸ì˜ ì œëª© */
+	inquire_content VARCHAR2(2000), /* ë¬¸ì˜ ë‚´ìš© */
+	inquire_kind VARCHAR2(20), /* ë¬¸ì˜ ì¢…ë¥˜ */
+	inquire_answer VARCHAR2(2000), /* ë¬¸ì˜ ë‹µê¸€ */
+	inquire_date DATE, /* ë¬¸ì˜ ë‚ ì§œ */
+	answer_date DATE /* ë‹µë³€ ë‚ ì§œ */
 );
 
-/* ÈÄ±â */
+/* í›„ê¸° */
 CREATE TABLE review (
-	review_num NUMBER NOT NULL, /* ÈÄ±â¹øÈ£ */
-	goods_num VARCHAR2(10) NOT NULL, /* »óÇ° ¹øÈ£ */
-	review_date DATE, /* ÈÄ±âµî·ÏÀÏ */
-	score NUMBER, /* º°Á¡ */
-	review_content VARCHAR2(2000), /* ÈÄ±â³»¿ë */
-	member_Num VARCHAR2(10) /* È¸¿ø¹øÈ£ */
+	review_num NUMBER NOT NULL, /* í›„ê¸°ë²ˆí˜¸ */
+	goods_num VARCHAR2(10) NOT NULL, /* ìƒí’ˆ ë²ˆí˜¸ */
+	review_date DATE, /* í›„ê¸°ë“±ë¡ì¼ */
+	score NUMBER, /* ë³„ì  */
+	review_content VARCHAR2(2000), /* í›„ê¸°ë‚´ìš© */
+	member_Num VARCHAR2(10) /* íšŒì›ë²ˆí˜¸ */
 );
 
-/* ±¸¸Å */
+/* êµ¬ë§¤ */
 CREATE TABLE purchase (
-	purchase_num VARCHAR2(10) NOT NULL, /* ±¸¸Å¹øÈ£ */
-	purchase_date DATE, /* ±¸¸ÅÀÏ */
-	total_price NUMBER, /* ÃÑ±¸¸Å±Ý¾× */
-	delivery_addr VARCHAR2(200), /* ¹è¼ÛÁö */
-	delivery_phone VARCHAR2(13), /* ¹Þ´Â»ç¶÷¿¬¶ôÃ³ */
-	message VARCHAR2(200), /* ¿ä±¸»çÇ× */
-	purchase_status VARCHAR2(20), /* ±¸¸Å»óÅÂ */
-	member_Num VARCHAR2(10) /* È¸¿ø¹øÈ£ */
+	purchase_num VARCHAR2(10) NOT NULL, /* êµ¬ë§¤ë²ˆí˜¸ */
+	purchase_date DATE, /* êµ¬ë§¤ì¼ */
+	total_price NUMBER, /* ì´êµ¬ë§¤ê¸ˆì•¡ */
+	delivery_addr VARCHAR2(200), /* ë°°ì†¡ì§€ */
+	delivery_phone VARCHAR2(13), /* ë°›ëŠ”ì‚¬ëžŒì—°ë½ì²˜ */
+	message VARCHAR2(200), /* ìš”êµ¬ì‚¬í•­ */
+	purchase_status VARCHAR2(20), /* êµ¬ë§¤ìƒíƒœ */
+	member_Num VARCHAR2(10) /* íšŒì›ë²ˆí˜¸ */
 );
 
-/* ±¸¸Å¸®½ºÆ® */
+/* êµ¬ë§¤ë¦¬ìŠ¤íŠ¸ */
 CREATE TABLE purchase_list (
-	purchase_num VARCHAR2(10) NOT NULL, /* ±¸¸Å¹øÈ£ */
-	goods_num VARCHAR2(10) NOT NULL, /* »óÇ° ¹øÈ£ */
-	purchase_qty NUMBER, /* ¼ö·® */
-	purchase_price NUMBER /* °¡°Ý */
+	purchase_num VARCHAR2(10) NOT NULL, /* êµ¬ë§¤ë²ˆí˜¸ */
+	goods_num VARCHAR2(10) NOT NULL, /* ìƒí’ˆ ë²ˆí˜¸ */
+	purchase_qty NUMBER, /* ìˆ˜ëŸ‰ */
+	purchase_price NUMBER /* ê°€ê²© */
 );
 
-/* Àå¹Ù±¸´Ï */
+/* ìž¥ë°”êµ¬ë‹ˆ */
 CREATE TABLE cart (
-	member_Num VARCHAR2(10) NOT NULL, /* È¸¿ø¹øÈ£ */
-	goods_num VARCHAR2(10) NOT NULL, /* »óÇ° ¹øÈ£ */
-	cart_qty NUMBER /* ¼ö·® */
+	member_Num VARCHAR2(10) NOT NULL, /* íšŒì›ë²ˆí˜¸ */
+	goods_num VARCHAR2(10) NOT NULL, /* ìƒí’ˆ ë²ˆí˜¸ */
+	cart_qty NUMBER /* ìˆ˜ëŸ‰ */
 );
 
-/* °ü½É»óÇ° */
+/* ê´€ì‹¬ìƒí’ˆ */
 CREATE TABLE wish (
-	goods_num VARCHAR2(10) NOT NULL, /* »óÇ° ¹øÈ£ */
-	member_Num VARCHAR2(10) NOT NULL, /* È¸¿ø¹øÈ£ */
-	wish_date DATE /* µî·ÏÀÏ */
+	goods_num VARCHAR2(10) NOT NULL, /* ìƒí’ˆ ë²ˆí˜¸ */
+	member_Num VARCHAR2(10) NOT NULL, /* íšŒì›ë²ˆí˜¸ */
+	wish_date DATE /* ë“±ë¡ì¼ */
 );
 
-/* ¹è¼Û */
+/* ë°°ì†¡ */
 CREATE TABLE delivery (
-	purchase_num VARCHAR2(10) NOT NULL, /* ±¸¸Å¹øÈ£ */
-	delivery_number VARCHAR2(20), /* ¼ÛÀå¹øÈ£ */
-	delivery_company VARCHAR2(100) /* ¹è¼Û¾÷Ã¼¸í */
+	purchase_num VARCHAR2(10) NOT NULL, /* êµ¬ë§¤ë²ˆí˜¸ */
+	delivery_number VARCHAR2(20), /* ì†¡ìž¥ë²ˆí˜¸ */
+	delivery_company VARCHAR2(100) /* ë°°ì†¡ì—…ì²´ëª… */
 );
 
-/* °áÁ¦ */
+/* ê²°ì œ */
 CREATE TABLE payment (
-	purchase_num VARCHAR2(10) NOT NULL, /* ±¸¸Å¹øÈ£ */
-	payment_kind VARCHAR2(50), /* °áÁ¦¼ö´Ü */
-	payment_price NUMBER, /* °áÁ¦±Ý¾× */
-	payment_date DATE, /* °áÁ¦ÀÏ */
-	confirm_number VARCHAR2(20), /* ½ÂÀÎ¹øÈ£ */
-	card_number VARCHAR2(15) /* Ä«µå¹øÈ£ */
+	purchase_num VARCHAR2(10) NOT NULL, /* êµ¬ë§¤ë²ˆí˜¸ */
+	payment_kind VARCHAR2(50), /* ê²°ì œìˆ˜ë‹¨ */
+	payment_price NUMBER, /* ê²°ì œê¸ˆì•¡ */
+	payment_date DATE, /* ê²°ì œì¼ */
+	confirm_number VARCHAR2(20), /* ìŠ¹ì¸ë²ˆí˜¸ */
+	card_number VARCHAR2(15) /* ì¹´ë“œë²ˆí˜¸ */
 );
 
 

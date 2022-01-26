@@ -7,7 +7,7 @@
 후기 : 후기번호, 후기등록일, 별점, 후기내용
 구매 : 구매번호, 구매일 , 구매금액, 배송지, 받는 사람연락처, 요청사항, 구매상태  
 구매리스트 : 수량, 가격
-장바구니 : 장바구니 번호 , 수량
+장바구니 :  수량
 관심상품 : 등록일
 배송 : 송장번호, 배송업체명,
 결제 : 결제수단, 결제 금액, 결제일 , 승인 번호, 카드번호,
@@ -120,7 +120,90 @@ CREATE TABLE payment (
 	card_number VARCHAR2(15) /* 카드번호 */
 );
 
+alter table goodsipgo
+add (constraint ipgo_date_goods_num_pk primary key (ipgo_date,goods_num));
 
+alter table goods
+add (constraint goods_num_pk primary key (goods_num));
+
+alter table cart
+add (constraint member_num_goods_num_pk PRIMARY key (member_num,goods_num));
+
+alter table wish
+add constraint member_num_goods_num_pk primary key (member_num,goods_num) ;
+
+alter table member
+add (constraint member_num_pk primary key (member_num),
+     constraint member_id_uu unique (member_id),
+     constraint member_email_uu unique (member_email));
+     
+alter table goods_inquire
+add( constraint goods_inquire_pk primary key (inquire_num, goods_num, member_Num));
+
+alter table review
+add( constraint review_num_goods_num_pk primary key (review_num,goods_num));
+
+alter table purchase_list
+add( constraint purchase_num_goods_num_pk primary key (purchase_num,goods_num) );
+
+alter table purchase
+add( constraint purchase_num_pk primary key (purchase_num));
+
+alter table delivery
+add( constraint delivery_pk primary key (purchase_num));
+
+alter table payment
+add ( constraint payment_pk primary key (purchase_num) );
+
+alter table goodsipgo
+drop constraint goods_num_fk;
+
+alter table goodsipgo
+add (constraint goods_num_fk foreign key(goods_num)
+     REFERENCES goods(goods_num) on delete cascade);
+
+
+alter table cart
+add( constraint cart_member_num_fk foreign key (member_num)
+    REFERENCES member (member_num) on delete CASCADE,
+    constraint cart_goods_num_fk FOREIGN key (goods_num)
+    REFERENCES goods (goods_num)  on delete CASCADE);
+    
+alter table wish
+add (constraint wish_member_num_fk FOREIGN key (member_num)
+    REFERENCES member (member_num)  on delete CASCADE,
+    constraint wish_goods_num_fk FOREIGN key (goods_num)
+    REFERENCES goods (goods_num)  on delete CASCADE);
+
+alter table goods_inquire
+add (constraint g_inquire_member_num_fk FOREIGN key (member_num)
+    REFERENCES member (member_num)  on delete CASCADE,
+    constraint g_inquire_goods_num_fk FOREIGN key (goods_num)
+    REFERENCES goods (goods_num)  on delete CASCADE);
+
+alter table review
+add (constraint review_member_num_fk FOREIGN key (member_num)
+    REFERENCES  member (member_num)  on delete set null,
+    constraint review_goods_num_fk FOREIGN key (goods_num)
+    REFERENCES goods (goods_num)  on delete CASCADE);
+
+alter table purchase_list
+add (constraint purchase_list_goods_num_fk FOREIGN key (goods_num)
+    REFERENCES goods (goods_num) ,
+    constraint purchase_list_purchase_num_fk FOREIGN key (purchase_num)
+    REFERENCES purchase (purchase_num)  on delete CASCADE);
+
+alter table purchase
+add (constraint purchase_member_num_fk foreign key (member_num) 
+     REFERENCES member (member_num) on delete set null);
+
+alter table      delivery
+add (constraint delivery_purchase_num_fk foreign key (purchase_num)
+     REFERENCES purchase (purchase_num) on delete CASCADE);
+    
+alter table      payment
+add (constraint payment_purchase_num_fk foreign key (purchase_num)
+     REFERENCES purchase (purchase_num) on delete CASCADE);
 
 
 

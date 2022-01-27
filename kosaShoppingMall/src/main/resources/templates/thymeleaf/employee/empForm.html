@@ -3,14 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+/*
+	$(function(){
+		$("#frm").submit(function(){
+			if($("#empPw").val() != $("#empPwCon").val()){
+				alert("비밀번호 확인이 다릅니다.");
+				return false;
+			}
+		});
+	});
+*/
+</script>
 </head>
 <body>
-<form action="empWrite" method="post" th:object="${employeeCommand}">
+<form action="empWrite" id = "frm" method="post" th:object="${employeeCommand}">
 아이디 : <input type="text" name="empId" th:value="${employeeCommand.empId}"/>
 <span th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span><br />
-비밀번호 : <input type="password" name="empPw" th:value="${employeeCommand.empPw}"/>
+비밀번호 : <input type="password" name="empPw" id="empPw" th:value="${employeeCommand.empPw}"/>
 <span th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span><br />
-비밀번호 확인 : <input type="password" name="empPwCon" th:value="${employeeCommand.empPwCon}"/>
+비밀번호 확인 : <input type="password" name="empPwCon"  id="empPwCon"  th:value="${employeeCommand.empPwCon}"/>
 <span th:if="${#fields.hasErrors('empPwCon')}" th:errors="*{empPwCon}"></span><br />
 이름 : <input type="text" name="empName" th:value="${employeeCommand.empName}"/>
 <span th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span><br />

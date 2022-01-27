@@ -35,7 +35,7 @@ public class EmployeeController {
 	EmployeeDeleteService employeeDeleteService ;
 	
 	@ModelAttribute
-	EmployeeCommand setMemberCommand() {
+	EmployeeCommand setEmployeeCommand() {
 		return new EmployeeCommand();
 	}
 	
@@ -70,7 +70,8 @@ public class EmployeeController {
 		return "thymeleaf/employee/empList";
 	}
 	@RequestMapping("empJoin")
-	public String empJoin() {
+	public String empJoin(Model model) {
+		//model.addAttribute("employeeCommand", new EmployeeCommand());
 		return "thymeleaf/employee/empForm";
 	}
 	@RequestMapping(value = "empWrite", method = RequestMethod.GET)

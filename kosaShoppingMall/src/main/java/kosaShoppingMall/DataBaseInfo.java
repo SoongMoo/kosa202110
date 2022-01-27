@@ -19,14 +19,16 @@ public class DataBaseInfo {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
 		sessionFactory.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
-		//sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*.xml"));
-		sessionFactory.setTypeAliasesPackage("springBootTest2.domain");
+		sessionFactory.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*Mapper.xml"));
+		sessionFactory.setTypeAliasesPackage("kosaShoppingMall.domain");
 		return sessionFactory.getObject();
 	}
-	/*
+	
+	
 	@Bean
-	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) throws Exception {
+	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) 
+			throws Exception {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
-	*/
+	
 }

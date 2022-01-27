@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosaShoppingMall.mapper.EmployeeMapper">
+<insert id="employeeInsert" parameterType="empDTO">
+	insert into employees(emp_id, emp_pw, emp_name,emp_addr,
+							emp_phone  )
+	values(#{empId},#{empPw},#{empName},#{empAddr},#{empPhone})
+</insert>
+<delete id="employeeDelete" parameterType="string">
+	delete from employees
+	where emp_id = #{empId}
+</delete>
+<update id="employeeUpdate" parameterType="empDTO">
+	update employees
+	set emp_name = #{empName}, emp_addr = #{empAddr}, 
+		emp_phone = #{empPhone}
+	where emp_id = #{empId}
+</update>
+<select id="selectOne" resultType="empDTO" parameterType="string" >
+	select emp_id empId, emp_pw empPw, emp_name empName,
+			emp_addr empAddr, emp_phone empPhone
+	from employees
+	where emp_id = #{empId}
+</select>
+<select id="selectAll" resultType="empDTO">
+	select emp_id empId, emp_pw empPw, emp_name empName,
+			emp_addr empAddr, emp_phone empPhone
+	from employees
+</select>
+</mapper>

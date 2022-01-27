@@ -20,6 +20,7 @@ public class SecurityJavaConfig
 			.headers().frameOptions().disable();
 	}
 	@Bean
+	// 암호화 모듈
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}

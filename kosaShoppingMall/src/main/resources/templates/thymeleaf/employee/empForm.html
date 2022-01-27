@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="empWrite" method="post" th:object="${employeeCommand}">
+아이디 : <input type="text" name="empId" th:value="${employeeCommand.empId}"/>
+<span th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span><br />
+비밀번호 : <input type="password" name="empPw" th:value="${employeeCommand.empPw}"/>
+<span th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span><br />
+비밀번호 확인 : <input type="password" name="empPwCon" th:value="${employeeCommand.empPwCon}"/>
+<span th:if="${#fields.hasErrors('empPwCon')}" th:errors="*{empPwCon}"></span><br />
+이름 : <input type="text" name="empName" th:value="${employeeCommand.empName}"/>
+<span th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span><br />
+주소 : <input type="text" name="empAddr" th:value="${employeeCommand.empAddr}"/>
+<span th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br />
+연락처 : <input type="text" name="empPhone" th:value="${employeeCommand.empPhone}"/>
+<span th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span><br />
+<input type="submit" value="등록" />
+</form>
+</body>
+</html>

@@ -1,5 +1,8 @@
 package kosaShoppingMall.service.member;
 
+import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,7 @@ public class MemberModifyService {
 		dto.setMemberEmail(memberCommand.getMemberEmail());
 		dto.setMemberName(memberCommand.getMemberName());
 		dto.setMemberPhone(memberCommand.getMemberPhone());
-		dto.setMemberRegist(memberCommand.getMemberRegist());
+		dto.setMemberRegist(Timestamp.valueOf(memberCommand.getMemberRegist()));
 		dto.setMemberNum(memberCommand.getMemberNum());
 		memberMapper.memberUpdate(dto);
 	}

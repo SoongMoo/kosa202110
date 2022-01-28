@@ -1,5 +1,7 @@
 package kosaShoppingMall.service.member;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,7 +27,7 @@ public class MemberRegistService {
 		  dto.setMemberNum(memberCommand.getMemberNum());
 		  dto.setMemberPhone(memberCommand.getMemberPhone());
 		  dto.setMemberPw(passwordEncoder.encode(memberCommand.getMemberPw()));
-		  dto.setMemberRegist(memberCommand.getMemberRegist());
+		  dto.setMemberRegist(Timestamp.valueOf(memberCommand.getMemberRegist()));
 		  Integer i = memberMapper.memberInsert(dto);
 		  System.out.println(i + "개행이(가) 삽입되었습니다.");
 	}

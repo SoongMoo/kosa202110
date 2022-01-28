@@ -20,8 +20,8 @@
 회원 주소 :  <form:input path="memberAddr" /><form:errors  path='memberName'/><br/>
 등록일 :  <input type="date" name="memberRegist" value='<fmt:formatDate value="${memberCommand.memberRegist}" pattern="yyyy-MM-dd"/>' /><br/>
 
-성별 : <form:radiobutton path="gender" value="F"  />여자 
-	<form:radiobutton path="gender" value="M" />남자 <br/>
+성별 : <form:radiobutton path="gender" value="F" />여자 
+	  <form:radiobutton path="gender" value="M" />남자 <br/>
 연락처 :   <input type="tel" name="memberPhone"  value="${memberCommand.memberPhone}"> <form:errors  path='memberPhone'/><br/>
 생년월일 : <input type="date" name="memberBirth"  value='<fmt:formatDate value="${memberCommand.memberBirth}" pattern="yyyy-MM-dd"/>' />  <br/>
 회원 이메일 : <input type="email" name="memberEmail"  value="${memberCommand.memberEmail}"><form:errors  path='memberEmail'/><br/>

@@ -14,7 +14,7 @@
 <table width=50% border="1" cellpadding="0" cellspacing="0" >
 <tr align="center" valign="middle">
 	<td colspan =4 >회원리스트</td>
-	<td align=right >회원수 : </td>
+	<td align=center >회원수 : ${lists.size() }</td>
 </tr>
 <tr align="center" valign="middle">
 	<td align="center">회원아이디</td>

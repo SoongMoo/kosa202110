@@ -1,5 +1,6 @@
 package kosaShoppingMall.command;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.validation.constraints.Email;
@@ -26,9 +27,9 @@ public class MemberCommand {
 	String memberName;
 	@NotBlank(message = "주소를 입력하여 주세요.")
 	String memberAddr;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	@NotNull (message = "등록일을 입력하여 주세요.")
-	Date memberRegist;
+	LocalDateTime memberRegist;
 	@NotBlank(message = "성별을 선택하여 주세요.")
 	String gender;
 	@NotBlank(message = "연락처를 입력하여 주세요.")

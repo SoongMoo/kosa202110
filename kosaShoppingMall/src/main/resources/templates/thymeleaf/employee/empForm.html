@@ -25,7 +25,7 @@
 <span th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span><br />
 비밀번호 확인 : <input type="password" name="empPwCon"  id="empPwCon"  th:value="${employeeCommand.empPwCon}"/>
 <span th:if="${#fields.hasErrors('empPwCon')}" th:errors="*{empPwCon}"></span><br />
-이름 : <input type="text" name="empName" th:value="${employeeCommand.empName}"/>
+이름 : <input type="text" name="empName" th:value="${empName}"/>
 <span th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span><br />
 주소 : <input type="text" name="empAddr" th:value="${employeeCommand.empAddr}"/>
 <span th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br />

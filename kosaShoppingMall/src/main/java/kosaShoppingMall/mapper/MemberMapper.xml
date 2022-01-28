@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosaShoppingMall.mapper.MemberMapper">
+<delete id="memberDelete" parameterType="string">
+	delete from member
+	where member_Num =#{memberNum}
+</delete>
+
+<update id="memberUpdate" parameterType="memDTO">
+	update member
+	set member_Name = #{memberName}, member_addr=#{memberAddr},
+		member_regist =#{memberRegist}, gender=#{gender},
+		member_phone = #{memberPhone}, member_birth = #{memberBirth},
+		member_email = #{memberEmail}
+	where member_Num =#{memberNum}
+</update>
+<select id="numberGenerate" resultType="string">
+select concat('kosa',nvl(max(substr(member_Num,5)),100000) + 1) from member
+</select>
+<select id="selectAll" resultType="memDTO">
+select <include refid="baseColumns" />
+from member
+</select>
+<sql id="baseColumns">
+member_Num memberNum,member_Id memberId,member_Pw memberPw,
+member_Name memberName, member_addr memberAddr,member_regist memberRegist,
+gender gender,member_phone memberPhone,member_birth memberBirth, 
+member_email memberEmail
+</sql>
+<select id="selectDTO" parameterType="string" resultType="memDTO">
+select <include refid="baseColumns" />
+from member
+where member_Num = #{memberNum}
+</select>
+<insert id="memberInsert" parameterType="memDTO">
+	insert into member(member_Num,member_Id,member_Pw,member_Name, member_addr,member_regist,
+						 gender,member_phone,member_birth, member_email  )
+	values(#{memberNum},#{memberId},#{memberPw},#{memberName},#{memberAddr},
+			#{memberRegist},#{gender},#{memberPhone},#{memberBirth},#{memberEmail})
+</insert>
+</mapper>

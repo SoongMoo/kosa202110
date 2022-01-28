@@ -12,6 +12,7 @@ $(function() {
 			type : "post",
 			url : "empDelete",
 			dataType : "text",
+			//data : "empId=[[${employeeCommand.empId}]]&empPw="+$("#empPw").val(),
 			data : {"empId":"[[${employeeCommand.empId}]]",
 				    "empPw" : $("#empPw").val()},
 			success : function(result) {

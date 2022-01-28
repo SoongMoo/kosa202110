@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#delete").click(function() {
+			//location.href="../memberDelete?num=[[${memberCommand.memberNum}]]";
+			$.ajax({
+				type : "post",
+				url : "../memberDelete",
+				data : {"num":"[[${memberCommand.memberNum}]]"},
+				dataType : "text",
+				success : function(result){
+					alert(result);
+					if(result.trim() == '1'){
+						alert("회원이 정상적으로 삭제 되었습니다.");
+						location.href="../memList";
+					}else{
+						alert("회원이 삭제되지 않았습니다.");
+						return false;
+					}
+				},
+				error : function() {
+					alert('에러가 나왔다 홀홀홀~');
+					return;
+				}
+			});
+		});
+	});
+	function del(){
+		$.ajax({
+			type : "post",
+			url : "../memberDelete",
+			data : {"num":"[[${memberCommand.memberNum}]]"},
+			dataType : "text",
+			success : function(result){
+				alert(aaaaa);
+				if(result.trim == '1'){
+					alert("회원이 정상적으로 삭제 되었습니다.");
+					location.href="../memList";
+				}else{
+					alert("회원이 삭제되지 않았습니다.");
+					return false;
+				}
+			},
+			error : function() {
+				alert('에러가 나왔다 홀홀홀~');
+				return;
+			}
+		});
+	}
+</script>
+</head>
+<body>
+회원 3등급 이상만 볼 수 있습니다.<br />
+	
+회원 아이디 :  [[${memberCommand.memberId}]]<br/>
+
+
+회원 이름 :  [[${memberCommand.memberName}]]<br/>
+회원 주소 :  [[${memberCommand.memberAddr}]]<br/>
+등록일 :   <span th:text="${#dates.format(memberCommand.memberRegist,'yyyy-MM-dd')}"></span> <br/>
+성별 :  <span th:if="${memberCommand.gender == 'M'}" th:text="남자"></span> 
+<span th:if="${memberCommand.gender == 'F'}" th:text="여자"></span><br>
+연락처 :    [[${memberCommand.memberPhone}]] <br/>
+생년월일 :   <span th:text="${#dates.format(memberCommand.memberBirth,'yyyy-MM-dd')}"></span> <br/>
+회원 이메일 :   [[${memberCommand.memberEmail}]]<br/>
+
+<form action="../memberModify" method="get">
+ <input type="hidden" name="memberNum" th:value="${memberCommand.memberNum}" ><br/>
+<input type="submit" value="수정해봐요"/>
+<input type="button" value="jquery삭제" id="delete"  >
+<input type="button" value="function삭제" onclick="del();" >
+</form>
+<!--  
+<a href="@{../memberDelete?(num=${memberCommand.memberNum})}">삭제</a>
+-->
+<a href="javascript:del();" >삭제</a>
+</body>
+</html>

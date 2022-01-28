@@ -5,7 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-회원관리<br />
-<a href="memberRegist">회원등록</a>
+회원 관리<br/>
+<a href="memberRegist">회원 등록</a> 
+<table border="1">
+	<tr><td>번호</td><td>이름</td><td>아이디</td><td>생일</td></tr>
+	<th:block th:each="dto :${lists}">
+		<tr><td><a th:href="|memberDetail/${dto.memberNum}|">[[${dto.memberNum}]]</a></td>
+			<td>[[${dto.memberName}]]</td>
+			<td>[[${dto.memberId}]]</td>
+			<td><span th:text="${#dates.format(dto.memberBirth,'yyyy-MM-dd')}"></span></td>
+			
+		</tr>
+		
+	</th:block>
+</table>
 </body>
 </html>

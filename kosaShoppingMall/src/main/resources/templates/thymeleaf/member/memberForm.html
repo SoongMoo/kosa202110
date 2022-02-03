@@ -13,7 +13,7 @@
 회원 비밀번호 : <input type="password" name="memberPw" th:value="${memberCommand.memberPw}" />
 			<span th:if="${#fields.hasErrors('memberPw')}" th:errors="*{memberPw}"></span><br/>
 회원 비밀번호 확인 : <input type="password" name="memberPwCon" th:value="${memberCommand.memberPwCon}"  />
-			<span th:if="${#fields.hasErrors('memberPwCon')}" th:errors="*{memberPwCon}"></span></span><br/>
+			<span th:if="${#fields.hasErrors('memberPwCon')}" th:errors="*{memberPwCon}"></span><br/>
 회원 이름 :  <input type="text" name="memberName" th:value="${memberCommand.memberName}" />
 		<span th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}"></span><br/>
 회원 주소 :  <input type="text" name="memberAddr" th:value="${memberCommand.memberAddr}" />

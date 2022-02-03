@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Data
 public class MemberCommand {
-	@Size(min = 10, max = 10,message = "번호를 입력하여 주세요.")
+	@Size(min = 10, max = 10,message = "번호를 10글자 입력하여 주세요.")
 	String memberNum;
 	@NotBlank(message = "아이디를 입력하여 주세요.")
 	@Size(min = 3, max = 20)

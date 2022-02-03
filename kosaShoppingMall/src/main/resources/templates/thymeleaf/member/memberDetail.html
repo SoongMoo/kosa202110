@@ -63,7 +63,7 @@
 
 회원 이름 :  [[${memberCommand.memberName}]]<br/>
 회원 주소 :  [[${memberCommand.memberAddr}]]<br/>
-등록일 :   <span th:text="${#dates.format(memberCommand.memberRegist,'yyyy-MM-dd')}"></span> <br/>
+등록일 :   [[${dto.memberRegist}]] <br/>
 성별 :  <span th:if="${memberCommand.gender == 'M'}" th:text="남자"></span> 
 <span th:if="${memberCommand.gender == 'F'}" th:text="여자"></span><br>
 연락처 :    [[${memberCommand.memberPhone}]] <br/>

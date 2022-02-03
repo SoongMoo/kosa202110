@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>memberDrop</title>
+</head>
+<body>
+<div id="leftMenu">
+	<ul>
+		<li><a href="memberDetail">내 정보 보기</a></li>
+		<li><a href="memberInfoModify">내 정보 수정</a></li>
+		<li><a href="memberPass" >비밀번호 수정</a></li>
+		<li><a href="memberDrop">회원 탈퇴</a></li>
+	</ul>
+</div>
+<div id="MemberInfo">
+<form action="memberDropOk" method="post" name="frm" id="frm" th:object="${memberCommand}">
+	비밀번호 : <input type="password" name="memberPw" />
+	<span th:if="${#fields.hasErrors('memberPw')}" th:errors="*{memberPw}"></span>
+	<input type="submit" value="탈퇴하기"/>
+</form>
+</div>
+</body>
+</html>

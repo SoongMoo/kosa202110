@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosaShoppingMall.mapper.MemberShipMapper">
+<sql id="baseColumns">
+member_Num memberNum,member_Id memberId,member_Pw memberPw,
+member_Name memberName, member_addr memberAddr,member_regist memberRegist,
+gender gender,member_phone memberPhone,member_birth memberBirth, 
+member_email memberEmail
+</sql>
+
+<sql id="baseColumns1">
+member_Num ,member_Id ,member_Pw ,member_Name , member_addr,
+member_regist ,gender,member_phone ,member_birth, 
+member_email
+</sql>
+
+<sql id="AutoNum">
+	select nvl(max(substr(MEMber_NUM,5)),100000) + 1 from member
+</sql>
+<update id="updatePassword" 
+	parameterType="memDTO">
+	update member
+	set member_pw = #{memberPw}
+	where member_id = #{memberId}
+</update>
+<delete id="memberDrop" parameterType="string">
+	delete from member
+	where member_id = #{memberId}
+</delete>
+<update id="memberUpdate" parameterType="memDTO">
+	update member
+	set MEMber_NAME =#{memberName}, MEMber_PHONE = #{memberPhone},
+	    MEMber_ADDR = #{memberAddr} , MEMber_EMAIL =#{memberEmail},
+	    GENDER = #{gender}, MEMber_BIRTH = #{memberBirth} 
+	where MEMber_NUM = #{memberNum}
+</update>
+<select id="selectOne" parameterType="string" 
+	resultType="memDTO">
+	select <include refid="baseColumns" />
+	from member
+	where member_id = #{memberId}
+</select>
+
+<insert id="memberInsert" 
+	parameterType="memDTO">
+insert into member( <include refid="baseColumns1" /> )
+values(concat('kosa',( <include refid="AutoNum" /> )),
+		#{memberId},#{memberPw},#{memberName},#{memberAddr},sysdate,
+		#{gender},#{memberPhone},#{memberBirth},#{memberEmail})
+</insert>
+</mapper>

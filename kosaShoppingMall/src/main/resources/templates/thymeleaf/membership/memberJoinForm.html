@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>memberJoinForm</title>
+</head>
+<body>
+<form action="memberJoinAction" method="post" name='frm' id="frm" th:object="${memberCommand}">
+<input type="hidden" name="memberNum" value="1234567890"> 
+<span th:if="${#fields.hasErrors('memberNum')}" th:errors="*{memberNum}"></span>
+<input type="hidden" name="memberRegist" value="1999-12-30T00:00"> 
+<span th:if="${#fields.hasErrors('memberRegist')}" th:errors="*{memberRegist}"></span>
+<fieldset>
+	<legend>회원가입 정보</legend>
+	<table width = '600' align = 'center' border = '1' >
+		<caption><strong>회원 가입</strong></caption>
+		<tfoot>
+		<tr>
+			<th colspan="2">
+				<input type='submit' value='가입완료' />&nbsp;&nbsp;
+				<input type='reset' value='다시 입력' />&nbsp;&nbsp;
+				<input type='button' value='가입 안함' 
+					onclick="javascript:location.href='/'"/>
+			</th>
+		</tr>
+		</tfoot>
+		<tbody>
+		<tr>
+			<th colspan= '2'>사용자 ID와 비밀번호 입력</th>
+		</tr>
+		<tr>
+			<th>
+				<label for="memberId">* 사용자 아이디</label>
+			</th>
+			<td>
+				<input type='text' name="memberId" id="memberId" 
+					 size='15' maxlength='12' autofocus="autofocus" th:value="${memberCommand.memberId}"/>
+				<span th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<label for="memberPw">비밀번호</label>
+			</th>
+			<td>
+				<input type='password' name='memberPw' id="memberPw"
+					size='15' maxlength='12'/>
+				<span th:if="${#fields.hasErrors('memberPw')}" th:errors="*{memberPw}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<label for="memberPwCon">비밀번호 확인</label>
+			</th>
+			<td>
+				<input type='password' name='memberPwCon' id="memberPwCon"
+					size='15' maxlength='12'/>
+				<span th:if="${#fields.hasErrors('memberPwCon')}" th:errors="*{memberPwCon}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th colspan= '2'>사용자 기본 정보</th>
+		</tr>
+		<tr>
+			<th>
+				<label for="memberName" >사용자 이름</label>
+			</th>
+			<td>
+				<input type ='text' name='memberName' id="memberName"
+					size='15' maxlength='12' th:value="${memberCommand.memberName}" />
+				<span th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				<label for="memberBirth">생년원일</label>
+			</th>
+			<td>
+				<input type='date' name='memberBirth' id="memberBirth"	placeholder='1999-12-30' 
+				th:value="${#dates.format(memberCommand.memberBirth,'yyyy-MM-dd')}" />
+				<span th:if="${#fields.hasErrors('memberBirth')}" th:errors="*{memberBirth}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>성별</th>	
+			<td>
+				<input type='radio' name='gender' value="M" th:checked="${memberCommand.gender=='F'}" />남자
+				<input type='radio' name='gender' value="F" th:checked="${memberCommand.gender=='M'}"/>여자
+				<span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th colspan= '2'>사용자 연락처</th>
+		</tr>
+		<tr>
+			<th><label for='memberEmail'>사용자 이메일</label></th>
+			<td>
+				<input type='email' name='memberEmail' id="memberEmail" th:value="${memberCommand.memberEmail}"/>
+				<span th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="memberAddr">사용자 주소</label></th>
+			<td>
+				<input type='text' name='memberAddr' id="memberAddr"  th:value="${memberCommand.memberAddr}" />
+				<span th:if="${#fields.hasErrors('memberAddr')}" th:errors="*{memberAddr}"></span>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="memberPhone">연락처</label></th>
+			<td>
+				<input type='tel'  size= '26' maxlength='13'
+					name="memberPhone" id="memberPhone"  th:value="${memberCommand.memberPhone}"
+					placeholder='123-123-1234 ,123-1234-1234'
+					/>
+				<span th:if="${#fields.hasErrors('memberPhone')}" th:errors="*{memberPhone}"></span>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</fieldset>
+</form>
+</body>
+</html>

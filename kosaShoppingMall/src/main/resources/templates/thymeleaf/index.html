@@ -5,7 +5,55 @@
 <title>Insert title here</title>
 </head>
 <body>
+<span th:if="${session.authInfo == null}">
+<form action="loginPro" name="frm" id="frm" method="post" th:object="${loginCommand}" >
+<table border="1">
+<tr>
+	<td colspan="3">
+		자동 로그인 <input type="checkbox" name="autoLogin" />
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		아이디 저장 <input type="checkbox" name="idStore" />
+	</td>
+</tr>
+<tr>
+	<td>아이디</td>
+	<td>
+		<input type="text" name="userId" id="userId"  th:value="${loginCommand.userId}"/>
+		<span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" ></span>
+	</td>
+	<td rowspan=2>
+						<!-- src="/static/images/img1.jpg" -->
+		<input type="image" th:src="@{/static/images/img1.jpg}" 
+			width="80" height="80" >
+	</td>
+	<tr>
+		<td>비밀번호</td>
+		<td>
+			<input type="password" name="userPw" id="userPw">
+			<span th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}" ></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<a href="/register/agree">회원가입</a>&nbsp;
+			<a href="">아이디 찾기</a>&nbsp;
+			<a href="">비밀번호 찾기</a>&nbsp;
+		</td>
+	</tr>
+</table>
+</form>
+</span>
+
+
+<span th:if="${session.authInfo != null}">
+	<span th:if="${session.authInfo.grade == 'emp'}">
 <a href="/emp/empList">직원 관리</a> 
 <a href="/mem/memList">회원 관리</a>
+	</span>
+	<span th:if="${session.authInfo.grade == 'mem'}">
+<a href="/mypage/memberDetail">내 정보 보기</a>
+	</span>
+	<a href="/login/logout">로그아웃</a>
+</span>
 </body>
 </html>

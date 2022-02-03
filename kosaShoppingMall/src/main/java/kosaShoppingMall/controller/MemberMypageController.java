@@ -56,25 +56,10 @@ public class MemberMypageController {
 		return "thymeleaf/membership/memberDrop";
 	}
 	@RequestMapping(value="memberPassModify",method=RequestMethod.POST)
-	public String memberPassModify(@RequestParam(value="memPw") String oldPw,
-			@RequestParam(value="newMemPw") String newPw,
-			@RequestParam(value="newMemPwCon") String newPwCon,
-			HttpSession session,Model model ) {
-		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
-		if(passwordEncoder.matches(oldPw, authInfo.getUserPw())) {
-			if(newPw.equals(newPwCon) && !newPw.isEmpty()) {
-				newPw = passwordEncoder.encode(newPw);
-				memberPasswordService.execute(authInfo.getUserId(),newPw);
-				authInfo.setUserPw(newPw);
-				return "redirect:memberDetail";
-			}else {
-				model.addAttribute("err_pwCon", "비밀번호확인이 다릅니다.");
-				return "thymeleaf/membership/memberPassCon";
-			}
-		}else {
-			model.addAttribute("err_pw", "비밀번호가 틀립니다.");
-			return "thymeleaf/membership/memberPassCon";
-		}
+	public String memberPassModify(MemberCommand memberCommand, 
+			BindingResult result , HttpSession session ) {
+		String path = memberPasswordService.execute(memberCommand,result,session );
+		return path;
 	}
 	@RequestMapping(value="memberPasswordPro",method=RequestMethod.POST)
 	public String memberPasswordPro(@RequestParam(value="memPw") String pw,

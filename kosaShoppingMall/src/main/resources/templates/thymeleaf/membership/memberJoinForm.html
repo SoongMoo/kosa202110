@@ -84,8 +84,8 @@
 		<tr>
 			<th>성별</th>	
 			<td>
-				<input type='radio' name='gender' value="M" th:checked="${memberCommand.gender=='F'}" />남자
-				<input type='radio' name='gender' value="F" th:checked="${memberCommand.gender=='M'}"/>여자
+				<input type='radio' name='gender' value="M" th:checked="${memberCommand.gender=='M' || memberCommand.gender == null }"  /> 남자
+				<input type='radio' name='gender' value="F" th:checked="${memberCommand.gender=='F'}"/>여자
 				<span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
 			</td>
 		</tr>

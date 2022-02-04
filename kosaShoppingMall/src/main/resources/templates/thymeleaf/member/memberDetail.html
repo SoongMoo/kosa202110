@@ -38,8 +38,7 @@
 			data : {"num":"[[${memberCommand.memberNum}]]"},
 			dataType : "text",
 			success : function(result){
-				alert(aaaaa);
-				if(result.trim == '1'){
+				if(result.trim() == '1'){
 					alert("회원이 정상적으로 삭제 되었습니다.");
 					location.href="../memList";
 				}else{

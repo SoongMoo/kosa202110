@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,8 @@
 회원 이름 : ${memberCommand.memberName}<br/>
 회원 주소 : ${memberCommand.memberAddr}<br/>
 등록일 :   <fmt:formatDate value="${memberCommand.memberRegist}" pattern="yyyy-MM-dd"/>  <br/>
-성별 :  <br>
+성별 :  <c:if test="${memberCommand.gender=='M' }" >남자</c:if>
+      <c:if test="${memberCommand.gender=='F' }" >여자</c:if> <br />
 연락처 :    ${memberCommand.memberPhone} <br/>
 생년월일 :   <fmt:formatDate value="${memberCommand.memberBirth}" pattern="yyyy-MM-dd"/></span> <br/>
 회원 이메일 :  ${memberCommand.memberEmail}<br/>

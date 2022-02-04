@@ -44,22 +44,22 @@ public class MemberConteroller {
 	public String memberDelete(@RequestParam(value = "num") String memberNum,
 			Model model) {
 		memberDeleteService.execute(memberNum , model);
-		return "thymeleaf/member/memberdel";
-		//return "redirect:memList";
+		//return "thymeleaf/member/memberdel";
+		return "redirect:memList";
 	}
 	@RequestMapping(value="memberModify" , method = RequestMethod.GET)
 	public String memberModify(@RequestParam(value="memberNum") 
 				String memberNum ,Model model) {
 		memberDetailService.execute(memberNum, model);
-		return "thymeleaf/member/memberUpdate";
-		//return "member/memberUpdate";
+		//return "thymeleaf/member/memberUpdate";
+		return "member/memberUpdate";
 	}
 	@RequestMapping(value="memberModify" , method = RequestMethod.POST)
 	public String memberUpdate(@Validated MemberCommand memberCommand, 
 			BindingResult result) {
 		if (result.hasErrors()) {
-			return "thymeleaf/member/memberUpdate";
-			//return "member/memberUpdate";
+			//return "thymeleaf/member/memberUpdate";
+			return "member/memberUpdate";
 		}
 		memberModifyService.execute(memberCommand);
 		return "redirect:memberDetail/"+memberCommand.getMemberNum();
@@ -68,35 +68,35 @@ public class MemberConteroller {
 	public String memberDetail(@PathVariable(value = "num") String memberNum,
 			Model model) {
 		memberDetailService.execute(memberNum, model);
-		return "thymeleaf/member/memberDetail";
-		//return "member/memberDetail";
+		//return "thymeleaf/member/memberDetail";
+		return "member/memberDetail";
 	}
 	@RequestMapping("memList")
 	public String memList(Model model) {
 		memberListService.execute(model);
-		return "thymeleaf/member/memberList";
-		//return "member/memberList";
+		//return "thymeleaf/member/memberList";
+		return "member/memberList";
 	}
 	@RequestMapping(value="memberRegist" ,method = RequestMethod.GET)
-	public String memberForm(MemberCommand memberCommand) {
-		memberNumberService.execute(memberCommand);
-		return "thymeleaf/member/memberForm";
-		//return "member/memberForm";
+	public String memberForm(MemberCommand memberCommand,Model model) {
+		memberNumberService.execute(memberCommand,model);
+		//return "thymeleaf/member/memberForm";
+		return "member/memberForm";
 	}
 	@RequestMapping(value="memberRegist" ,method = RequestMethod.POST)
 	public String memberFrom(@Validated MemberCommand memberCommand, 
 			BindingResult result) {
 		
 		if (result.hasErrors()) {
-			return "thymeleaf/member/memberForm";
-			//return "member/memberForm";
+			//return "thymeleaf/member/memberForm";
+			return "member/memberForm";
 		}
 		
 		if(!memberCommand.isMemberPwEqualsMemberPwCon()) {
 			result.rejectValue("memberPw", "memberCommand.memberPw", 
 					"비밀번호 확인이 다릅니다.");
-			return "thymeleaf/member/memberForm";
-			//return "member/memberForm";
+			//return "thymeleaf/member/memberForm";
+			return "member/memberForm";
 		}
 		memberRegistService.execute(memberCommand);
 		return "redirect:memList";

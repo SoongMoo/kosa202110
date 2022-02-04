@@ -18,7 +18,7 @@
 <tr>
 	<td>아이디</td>
 	<td>
-		<input type="text" name="userId" id="userId"  th:value="${loginCommand.userId}"/>
+		<input type="text" name="userId" id="userId"  th:value="${loginCommand.userId}"/><br />
 		<span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" ></span>
 	</td>
 	<td rowspan=2>
@@ -30,7 +30,7 @@
 	<tr>
 		<td>비밀번호</td>
 		<td>
-			<input type="password" name="userPw" id="userPw">
+			<input type="password" name="userPw" id="userPw"><br />
 			<span th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}" ></span>
 		</td>
 	</tr>

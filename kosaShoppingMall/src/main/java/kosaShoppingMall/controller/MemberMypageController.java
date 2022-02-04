@@ -7,12 +7,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.MemberCommand;
+import kosaShoppingMall.command.MemberPwCommand;
 import kosaShoppingMall.domain.AuthInfo;
 import kosaShoppingMall.service.memberJoin.MemberDropService;
 import kosaShoppingMall.service.memberJoin.MemberInfoService;
@@ -56,9 +58,12 @@ public class MemberMypageController {
 		return "thymeleaf/membership/memberDrop";
 	}
 	@RequestMapping(value="memberPassModify",method=RequestMethod.POST)
-	public String memberPassModify(MemberCommand memberCommand, 
+	public String memberPassModify(@Validated MemberPwCommand memberPwCommand, 
 			BindingResult result , HttpSession session ) {
-		String path = memberPasswordService.execute(memberCommand,result,session );
+		if(result.hasErrors()) {
+			return "thymeleaf/membership/memberPassCon";
+		}
+		String path = memberPasswordService.execute(memberPwCommand,result,session );
 		return path;
 	}
 	@RequestMapping(value="memberPasswordPro",method=RequestMethod.POST)
@@ -66,6 +71,7 @@ public class MemberMypageController {
 			HttpSession session,Model model) {
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
 		if(passwordEncoder.matches(pw, authInfo.getUserPw())) {
+			model.addAttribute("memberPwCommand", new MemberPwCommand());
 			return "thymeleaf/membership/memberPassCon";
 		}else {
 			model.addAttribute("err_pw", "비밀번호가 틀립니다.");

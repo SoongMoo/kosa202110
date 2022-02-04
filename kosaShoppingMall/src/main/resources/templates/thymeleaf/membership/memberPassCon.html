@@ -16,12 +16,13 @@
 	</ul>
 </div>
 <div id="MemberInfo">
-<form action="memberPassModify" name="frm" id="frm" method="post" th:object="${memberCommand}">
+<form action="memberPassModify" name="frm" id="frm" method="post" th:object="${memberPwCommand}">
 현재 비밀번호 : <input type="password" name="oldPw" />
 <span th:if="${#fields.hasErrors('oldPw')}" th:errors="*{oldPw}"></span><br />
 바꿀 비밀번호 : <input type="password" name="memberPw" id ="memberPw" />
 <span th:if="${#fields.hasErrors('memberPw')}" th:errors="*{memberPw}"></span><br />
-비밀번호 확인 : <input type="password" name="memberPwCon" id="memberPwCon" /><br />
+비밀번호 확인 : <input type="password" name="memberPwCon" id="memberPwCon" />
+<span th:if="${#fields.hasErrors('memberPwCon')}" th:errors="*{memberPwCon}"></span><br />
 <input type="submit" value="비밀번호 변경하기" />
 </form>
 </div>

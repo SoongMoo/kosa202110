@@ -24,8 +24,8 @@ public class FindIdService {
 				model.addAttribute("userId", authInfo.getUserId());
 				return "thymeleaf/help/findIdOk";
 			}else {
-				result.rejectValue("memberPhone", 
-						"findIdCommand.memberPhone", "전화번호가 틀렸습니다.");
+				result.rejectValue("memberPhone","bad" );
+				//result.rejectValue("memberPhone","findIdCommand.memberPhone","전화번호가 틀렸습니다." );
 				return "thymeleaf/help/findId";
 			}
 		}

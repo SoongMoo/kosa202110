@@ -1,5 +1,7 @@
 package kosaShoppingMall.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,9 @@ public class HelpController {
 	}
 	@RequestMapping(value="findId", method = RequestMethod.POST)
 	public String findIdOk(@Validated FindIdCommand findIdCommand,
-			BindingResult result, Model model) {
+			BindingResult result, Model model ,
+			HttpServletResponse response) {
+		response.setCharacterEncoding("utf-8");
 		if(result.hasErrors()) {
 			return "thymeleaf/help/findId";
 		}

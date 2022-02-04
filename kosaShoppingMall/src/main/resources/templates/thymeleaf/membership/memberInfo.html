@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet">
 </head>
 <body>
+<div id="wrapper">
 <div id="leftMenu">
 	<ul>
 		<li><a href="memberDetail">내 정보 보기</a></li>
@@ -26,6 +28,7 @@
 성별 : <span th:if= "${memberCommand.gender == 'M'}" th:text="남자"></span>
 	  <span th:if= "${memberCommand.gender == 'F'}" th:text="여자"></span><br />
 생년월일 :[[${#dates.format(memberCommand.memberBirth,'yyyy-MM-dd')}]]<br />
+</div>
 </div>
 </body>
 </html>

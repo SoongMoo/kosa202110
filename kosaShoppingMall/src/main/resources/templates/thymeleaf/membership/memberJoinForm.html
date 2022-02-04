@@ -5,6 +5,7 @@
 <title>memberJoinForm</title>
 </head>
 <body>
+
 <form action="memberJoinAction" method="post" name='frm' id="frm" th:object="${memberCommand}">
 <input type="hidden" name="memberNum" value="1234567890"> 
 <span th:if="${#fields.hasErrors('memberNum')}" th:errors="*{memberNum}"></span>

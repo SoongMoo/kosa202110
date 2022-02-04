@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="findId" method="post" th:object="${findIdCommand}">
+		<table border="1">
+			<tr>
+				<th>전화 번호</th>
+				<td>
+					<input type="tel" name="memberPhone" 
+									th:value="${findIdCommand.memberPhone}" /><BR />
+					<span th:if="${#fields.hasErrors('memberPhone')}" 
+									th:errors="*{memberPhone}" ></span>
+				</td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td>
+					<input type="email" name="memberEmail" 
+									 th:value="${findIdCommand.memberEmail}"  /><br />
+					<span th:if="${#fields.hasErrors('memberEmail')}" 
+									th:errors="*{memberEmail}" ></span>
+				</td>
+			</tr>
+			<tr>
+				<th colspan=2>
+					<input type="submit" value="아이디 찾기">
+				</th>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

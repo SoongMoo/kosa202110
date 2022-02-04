@@ -52,7 +52,7 @@ public class MemberMypageController {
 		}
 	}
 	@RequestMapping("memberDrop")
-	public String memberDrop() {
+	public String memberDrop(MemberCommand memberCommand) {
 		return "thymeleaf/membership/memberDrop";
 	}
 	@RequestMapping(value="memberPassModify",method=RequestMethod.POST)

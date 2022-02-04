@@ -7,7 +7,11 @@
 	delete from member
 	where member_Num =#{memberNum}
 </delete>
-
+<select id="findId" parameterType="string" resultType="memDTO">
+	select <include refid="baseColumns" />
+	from member
+	where member_email = #{memberEmail}
+</select>
 <update id="memberUpdate" parameterType="memDTO">
 	update member
 	set member_Name = #{memberName}, member_addr=#{memberAddr},

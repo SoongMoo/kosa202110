@@ -17,7 +17,7 @@ import kosaShoppingMall.service.login.LoginService;
 public class LoginController {
 	@Autowired
 	LoginService loginService;
-	
+
 	@RequestMapping(value = "/loginPro", method = RequestMethod.GET)
 	public String home() {
 		return "redirect:/";

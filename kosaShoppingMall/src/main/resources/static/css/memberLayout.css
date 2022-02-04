@@ -1,0 +1,16 @@
+@charset "UTF-8";
+#wrapper{
+	width : 1000px;
+	margin: 0 auto;
+}
+#leftMenu{
+	float:left;
+	margin-right: 50px;
+	height : 500px;
+}
+#MemberInfo{
+	float:left;
+	padding-left : 50px;
+	border-left: 1px solid gray; 
+	height : 500px;
+}

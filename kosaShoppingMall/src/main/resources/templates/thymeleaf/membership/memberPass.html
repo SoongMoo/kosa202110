@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet">
 </head>
 <body>
+<div id="wrapper">
 <div id="leftMenu">
 	<ul>
 		<li><a href="memberDetail">내 정보 보기</a></li>
@@ -19,6 +21,7 @@
 <span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span>
 <input type="submit" value="비밀번호 확인" />
 </form>
+</div>
 </div>
 </body>
 </html>

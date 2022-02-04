@@ -14,14 +14,9 @@ import kosaShoppingMall.command.LoginCommand;
 @ComponentScan(value = "kosaShoppingMall")
 @MapperScan(value = {"kosaShoppingMall"})
 @Controller
-public class KosaShoppingMallApplication {
-	@ModelAttribute
-	public LoginCommand getLoginCommand() {
-		return new LoginCommand();
-	}
-
+public class KosaShoppingMallApplication {	
 	@RequestMapping(value = "/")
-	public String test() {
+	public String test(LoginCommand loginCommand) {
 		return "thymeleaf/index";
 	}
 	public static void main(String[] args) {

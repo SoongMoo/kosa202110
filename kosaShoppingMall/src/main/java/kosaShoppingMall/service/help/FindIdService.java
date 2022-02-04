@@ -1,4 +1,4 @@
-package kosaShoppingMall.service.memberJoin;
+package kosaShoppingMall.service.help;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,22 +6,22 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import kosaShoppingMall.command.FindIdCommand;
-import kosaShoppingMall.domain.MemberDTO;
-import kosaShoppingMall.mapper.MemberMapper;
+import kosaShoppingMall.domain.AuthInfo;
+import kosaShoppingMall.mapper.LoginMapper;
 @Service
 public class FindIdService {
 	@Autowired
-	MemberMapper memberMapper;
+	LoginMapper loginMapper;
 	public String execute(FindIdCommand findIdCommand,
 			 Model model, BindingResult result) {
-		MemberDTO dto  = memberMapper.findId(findIdCommand.getMemberEmail());
-		if(dto == null) {
+		AuthInfo authInfo  = loginMapper.findId(findIdCommand.getMemberEmail());
+		if(authInfo == null) {
 			result.rejectValue("memberEmail", 
 					"findIdCommand.memberEmail", "이메일이 틀렸습니다.");
 			return "thymeleaf/help/findId";
 		}else {
-			if(dto.getMemberPhone().equals(findIdCommand.getMemberPhone())) {
-				model.addAttribute("userId", dto.getMemberId());
+			if(authInfo.getPhone().equals(findIdCommand.getMemberPhone())) {
+				model.addAttribute("userId", authInfo.getUserId());
 				return "thymeleaf/help/findIdOk";
 			}else {
 				result.rejectValue("memberPhone", 

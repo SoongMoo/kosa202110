@@ -31,6 +31,9 @@
 <span th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br />
 연락처 : <input type="text" name="empPhone" th:value="${employeeCommand.empPhone}"/>
 <span th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span><br />
+이메일 : <input type="email" name="empEmail" th:value="${employeeCommand.empEmail}"/>
+<span th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span><br />
+
 <input type="submit" value="등록" />
 </form>
 </body>

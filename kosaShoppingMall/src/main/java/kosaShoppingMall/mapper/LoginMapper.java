@@ -9,4 +9,5 @@ import kosaShoppingMall.domain.AuthInfo;
 @Repository(value = "kosaShoppingMall.mapper.LoginMapper")
 public interface LoginMapper {
 	public AuthInfo loginSelect(String id);
+	public AuthInfo findId(String email);
 }

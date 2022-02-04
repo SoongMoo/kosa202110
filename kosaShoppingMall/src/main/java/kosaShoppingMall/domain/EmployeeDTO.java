@@ -12,4 +12,5 @@ public class EmployeeDTO {
 	String empName;
 	String empAddr;
 	String empPhone;
+	String empEmail;
 }

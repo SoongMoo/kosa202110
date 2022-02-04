@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kosaShoppingMall.command.FindIdCommand;
-import kosaShoppingMall.service.memberJoin.FindIdService;
+import kosaShoppingMall.service.help.FindIdService;
 
 @Controller
 @RequestMapping("help")

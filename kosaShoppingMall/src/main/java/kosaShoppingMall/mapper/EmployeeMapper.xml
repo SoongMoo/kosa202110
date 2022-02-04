@@ -5,8 +5,8 @@
 <mapper namespace="kosaShoppingMall.mapper.EmployeeMapper">
 <insert id="employeeInsert" parameterType="empDTO">
 	insert into employees(emp_id, emp_pw, emp_name,emp_addr,
-							emp_phone  )
-	values(#{empId},#{empPw},#{empName},#{empAddr},#{empPhone})
+							emp_phone ,emp_email  )
+	values(#{empId},#{empPw},#{empName},#{empAddr},#{empPhone},#{empEmail})
 </insert>
 <delete id="employeeDelete" parameterType="string">
 	delete from employees
@@ -15,18 +15,18 @@
 <update id="employeeUpdate" parameterType="empDTO">
 	update employees
 	set emp_name = #{empName}, emp_addr = #{empAddr}, 
-		emp_phone = #{empPhone}
+		emp_phone = #{empPhone},emp_email = #{empEmail}
 	where emp_id = #{empId}
 </update>
 <select id="selectOne" resultType="empDTO" parameterType="string" >
 	select emp_id empId, emp_pw empPw, emp_name empName,
-			emp_addr empAddr, emp_phone empPhone
+			emp_addr empAddr, emp_phone empPhone, emp_email empEmail
 	from employees
 	where emp_id = #{empId}
 </select>
 <select id="selectAll" resultType="empDTO">
 	select emp_id empId, emp_pw empPw, emp_name empName,
-			emp_addr empAddr, emp_phone empPhone
+			emp_addr empAddr, emp_phone empPhone, emp_email empEmail
 	from employees
 </select>
 </mapper>

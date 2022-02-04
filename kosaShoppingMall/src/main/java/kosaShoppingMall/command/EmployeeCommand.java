@@ -22,7 +22,8 @@ public class EmployeeCommand {
 	String empAddr;
 	@NotEmpty(message = "전화번호를 입력해주세요!")
 	String empPhone;
-	
+	@NotBlank(message = "이메일을 입력해주세요!")
+	String empEmail;
 	public boolean isEmpPwEqualsEmpPwCon() {
 		return empPw.equals(empPwCon);
 	}

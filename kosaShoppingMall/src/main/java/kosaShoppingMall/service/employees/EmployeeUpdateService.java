@@ -25,6 +25,7 @@ public class EmployeeUpdateService {
 			dto.setEmpId(employeeCommand.getEmpId());
 			dto.setEmpName(employeeCommand.getEmpName());
 			dto.setEmpPhone(employeeCommand.getEmpPhone());
+			dto.setEmpEmail(employeeCommand.getEmpEmail());
 			employeeMapper.employeeUpdate(dto);
 			return "redirect:empInfo?num="+employeeCommand.getEmpId();
 		}else {

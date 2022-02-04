@@ -10,5 +10,4 @@ public class EmpMyPageController {
 	public String empDetail() {
 		return "thymeleaf/employeesShip/empDetail";
 	}
-	
 }

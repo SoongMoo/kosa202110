@@ -16,8 +16,8 @@ public class FindIdService {
 			 Model model, BindingResult result) {
 		AuthInfo authInfo  = loginMapper.findId(findIdCommand.getMemberEmail());
 		if(authInfo == null) {
-			result.rejectValue("memberEmail", 
-					"findIdCommand.memberEmail", "이메일이 틀렸습니다.");
+			result.rejectValue("memberEmail", "wrong");
+			//result.rejectValue("memberEmail", "findIdCommand.memberEmail", "이메일이 틀렸습니다.");
 			return "thymeleaf/help/findId";
 		}else {
 			if(authInfo.getPhone().equals(findIdCommand.getMemberPhone())) {

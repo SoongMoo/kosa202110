@@ -13,4 +13,6 @@ public interface EmployeeMapper {
 	public EmployeeDTO selectOne(String empId);
 	public Integer employeeUpdate(EmployeeDTO dto);
 	public Integer employeeDelete(String empId);
+	/// employeesMyPage서비스
+	public Integer employeePwChange(EmployeeDTO dto);
 }

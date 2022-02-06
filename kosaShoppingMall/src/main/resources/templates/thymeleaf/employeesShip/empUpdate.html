@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet">
+<style type="text/css">
+	span{color:red;}
+</style>
+</head>
+<body>
+		<div id="wrapper">
+			<div id="leftMenu">
+				<ul>
+					<li><a href="empDetail">내 정보 보기</a></li>
+					<li><a href="empModifyBiforPw">내 정보 수정</a></li>
+					<li><a href="empPwChange">비밀번호 수정</a></li>
+
+				</ul>
+			</div>
+			<div id="MemberInfo">
+					<form action="empUpdate" method="post"   th:object="${employeeCommand}">
+	<input type="hidden" name="empPwCon" value="123"> 
+	<fieldset>
+		<legend>회원가입 정보</legend>
+		<table width = '600'  border = '1' >
+			<caption><strong>회원 정보</strong></caption>
+			<tfoot>
+			<tr>
+				<th colspan="2">
+					<input type='submit' value='가입완료' />&nbsp;&nbsp;
+					<input type='reset' value='다시 입력' />&nbsp;&nbsp;
+					<input type='button' value='가입 안함' 
+						onclick="javascript:location.href='/'"/>
+				</th>
+			</tr>
+			</tfoot>
+			<tbody>
+			<tr>
+				<th colspan= '2'>사용자 ID</th>
+			</tr>
+			
+			<tr>
+				<th>
+					<label for="empId">* 사용자 아이디</label>
+				</th>
+				<td>
+					<input type='text' name="empId" id="empId" 
+						 size='15' maxlength='12' autofocus="autofocus" th:value="${employeeCommand.empId}" readonly="readonly"/>
+					<span th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="empPw">* 사용자 비밀번호</label>
+				</th>
+				<td>
+					<input type='password' name="empPw" id="empPW" size='15' maxlength='12' />
+					<span th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span>
+				</td>
+			</tr>
+	
+			<tr>
+				<th colspan= '2'>사용자 기본 정보</th>
+			</tr>
+			<tr>
+				<th>
+					<label for="empName" >사용자 이름</label>
+				</th>
+				<td>
+					<input type ='text' name='empName' id="empName"
+						size='15' maxlength='12' th:value="${employeeCommand.empName}" />
+					<span th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span>
+				</td>
+			</tr>
+			<tr>
+				<th colspan= '2'>사용자 연락처</th>
+			</tr>
+			<tr>
+				<th><label for='empEmail'>사용자 이메일</label></th>
+				<td>
+					<input type='email' name='empEmail' id="empEmail" th:value="${employeeCommand.empEmail}"/>
+					<span th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="empAddr">사용자 주소</label></th>
+				<td>
+					<input type='text' name='empAddr' id="empAddr"  th:value="${employeeCommand.empAddr}" />
+					<span th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="empPhone">연락처</label></th>
+				<td>
+					<input type='tel'  size= '26' maxlength='13'
+						name="empPhone" id="empPhone"  th:value="${employeeCommand.empPhone}"
+						placeholder='123-123-1234 ,123-1234-1234'
+						/>
+					<span th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</fieldset>
+	</form>
+				
+			</div>
+		</div>
+</body>
+</html>

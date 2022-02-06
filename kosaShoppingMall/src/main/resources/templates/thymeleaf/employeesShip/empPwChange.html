@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet">
+<style type="text/css">
+	span{color:red;}
+</style>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="leftMenu">
+			<ul>
+				<li><a href="empDetail">내 정보 보기</a></li>
+				<li><a href="empModifyBiforPw">내 정보 수정</a></li>
+				<li><a href="empPwChange">비밀번호 수정</a></li>
+
+			</ul>
+		</div>
+		<div id="MemberInfo">
+			<h3>당신의 비밀번호! 지금 바로 바꿔드립니다.</h3>
+			<br />
+			<form action="empPwChangeCon" method="post"
+				th:object="${employeePwCommand}">
+				<table border=1>
+					<caption>비밀번호 변경</caption>
+					<tr>
+						<td>기존 비밀번호 입력 :</td>
+						<td><input type="password" name="empPw"> <span
+							th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>변경하실 비밀번호 :</td>
+						<td><input type="password" name="newEmpPw"> <span
+							th:if="${#fields.hasErrors('newEmpPw')}" th:errors="*{newEmpPw}"></span>
+						</td>
+					</tr>
+
+					<tr>
+						<td>변경하실 비밀번호 확인:</td>
+						<td><input type="password" name="newEmpPwCon"> <span
+							th:if="${#fields.hasErrors('newEmpPwCon')}"
+							th:errors="*{newEmpPwCon}"></span></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="submit" value="확인"></td>
+					</tr>
+
+				</table>
+
+			</form>
+		</div>
+	</div>
+</body>
+</html>

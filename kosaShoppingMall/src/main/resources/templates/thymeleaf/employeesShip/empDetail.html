@@ -3,17 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet">
 </head>
 <body>
-<div >
-<ul>
-	<li>내 정보 보기</li>
-	<li>내 정보 수정</li>
-	<li>비밀번호 수정</li>
-</ul>
-</div>
-<div >
-내정보<br />
-</div>
+	<div>
+		<div id="wrapper">
+			<div id="leftMenu">
+				<ul>
+					<li><a href="empDetail">내 정보 보기</a></li>
+					<li><a href="empModifyBiforPw">내 정보 수정</a></li>
+					<li><a href="empPwChange">비밀번호 수정</a></li>
+
+				</ul>
+			</div>
+			<div id="MemberInfo">
+
+				내정보<br />
+				아이디 : [[${employeeCommand.empId}]] <br/>
+				이름 : [[${employeeCommand.empName}]] <br/>
+				주소 : [[${employeeCommand.empAddr}]] <br/>
+				핸드폰 번호: [[${employeeCommand.empPhone}]] <br/>
+				이메일 : [[${employeeCommand.empEmail}]] <br/>
+			</div>
+		</div>
 </body>
 </html>

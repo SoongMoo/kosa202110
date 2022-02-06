@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet">
+<style type="text/css">
+	span{color:red;}
+</style>
+</head>
+<body>
+		<div id="wrapper">
+			<div id="leftMenu">
+				<ul>
+					<li><a href="empDetail">내 정보 보기</a></li>
+					<li><a href="empModifyBiforPw">내 정보 수정</a></li>
+					<li><a href="empPwChange">비밀번호 수정</a></li>
+
+				</ul>
+			</div>
+			<div id="MemberInfo">
+				내 정보 수정을 위한 비밀번호 확인<hr>
+				<form action="empModify" method="post" th:object="${employeePwCommand}">
+				<input type="hidden" name="newEmpPw" value="1234">
+				<input type="hidden" name="newEmpPwCon" value="1234">
+				비밀번호 입력 :<input type="password" name="empPw">
+				<span th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span><br />
+				<input type="submit" value="확인">
+				</form>
+				
+				
+			</div>
+		</div>
+</body>
+</html>

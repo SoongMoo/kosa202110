@@ -13,7 +13,6 @@ public class GoodsWriteService {
 	@Autowired
 	GoodsMapper goodsMapper;
 	public void execute(GoodsCommand goodsCommand) {
-		
 		GoodsDTO dto = new GoodsDTO();
 		dto.setDeliveryCost(goodsCommand.getDeliveryCost());
 		dto.setGoodsContent(goodsCommand.getGoodsContent());
@@ -22,8 +21,5 @@ public class GoodsWriteService {
 		dto.setGoodsPrice(goodsCommand.getGoodsPrice());
 		Integer i = goodsMapper.goodsInsert(dto);
 		System.out.println(i +"개의 상품이 등록되었습니다.");
-		
-
 	}
-
 }

@@ -20,15 +20,16 @@ document.onkeydown = noEvent;
 </head>
 <body>
 	상세 페이지 일까요?<br />
-	상품 번호: [[${goodsCommand.goodsNum}]] || 조회수 :
-	[[${goodsCommand.vistCount}]]
+	상품 번호: [[${goodsCommand.goodsNum}]] || 조회수 : [[${goodsCommand.vistCount}]]
 	<br />상품 이름: [[${goodsCommand.goodsName}]]
 	<br />가격 : [[${goodsCommand.goodsPrice}]]
 
 	<br />내용 : [[${goodsCommand.goodsContent}]]
 	<br />배송비 : [[${goodsCommand.deliveryCost}]]
-	<Br/><a th:href="@{../goodsModify(goodsNum=${goodsCommand.goodsNum})}">수정</a>
+	<Br/><a href="javascript:history.back();">뒤로 가기</a> | 
+		 <a th:href="@{../goodsModify(goodsNum=${goodsCommand.goodsNum})}">수정</a> | 
 		 <a th:href="|../goodsDelete/${goodsCommand.goodsNum}|">삭제</a>
+		 
 	
 </body>
 </html>

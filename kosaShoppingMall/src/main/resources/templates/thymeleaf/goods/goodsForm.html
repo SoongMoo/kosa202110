@@ -12,7 +12,7 @@
 <form action="goodsRegist" method="post" th:object="${goodsCommand}">
 <table border=1>
 	<tr><th>제품 번호</th>
-		<td><input type="text" name="goodsNum"  th:value="${goodsCommand.goodsNum}"/><br/>
+		<td><input type="text" name="goodsNum"  th:value="${goodsCommand.goodsNum}"  readonly="readonly" /><br/>
 			<span th:if="${#fields.hasErrors('goodsNum')}" th:errors="*{goodsNum}"></span>
 			goods10001번 부터 자동 부여
 		</td>

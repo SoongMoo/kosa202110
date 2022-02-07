@@ -14,10 +14,8 @@
 		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
 		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount
 		from goods
-		<if test="goodsWord != null">
 		where GOODS_NAME like '%'||#{goodsWord}||'%'
 		   or GOODS_CONTENT like '%'||#{goodsWord}||'%'
-		</if>
 	</select>
 	
 	<update id="goodsUpdate" parameterType="goodsDTO">

@@ -3,8 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet">
 </head>
 <body>
+<div id="wrapper">
+<div id="leftMenu">
+<ul>
+	<li><a href="goodsList">상품 리스트</a></li>
+	<li><a href="goodsRegist">상품 등록</a></li>
+	<li><a href="goodsIpgo">상품 입고</a></li>
+</ul>
+</div>
+<div id="MemberInfo">
 <form action="goodsUpdate" method="post" th:object="${goodsCommand}">
 <table border=1>
 	<tr><th>제품 번호</th>
@@ -40,11 +50,11 @@
 	<tr>
 		<th colspan="2" > 
 			<input type="submit" value="상품 수정 완료" />
-			<input type="button" value="상품 리스트" 
-				onclick="javascript:location.href='goodsList'" />
 		</th>
 	</tr>
 </table>
 </form>
+</div>
+</div>
 </body>
 </html>

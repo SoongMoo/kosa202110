@@ -3,13 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet">
 </head>
 <body>
+<div id="wrapper">
+<div id="leftMenu">
+<ul>
+	<li><a href="goodsList">상품 리스트</a></li>
+	<li><a href="goodsRegist">상품 등록</a></li>
+	<li><a href="goodsIpgo">상품 입고</a></li>
+</ul>
+</div>
+<div id="MemberInfo">
 상품관리<br />
-<a href="goodsRegist">상품 등록</a><br />
-
 <p>
-<table width="800" >
+<table width="600" >
 <tr><th>
 <form action="goodsSearch" method="get" >
 	상품 조회 : <input type="search" name="goodsWord" size="50"/> <input type="submit" value="검색" />
@@ -18,10 +26,10 @@
 </table>
 </p>
 
-<table border=1 width="800" >
+<table border=1 width="600" >
 	<tr>
 		<th colspan="3">상품 리스트</th>
-		<th width = "150">상품 개수 : [[${list.size()}]]</th>
+		<th width = "100">상품 개수 : [[${list.size()}]]</th>
 	</tr>
 	<tr>
 		<th>상품 번호</th><th>상품명</th><th>가격</th><th>조회수</th>
@@ -35,5 +43,7 @@
 	</tr>
 	</th:block>
 </table>
+</div>
+</div>
 </body>
 </html>

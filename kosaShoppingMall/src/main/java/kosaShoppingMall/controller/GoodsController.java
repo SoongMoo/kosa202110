@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("goods")
 @Controller
 public class GoodsController {
+	@RequestMapping("goodsSearch")
+	public String goodsSearch() {
+		return "thymeleaf/goods/goodsList";
+	}
 	@RequestMapping("goodsList")
 	public String goodsList() {
 		return "thymeleaf/goods/goodsList";

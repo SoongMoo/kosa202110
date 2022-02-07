@@ -12,7 +12,7 @@
 회원리스트 페이지입니다.<br />
 <table border="1" width=50% >
 	<tr valign="middle">
-		<td colspan =4 >회원리스트</td>
+		<th colspan =4 >회원리스트</th>
 		<td align=center >회원 수 : ${lists.size()}</td>
 	</tr>
 	<tr>	

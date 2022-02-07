@@ -44,7 +44,8 @@ public class MemberConteroller {
 	public String memberDelete(@RequestParam(value = "num") String memberNum,
 			Model model) {
 		memberDeleteService.execute(memberNum , model);
-		return "thymeleaf/member/memberdel";
+		//return "thymeleaf/member/memberdel";
+		return "member/memberdel";
 	}
 	@RequestMapping(value="memberModify" , method = RequestMethod.GET)
 	public String memberModify(@RequestParam(value="memberNum") 

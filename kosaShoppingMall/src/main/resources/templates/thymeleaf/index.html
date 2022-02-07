@@ -48,6 +48,7 @@
 <span th:if="${session.authInfo != null}">
 	<span th:switch="${session.authInfo.grade}">
 	<span th:case="emp">
+		<a href="/goods/goodsList">상품 관리</a>
 		<a href="/emp/empList">직원 관리</a> 
 		<a href="/mem/memList">회원 관리</a>
 		<a href="/empMypage/empDetail">직원 내 정보 보기</a>

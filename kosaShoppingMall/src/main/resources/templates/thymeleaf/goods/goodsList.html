@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+상품관리<br />
+<a href="goodsRegist">상품 등록</a><br />
+<table border=1 width="800" >
+	<tr>
+		<th colspan="3">상품 리스트</th>
+		<th width = "150">상품 개수 : </th>
+	</tr>
+	<tr>
+		<th>상품 번호</th><th>상품명</th><th>가격</th><th>조회수</th>
+	</tr>
+	<tr>
+		<th><a th:href="|goodsDetail/${goodsNum}|">[[${goodsCommand.goodsNum}]]</a></th>
+		<th>[[${goodsCommand.goodsName}]]</th>
+		<th>[[${goodsCommand.goodsPrice}]]</th>
+		<th>[[${goodsCommand.visitCount}]]</th>
+	</tr>
+</table>
+</body>
+</html>

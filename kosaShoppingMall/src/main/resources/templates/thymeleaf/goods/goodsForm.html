@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="goodsRegist" method="post">
+<table border=1>
+	<tr><th>제품 번호</th>
+		<td><input type="text" name="goodsNum" />
+			goods100001번 부터 자동 부여
+		</td>
+	</tr>
+	<tr>
+		<th>상품명</th>
+		<td><input type="text" name="goodsName" /></td>
+	</tr>
+	<tr>
+		<th>상품 가격</th>
+		<td><input type="number" name="goodsPrice" min="1000" step="1000" value="1000"/></td>
+	</tr>
+	<tr>
+		<th>상품 내용</th>
+		<td><textarea rows="6" cols="30" name="goodsContent"></textarea> </td>
+	</tr>
+	<tr>
+		<th>배송비</th>
+		<td><input type="number" name="deliveryCost" min="2000" step="500" value="2000"/></td>
+	</tr>
+	<tr>
+		<th colspan="2" > 
+			<input type="submit" value="상품등록" />
+			<input type="reset" value="다시 작성" />
+			<input type="button" value="상품리스트" 
+				onclick="javascript:location.href='goodsList'" />
+		</th>
+	</tr>
+</table>
+</form>
+</body>
+</html>

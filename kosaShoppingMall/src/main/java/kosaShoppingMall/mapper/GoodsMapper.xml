@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+	<delete id="goodsDelete" parameterType="goodsDTO">
+		delete from goods
+		where goods_num =#{goodsNum}
+	
+	</delete>
+	
+	<select id="searchGoods" parameterType="string" resultType="goodsDTO">
+		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
+		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount
+		from goods
+		<if test="goodsWord != null">
+		where GOODS_NAME like '%'||#{goodsWord}||'%'
+		   or GOODS_CONTENT like '%'||#{goodsWord}||'%'
+		</if>
+	</select>
+	
+	<update id="goodsUpdate" parameterType="goodsDTO">
+		update goods
+		set GOODS_NAME = #{goodsName}, GOODS_PRICE = #{goodsPrice} ,
+		 GOODS_CONTENT = #{goodsContent}, DELIVERY_COST = #{deliveryCost}
+		where goods_num = #{goodsNum}
+	
+	</update>
+	
+	<update id="goodsVisitCnt" parameterType="string">
+		update goods
+		set VISIT_COUNT = visit_count+1
+		where goods_num = #{goodsNum}
+	
+	</update>
+	
+	<select id="goodsSelectOne" parameterType="string" resultType="goodsDTO">
+		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
+		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount
+		from goods
+		where goods_num = #{goodsNum}
+	
+	
+	</select>
+	
+	<select id="goodsList" resultType="goodsDTO">
+		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
+		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount
+		from goods
+	</select>
+	
+	<insert id="goodsInsert" parameterType="goodsDTO"> 
+		insert into goods(GOODS_NUM , GOODS_NAME , GOODS_PRICE,
+		GOODS_CONTENT, DELIVERY_COST, VISIT_COUNT)
+		values(#{goodsNum},#{goodsName},
+		#{goodsPrice},#{goodsContent},#{deliveryCost},0)
+		
+	</insert>
+
+	<select id="goodsAutoNum" resultType="string">
+		select 
+		concat('goods',nvl(max(substr(goods_num,6)),10000)+1)from goods	
+	</select>
+</mapper>
+

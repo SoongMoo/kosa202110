@@ -3,13 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	span{color:"red";}
-</style>
- 
 </head>
 <body>
-<form action="goodsRegist" method="post" th:object="${goodsCommand}">
+<form action="goodsUpdate" method="post" th:object="${goodsCommand}">
 <table border=1>
 	<tr><th>제품 번호</th>
 		<td><input type="text" name="goodsNum"  th:value="${goodsCommand.goodsNum}"/><br/>
@@ -19,26 +15,26 @@
 	</tr>
 	<tr>
 		<th>상품명</th>
-		<td><input type="text" name="goodsName" /><br/>
+		<td><input type="text" name="goodsName" th:value="${goodsCommand.goodsName}" /><br/>
 			<span th:if="${#fields.hasErrors('goodsName')}" th:errors="*{goodsName}"></span>
 		</td>
 	</tr>
 	<tr>
 		<th>상품 가격</th>
-		<td><input type="number" name="goodsPrice" min="1000" step="1000" value="1000"/><br/>
+		<td><input type="number" name="goodsPrice" th:value="${goodsCommand.goodsPrice}"/><br/>
 			<span th:if="${#fields.hasErrors('goodsPrice')}" th:errors="*{goodsPrice}"></span>
 		</td>
 	</tr>
 	<tr>
 		<th>상품 내용</th>
 		<td><span th:if="${#fields.hasErrors('goodsContent')}" th:errors="*{goodsContent}"></span>
-			<br/><textarea rows="6" cols="30" name="goodsContent"></textarea>
+			<br/><textarea rows="6" cols="30" name="goodsContent">[[${goodsCommand.goodsContent}]]</textarea>
 			
 		 </td>
 	</tr>
 	<tr>
 		<th>배송비</th>
-		<td><input type="number" name="deliveryCost" min="2000" step="500" value="2000"/><br/>
+		<td><input type="number" name="deliveryCost" th:value="${goodsCommand.deliveryCost}"/><br/>
 			<span th:if="${#fields.hasErrors('deliveryCost')}" th:errors="*{deliveryCost}"></span>
 		</td>
 	</tr>

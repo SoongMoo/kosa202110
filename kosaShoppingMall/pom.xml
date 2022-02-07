@@ -64,7 +64,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!--  jstl, form spring fmt core  -->
+		<!--  jstl, form spring fmt core functions  -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>

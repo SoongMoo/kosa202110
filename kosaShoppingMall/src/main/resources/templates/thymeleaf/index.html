@@ -6,7 +6,7 @@
 </head>
 <body>
 <span th:if="${session.authInfo == null}">
-<form action="loginPro" name="frm" id="frm" method="post" th:object="${loginCommand}" >
+<form action="/login/loginPro" name="frm" id="frm" method="post" th:object="${loginCommand}" >
 <table border="1">
 <tr>
 	<td colspan="3">

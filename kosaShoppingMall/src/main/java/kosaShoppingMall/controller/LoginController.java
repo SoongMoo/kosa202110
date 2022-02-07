@@ -1,5 +1,6 @@
 package kosaShoppingMall.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +19,22 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 
-	@RequestMapping(value = "/loginPro", method = RequestMethod.GET)
+	@RequestMapping(value = "/login/loginPro", method = RequestMethod.GET)
 	public String home() {
 		return "redirect:/";
+	}
+	@RequestMapping(value = "/login/loginPro", method = RequestMethod.POST)
+	public String loginPro(@Validated LoginCommand loginCommand ,
+			BindingResult result, HttpServletRequest request) {
+		if(result.hasErrors()) {
+			return "thymeleaf/index";
+		}
+		String path = loginService.execute(loginCommand, request,result);
+		return path;
 	}
 	@RequestMapping("/login/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
-	}
-	@RequestMapping(value = "/loginPro", method = RequestMethod.POST)
-	public String loginPro(@Validated LoginCommand loginCommand ,
-			BindingResult result, HttpSession  session) {
-		if(result.hasErrors()) {
-			return "thymeleaf/index";
-		}
-		String path = loginService.execute(loginCommand, session,result);
-		return path;
 	}
 }

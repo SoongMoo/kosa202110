@@ -14,7 +14,7 @@ public class MemberNumberService {
 	MemberMapper memberMapper;
 	public void execute(MemberCommand memberCommand, Model model) {
 		String memberNum = memberMapper.numberGenerate();
-		model.addAttribute("memberNum", memberNum);
-		//memberCommand.setMemberNum(memberNum);
+		//model.addAttribute("memberNum", memberNum);
+		memberCommand.setMemberNum(memberNum);
 	}
 }

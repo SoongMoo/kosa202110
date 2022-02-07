@@ -44,8 +44,7 @@ public class MemberConteroller {
 	public String memberDelete(@RequestParam(value = "num") String memberNum,
 			Model model) {
 		memberDeleteService.execute(memberNum , model);
-		//return "thymeleaf/member/memberdel";
-		return "redirect:memList";
+		return "thymeleaf/member/memberdel";
 	}
 	@RequestMapping(value="memberModify" , method = RequestMethod.GET)
 	public String memberModify(@RequestParam(value="memberNum") 
@@ -86,7 +85,6 @@ public class MemberConteroller {
 	@RequestMapping(value="memberRegist" ,method = RequestMethod.POST)
 	public String memberFrom(@Validated MemberCommand memberCommand, 
 			BindingResult result) {
-		
 		if (result.hasErrors()) {
 			//return "thymeleaf/member/memberForm";
 			return "member/memberForm";

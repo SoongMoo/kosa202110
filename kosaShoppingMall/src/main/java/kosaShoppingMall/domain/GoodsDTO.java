@@ -16,4 +16,13 @@ public class GoodsDTO {
 	String goodsMain;
 	Integer deliveryCost;
 	Integer vistCount;
+	
+	GoodsIpgoDTO goodsIpgoDTO;
 }
+
+
+
+
+
+
+

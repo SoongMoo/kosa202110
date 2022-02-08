@@ -30,14 +30,14 @@ $(function(){
 <table>
 	<tr><th>상품번호</th>
 		<td th:if="${goodsIpgoCommand == null}"><input type="text" name="goodsNum" id="num"  readonly="readonly" />
-		<td th:if="${goodsIpgoCommand != null}"><input type="text" name="goodsNum" id="num" th:value="${goodsIpgoCommand.goodsNum}" readonly="readonly" />
+		<td th:if="${goodsIpgoCommand != null}"><input type="text" name="goodsNum" id="num" 
+												 th:value="${goodsIpgoCommand.goodsNum}" readonly="readonly" />
 		<button type="button" id="btn" >상품 번호 검색</button><br />
 		<span th:if="${#fields.hasErrors('goodsNum')}" th:errors="*{goodsNum}"></span></td>
 	</tr>
 	<tr><th>입고일</th>
 		<td><input type="date" name="ipgoDate" 
 					th:value="${#dates.format(goodsIpgoCommand.ipgoDate,'yyyy-MM-dd')}"/><br />
-		
 		<span th:if="${#fields.hasErrors('ipgoDate')}" th:errors="*{ipgoDate}"></span></td>
 	</tr>
 	<tr><th>입고 수량</th>

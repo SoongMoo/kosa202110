@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet" >
+</head>
+<body>
+<div id="wrapper">
+<div id="leftMenu">
+	<ul>
+		<li><a href="goodsList">상품 리스트</a></li>
+		<li><a href="goodsRegist">상품 등록</a></li>
+		<li><a href="goodsIpgoList">상품 입고 현황</a></li>
+		<li><a href="goodsIpgo">상품 입고</a></li>
+	</ul>
+</div>
+<div id="MemberInfo">
+<form action="goodsIpgoModify" method="post" >
+<table border = 1>
+<tr><td>제품번호</td>
+	<td><input type="text" th:value="${goodsIpgoGoodsCommand.goodsNum}" 
+		name="goodsNum" readonly="readonly"/></td></tr>
+<tr><td>제품명</td><td>[[${goodsIpgoGoodsCommand.goodsName}]]</td></tr>
+<tr><td>가격</td><td>[[${goodsIpgoGoodsCommand.goodsPrice}]]</td></tr>
+<tr><td>내용</td><td>[[${goodsIpgoGoodsCommand.goodsContent}]]</td></tr>
+<tr><td>배송비</td><td>[[${goodsIpgoGoodsCommand.deliveryCost}]]</td></tr>
+<tr><td>조회수</td><td>[[${goodsIpgoGoodsCommand.vistCount}]]</td></tr>
+<tr><td>입고 일</td><td>
+	<input type="date" name="ipgoDate"
+		th:value="${#dates.format(goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoDate,'yyyy-MM-dd')}"
+		readonly="readonly" /></td></tr>
+<tr><td>입고 수량</td>
+	<td><input type="number" name="ipgoQty" 
+		th:value="${goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoQty}" min="1"/>
+	</td>
+</tr>
+<tr><td>제조 일</td>
+	<td><input type="datetime-local" name="madeDate"
+		th:value="${#strings.replace(goodsIpgoGoodsCommand.goodsIpgoDTO.madeDate,' ','T')}" /></td></tr>
+<tr><th colspan="2"><input type="submit" value="전송"> </th></tr>
+</table>
+</form>
+</div>
+</div>	
+</body>
+</html>

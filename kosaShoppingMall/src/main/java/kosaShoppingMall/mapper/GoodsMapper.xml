@@ -4,6 +4,62 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+	<resultMap type="kosaShoppingMall.domain.GoodsIpgoGoodsDTO" id="goodsIpgoGoodsMap">
+		<association property="goodsDTO" javaType="goodsDTO" >
+	 		<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+	 		<result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+	 		<result column="GOODS_PRICE" jdbcType="BIGINT" property="goodsPrice"/>
+	 		<result column="GOODS_CONTENT" jdbcType="VARCHAR" property="goodsContent"/>
+	 		<result column="DELIVERY_COST" jdbcType="BIGINT" property="deliveryCost"/>
+	 		<result column="VISIT_COUNT" jdbcType="BIGINT" property="vistCount"/>
+	 	</association>
+		<association property="goodsIpgoDTO" javaType="goodsIpgoDTO" >
+			<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+			<id column="IPGO_DATE" jdbcType="DATE" property="ipgoDate"/>
+			<result column="IPGO_QTY" jdbcType="BIGINT" property="ipgoQty"/>
+			<result column="MADE_DATE" jdbcType="TIMESTAMP" property="madeDate"/>
+		</association>
+	</resultMap>
+	
+	<resultMap type="goodsDTO" id="goodsIpgoGoodsResultMap">
+		<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+	 	<result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+	 	<result column="GOODS_PRICE" jdbcType="BIGINT" property="goodsPrice"/>
+	 	<result column="GOODS_CONTENT" jdbcType="VARCHAR" property="goodsContent"/>
+	 	<result column="DELIVERY_COST" jdbcType="BIGINT" property="deliveryCost"/>
+	 	<result column="VISIT_COUNT" jdbcType="BIGINT" property="vistCount"/>
+		<association property="goodsIpgoDTO" javaType="goodsIpgoDTO" >
+			<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+			<id column="IPGO_DATE" jdbcType="DATE" property="ipgoDate"/>
+			<result column="IPGO_QTY" jdbcType="BIGINT" property="ipgoQty"/>
+			<result column="MADE_DATE" jdbcType="TIMESTAMP" property="madeDate"/>
+		</association>
+	</resultMap>
+	
+	<select id="getGoodsIpgoInfo" parameterType="goodsIpgoDTO" 
+					resultMap="goodsIpgoGoodsResultMap">
+		select g.GOODS_NUM, g.GOODS_NAME, g.GOODS_PRICE, g.GOODS_CONTENT, 
+				g.DELIVERY_COST, g.VISIT_COUNT,
+		        i.IPGO_DATE, i.IPGO_QTY, MADE_DATE
+		from goods g, goodsipgo i
+		where g.GOODS_NUM = i.GOODS_NUM and g.GOODS_NUM = #{goodsNum}
+										and i.IPGO_DATE=#{ipgoDate}
+	</select>
+	
+	<select id="ipgoDetail" parameterType="goodsIpgoDTO" resultMap="goodsIpgoGoodsMap">
+		select g.GOODS_NUM, g.GOODS_NAME, g.GOODS_PRICE, g.GOODS_CONTENT, 
+				g.DELIVERY_COST, g.VISIT_COUNT,
+		        i.IPGO_DATE, i.IPGO_QTY, MADE_DATE
+		from goods g, goodsipgo i
+		where g.GOODS_NUM = i.GOODS_NUM and g.GOODS_NUM = #{goodsNum}
+										and i.IPGO_DATE=#{ipgoDate}
+	</select>
+
+	<select id="ipgoSelect" resultType="goodsIpgoDTO">
+		select IPGO_DATE ipgoDate,GOODS_NUM goodsNum ,IPGO_QTY ipgoQty,MADE_DATE madeDate
+		from goodsipgo
+		order by GOODS_NUM desc, IPGO_DATE desc
+	</select>
 	<insert id="ipgoInsert" parameterType="goodsIpgoDTO">
 		insert into goodsipgo(IPGO_DATE,GOODS_NUM,IPGO_QTY,MADE_DATE)
 		values(#{ipgoDate},#{goodsNum},#{ipgoQty},#{madeDate})

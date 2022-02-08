@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import kosaShoppingMall.domain.GoodsDTO;
 import kosaShoppingMall.domain.GoodsIpgoDTO;
+import kosaShoppingMall.domain.GoodsIpgoGoodsDTO;
 
 @Component
 @Repository(value="kosaShoppingMall.mapper.GoodsMapper")
@@ -21,5 +22,23 @@ public interface GoodsMapper {
 	public List<GoodsDTO> searchGoods(String goodsWord);
 	public List<GoodsDTO> goodsItems(String goodsName);
 	public Integer ipgoInsert(GoodsIpgoDTO dto);
-	
+	public List<GoodsIpgoDTO> ipgoSelect();
+	/// 1 대 1 정보
+	public GoodsIpgoGoodsDTO ipgoDetail(GoodsIpgoDTO idto);
+	public GoodsDTO getGoodsIpgoInfo(GoodsIpgoDTO idto);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

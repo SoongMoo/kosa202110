@@ -18,6 +18,9 @@ import kosaShoppingMall.command.GoodsIpgoCommand;
 import kosaShoppingMall.service.goods.GoodsAutoNum;
 import kosaShoppingMall.service.goods.GoodsDeleteService;
 import kosaShoppingMall.service.goods.GoodsDetailService;
+import kosaShoppingMall.service.goods.GoodsIpgoDetailService;
+import kosaShoppingMall.service.goods.GoodsIpgoListService;
+import kosaShoppingMall.service.goods.GoodsIpgoModifyService;
 import kosaShoppingMall.service.goods.GoodsIpgoService;
 import kosaShoppingMall.service.goods.GoodsItemService;
 import kosaShoppingMall.service.goods.GoodsListService;
@@ -49,6 +52,27 @@ public class GoodsController {
 	GoodsItemService goodsItemService;
 	@Autowired 
 	GoodsIpgoService goodsIpgoService;
+	@Autowired
+	GoodsIpgoListService goodsIpgoListService;
+	@Autowired
+	GoodsIpgoDetailService goodsIpgoDetailService;
+	@Autowired
+	GoodsIpgoModifyService goodsIpgoModifyService;
+	@RequestMapping("goodsIpgoModify")
+	public String goodsIpgoModify(@RequestParam(value = "goodsNum") String goodsNum,
+			@RequestParam(value="ipgoDate") String ipgoDate, Model model) {
+		goodsIpgoModifyService.execute(goodsNum,ipgoDate, model);
+		return "thymeleaf/goods/goodsIpgoUpdate";
+	}
+	
+	
+	@RequestMapping("goodsIpgoDetail")
+	public String goodsIpgoDetail(@RequestParam(value = "goodsNum") String goodsNum,
+			@RequestParam(value="ipgoDate") String ipgoDate, Model model) {
+		goodsIpgoDetailService.execute(goodsNum,ipgoDate, model);
+		return "thymeleaf/goods/goodsIpgoDetail";
+	}
+	
 	@RequestMapping(value="ipgoRegist", method = RequestMethod.GET)
 	public String ipgoRegist1() {
 		return "redirect:/";
@@ -84,7 +108,8 @@ public class GoodsController {
 	}
 	
 	@RequestMapping("goodsIpgoList")
-	public String goodsIpgoList() {
+	public String goodsIpgoList(Model model) {
+		goodsIpgoListService.execute(model);
 		return "thymeleaf/goods/goodsIpgoList";
 	}
 	

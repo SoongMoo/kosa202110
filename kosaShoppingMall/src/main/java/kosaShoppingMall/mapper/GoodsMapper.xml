@@ -4,9 +4,22 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+	<insert id="ipgoInsert" parameterType="goodsIpgoDTO">
+		insert into goodsipgo(IPGO_DATE,GOODS_NUM,IPGO_QTY,MADE_DATE)
+		values(#{ipgoDate},#{goodsNum},#{ipgoQty},#{madeDate})
+	</insert>
+	
+	<select id="goodsItems" parameterType="string" resultType="goodsDTO">
+		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
+		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, 
+		VISIT_COUNT vistCount
+		from goods
+		where GOODS_NAME like '%'||#{goodsWord}||'%'
+	</select>
+
 	<delete id="goodsDelete" parameterType="goodsDTO">
 		delete from goods
-		where goods_num =#{goodsNum}
+		where goods_num = #{goodsNum}
 	
 	</delete>
 	

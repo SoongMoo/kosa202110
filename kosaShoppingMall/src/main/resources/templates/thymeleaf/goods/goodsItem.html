@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+function itemSend(goodsNum){
+	//opener.document.getElementById('num').value = goodsNum; 
+	$(opener.document).find("#num").val(goodsNum);
+	window.self.close();
+}
+</script>
+</head>
+<body>
+<p>
+<table width="600" >
+<tr><th>
+<form action="goodsItem" method="post" >
+	상품명 : <input type="search" name="goodsName" size="50"/> <input type="submit" value="검색" />
+</form>
+</th></tr>
+</table>
+</p>
+<table border=1 width="600" >
+	<tr>
+		<th colspan="3">상품 리스트</th>
+		<th width = "100">상품 개수 : </th>
+	</tr>
+	<tr>
+		<th>상품 번호</th><th>상품명</th><th>가격</th><th>조회수</th>
+	</tr>
+	<th:block th:each="goodsCommand : ${list}">
+	<tr>
+		<th><a th:href="|javascript:itemSend('${goodsCommand.goodsNum}')|">[[${goodsCommand.goodsNum}]]</a></th>
+			<th>[[${goodsCommand.goodsName}]]</th>
+			<th>[[${goodsCommand.goodsPrice}]]</th>
+			<th>[[${goodsCommand.vistCount}]]</th>
+	</tr>
+	</th:block>
+
+</table>
+</body>
+</html>

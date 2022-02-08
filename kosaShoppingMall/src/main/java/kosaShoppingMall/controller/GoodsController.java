@@ -1,5 +1,8 @@
 package kosaShoppingMall.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.GoodsCommand;
+import kosaShoppingMall.command.GoodsIpgoCommand;
 import kosaShoppingMall.service.goods.GoodsAutoNum;
 import kosaShoppingMall.service.goods.GoodsDeleteService;
 import kosaShoppingMall.service.goods.GoodsDetailService;
+import kosaShoppingMall.service.goods.GoodsIpgoService;
+import kosaShoppingMall.service.goods.GoodsItemService;
 import kosaShoppingMall.service.goods.GoodsListService;
 import kosaShoppingMall.service.goods.GoodsModifyService;
 import kosaShoppingMall.service.goods.GoodsSearchService;
@@ -39,6 +45,49 @@ public class GoodsController {
 	GoodsDeleteService goodsDeleteService;
 	@Autowired
 	GoodsSearchService goodsSearchService;
+	@Autowired
+	GoodsItemService goodsItemService;
+	@Autowired 
+	GoodsIpgoService goodsIpgoService;
+	@RequestMapping(value="ipgoRegist", method = RequestMethod.GET)
+	public String ipgoRegist1() {
+		return "redirect:/";
+	}
+	@RequestMapping(value="ipgoRegist", method = RequestMethod.POST)
+	public String ipgoRegist(@Validated GoodsIpgoCommand goodsIpgoCommand,
+			BindingResult result ) {
+		if(result.hasErrors()) {
+			return "thymeleaf/goods/goodsIpgo";
+		}
+		goodsIpgoService.execute(goodsIpgoCommand);
+		return "redirect:goodsIpgoList";
+	}
+	@RequestMapping(value="goodsItem", method = RequestMethod.GET)
+	public String goodsItem() {
+		return "thymeleaf/goods/goodsItem";
+	}
+	
+	@RequestMapping(value="goodsItem", method = RequestMethod.POST)
+	public String goodsItems(@RequestParam(value="goodsName") String goodsName, 
+			Model model) {
+		goodsItemService.execute(goodsName, model);
+		return "thymeleaf/goods/goodsItem";
+	}
+
+	@RequestMapping("goodsIpgo")
+	public String goodsIpgo( GoodsIpgoCommand goodsIpgoCommand) {
+		Date now = new Date();
+		SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+		String ipgoDate = sdf.format(now);
+		goodsIpgoCommand.setIpgoDate(now);
+		return "thymeleaf/goods/goodsIpgo";
+	}
+	
+	@RequestMapping("goodsIpgoList")
+	public String goodsIpgoList() {
+		return "thymeleaf/goods/goodsIpgoList";
+	}
+	
 	
 	@RequestMapping("goodsSearch")
 	public String goodsSearch(@RequestParam(value = "goodsWord")String goodsWord , Model model){

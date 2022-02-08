@@ -31,7 +31,7 @@ CREATE TABLE goodsIpgo (
 	ipgo_date DATE NOT NULL, /* 입고 일자 */
 	goods_num VARCHAR2(10) NOT NULL, /* 상품 번호 */
 	ipgo_qty NUMBER, /* 수량 */
-	made_date DATE /* 제조일 */
+	made_date timestamp /* 제조일 */
 );
 
 /* 상품 */

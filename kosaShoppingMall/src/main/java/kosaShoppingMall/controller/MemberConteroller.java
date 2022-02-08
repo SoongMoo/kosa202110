@@ -80,15 +80,15 @@ public class MemberConteroller {
 	@RequestMapping(value="memberRegist" ,method = RequestMethod.GET)
 	public String memberForm(MemberCommand memberCommand,Model model) {
 		memberNumberService.execute(memberCommand,model);
-		//return "thymeleaf/member/memberForm";
-		return "member/memberForm";
+		return "thymeleaf/member/memberForm";
+		//return "member/memberForm";
 	}
 	@RequestMapping(value="memberRegist" ,method = RequestMethod.POST)
 	public String memberFrom(@Validated MemberCommand memberCommand, 
 			BindingResult result) {
 		if (result.hasErrors()) {
-			//return "thymeleaf/member/memberForm";
-			return "member/memberForm";
+			return "thymeleaf/member/memberForm";
+			//return "member/memberForm";
 		}
 		
 		if(!memberCommand.isMemberPwEqualsMemberPwCon()) {

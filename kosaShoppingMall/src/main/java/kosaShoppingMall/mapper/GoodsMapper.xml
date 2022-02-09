@@ -4,6 +4,39 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+	<delete id="goodsDeletes" parameterType="hashMap">
+		delete from goods
+		<where>
+		GOODS_NUM in 
+		<foreach collection="cs" item="goodsNum" index="index" open="(" close=")" separator="," >
+			#{goodsNum}
+		</foreach>
+		</where>
+	</delete>
+	
+	<delete id="goodsRemove" parameterType="hashMap">
+		delete from goods
+	 	<where>
+	 	GOODS_NUM in 
+		<foreach collection="goodsNums" item="goodsNum" index="index" open="(" close=")" separator="," >
+			#{goodsNum}
+		</foreach>
+		</where>
+	</delete>
+	
+	<delete id="goodsDels" parameterType="hashMap">
+		delete from goods
+		<where>
+		GOODS_NUM in 
+		<foreach collection="deletes" item="goodsNum" index="index" open="(" close=")" separator="," >
+			#{goodsNum}
+		</foreach>
+		</where>
+	</delete>
+	
+	
+
+
 	<resultMap type="kosaShoppingMall.domain.GoodsIpgoGoodsDTO" id="goodsIpgoGoodsMap">
 		<association property="goodsDTO" javaType="goodsDTO" >
 	 		<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
@@ -35,6 +68,18 @@
 			<result column="MADE_DATE" jdbcType="TIMESTAMP" property="madeDate"/>
 		</association>
 	</resultMap>
+
+	<delete id="goodsIpgoDelete" parameterType="kosaShoppingMall.command.GoodsCommand">
+		delete from goodsIpgo 
+		where GOODS_NUM = #{goodsNum} and IPGO_DATE =#{ipgoDate}
+	</delete>
+	
+	<update id="goodsIpgoUpdate" parameterType="goodsIpgoDTO">
+		 update goodsIpgo
+		 set  IPGO_QTY =${ipgoQty} , MADE_DATE =#{madeDate}
+		 where goods_Num = #{goodsNum} and IPGO_DATE = #{ipgoDate}
+	</update>
+	
 	
 	<select id="getGoodsIpgoInfo" parameterType="goodsIpgoDTO" 
 					resultMap="goodsIpgoGoodsResultMap">

@@ -18,8 +18,7 @@
 		<span th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}"></span><br/>
 회원 주소 :  <input type="text" name="memberAddr" th:value="${memberCommand.memberAddr}" />
 		<span th:if="${#fields.hasErrors('memberAddr')}" th:errors="*{memberAddr}"></span><br/>
-등록일 :  <input type="datetime-local" name="memberRegist" 
-		th:value="${#dates.format(memberCommand.memberRegist,'yyyy-MM-dd')}" />
+등록일 :  <input type="datetime-local" name="memberRegist" th:value="${memberCommand.memberRegist}" />
 		<span th:if="${#fields.hasErrors('memberRegist')}" th:errors="*{memberRegist}"></span><br/>
 성별 : <input type="radio" name="gender" value="F" th:checked="${memberCommand.gender=='F'}" />여자 
 	 <input type="radio" name="gender" value="M" th:checked="${memberCommand.gender=='M'}" />남자

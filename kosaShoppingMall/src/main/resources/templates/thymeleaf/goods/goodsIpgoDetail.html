@@ -26,7 +26,9 @@
 입고 수량 : [[${goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoQty}]]<br />
 제조일 : [[${goodsIpgoGoodsCommand.goodsIpgoDTO.madeDate}]]<br />
 <a th:href="@{goodsIpgoModify(goodsNum=${goodsIpgoGoodsCommand.goodsDTO.goodsNum},
-ipgoDate=${#dates.format(goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoDate,'yyyy-MM-dd')})}">수정</a>
+ipgoDate=${#dates.format(goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoDate,'yyyy-MM-dd')})}">수정</a>||
+<a th:href="@{goodsIpgoDelete(goodsNum=${goodsIpgoGoodsCommand.goodsDTO.goodsNum},
+ipgoDate=${#dates.format(goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoDate,'yyyy-MM-dd')})}">삭제</a>
 </div>
 </div>	
 </body>

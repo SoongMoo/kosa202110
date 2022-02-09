@@ -17,7 +17,7 @@
 	</ul>
 </div>
 <div id="MemberInfo">
-<form action="goodsRegist" method="post" th:object="${goodsCommand}">
+<form action="goodsRegist" method="post" th:object="${goodsCommand}" enctype="multipart/form-data">
 <table border=1>
 	<tr><th>제품 번호</th>
 		<td><input type="text" name="goodsNum"  th:value="${goodsCommand.goodsNum}"  readonly="readonly" /><br/>
@@ -48,6 +48,18 @@
 		<th>배송비</th>
 		<td><input type="number" name="deliveryCost" min="2000" step="500" value="2000"/><br/>
 			<span th:if="${#fields.hasErrors('deliveryCost')}" th:errors="*{deliveryCost}"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>메인 이미지</td>
+		<td>
+			<input type="file" name="goodsMain" />			
+		</td>
+	</tr>
+	<tr>
+		<td>이미지</td>
+		<td>
+			<input type="file" name="goodsImages" multiple="multiple"/>			
 		</td>
 	</tr>
 	<tr>

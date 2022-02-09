@@ -17,8 +17,10 @@
 </div>
 <div id="MemberInfo">
 <h2>입고현황</h2>
+<form action="goodsIpgodels" method="post">
 	<table border="1" width="600">
-		<tr><th>순서</th><th>상품번호</th><th>입고일</th><th>수량</th><th>제조일</th></tr>
+		<tr><th>순서</th><th>상품번호</th><th>입고일</th><th>수량</th><th>제조일</th>
+			<th><input type="submit" value="삭제" /></th></tr>
 		<tr th:each="goodsCommand , idx : ${list}">
 		    <th>[[${idx.count}]]</th>
 			<th><a th:href="@{goodsIpgoDetail(goodsNum=${goodsCommand.goodsNum},
@@ -28,8 +30,11 @@
 			<th>[[${#dates.format(goodsCommand.ipgoDate,'yyyy-MM-dd')}]]</th>
 			<th>[[${goodsCommand.ipgoQty}]]</th>
 			<th>[[${#dates.format(goodsCommand.madeDate,'yyyy-MM-dd')}]]</th>
+			<th><input type="checkbox"  name="delete" 
+			th:value="${goodsCommand.goodsNum}+'`'+${#dates.format(goodsCommand.ipgoDate,'yyyy-MM-dd')}" /></th>
 		</tr>
 	</table>
+</form>
 </div>
 </div>
 </body>

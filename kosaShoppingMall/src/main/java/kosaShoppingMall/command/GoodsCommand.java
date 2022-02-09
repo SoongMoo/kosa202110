@@ -3,6 +3,8 @@ package kosaShoppingMall.command;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -18,4 +20,6 @@ public class GoodsCommand {
 	@NotNull(message = "상품 배송비를 입력하세요.")
 	Integer deliveryCost;
 	
+	MultipartFile [] goodsImages; 
+	MultipartFile [] goodsMain; 
 }

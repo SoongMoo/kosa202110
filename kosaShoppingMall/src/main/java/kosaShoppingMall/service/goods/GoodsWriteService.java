@@ -19,6 +19,9 @@ public class GoodsWriteService {
 		dto.setGoodsName(goodsCommand.getGoodsName());
 		dto.setGoodsNum(goodsCommand.getGoodsNum());
 		dto.setGoodsPrice(goodsCommand.getGoodsPrice());
+		
+		
+		
 		Integer i = goodsMapper.goodsInsert(dto);
 		System.out.println(i +"개의 상품이 등록되었습니다.");
 	}

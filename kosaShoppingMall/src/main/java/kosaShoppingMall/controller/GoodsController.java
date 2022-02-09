@@ -17,11 +17,15 @@ import kosaShoppingMall.command.GoodsCommand;
 import kosaShoppingMall.command.GoodsIpgoCommand;
 import kosaShoppingMall.service.goods.GoodsAutoNum;
 import kosaShoppingMall.service.goods.GoodsDeleteService;
+import kosaShoppingMall.service.goods.GoodsDelsService;
 import kosaShoppingMall.service.goods.GoodsDetailService;
+import kosaShoppingMall.service.goods.GoodsIpgoDeleteService;
+import kosaShoppingMall.service.goods.GoodsIpgoDelsService;
 import kosaShoppingMall.service.goods.GoodsIpgoDetailService;
 import kosaShoppingMall.service.goods.GoodsIpgoListService;
 import kosaShoppingMall.service.goods.GoodsIpgoModifyService;
 import kosaShoppingMall.service.goods.GoodsIpgoService;
+import kosaShoppingMall.service.goods.GoodsIpgoUpdateService;
 import kosaShoppingMall.service.goods.GoodsItemService;
 import kosaShoppingMall.service.goods.GoodsListService;
 import kosaShoppingMall.service.goods.GoodsModifyService;
@@ -58,7 +62,42 @@ public class GoodsController {
 	GoodsIpgoDetailService goodsIpgoDetailService;
 	@Autowired
 	GoodsIpgoModifyService goodsIpgoModifyService;
-	@RequestMapping("goodsIpgoModify")
+	@Autowired
+	GoodsIpgoUpdateService goodsIpgoUpdateService; 
+	@Autowired
+	GoodsIpgoDeleteService goodsIpgoDeleteService;
+	@Autowired
+	GoodsIpgoDelsService goodsIpgoDelsService;
+	@Autowired
+	GoodsDelsService goodsDelsService;
+	@RequestMapping(value="goodsDels", method = RequestMethod.POST)
+	public String goodsDels(@RequestParam(value="delete") String [] deletes) {
+		goodsDelsService.execute(deletes);
+		return "redirect:goodsList";
+	}
+	@RequestMapping(value="goodsIpgodels" , method = RequestMethod.POST)
+	public String goodsIpgodels(@RequestParam(value="delete") String [] deletes) {
+		goodsIpgoDelsService.execute(deletes);
+		return "redirect:goodsIpgoList";
+	}
+	
+	@RequestMapping(value = "goodsIpgoDelete" , method = RequestMethod.GET)
+	public String goodsIpgoDelete(GoodsIpgoCommand goodsIpgoCommand) {
+		goodsIpgoDeleteService.execute(goodsIpgoCommand);
+		return "redirect:goodsIpgoList";
+	}
+	
+	
+	@RequestMapping(value ="goodsIpgoModify" , method = RequestMethod.POST)
+	public String goodsIpgoModify(GoodsIpgoCommand goodsIpgoCommand) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(goodsIpgoCommand.getIpgoDate());
+		goodsIpgoUpdateService.execute(goodsIpgoCommand);
+		return "redirect:goodsIpgoDetail?goodsNum="+goodsIpgoCommand.getGoodsNum()+
+				"&ipgoDate="+date;
+	}
+	
+	@RequestMapping(value="goodsIpgoModify" , method = RequestMethod.GET)
 	public String goodsIpgoModify(@RequestParam(value = "goodsNum") String goodsNum,
 			@RequestParam(value="ipgoDate") String ipgoDate, Model model) {
 		goodsIpgoModifyService.execute(goodsNum,ipgoDate, model);
@@ -100,10 +139,7 @@ public class GoodsController {
 
 	@RequestMapping("goodsIpgo")
 	public String goodsIpgo( GoodsIpgoCommand goodsIpgoCommand) {
-		Date now = new Date();
-		SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
-		String ipgoDate = sdf.format(now);
-		goodsIpgoCommand.setIpgoDate(now);
+		goodsIpgoCommand.setIpgoDate(new Date());
 		return "thymeleaf/goods/goodsIpgo";
 	}
 	

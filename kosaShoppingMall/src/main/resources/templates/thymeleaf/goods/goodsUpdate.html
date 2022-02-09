@@ -4,6 +4,29 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/static/css/memberLayout.css" rel="stylesheet">
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+function fileDel(orgFile, strFile,  btn ){
+	$.ajax({ 
+		type : "get",	
+		url : "fileDel",
+		dataType : "text",
+		data: {"orgFile":orgFile,"strFile":strFile},
+		success : function(result){
+			if(result.trim() == 1){
+				$(btn).val("삭제 취소")
+			}else{
+				$(btn).val("삭제")
+			}
+		},
+		error : function(){
+			$(btn).text("삭제 취소")
+			alert('에러가 나왔다 홀홀홀~');
+			return;
+		}
+	});
+}
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -64,14 +87,18 @@
 	<tr>
 		<td>등록된 메인 이미지</td>
 		<td>
-			[[${goodsCommand.goodsMain}]]		
+			[[${goodsCommand.goodsMainOrg}]]	
+			<input type="button" value="삭제" 
+        th:attr="onclick=|fileDel('${goodsCommand.goodsMainOrg}','${goodsCommand.goodsMain}',this);|" />
 		</td>
 	</tr>
 	<tr>
 		<td>등록된 이미지</td>
 		<td>
-			<div th:each="file , idx : ${#strings.arraySplit(goodsCommand.goodsImages,'`')}" >	
+			<div th:each="file , idx : ${#strings.arraySplit(goodsCommand.goodsOriginal,'`')}" >	
 				[[${file}]] 
+				<input type="button" value="삭제" 
+        th:attr="onclick=|fileDel('${file}','${#strings.arraySplit(goodsCommand.goodsImages,'`')[idx.index]}',this);|" />
 				<br />
 			</div>	
 		</td>

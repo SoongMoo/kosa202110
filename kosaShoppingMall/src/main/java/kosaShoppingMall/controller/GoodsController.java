@@ -72,6 +72,11 @@ public class GoodsController {
 	GoodsIpgoDelsService goodsIpgoDelsService;
 	@Autowired
 	GoodsDelsService goodsDelsService;
+	
+	@RequestMapping("fileDel")
+	public String fileDel() {
+		return "thymeleaf/goods/delPage";
+	}
 	@RequestMapping(value="goodsDels", method = RequestMethod.POST)
 	public String goodsDels(@RequestParam(value="delete") String [] deletes) {
 		goodsDelsService.execute(deletes);
@@ -88,8 +93,7 @@ public class GoodsController {
 		goodsIpgoDeleteService.execute(goodsIpgoCommand);
 		return "redirect:goodsIpgoList";
 	}
-	
-	
+
 	@RequestMapping(value ="goodsIpgoModify" , method = RequestMethod.POST)
 	public String goodsIpgoModify(GoodsIpgoCommand goodsIpgoCommand) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

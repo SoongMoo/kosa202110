@@ -6,19 +6,21 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#memberId").Keypress(function(){
-		$.ajax({ 
-			type : "post",
-			url : "idCheck",
-			dataType : "text",
-			data: {"memberId":$("#memberId").val()},
-			success : function(result){
-				$("#idCheck").html(result);
-			},
-			error : function(){
-				
-			}
-		});
+	$("#memberId").keyup(function(){
+			$.ajax({ 
+				type : "post",
+				url : "idCheck",
+				dataType : "text",
+				data: {"memberId":$("#memberId").val()},
+				success : function(result){
+					$("#memberId").val($("#memberId").val());
+					$("#idCheck").html(result);
+				},
+				error : function(){
+					alert('에러가 나왔다 홀홀홀~');
+					return;
+				}
+			});
 	});
 });
 </script>
@@ -55,7 +57,7 @@ $(function(){
 			<td>
 				<input type='text' name="memberId" id="memberId" 
 					 size='15' maxlength='12' autofocus="autofocus" th:value="${memberCommand.memberId}"/>
-				<br /><span id="idCheck"></span>
+				<span id="idCheck"></span>
 				<span th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></span>
 			</td>
 		</tr>

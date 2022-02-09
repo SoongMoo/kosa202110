@@ -40,22 +40,7 @@ public interface GoodsMapper {
 	public Integer goodsRemove(Map<String, Object> condition);
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+	public Integer goodsIpgoDels(List<String[]> condition);
 }
 
 

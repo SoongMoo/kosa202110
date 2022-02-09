@@ -35,7 +35,20 @@
 	</delete>
 	
 	
-
+	
+	
+	
+	<delete id="goodsIpgoDels" parameterType="hashMap">
+		delete from goodsIpgo
+		<where>
+		(GOODS_NUM, IPGO_DATE) in 
+		<foreach collection="condition" item="nums" index="index" open="(" close=")" separator="," >
+			<foreach collection="nums" item="num"  index="index" open="(" close=")" separator=",">
+				#{num}
+			</foreach>
+		</foreach>
+		</where>
+	</delete>
 
 	<resultMap type="kosaShoppingMall.domain.GoodsIpgoGoodsDTO" id="goodsIpgoGoodsMap">
 		<association property="goodsDTO" javaType="goodsDTO" >

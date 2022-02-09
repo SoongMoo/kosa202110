@@ -2,7 +2,7 @@
 회원        : 회원번호 , 회원아이디, 회원비밀번호, 회원이름, 회원 주소, 등록일, 성별
                연락처, 생년월일 
 상품입고 : 수량, 입고 일자, 제조일 
-상품       : 상품 번호, 상품명, 가격, 상품정보, 이미지, 대문이미지, 배송비   
+상품       : 상품 번호, 상품명, 가격, 상품정보, 이미지, 대문이미지, 원본파일명, 배송비   
 상품문의 : 문의번호, 문의 제목, 문의 내용, 문의 종류, 문의 답글
 후기 : 후기번호, 후기등록일, 별점, 후기내용
 구매 : 구매번호, 구매일 , 구매금액, 배송지, 받는 사람연락처, 요청사항, 구매상태  
@@ -41,7 +41,9 @@ CREATE TABLE goods (
 	goods_price NUMBER, /* 가격 */
 	goods_content VARCHAR2(2000), /* 상품정보 */
 	goods_images VARCHAR2(200), /* 이미지 */
+	goods_original VARCHAR2(200), /* 원본 파일명 */
 	goods_main VARCHAR2(200), /* 대문이미지 */
+	goods_main_org VARCHAR2(200), /* 대문 원본 파일명 */
 	delivery_cost NUMBER, /* 배송비 */
 	visit_count NUMBER /* 조회수 */
 );

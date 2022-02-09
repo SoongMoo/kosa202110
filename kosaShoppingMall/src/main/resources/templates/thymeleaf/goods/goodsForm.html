@@ -27,7 +27,7 @@
 	</tr>
 	<tr>
 		<th>상품명</th>
-		<td><input type="text" name="goodsName" /><br/>
+		<td><input type="text" name="goodsName" th:value="${goodsCommand.goodsName}" /><br/>
 			<span th:if="${#fields.hasErrors('goodsName')}" th:errors="*{goodsName}"></span>
 		</td>
 	</tr>
@@ -40,7 +40,7 @@
 	<tr>
 		<th>상품 내용</th>
 		<td><span th:if="${#fields.hasErrors('goodsContent')}" th:errors="*{goodsContent}"></span>
-			<br/><textarea rows="6" cols="30" name="goodsContent"></textarea>
+			<br/><textarea rows="6" cols="30" name="goodsContent">[[${goodsCommand.goodsName}]]</textarea>
 			
 		 </td>
 	</tr>
@@ -53,7 +53,8 @@
 	<tr>
 		<td>메인 이미지</td>
 		<td>
-			<input type="file" name="goodsMain" />			
+			<input type="file" name="goodsMain" /><BR />
+			<span th:if="${#fields.hasErrors('goodsMain')}" th:errors="*{goodsMain}"></span>		
 		</td>
 	</tr>
 	<tr>

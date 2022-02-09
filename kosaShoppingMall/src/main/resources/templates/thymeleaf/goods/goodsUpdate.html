@@ -49,6 +49,34 @@
 		</td>
 	</tr>
 	<tr>
+		<td>메인 이미지</td>
+		<td>
+			<input type="file" name="goodsMain" /><BR />
+			<span th:if="${#fields.hasErrors('goodsMain')}" th:errors="*{goodsMain}"></span>		
+		</td>
+	</tr>
+	<tr>
+		<td>이미지</td>
+		<td>
+			<input type="file" name="goodsImages" multiple="multiple"/>			
+		</td>
+	</tr>
+	<tr>
+		<td>등록된 메인 이미지</td>
+		<td>
+			[[${goodsCommand.goodsMain}]]		
+		</td>
+	</tr>
+	<tr>
+		<td>등록된 이미지</td>
+		<td>
+			<div th:each="file , idx : ${#strings.arraySplit(goodsCommand.goodsImages,'`')}" >	
+				[[${file}]] 
+				<br />
+			</div>	
+		</td>
+	</tr>
+	<tr>
 		<th colspan="2" > 
 			<input type="submit" value="상품 수정 완료" />
 		</th>

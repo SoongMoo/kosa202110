@@ -15,7 +15,9 @@ public class GoodsDTO {
 	Integer vistCount;
 	
 	String goodsImages;
+	String goodsOriginal;
 	String goodsMain;
+	String goodsMainOrg;
 
 	GoodsIpgoDTO goodsIpgoDTO;
 }

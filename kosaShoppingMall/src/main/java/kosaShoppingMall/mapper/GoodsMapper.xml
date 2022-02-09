@@ -163,6 +163,8 @@
 	<select id="goodsSelectOne" parameterType="string" resultType="goodsDTO">
 		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
 		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount
+		,goods_main goodsMain, goods_images goodsImages,goods_Original goodsOriginal
+		,goods_Main_Org goodsMainOrg
 		from goods
 		where goods_num = #{goodsNum}
 	
@@ -177,10 +179,35 @@
 	
 	<insert id="goodsInsert" parameterType="goodsDTO"> 
 		insert into goods(GOODS_NUM , GOODS_NAME , GOODS_PRICE,
-		GOODS_CONTENT, DELIVERY_COST, VISIT_COUNT)
+						  GOODS_CONTENT, DELIVERY_COST, VISIT_COUNT
+				<if test="goodsMain != null">
+					,goods_Main
+				</if>
+				<if test="goodsImages != null">
+					,goods_images
+				</if>
+				<if test="goodsOriginal != null">
+					,goods_Original
+				</if>
+				<if test="goodsMainOrg != null">
+					,goods_Main_Org
+				</if>	  
+		)
 		values(#{goodsNum},#{goodsName},
-		#{goodsPrice},#{goodsContent},#{deliveryCost},0)
-		
+		       #{goodsPrice},#{goodsContent},#{deliveryCost},0
+				<if test="goodsMain != null">
+					,#{goodsMain}
+				</if>
+				<if test="goodsImages != null">
+					,#{goodsImages}
+				</if>	
+				<if test="goodsOriginal != null">
+					,#{goodsOriginal}
+				</if>
+				<if test="goodsMainOrg != null">
+					,#{goodsMainOrg}
+				</if>	
+		)
 	</insert>
 
 	<select id="goodsAutoNum" resultType="string">

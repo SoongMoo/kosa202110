@@ -3,6 +3,8 @@ package kosaShoppingMall.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -157,8 +159,9 @@ public class GoodsController {
 	}
 	
 	@RequestMapping(value = "goodsDelete/{goodsNum}",method = RequestMethod.GET)
-	public String goodsDelete(@PathVariable(value="goodsNum")String goodsNum) {
-		goodsDeleteService.execute(goodsNum);
+	public String goodsDelete(@PathVariable(value="goodsNum")String goodsNum
+			, HttpServletRequest request) {
+		goodsDeleteService.execute(goodsNum, request);
 		return "redirect:../goodsList";
 	}
 		 
@@ -187,11 +190,16 @@ public class GoodsController {
 	}
 	
 	@RequestMapping(value="goodsRegist" ,method = RequestMethod.POST)
-	public String goodsRegist(@Validated GoodsCommand goodsCommand , BindingResult result) {
+	public String goodsRegist(@Validated GoodsCommand goodsCommand , BindingResult result,
+			HttpServletRequest request) {
 		if(result.hasErrors()) {
 			return "thymeleaf/goods/goodsForm";
 		}
-		goodsWriteService.execute(goodsCommand);
+		if(goodsCommand.getGoodsMain().getOriginalFilename().isEmpty()) {
+			result.rejectValue("goodsMain", "goodsCommand.goodsMain", "대문이미지를 선택하여주세요.");
+			return "thymeleaf/goods/goodsForm";
+		}
+		goodsWriteService.execute(goodsCommand, request);
 		return "redirect:goodsList";
 	}
 	

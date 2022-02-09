@@ -11,7 +11,8 @@
 <title>memberForm.jsp</title>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
 <script>
-$(function(){
+$(function(){	
+	});
 	$("#frm").submit(function(){
 		if($("#memPw").val() != $("#memPwCon").val()){
 			alert("비밀번호와 비밀번호확인이 일치하지 않습니다.");

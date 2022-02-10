@@ -5,7 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <span th:if="${session.authInfo == null}">
+
 <form action="/login/loginPro" name="frm" id="frm" method="post" th:object="${loginCommand}" >
 <table border="1">
 <tr>

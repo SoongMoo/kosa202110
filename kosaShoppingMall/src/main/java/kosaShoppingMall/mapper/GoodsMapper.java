@@ -10,13 +10,14 @@ import kosaShoppingMall.command.GoodsIpgoCommand;
 import kosaShoppingMall.domain.GoodsDTO;
 import kosaShoppingMall.domain.GoodsIpgoDTO;
 import kosaShoppingMall.domain.GoodsIpgoGoodsDTO;
+import kosaShoppingMall.domain.StartEndPageDTO;
 
 @Component
 @Repository(value="kosaShoppingMall.mapper.GoodsMapper")
 public interface GoodsMapper {
 	public String goodsAutoNum();
 	public Integer goodsInsert(GoodsDTO dto);
-	public List<GoodsDTO> goodsList();
+	public List<GoodsDTO> goodsList(StartEndPageDTO dto);
 	public GoodsDTO goodsSelectOne(String goodsNum);
 	public void goodsVisitCnt(String goodsNum);
 	public Integer goodsUpdate(GoodsDTO dto);
@@ -41,6 +42,7 @@ public interface GoodsMapper {
 	
 	
 	public Integer goodsIpgoDels(List<String[]> condition);
+	public int count(String goodsWord);
 }
 
 

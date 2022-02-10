@@ -9,4 +9,6 @@ import lombok.Data;
 public class StartEndPageDTO {
 	Long startRow;
 	Long endRow;
+	
+	String goodsWord;
 }

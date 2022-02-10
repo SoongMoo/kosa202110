@@ -37,12 +37,11 @@ public class MemberListService {
 	    int endPage = startPage + limitPage -1;
 	    if(endPage > maxPage) endPage = maxPage;
 		model.addAttribute("count", count);
-		model.addAttribute("lists", lists);
-		
 		model.addAttribute("maxPage", maxPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
-		
 		model.addAttribute("page", page);
+		
+		model.addAttribute("lists", lists);
 	}
 }

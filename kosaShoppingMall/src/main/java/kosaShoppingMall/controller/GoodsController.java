@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -221,9 +222,13 @@ public class GoodsController {
 		goodsAutoNum.execute(goodsCommand);
 		return "thymeleaf/goods/goodsForm";
 	}
+	
+	
 	@RequestMapping("goodsList")
-	public String goodsList(Model model) {
-		goodsListService.execute(model);
+	public String goodsList(
+			@RequestParam(value="page",defaultValue = "1" ,required = false ) int page,
+			@RequestParam(value="goodsWord", required = false ) String goodsWord, Model model) {
+		goodsListService.execute(model, goodsWord, page);
 		return "thymeleaf/goods/goodsList";
 	}
 

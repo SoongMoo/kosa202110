@@ -31,7 +31,7 @@ $(function(){
 <p>
 <table width="600" >
 <tr><th>
-<form action="goodsSearch" method="get" >
+<form action="goodsList" method="get" >
 	상품 조회 : <input type="search" name="goodsWord" size="50"/> <input type="submit" value="검색" />
 </form>
 </th></tr>
@@ -54,6 +54,27 @@ $(function(){
 			<th>[[${goodsCommand.goodsPrice}]]</th>
 			<th>[[${goodsCommand.vistCount}]]</th>
 			<th><input type="checkbox" id="delete" th:value="${goodsCommand.goodsNum}" name="delete"/></th>
+	</tr>
+	
+	<th colspan="6" >
+			<th:block th:if="${page <= 1 }">
+			[이전]
+			</th:block>
+			<th:block th:if="${page > 1 }">
+			<a th:href="@{goodsList(page=${page - 1 },goodsWord=${goodsWord})}">[이전]</a>
+			</th:block>
+			
+			<th:block th:each=" i : ${#numbers.sequence(startPage, endPage)}" >
+			[ <a th:href="@{goodsList(page=${i },goodsWord=${goodsWord})}">[[${i }]]</a> ] 
+ 			</th:block>
+ 			
+ 			<th:block th:if="${page < maxPage }">
+ 			<a th:href="@{goodsList(page=${page + 1 },goodsWord=${goodsWord})}">[이후]</a>
+ 			</th:block>
+ 			<th:block th:if="${page >= maxPage }">
+ 			[이후]
+ 			</th:block>
+		</th>
 	</tr>
 </table>
 </form>

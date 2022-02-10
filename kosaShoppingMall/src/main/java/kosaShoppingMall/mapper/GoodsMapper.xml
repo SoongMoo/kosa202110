@@ -180,10 +180,29 @@
 	
 	</select>
 	
-	<select id="goodsList" resultType="goodsDTO">
-		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
+	<select id="count" parameterType="string" resultType="int">
+		select count(*) from goods
+		<where>
+			<if test="goodsWord != null">
+				GOODS_NAME like '%'||#{goodsWord}||'%'
+		   		or GOODS_CONTENT like '%'||#{goodsWord}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="goodsList" resultType="goodsDTO" parameterType="StartEndPageDTO">
+	select *
+	from (	select rownum rn,  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
 		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount
 		from goods
+		<where>
+			<if test="goodsWord != null">
+				GOODS_NAME like '%'||#{goodsWord}||'%'
+		   		or GOODS_CONTENT like '%'||#{goodsWord}||'%'
+			</if>
+		</where>
+	)
+	where rn between #{startRow} and #{endRow}
 	</select>
 	
 	<insert id="goodsInsert" parameterType="goodsDTO"> 

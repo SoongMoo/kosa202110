@@ -72,8 +72,8 @@ public class MemberConteroller {
 		return "member/memberDetail";
 	}
 	@RequestMapping("memList")
-	public String memList(Model model) {
-		memberListService.execute(model);
+	public String memList(@RequestParam(value="page", defaultValue = "1", required = false) Integer page, Model model) {
+		memberListService.execute(model, page );
 		//return "thymeleaf/member/memberList";
 		return "member/memberList";
 	}

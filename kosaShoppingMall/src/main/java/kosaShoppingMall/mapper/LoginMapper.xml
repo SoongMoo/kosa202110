@@ -6,11 +6,11 @@
 <select id="findId" parameterType="string" resultType="authInfo">
 	select member_Phone phone, member_id userId
 	from member
-	where member_email = #{email}
+	where lower(member_email) = lower(#{email})
 	union
 	select emp_phone         , emp_id
 	from employees
-	where emp_email = #{email}
+	where lower(emp_email) = lower(#{email})
 </select>
 <select id="loginSelect" parameterType="string" 
 			resultType="authInfo">

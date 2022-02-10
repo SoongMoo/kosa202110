@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kosaShoppingMall.command.FileInfo;
 import kosaShoppingMall.command.GoodsCommand;
 import kosaShoppingMall.command.GoodsIpgoCommand;
+import kosaShoppingMall.service.goods.FileDelService;
 import kosaShoppingMall.service.goods.GoodsAutoNum;
 import kosaShoppingMall.service.goods.GoodsDeleteService;
 import kosaShoppingMall.service.goods.GoodsDelsService;
@@ -72,9 +75,13 @@ public class GoodsController {
 	GoodsIpgoDelsService goodsIpgoDelsService;
 	@Autowired
 	GoodsDelsService goodsDelsService;
+	@Autowired
+	FileDelService fileDelService;
 	
 	@RequestMapping("fileDel")
-	public String fileDel() {
+	public String fileDel(FileInfo fileInfo, 
+			HttpSession session,Model model) {
+		fileDelService.fileAdd(fileInfo,session,model );
 		return "thymeleaf/goods/delPage";
 	}
 	@RequestMapping(value="goodsDels", method = RequestMethod.POST)
@@ -171,11 +178,13 @@ public class GoodsController {
 		 
 	
 	@RequestMapping(value = "goodsUpdate" , method = RequestMethod.POST)
-	public String goodsUpdate(@Validated GoodsCommand goodsCommand ,BindingResult result) {
+	public String goodsUpdate(@Validated GoodsCommand goodsCommand ,BindingResult result,
+			HttpSession session ) {
 		if(result.hasErrors()) {
-			return "thymeleaf/goods/goodsUpdate";
+			return "redirect:goodsModify?goodsNum="+goodsCommand.getGoodsNum();
+			//return "thymeleaf/goods/goodsUpdate";
 		}
-		goodsUpdateService.execute(goodsCommand);
+		goodsUpdateService.execute(goodsCommand, session);
 		return "redirect:goodsDetail/"+goodsCommand.getGoodsNum();
 	}
 		

@@ -6,12 +6,12 @@
 <link href="/static/css/memberLayout.css" rel="stylesheet">
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
 <script type="text/javascript">
-function fileDel(orgFile, strFile,  btn ){
+function fileDel(orgFile, strFile,  btn ,kind ){
 	$.ajax({ 
 		type : "get",	
 		url : "fileDel",
 		dataType : "text",
-		data: {"orgFile":orgFile,"strFile":strFile},
+		data: {"orgFile":orgFile,"strFile":strFile,"kind":kind},
 		success : function(result){
 			if(result.trim() == 1){
 				$(btn).val("삭제 취소")
@@ -39,7 +39,7 @@ function fileDel(orgFile, strFile,  btn ){
 		</ul>
 	</div>
 <div id="MemberInfo">
-<form action="goodsUpdate" method="post" th:object="${goodsCommand}">
+<form action="goodsUpdate" method="post" th:object="${goodsCommand}" enctype="multipart/form-data">
 <table border=1>
 	<tr><th>제품 번호</th>
 		<td><input type="text" name="goodsNum"  th:value="${goodsCommand.goodsNum}" readonly="readonly" /><br/>
@@ -89,7 +89,7 @@ function fileDel(orgFile, strFile,  btn ){
 		<td>
 			[[${goodsCommand.goodsMainOrg}]]	
 			<input type="button" value="삭제" 
-        th:attr="onclick=|fileDel('${goodsCommand.goodsMainOrg}','${goodsCommand.goodsMain}',this);|" />
+        th:attr="onclick=|fileDel('${goodsCommand.goodsMainOrg}','${goodsCommand.goodsMain}',this,'main');|" />
 		</td>
 	</tr>
 	<tr>
@@ -98,7 +98,7 @@ function fileDel(orgFile, strFile,  btn ){
 			<div th:each="file , idx : ${#strings.arraySplit(goodsCommand.goodsOriginal,'`')}" >	
 				[[${file}]] 
 				<input type="button" value="삭제" 
-        th:attr="onclick=|fileDel('${file}','${#strings.arraySplit(goodsCommand.goodsImages,'`')[idx.index]}',this);|" />
+        th:attr="onclick=|fileDel('${file}','${#strings.arraySplit(goodsCommand.goodsImages,'`')[idx.index]}',this,'img');|" />
 				<br />
 			</div>	
 		</td>

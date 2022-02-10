@@ -20,7 +20,11 @@ public class GoodsCommand {
 	String goodsContent;
 	@NotNull(message = "상품 배송비를 입력하세요.")
 	Integer deliveryCost;
+	
 	MultipartFile goodsMain;
 	MultipartFile [] goodsImages; 
+	
+	String goodsMainOrg;
+	String goodsOriginal;
 	 
 }

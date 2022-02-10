@@ -147,10 +147,19 @@
 	
 	<update id="goodsUpdate" parameterType="goodsDTO">
 		update goods
-		set GOODS_NAME = #{goodsName}, GOODS_PRICE = #{goodsPrice} ,
-		 GOODS_CONTENT = #{goodsContent}, DELIVERY_COST = #{deliveryCost}
+		<trim prefix="set" suffixOverrides=",">
+		 GOODS_NAME = #{goodsName}, GOODS_PRICE = #{goodsPrice} ,
+		 GOODS_CONTENT = #{goodsContent}, DELIVERY_COST = #{deliveryCost},
+		 <if test="goodsImages != null">
+		 	GOODS_IMAGES= #{goodsImages}, 
+		 	GOODS_ORIGINAL = #{goodsOriginal} ,
+		 </if>
+		 <if test="goodsMain != null" >
+			 GOODS_MAIN = #{goodsMain} , 
+			 GOODS_MAIN_ORG = #{goodsMainOrg},
+		 </if>
+		</trim>
 		where goods_num = #{goodsNum}
-	
 	</update>
 	
 	<update id="goodsVisitCnt" parameterType="string">

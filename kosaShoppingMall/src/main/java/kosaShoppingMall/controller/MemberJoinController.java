@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.MemberCommand;
 import kosaShoppingMall.domain.AuthInfo;
+import kosaShoppingMall.service.EmailCheckService;
+import kosaShoppingMall.service.IdcheckService;
 import kosaShoppingMall.service.memberJoin.MemberDropService;
 import kosaShoppingMall.service.memberJoin.MemberInfoService;
 import kosaShoppingMall.service.memberJoin.MemberJoinService;
@@ -52,6 +54,11 @@ public class MemberJoinController {
 	public String memberJoinAction() {
 		return "redirect:/register/agree";
 	}
+	@Autowired
+	IdcheckService idcheckService;
+	@Autowired
+	EmailCheckService emailCheckService ;
+	
 	@RequestMapping(value = "memberJoinAction", method = RequestMethod.POST )
 	public String memberJoinAction1(
 			@Validated MemberCommand memberCommand, BindingResult result,
@@ -62,6 +69,18 @@ public class MemberJoinController {
 		if(!memberCommand.isMemberPwEqualsMemberPwCon()) {
 			result.rejectValue("memberPw", "memberCommand.memberPw", 
 					"비밀번호 확인이 다릅니다.");
+			return "thymeleaf/membership/memberJoinForm";
+		}
+		Integer i = idcheckService.execute(memberCommand.getMemberId());
+		if(i == 1) {
+			result.rejectValue("memberId", "memberCommand.memberId", 
+					"중복 아이디입니다.");
+			return "thymeleaf/membership/memberJoinForm";
+		}
+		i = emailCheckService.execute(memberCommand.getMemberEmail());
+		if(i == 1) {
+			result.rejectValue("memberEmail", "memberCommand.memberEmail", 
+					"중복 Email입니다.");
 			return "thymeleaf/membership/memberJoinForm";
 		}
 		memberJoinService.execute(memberCommand,model);

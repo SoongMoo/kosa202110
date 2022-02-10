@@ -3,6 +3,9 @@
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberMapper">
+<select id="memberCount"  resultType="int">
+	select count(*) from member
+</select>
 <delete id="memberDelete" parameterType="string">
 	delete from member
 	where member_Num =#{memberNum}
@@ -18,9 +21,11 @@
 <select id="numberGenerate" resultType="string">
 select concat('kosa',nvl(max(substr(member_Num,5)),100000) + 1) from member
 </select>
-<select id="selectAll" resultType="memDTO">
-select <include refid="baseColumns" />
-from member
+<select id="selectAll" resultType="memDTO" parameterType="StartEndPageDTO">
+select *
+from (select rownum rn, <include refid="baseColumns" />
+	from member)
+where rn between #{startRow} and #{endRow}
 </select>
 <sql id="baseColumns">
 member_Num memberNum,member_Id memberId,member_Pw memberPw,

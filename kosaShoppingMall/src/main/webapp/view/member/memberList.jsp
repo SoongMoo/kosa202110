@@ -13,7 +13,7 @@
 <table border="1" width=50% >
 	<tr valign="middle">
 		<th colspan =4 >회원리스트</th>
-		<td align=center >회원 수 : ${lists.size()}</td>
+		<td align=center >회원 수 : ${count}</td>
 	</tr>
 	<tr>	
 		<th>회원아이디</th><th>회원이름</th><th>회원연락처</th>

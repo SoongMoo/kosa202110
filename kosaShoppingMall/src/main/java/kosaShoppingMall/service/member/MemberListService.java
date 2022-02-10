@@ -14,12 +14,12 @@ public class MemberListService {
 	@Autowired
 	MemberMapper memberMapper;
 	public void execute(Model model, Integer page) {
-		int limit = 10; 
+		int limit = 3; 
 		int limitPage = 10 ;
 		// page = 2;  startRow = 11, endRow = 20
 		// page = 3;  startRow = 21, endRow = 30
 		// page = 4;  startRow = 31, endRow = 40
-		Long startRow = ((long)page - 1 ) * 10 + 1 ;
+		Long startRow = ((long)page - 1 ) * limit + 1 ;
 		Long endRow = startRow + limit -1;		
 		StartEndPageDTO dto = new StartEndPageDTO();
 		dto.setStartRow(startRow);

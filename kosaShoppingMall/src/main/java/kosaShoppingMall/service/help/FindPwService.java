@@ -27,6 +27,7 @@ public class FindPwService {
 	MemberMapper memberMapper;
 	@Autowired
 	EmployeeMapper employeeMapper;
+	@Autowired
 	PasswordEncoder passwordEncoder;
 	public String  execute(FindPasswordCommand findPasswordCommand, BindingResult result) {
 		String grade = loginMapper.findPw(findPasswordCommand);

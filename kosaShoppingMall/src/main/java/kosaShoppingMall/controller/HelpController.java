@@ -31,7 +31,7 @@ public class HelpController {
 		return findPwService.execute(findPasswordCommand, result);
 	}
 	@RequestMapping(value="findPassword", method = RequestMethod.GET )
-	public String findPassword() {
+	public String findPassword(FindPasswordCommand findPasswordCommand) {
 		return "thymeleaf/help/findPw";
 	}
 	@RequestMapping(value="findId", method = RequestMethod.GET)

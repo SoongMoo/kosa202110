@@ -5,16 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="findPassword" method="post">
+<form action="findPassword" method="post" th:object="${findPasswordCommand}">
 	<table>
 		<tr><th>아이디</th>
-			<td><input type="text" name="userId"/></td>
+			<td><input type="text" name="userId" /><br />
+			<span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" ></span></td>
 		</tr>
 		<tr><th>연락처</th>
-			<td><input type="text" name="userPhone"/></td>
+			<td><input type="text" name="userPhone"/><br />
+			<span th:if="${#fields.hasErrors('userPhone')}" th:errors="*{userPhone}" ></span></td>
 		</tr>
 		<tr><th>이메일</th>
-			<td><input type="text" name="userEmail"/></td>
+			<td><input type="text" name="userEmail"/><br />
+			<span th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}" ></span></td>
 		</tr>
 		<tr>
 			<th><input type="submit" value="전송" /></th>

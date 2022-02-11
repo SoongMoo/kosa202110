@@ -37,7 +37,7 @@ public class FindPwService {
 		}else {
 			String tampPw = UUID.randomUUID().toString().substring(0, 7);
 			String pw = passwordEncoder.encode(tampPw);
-			System.out.println(tampPw);
+			System.out.println("변경된 비밀번호 : " + tampPw);
 			AuthInfo authInfo = new AuthInfo();
 			authInfo.setUserId(findPasswordCommand.getUserId());
 			authInfo.setUserPw(pw);

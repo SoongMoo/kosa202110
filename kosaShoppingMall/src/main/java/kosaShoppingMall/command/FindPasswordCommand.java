@@ -1,9 +1,6 @@
 package kosaShoppingMall.command;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-
-import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
 

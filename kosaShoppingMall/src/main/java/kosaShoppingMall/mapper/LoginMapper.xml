@@ -3,6 +3,18 @@
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.LoginMapper">
+<select id="findPw" parameterType="kosaShoppingMall.command.FindPasswordCommand" 
+		resultType="string">
+	select 'mem' from member 
+	where member_id = #{userId} 
+	  and member_phone =#{userPhone} 
+	  and member_email = #{userEmail}
+	union
+	select 'emp' from employees
+	where emp_id = #{userId} 
+	  and emp_phone =#{userPhone} 
+	  and emp_email = #{userEmail}
+</select>
 <select id="findId" parameterType="string" resultType="authInfo">
 	select member_Phone phone, member_id userId
 	from member

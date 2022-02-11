@@ -4,15 +4,17 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.EmployeeMapper">
 
-
-
+<update id="changPw" parameterType="authInfo">
+	update employees
+	set emp_pw = #{userPw}
+	where emp_id = #{userId}
+</update>
 
 <update id="employeePwChange" parameterType="empDTO">
 	update employees
 	set emp_pw = #{empPw}
 	where emp_id = #{empId}
 </update>
-
 
 <insert id="employeeInsert" parameterType="empDTO">
 	insert into employees(emp_id, emp_pw, emp_name,emp_addr,

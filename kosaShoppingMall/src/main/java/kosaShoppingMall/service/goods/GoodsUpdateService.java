@@ -38,8 +38,10 @@ public class GoodsUpdateService {
 					lib.setGoodsImages(lib.getGoodsImages().replace(fi.getStrFile()+"`", ""));
 				}
 			}
+			dto.setGoodsImages(lib.getGoodsImages());
+			dto.setGoodsOriginal(lib.getGoodsOriginal());
 		}
-				
+		
 		String fileDir = "/view/goods/upload";
 		String filePath=session.getServletContext().getRealPath(fileDir);
 		if(!goodsCommand.getGoodsMain().getOriginalFilename().isEmpty()){
@@ -58,8 +60,6 @@ public class GoodsUpdateService {
 			dto.setGoodsMain(storeFileName);
 		}
 
-		
-		
 		if(!goodsCommand.getGoodsImages()[0].getOriginalFilename().isEmpty() ) {
 			String storeTotal = lib.getGoodsOriginal();
 			String originalTotal = lib.getGoodsImages();
@@ -78,12 +78,10 @@ public class GoodsUpdateService {
 			}
 			dto.setGoodsOriginal(originalTotal);
 			dto.setGoodsImages(storeTotal);
-			System.out.println(dto.getGoodsImages());
-			System.out.println(dto.getGoodsOriginal());
 		}
+		
 		goodsMapper.goodsUpdate(dto);
 
-		
 		// update 된 후에는 session에 있는 파일 삭제
 		if(list != null) {
 			for(FileInfo fi : list ) {
@@ -94,7 +92,5 @@ public class GoodsUpdateService {
 			}
 			session.removeAttribute("fileList");
 		}
-		
 	}
-
 }

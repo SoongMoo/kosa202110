@@ -1,7 +1,5 @@
 package kosaShoppingMall.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.MemberCommand;
-import kosaShoppingMall.domain.AuthInfo;
 import kosaShoppingMall.service.EmailCheckService;
 import kosaShoppingMall.service.IdcheckService;
-import kosaShoppingMall.service.memberJoin.MemberDropService;
-import kosaShoppingMall.service.memberJoin.MemberInfoService;
 import kosaShoppingMall.service.memberJoin.MemberJoinService;
-import kosaShoppingMall.service.memberJoin.MemberPasswordService;
-import kosaShoppingMall.service.memberJoin.MemberUpdateService;
+import kosaShoppingMall.service.memberJoin.MemberMailService;
 
 @Controller
 @RequestMapping("register")
@@ -33,6 +27,20 @@ public class MemberJoinController {
 		return new MemberCommand();
 	}
 	
+	@Autowired
+	MemberMailService memberMailService ;
+	
+	@RequestMapping("memberMail")
+	public String memberMail(@RequestParam(value = "num") String num,
+			@RequestParam(value = "reciver")String reciver,
+			@RequestParam(value = "userId")String userId) {
+		Integer i = memberMailService.execute(num, reciver, userId);
+		if(i > 0) {
+			return "thymeleaf/membership/success";
+		}else {
+			return "thymeleaf/membership/fail";
+		}
+	}
 	@RequestMapping(value = "agree", method = RequestMethod.GET)
 	public String agree() {
 		return "thymeleaf/membership/agree";

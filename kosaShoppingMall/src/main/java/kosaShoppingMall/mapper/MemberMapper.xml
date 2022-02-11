@@ -3,6 +3,14 @@
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberMapper">
+
+<update id="joinOkUpdate" parameterType="memDTO" >
+	update member
+	set member_ok = #{memberOk}
+	where member_id= #{memberId} and member_email = #{memberEmail}
+	  and member_ok is null
+</update>
+
 <update id="changPw" parameterType="authInfo">
 	update member
 	set member_pw = #{userPw}

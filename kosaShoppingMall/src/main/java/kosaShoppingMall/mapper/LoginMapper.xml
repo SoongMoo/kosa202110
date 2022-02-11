@@ -24,14 +24,15 @@
 	from employees
 	where lower(emp_email) = lower(#{email})
 </select>
-<select id="loginSelect" parameterType="string" 
-			resultType="authInfo">
-	select member_Id userId, member_pw userPw, 'mem' grade
+<select id="loginSelect" parameterType="string" resultType="authInfo">
+	select member_Id userId, member_pw userPw, 'mem' grade , member_ok memberok
 	from member
-	where member_id = #{id}
+	where member_id = #{id} 
 	union
-	select emp_id, emp_pw ,'emp'
+	select emp_id, emp_pw ,'emp' , null
 	from employees
 	where emp_id= #{id}
 </select>
 </mapper>
+
+

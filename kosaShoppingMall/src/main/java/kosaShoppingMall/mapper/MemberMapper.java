@@ -18,4 +18,5 @@ public interface MemberMapper {
 	public Integer memberDelete(String memberNum);
 	public int memberCount();
 	public Integer changPw(AuthInfo authInfo);
+	public Integer joinOkUpdate(MemberDTO dto);
 }

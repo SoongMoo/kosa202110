@@ -42,7 +42,7 @@ public class MemberJoinService {
 		model.addAttribute("memberName", dto.getMemberName());
 		
 		//메일 보내기
-		String num = UUID.randomUUID().toString().substring(0, 10);
+		String num = UUID.randomUUID().toString();
 		MimeMessage msg = mailSender.createMimeMessage();
 		String content = "<html><body>"
 				+ "안녕하세요. 숭무 쇼핑몰입니다. <BR />"
@@ -59,8 +59,8 @@ public class MemberJoinService {
 			msg.setSubject(subject);
 			msg.setFrom(new InternetAddress("sender@gmail.com")); // 보내는 사람
 			msg.setRecipient(MimeMessage.RecipientType.TO , 
-					new InternetAddress(memberCommand.getMemberEmail()));
-			mailSender.send(msg);
+					new InternetAddress(memberCommand.getMemberEmail())); // 받는 사람
+			mailSender.send(msg); // 메일보내기
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

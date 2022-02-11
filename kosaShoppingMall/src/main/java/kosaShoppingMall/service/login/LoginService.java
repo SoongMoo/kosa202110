@@ -24,6 +24,12 @@ public class LoginService {
 		String aaa="thymeleaf/index";
 		AuthInfo authInfo = loginMapper.loginSelect(loginCommand.getUserId());
 		if(authInfo != null) {
+			
+			if(authInfo.getMemberOk() == null && authInfo.getGrade().equals("mem")) {
+				result.rejectValue("userId","loginCommand.userId","이메일을 확인해주세요.");
+				return aaa;
+			}
+			
 			if(passwordEncoder.matches(loginCommand.getUserPw(), authInfo.getUserPw())) {
 				session.setAttribute("authInfo", authInfo);
 				aaa = "redirect:"+request.getHeader("referer");

@@ -1,4 +1,4 @@
-package kosaShoppingMall.service.goods;
+package kosaShoppingMall.service.goodsIpgo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

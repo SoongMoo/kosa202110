@@ -1,4 +1,4 @@
-package kosaShoppingMall.service.goods;
+package kosaShoppingMall.service.goodsIpgo;
 
 import java.util.List;
 
@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import kosaShoppingMall.domain.GoodsDTO;
+import kosaShoppingMall.domain.GoodsIpgoDTO;
 import kosaShoppingMall.mapper.GoodsMapper;
-
 @Service
-public class GoodsItemService {
+public class GoodsIpgoListService {
 	@Autowired
 	GoodsMapper goodsMapper;
-	public void execute(String goodsName, Model model) {
-		List<GoodsDTO> list = goodsMapper.goodsItems(goodsName);
+	public void execute(Model model) {
+		List<GoodsIpgoDTO> list = goodsMapper.ipgoSelect();
 		model.addAttribute("list", list);
 	}
+
 }

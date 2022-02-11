@@ -25,19 +25,19 @@ import kosaShoppingMall.service.goods.GoodsAutoNum;
 import kosaShoppingMall.service.goods.GoodsDeleteService;
 import kosaShoppingMall.service.goods.GoodsDelsService;
 import kosaShoppingMall.service.goods.GoodsDetailService;
-import kosaShoppingMall.service.goods.GoodsIpgoDeleteService;
-import kosaShoppingMall.service.goods.GoodsIpgoDelsService;
-import kosaShoppingMall.service.goods.GoodsIpgoDetailService;
-import kosaShoppingMall.service.goods.GoodsIpgoListService;
-import kosaShoppingMall.service.goods.GoodsIpgoModifyService;
-import kosaShoppingMall.service.goods.GoodsIpgoService;
-import kosaShoppingMall.service.goods.GoodsIpgoUpdateService;
-import kosaShoppingMall.service.goods.GoodsItemService;
 import kosaShoppingMall.service.goods.GoodsListService;
 import kosaShoppingMall.service.goods.GoodsModifyService;
 import kosaShoppingMall.service.goods.GoodsSearchService;
 import kosaShoppingMall.service.goods.GoodsUpdateService;
 import kosaShoppingMall.service.goods.GoodsWriteService;
+import kosaShoppingMall.service.goodsIpgo.GoodsIpgoDeleteService;
+import kosaShoppingMall.service.goodsIpgo.GoodsIpgoDelsService;
+import kosaShoppingMall.service.goodsIpgo.GoodsIpgoDetailService;
+import kosaShoppingMall.service.goodsIpgo.GoodsIpgoListService;
+import kosaShoppingMall.service.goodsIpgo.GoodsIpgoModifyService;
+import kosaShoppingMall.service.goodsIpgo.GoodsIpgoService;
+import kosaShoppingMall.service.goodsIpgo.GoodsIpgoUpdateService;
+import kosaShoppingMall.service.goodsIpgo.GoodsItemService;
 
 @RequestMapping("goods")
 @Controller

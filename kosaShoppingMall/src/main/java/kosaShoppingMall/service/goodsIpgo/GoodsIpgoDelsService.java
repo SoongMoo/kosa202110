@@ -1,4 +1,4 @@
-package kosaShoppingMall.service.goods;
+package kosaShoppingMall.service.goodsIpgo;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package kosaShoppingMall.service.goods;
+package kosaShoppingMall.service.goodsIpgo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -30,28 +30,32 @@ public class GoodsUpdateService {
 		
 		
 		
-		
-		
 		/// session에 삭제하려는 파일 정보
 		List<FileInfo> list = (List<FileInfo>)session.getAttribute("fileList");
 		/// 이미지 정보를 가져오기 위해서 
 		GoodsDTO lib = goodsMapper.goodsSelectOne(goodsCommand.getGoodsNum());
+		
+		/// 데이터베이스에 있는 파일정보를 dto에 저장
+		dto.setGoodsImages(lib.getGoodsOriginal());
+		dto.setGoodsOriginal(lib.getGoodsOriginal());
+		
+		// dto에 저장된 팡리 정보를 스플릿 후 리스트에 저장
 		List<String> orgFile = new ArrayList<String>();
 		List<String> strFile = new ArrayList<String>();
-		for(String s : lib.getGoodsOriginal().split("`")) {
+		for(String s : dto.getGoodsOriginal().split("`")) {
 			orgFile.add(s);
 		}
-		for(String s : lib.getGoodsImages().split("`")) {
+		for(String s : dto.getGoodsImages().split("`")) {
 			strFile.add(s);
 		}
 		
 		// file삭제 session이 있다면 데이터베이스에서 dto에서 삭제
 		System.out.println(lib.getGoodsOriginal());
 		if(list != null) {
-			for (FileInfo fi : list) {
+			for (FileInfo fi : list) { // session에 있는 내용과 비교하여 리스트에 있는 파일정보 삭제
 				for (int i = 0; i < orgFile.size(); i++) {
 					if (fi.getOrgFile().equals(orgFile.get(i)) && fi.getKind().equals("img")) {
-						orgFile.remove(i);
+						orgFile.remove(i); 
 						strFile.remove(i);
 					}
 				}
@@ -59,15 +63,18 @@ public class GoodsUpdateService {
 			}
 			String o = "";
 			String s = "";
+			// 리스트에 있는 내용을 문자열로 변경
 			for(String str : orgFile) {
 				o += str+"`";
 			}
 			for(String str : strFile) {
 				s += str +"`";
 			}
+			// 문자열을 dto에 저장
 			dto.setGoodsOriginal(o); // session에 있는 것은 지우고 session에 없는 것만 저장
 			dto.setGoodsImages(s);
 		}
+
 		
 		String fileDir = "/view/goods/upload";
 		String filePath=session.getServletContext().getRealPath(fileDir);
@@ -91,8 +98,8 @@ public class GoodsUpdateService {
 			String storeTotal = "";
 			String originalTotal = "";
 			if(lib.getGoodsImages() != null) {
-				storeTotal = lib.getGoodsImages();
-				originalTotal =  lib.getGoodsOriginal();
+				storeTotal = dto.getGoodsImages();
+				originalTotal =  dto.getGoodsOriginal();
 			}
 			for(MultipartFile mf : goodsCommand.getGoodsImages() ) {
 				String originalFile = mf.getOriginalFilename();

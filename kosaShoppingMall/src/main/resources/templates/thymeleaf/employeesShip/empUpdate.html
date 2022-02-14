@@ -3,6 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	$("#empEmail").keyup(function() {
+		$.ajax({
+			type:"post",
+			url:"empEmailChecks",
+			dataType:"text",
+			data:{"empEmail":$("#empEmail").val(),"empId":$("#empId").val()},
+			success : function (result) {
+				$("#emailCk").html(result);
+				if(result=="사용가능한 이메일 입니다."){
+					$("#emailCk").css("color","blue");
+				}else{
+					$("#emailCk").css("color","red");
+				}
+			},error : function () {
+				alert("코드에러 코드에러");
+				return;
+			}
+		});
+	});	
+});
+</script>
 <link href="/static/css/memberLayout.css" rel="stylesheet">
 <style type="text/css">
 	span{color:red;}
@@ -46,7 +70,8 @@
 				</th>
 				<td>
 					<input type='text' name="empId" id="empId" 
-						 size='15' maxlength='12' autofocus="autofocus" th:value="${employeeCommand.empId}" readonly="readonly"/>
+						 size='15' maxlength='12' autofocus="autofocus" th:value="${employeeCommand.empId}"
+						  readonly="readonly" />
 					<span th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span>
 				</td>
 			</tr>
@@ -79,7 +104,8 @@
 			<tr>
 				<th><label for='empEmail'>사용자 이메일</label></th>
 				<td>
-					<input type='email' name='empEmail' id="empEmail" th:value="${employeeCommand.empEmail}"/>
+					<input type='email' name='empEmail' th:value="${employeeCommand.empEmail}" id="empEmail"/>
+					<span id="emailCk"></span>
 					<span th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span>
 				</td>
 			</tr>

@@ -3,24 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/static/css/memberLayout.css" rel="stylesheet">
+<link href="/static/css/memberLayout.css" rel="stylesheet" >
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
 <script type="text/javascript">
-function fileDel(orgFile, strFile,  btn ,kind ){
+function fileDel(orgFile1, strFile1,btn,kind1){
 	$.ajax({ 
 		type : "get",	
 		url : "fileDel",
 		dataType : "text",
-		data: {"orgFile":orgFile,"strFile":strFile,"kind":kind},
+		data: {"orgFile":orgFile1,"strFile":strFile1,"kind":kind1},
 		success : function(result){
 			if(result.trim() == 1){
-				$(btn).val("삭제 취소")
+				$(btn).val("삭제 취소");
+				return;
 			}else{
-				$(btn).val("삭제")
+				$(btn).val("삭제");
+				return;
 			}
 		},
 		error : function(){
-			$(btn).text("삭제 취소")
 			alert('에러가 나왔다 홀홀홀~');
 			return;
 		}
@@ -71,11 +72,14 @@ function fileDel(orgFile, strFile,  btn ,kind ){
 			<span th:if="${#fields.hasErrors('deliveryCost')}" th:errors="*{deliveryCost}"></span>
 		</td>
 	</tr>
+	
+	
+	
+	
 	<tr>
 		<td>메인 이미지</td>
 		<td>
-			<input type="file" name="goodsMain" /><BR />
-			<span th:if="${#fields.hasErrors('goodsMain')}" th:errors="*{goodsMain}"></span>		
+			<input type="file" name="goodsMain"  /><BR />	
 		</td>
 	</tr>
 	<tr>
@@ -84,25 +88,39 @@ function fileDel(orgFile, strFile,  btn ,kind ){
 			<input type="file" name="goodsImages" multiple="multiple"/>			
 		</td>
 	</tr>
+	
+	
+	
+	
+	
+	
+	
 	<tr>
 		<td>등록된 메인 이미지</td>
 		<td>
 			[[${goodsCommand.goodsMainOrg}]]	
-			<input type="button" value="삭제" 
-        th:attr="onclick=|fileDel('${goodsCommand.goodsMainOrg}','${goodsCommand.goodsMain}',this,'main');|" />
+			<input type="button" value="삭제" th:attr="onclick=|fileDel('${goodsCommand.goodsMainOrg}',
+																	   '${goodsCommand.goodsMain}',
+																		this,
+																		'main');|"/>
 		</td>
 	</tr>
 	<tr>
 		<td>등록된 이미지</td>
 		<td>
+			<div></div>
 			<div th:each="file , idx : ${#strings.arraySplit(goodsCommand.goodsOriginal,'`')}" >	
 				[[${file}]] 
-				<input type="button" value="삭제" 
-        th:attr="onclick=|fileDel('${file}','${#strings.arraySplit(goodsCommand.goodsImages,'`')[idx.index]}',this,'img');|" />
+				<input type="button" value="삭제" th:attr="onclick=|fileDel('${file}',
+														'${#strings.arraySplit(goodsCommand.goodsImages,'`')[idx.index]}',
+														this,
+														'img');|" />
 				<br />
 			</div>	
 		</td>
 	</tr>
+	
+	
 	<tr>
 		<th colspan="2" > 
 			<input type="submit" value="상품 수정 완료" />
@@ -114,3 +132,8 @@ function fileDel(orgFile, strFile,  btn ,kind ){
 </div>
 </body>
 </html>
+
+
+
+
+

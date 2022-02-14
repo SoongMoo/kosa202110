@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kosaShoppingMall.command.EmployeeCommand;
 import kosaShoppingMall.command.EmployeePwCommand;
+import kosaShoppingMall.service.EmpEmailUpdatecheckService;
 import kosaShoppingMall.service.empMyPage.EmpMyPageModifyService;
 import kosaShoppingMall.service.empMyPage.EmpMyPagePwService;
 import kosaShoppingMall.service.empMyPage.EmpMyPageUpdateService;
@@ -28,6 +29,8 @@ public class EmpMyPageController {
 	EmpMyPageUpdateService empMyPageUpdateService;
 	@Autowired
 	EmpMyPagePwService empMyPagePwService;
+	@Autowired
+	EmpEmailUpdatecheckService empEmailUpdatecheckService;
 	
 	@RequestMapping(value ="empPwChangeCon" , method = RequestMethod.POST)
 	public String empPwChangeCon(@Validated EmployeePwCommand employeePwCommand , BindingResult result , HttpSession session) {
@@ -43,6 +46,11 @@ public class EmpMyPageController {
 	
 	@RequestMapping(value = "empUpdate", method = RequestMethod.POST)
 	public String empUpdate(@Validated EmployeeCommand employeeCommand, BindingResult result, HttpSession  session) {
+		Integer i = empEmailUpdatecheckService.execute(employeeCommand.getEmpEmail() , employeeCommand.getEmpId());
+		if(i == 1) {
+			result.rejectValue("empEmail","employeeCommand.empEmail" , "중복된 이메일 입니다.");
+			return "thymeleaf/employeesShip/empUpdate";
+		}
 		String path = empMyPageUpdateService.execute(employeeCommand, result, session);
 		return path;
 	}

@@ -44,6 +44,25 @@ $(function(){
 			<th><input type="checkbox"  name="delete" 
 			th:value="${goodsCommand.goodsNum}+'`'+${#dates.format(goodsCommand.ipgoDate,'yyyy-MM-dd')}" /></th>
 		</tr>
+		<tr>
+			<th colspan="6"><th:block th:if="${page<=1}">
+				[이전]
+			</th:block>
+			
+			<th:block th:if="${page>1}">
+				<a th:href="@{goodsIpgoList(page=${page -1})}">
+				[이전]</a>
+			</th:block>
+			<th:block th:each=" i : ${#numbers.sequence(startPage, endPage)}">
+				[ <a th:href="@{goodsIpgoList(page=${i })}">[[${i }]]</a> ] 
+	 		</th:block> 
+	 		<th:block th:if="${page < maxPage }">
+				<a th:href="@{goodsIpgoList(page=${page + 1 })}">[이후]</a>
+			</th:block> 
+			<th:block th:if="${page >= maxPage }">
+	 			[이후]
+	 		</th:block></th>
+		</tr>
 	</table>
 </form>
 </div>

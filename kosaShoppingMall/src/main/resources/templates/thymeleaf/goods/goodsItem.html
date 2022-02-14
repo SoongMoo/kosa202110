@@ -17,7 +17,7 @@ function itemSend(goodsNum){
 <table width="600" >
 <tr><th>
 <form action="goodsItem" method="post" >
-	상품명 : <input type="search" name="goodsName" size="50"/> <input type="submit" value="검색" />
+	상품명 : <input type="search" name="goodsWord" size="50"/> <input type="submit" value="검색" />
 </form>
 </th></tr>
 </table>
@@ -38,7 +38,30 @@ function itemSend(goodsNum){
 			<th>[[${goodsCommand.vistCount}]]</th>
 	</tr>
 	</th:block>
-
+	<tr>
+		<th colspan="4">
+			<th:block th:if="${page <=1}">
+				[이전]
+			</th:block>	
+			<th:block>
+				<a th:if="${page >1}">
+				<a th:href="@{goodsItem(page=${page -1},goodsWord=${goodsWord})}">[이전]</a>
+			</th:block>
+			<th:block>
+				<th:bloc th:each=" i : ${#numbers.sequence(startPage , endPage)}">
+					[<a th:href="@{goodsItem(page=${i},goodsWord=${goodsWord})}">[[${i}]]</a>]
+				</th:block>
+			<th:block th:if="${page < maxPage }">
+ 			<a th:href="@{goodsItem(page=${page + 1 },goodsWord=${goodsWord})}">[이후]</a>
+ 			</th:block>
+ 			<th:block th:if="${page >= maxPage }">
+ 			[이후]
+ 			</th:block>		
+		
+		</th>
+		
+	
+	</tr>
 </table>
 </body>
 </html>

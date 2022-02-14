@@ -3,6 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+$(function () { memberId
+	$("#memberEmail").keyup(function() {
+		$.ajax({
+			type:"post",
+			url:"memMyEmailCk",
+			dataType:"text",
+			data:{"memberEmail":$("#memberEmail").val(),"memberId":$("#memberId").val()},
+			success: function (result) {
+				$("#emailCk").html(result);
+				if(result =="사용 가능 이메일입니다."){
+					$("#emailCk").css("color" , "blue");
+				}else{
+					$("#emailCk").css("color" , "red");
+				}
+			},error : function () {
+				alert("코드에러 코드에러 ");
+				return;
+			}
+		});
+	});
+});
+</script>
 <link href="/static/css/memberLayout.css" rel="stylesheet">
 </head>
 <body>
@@ -116,6 +140,7 @@
 				<th><label for='memberEmail'>사용자 이메일</label></th>
 				<td>
 					<input type='email' name='memberEmail' id="memberEmail" th:value="${memberCommand.memberEmail}"/>
+					<span id="emailCk"></span>
 					<span th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></span>
 				</td>
 			</tr>

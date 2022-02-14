@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -76,12 +75,12 @@ public class GoodsController {
 	GoodsIpgoDelsService goodsIpgoDelsService;
 	@Autowired
 	GoodsDelsService goodsDelsService;
+	
 	@Autowired
 	FileDelService fileDelService;
 	
 	@RequestMapping("fileDel")
-	public String fileDel(FileInfo fileInfo, 
-			HttpSession session,Model model) {
+	public String fileDel(FileInfo fileInfo, HttpSession session,Model model) {
 		fileDelService.fileAdd(fileInfo,session,model );
 		return "thymeleaf/goods/delPage";
 	}
@@ -139,15 +138,14 @@ public class GoodsController {
 		goodsIpgoService.execute(goodsIpgoCommand);
 		return "redirect:goodsIpgoList";
 	}
-	@RequestMapping(value="goodsItem", method = RequestMethod.GET)
-	public String goodsItem() {
-		return "thymeleaf/goods/goodsItem";
-	}
+
 	
-	@RequestMapping(value="goodsItem", method = RequestMethod.POST)
-	public String goodsItems(@RequestParam(value="goodsName") String goodsName, 
+	
+	@RequestMapping(value="goodsItem")
+	public String goodsItems(@RequestParam(value = "page" , defaultValue = "1" , required = false)Integer page,
+			@RequestParam(value="goodsWord" , required = false) String goodsWord, 
 			Model model) {
-		goodsItemService.execute(goodsName, model);
+		goodsItemService.execute(page,goodsWord, model);
 		return "thymeleaf/goods/goodsItem";
 	}
 
@@ -158,11 +156,11 @@ public class GoodsController {
 	}
 	
 	@RequestMapping("goodsIpgoList")
-	public String goodsIpgoList(Model model) {
-		goodsIpgoListService.execute(model);
+	public String goodsIpgoList(@RequestParam(value = "page",required = false ,defaultValue = "1")Integer page , Model model) {
+		goodsIpgoListService.execute(page ,model);
 		return "thymeleaf/goods/goodsIpgoList";
 	}
-	
+	//여기까지
 	
 	@RequestMapping("goodsSearch")
 	public String goodsSearch(@RequestParam(value = "goodsWord")String goodsWord , Model model){
@@ -179,8 +177,7 @@ public class GoodsController {
 		 
 	
 	@RequestMapping(value = "goodsUpdate" , method = RequestMethod.POST)
-	public String goodsUpdate(@Validated GoodsCommand goodsCommand ,BindingResult result,
-			HttpSession session ) {
+	public String goodsUpdate(@Validated GoodsCommand goodsCommand ,BindingResult result, HttpSession session ) {
 		if(result.hasErrors()) {
 			return "redirect:goodsModify?goodsNum="+goodsCommand.getGoodsNum();
 			//return "thymeleaf/goods/goodsUpdate";
@@ -188,7 +185,6 @@ public class GoodsController {
 		goodsUpdateService.execute(goodsCommand, session);
 		return "redirect:goodsDetail/"+goodsCommand.getGoodsNum();
 	}
-		
 	
 	@RequestMapping(value = "goodsModify" , method = RequestMethod.GET)
 	public String goodsNum(GoodsCommand goodsCommand ,Model model ) {
@@ -200,19 +196,25 @@ public class GoodsController {
 	@RequestMapping(value="goodsDetail/{goodsNum}" , method = RequestMethod.GET)
 	public String goodsDetail(@PathVariable(value = "goodsNum")String goodsNum ,Model model) {
 		goodsDetailService.execute(goodsNum , model);
+		model.addAttribute("newLineChar", '\n'); 
 		return "thymeleaf/goods/goodsDetail";
 	}
 	
+	/*
+	   @RequestParam(value="goodsMain") MultipartFile goodsMain
+	   @RequestParam(value="goodsImages") MultipartFile [] goodsImages
+	 */
 	@RequestMapping(value="goodsRegist" ,method = RequestMethod.POST)
-	public String goodsRegist(@Validated GoodsCommand goodsCommand , BindingResult result,
-			HttpServletRequest request) {
+	public String goodsRegist(@Validated GoodsCommand goodsCommand , BindingResult result,HttpServletRequest request) {
 		if(result.hasErrors()) {
 			return "thymeleaf/goods/goodsForm";
 		}
+		
 		if(goodsCommand.getGoodsMain().getOriginalFilename().isEmpty()) {
 			result.rejectValue("goodsMain", "goodsCommand.goodsMain", "대문이미지를 선택하여주세요.");
 			return "thymeleaf/goods/goodsForm";
 		}
+		
 		goodsWriteService.execute(goodsCommand, request);
 		return "redirect:goodsList";
 	}
@@ -223,7 +225,6 @@ public class GoodsController {
 		return "thymeleaf/goods/goodsForm";
 	}
 	
-	
 	@RequestMapping("goodsList")
 	public String goodsList(
 			@RequestParam(value="page",defaultValue = "1" ,required = false ) int page,
@@ -233,3 +234,9 @@ public class GoodsController {
 	}
 
 }
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 package kosaShoppingMall.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -19,4 +20,5 @@ public interface MemberMapper {
 	public int memberCount();
 	public Integer changPw(AuthInfo authInfo);
 	public Integer joinOkUpdate(MemberDTO dto);
+	public Integer memberRemove(HashMap<String, Object> conditioncondition);
 }

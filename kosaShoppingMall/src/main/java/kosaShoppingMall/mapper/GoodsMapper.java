@@ -23,9 +23,9 @@ public interface GoodsMapper {
 	public Integer goodsUpdate(GoodsDTO dto);
 	public Integer goodsDelete(String goodsNum);
 	public List<GoodsDTO> searchGoods(String goodsWord);
-	public List<GoodsDTO> goodsItems(String goodsName);
+	public List<GoodsDTO> goodsItems(StartEndPageDTO dto);
 	public Integer ipgoInsert(GoodsIpgoDTO dto);
-	public List<GoodsIpgoDTO> ipgoSelect();
+	public List<GoodsIpgoDTO> ipgoSelect(StartEndPageDTO dto);
 	/// 1 대 1 정보
 	public GoodsIpgoGoodsDTO ipgoDetail(GoodsIpgoDTO idto);
 	public GoodsDTO getGoodsIpgoInfo(GoodsIpgoDTO idto);
@@ -42,7 +42,9 @@ public interface GoodsMapper {
 	
 	
 	public Integer goodsIpgoDels(List<String[]> condition);
-	public int count(String goodsWord);
+	public Integer count(String goodsWord);
+	public Integer goodsCount();
+	public Integer goodsItemCount(String goodsWord);
 }
 
 

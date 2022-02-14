@@ -3,18 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	$("#empEmail").keyup(function() {
+		$.ajax({
+			type:"post",
+			url:"empEmailChecks",
+			dataType:"text",
+			data:{"empEmail":$("#empEmail").val(),"empId":$("#empId").val()},
+			success : function (result) {
+				$("#emailCk").html(result);
+				if(result=="사용가능한 이메일 입니다."){
+					$("#emailCk").css("color","blue");
+				}else{
+					$("#emailCk").css("color","red");
+				}
+			},error : function () {
+				alert("코드에러 코드에러");
+				return;
+			}
+		});
+	});	
+});
+</script>
 </head>
 <body>
 <form action="empUpdate" method="post" th:object="${employeeCommand}">
-아이디 : <input type="text" name="empId" th:value="${employeeCommand.empId}" readonly="readonly"/><br />
+아이디 : <input type="text" name="empId" th:value="${employeeCommand.empId}" readonly="readonly" id="empId" /><br />
+
 비밀번호 : <input type="password" name="empPw" />
 		<span th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span><br />
 이름 : <input type="text" name="empName"  th:value="${employeeCommand.empName}"/><br />
 주소 : <input type="text" name="empAddr"   th:value="${employeeCommand.empAddr}"/><br />
 연락처 : <input type="text" name="empPhone"  th:value="${employeeCommand.empPhone}"/><br />
-연락처 : <input type="text" name="empEmail"  th:value="${employeeCommand.empEmail}"/><br />
+이메일 : <input type="text" name="empEmail"  th:value="${employeeCommand.empEmail}" id="empEmail"/><br />
+		<span id="emailCk"></span><br/>
+		<span th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span><br />
 
-<input type="submit" value="등록" />
+	<input type="submit" value="등록" />
 </form>
 </body>
 </html>

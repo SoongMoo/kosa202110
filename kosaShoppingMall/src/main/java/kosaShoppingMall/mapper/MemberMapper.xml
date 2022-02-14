@@ -3,6 +3,20 @@
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberMapper">
+	
+	
+
+	<delete id="memberRemove" parameterType="hashMap">
+		delete from member
+		<where>
+			member_Num in
+			<foreach collection="memberNum" item="nums" index="index" open="(" close=")" separator=",">
+				#{nums}
+			</foreach>
+		</where>
+	</delete>
+
+
 
 <update id="joinOkUpdate" parameterType="memDTO" >
 	update member

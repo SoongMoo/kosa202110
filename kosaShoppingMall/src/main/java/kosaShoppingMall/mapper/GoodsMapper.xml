@@ -113,22 +113,45 @@
 										and i.IPGO_DATE=#{ipgoDate}
 	</select>
 
-	<select id="ipgoSelect" resultType="goodsIpgoDTO">
-		select IPGO_DATE ipgoDate,GOODS_NUM goodsNum ,IPGO_QTY ipgoQty,MADE_DATE madeDate
-		from goodsipgo
-		order by GOODS_NUM desc, IPGO_DATE desc
+	<select id="ipgoSelect" resultType="goodsIpgoDTO" parameterType="StartEndPageDTO">
+		select * from(
+			select rownum rn , IPGO_DATE ipgoDate,GOODS_NUM goodsNum ,IPGO_QTY ipgoQty,MADE_DATE madeDate
+			from goodsipgo 
+			order by GOODS_NUM desc, IPGO_DATE desc
+			)
+			where rn between #{startRow} and #{endRow}
 	</select>
 	<insert id="ipgoInsert" parameterType="goodsIpgoDTO">
 		insert into goodsipgo(IPGO_DATE,GOODS_NUM,IPGO_QTY,MADE_DATE)
 		values(#{ipgoDate},#{goodsNum},#{ipgoQty},#{madeDate})
 	</insert>
 	
-	<select id="goodsItems" parameterType="string" resultType="goodsDTO">
-		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
-		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, 
-		VISIT_COUNT vistCount
-		from goods
-		where GOODS_NAME like '%'||#{goodsWord}||'%'
+	<select id="goodsItemCount" parameterType="string" resultType="integer" >
+		select count(*) from goods
+		<where>
+			<if test="goodsWord != null">
+				GOODS_NAME like '%'||#{goodsWord}||'%'
+		   		or GOODS_CONTENT like '%'||#{goodsWord}||'%'
+			</if>
+		</where>
+	
+	</select>
+	
+	<select id="goodsItems" parameterType="StartEndPageDTO" resultType="goodsDTO">
+		select*from(	
+			select   rownum rn , GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
+			GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, 
+			VISIT_COUNT vistCount
+			from goods 
+			<where>
+				<if test="goodsWord !=null">
+						 GOODS_NAME like '%'||#{goodsWord}||'%'
+						or	GOODS_CONTENT like '%'||#{goodsWord}||'%'
+				</if>
+			</where>
+			)
+			
+			where rn between #{startRow} and #{endRow}
 	</select>
 
 	<delete id="goodsDelete" parameterType="goodsDTO">
@@ -148,19 +171,20 @@
 	<update id="goodsUpdate" parameterType="goodsDTO">
 		update goods
 		<trim prefix="set" suffixOverrides=",">
-		 GOODS_NAME = #{goodsName}, GOODS_PRICE = #{goodsPrice} ,
-		 GOODS_CONTENT = #{goodsContent}, DELIVERY_COST = #{deliveryCost},
-		 <if test="goodsImages != null">
-		 	GOODS_IMAGES= #{goodsImages}, 
-		 	GOODS_ORIGINAL = #{goodsOriginal} ,
-		 </if>
-		 <if test="goodsMain != null" >
-			 GOODS_MAIN = #{goodsMain} , 
-			 GOODS_MAIN_ORG = #{goodsMainOrg},
-		 </if>
+			 GOODS_NAME = #{goodsName}, GOODS_PRICE = #{goodsPrice} ,
+			 GOODS_CONTENT = #{goodsContent}, DELIVERY_COST = #{deliveryCost},
+			 <if test="goodsImages != null">
+			 	GOODS_IMAGES= #{goodsImages}, 
+			 	GOODS_ORIGINAL = #{goodsOriginal} ,
+			 </if>
+			 <if test="goodsMain != null" >
+				 GOODS_MAIN = #{goodsMain} , 
+				 GOODS_MAIN_ORG = #{goodsMainOrg},
+			 </if>
 		</trim>
 		where goods_num = #{goodsNum}
 	</update>
+	
 	
 	<update id="goodsVisitCnt" parameterType="string">
 		update goods
@@ -172,12 +196,14 @@
 	<select id="goodsSelectOne" parameterType="string" resultType="goodsDTO">
 		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
 		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount
-		,goods_main goodsMain, goods_images goodsImages,goods_Original goodsOriginal
+		,goods_main goodsMain, goods_images goodsImages, goods_Original goodsOriginal
 		,goods_Main_Org goodsMainOrg
 		from goods
 		where goods_num = #{goodsNum}
+	</select>
 	
-	
+	<select id="goodsCount" resultType="integer">
+		select count(*) from goodsIpgo
 	</select>
 	
 	<select id="count" parameterType="string" resultType="int">
@@ -190,10 +216,14 @@
 		</where>
 	</select>
 	
+	
+	
 	<select id="goodsList" resultType="goodsDTO" parameterType="StartEndPageDTO">
 	select *
 	from (	select rownum rn,  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
 		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount
+		,goods_main goodsMain
+		
 		from goods
 		<where>
 			<if test="goodsWord != null">
@@ -201,6 +231,7 @@
 		   		or GOODS_CONTENT like '%'||#{goodsWord}||'%'
 			</if>
 		</where>
+		order by goodsNum desc
 	)
 	where rn between #{startRow} and #{endRow}
 	</select>
@@ -234,7 +265,7 @@
 				</if>
 				<if test="goodsMainOrg != null">
 					,#{goodsMainOrg}
-				</if>	
+				</if>
 		)
 	</insert>
 

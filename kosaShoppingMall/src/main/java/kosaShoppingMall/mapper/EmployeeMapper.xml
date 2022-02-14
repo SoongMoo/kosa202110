@@ -4,6 +4,15 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.EmployeeMapper">
 
+	<delete id="empDeletes" parameterType="hashMap">
+		delete from employees
+		<where>
+			emp_id in
+			<foreach collection="cs" item="empId" index="index" open="(" close=")" separator=",">
+				#{empId}
+			</foreach>
+		</where>	
+	</delete>
 <update id="changPw" parameterType="authInfo">
 	update employees
 	set emp_pw = #{userPw}
@@ -37,9 +46,15 @@
 	from employees
 	where emp_id = #{empId}
 </select>
-<select id="selectAll" resultType="empDTO">
-	select emp_id empId, emp_pw empPw, emp_name empName,
+	<select id="count" resultType="integer">
+		select count(*) from employees
+	</select>
+<select id="selectAll" resultType="empDTO" parameterType="StartEndPageDTO">
+	select * from(
+	select rownum rn , emp_id empId, emp_pw empPw, emp_name empName,
 			emp_addr empAddr, emp_phone empPhone, emp_email empEmail
-	from employees
+	from employees)
+	where rn between #{startRow} and #{endRow}
+	
 </select>
 </mapper>

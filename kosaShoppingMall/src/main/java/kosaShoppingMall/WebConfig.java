@@ -10,25 +10,25 @@ import kosaShoppingMall.Interceptor.CertificationInterceptor;
 @Configuration
 public class WebConfig implements WebMvcConfigurer{	
 
-	//@Override
-	//public void addInterceptors(InterceptorRegistry registry) {
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
 		// TODO Auto-generated method stub
-	//	registry.addInterceptor(new CertificationInterceptor())
-	//	        .addPathPatterns("/**/*") //모든 주소
-	//	        .excludePathPatterns("/static/**/*")
-	//	        .excludePathPatterns("/register/**/*")
-	//	        .excludePathPatterns("/help/**/*")
-	//			.excludePathPatterns("/login/**/*");
+		registry.addInterceptor(new CertificationInterceptor())
+		        .addPathPatterns("/**/*") //모든 주소
+		        .excludePathPatterns("/static/**/*")
+		        .excludePathPatterns("/register/**/*")
+		        .excludePathPatterns("/help/**/*")
+				.excludePathPatterns("/login/**/*");
 		// 로그인 세션이 없어도 되는 주소들을 적어 준다.
-	//}
+	}
 	
-	// html이나 jsp문서에서 view밑에 있는 파일을 불러 올때 404오류가 나는 것을 방지
+	// html이나 jsp문서 그리고 이미지파일인 경우 view밑에 있는 파일을 불러 올때 404오류가 나는 것을 방지
 	@Override
 	public void addResourceHandlers(
 			ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**")
-        .addResourceLocations("/view/")
-        .setCachePeriod(14400);
+                .addResourceLocations("/view/")
+                .setCachePeriod(14400);
 	}
 
 	@Bean

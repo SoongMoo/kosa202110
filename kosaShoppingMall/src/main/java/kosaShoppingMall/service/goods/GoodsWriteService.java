@@ -25,17 +25,22 @@ public class GoodsWriteService {
 		dto.setGoodsName(goodsCommand.getGoodsName());
 		dto.setGoodsNum(goodsCommand.getGoodsNum());
 		dto.setGoodsPrice(goodsCommand.getGoodsPrice());
-
-		
+	////////////////////////////////////////////////////////////////////////////////////////
 		String fileDir = "/view/goods/upload";
-		String filePath=request.getServletContext().getRealPath(fileDir);
+		String filePath = request.getServletContext().getRealPath(fileDir);
+
 		if(!goodsCommand.getGoodsMain().getOriginalFilename().isEmpty()){
 			MultipartFile mf = goodsCommand.getGoodsMain();
 			String originalFile = mf.getOriginalFilename();
-			String extension = originalFile.substring(
-					originalFile.lastIndexOf("."));
+			
+			//.png
+			String extension = originalFile.substring(originalFile.lastIndexOf("."));
+			
+			//7b2582aca35e4525b4a579d84e8b6c9d
 			String storeName = UUID.randomUUID().toString().replace("-", "");
+			
 			String storeFileName=storeName + extension;
+			
 			File file = new File(filePath + "/" + storeFileName);
 			try {
 				mf.transferTo(file); // 파일을 저장
@@ -43,15 +48,15 @@ public class GoodsWriteService {
 			dto.setGoodsMainOrg(originalFile);
 			dto.setGoodsMain(storeFileName);
 		}
+		
 		if(!goodsCommand.getGoodsImages()[0].getOriginalFilename().isEmpty() ) {
 			String storeTotal = "";
 			String originalTotal = "";
 			for(MultipartFile mf : goodsCommand.getGoodsImages() ) {
 				String originalFile = mf.getOriginalFilename();
-				String extension = originalFile.substring(
-						originalFile.lastIndexOf("."));
+				String extension = originalFile.substring(originalFile.lastIndexOf("."));
 				String storeName = UUID.randomUUID().toString().replace("-", "");
-				String storeFileName=storeName + extension;
+				String storeFileName=storeName + extension;// 저장할 때 사용할 파일명
 				storeTotal += storeFileName +"`";
 				originalTotal += originalFile + "`";
 				File file = new File(filePath + "/" + storeFileName);
@@ -62,6 +67,8 @@ public class GoodsWriteService {
 			dto.setGoodsOriginal(originalTotal);
 			dto.setGoodsImages(storeTotal);
 		}
+
+		
 		Integer i = goodsMapper.goodsInsert(dto);
 		System.out.println(i +"개의 상품이 등록되었습니다.");
 	}

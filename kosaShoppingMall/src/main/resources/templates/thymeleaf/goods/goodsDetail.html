@@ -34,19 +34,23 @@ document.onkeydown = noEvent;
 	상품 번호: [[${goodsCommand.goodsNum}]] || 조회수 : [[${goodsCommand.vistCount}]]
 	<br />상품 이름: [[${goodsCommand.goodsName}]]
 	<br />가격 : [[${goodsCommand.goodsPrice}]]
-
-	<br />내용 : [[${goodsCommand.goodsContent}]]
 	<br />배송비 : [[${goodsCommand.deliveryCost}]]
-	<br />대문 이미지
+	<br />내용 : <span th:utext="${#strings.replace(goodsCommand.goodsContent, newLineChar ,'&lt;br /&gt;')}" ></span>
+	
+	
 	<th:block th:if="${goodsCommand.goodsMain != null}">
-	<br /><img th:src="|/goods/upload/${goodsCommand.goodsMain}|" />
+	<br />대문 이미지
+	<br /><img th:src="|/goods/upload/${goodsCommand.goodsMain}|"  width="500" />
 	</th:block>
+	
+	
+	
 	<br />이미지
-	<th:block th:if="${goodsCommand.goodsImages != null}">
+										 <!-- 배열 -->
 		<th:block th:each="goodsImage : ${#strings.arraySplit(goodsCommand.goodsImages,'`')}">
-			<br /><img th:src="|/goods/upload/${goodsImage}|" width="600" />
+			<br /><img th:src="|/goods/upload/${goodsImage}|" width="500" />
 		</th:block>
-	</th:block>
+
 	
 	<Br/><a href="javascript:history.back();">뒤로 가기</a> | 
 		 <a th:href="@{../goodsModify(goodsNum=${goodsCommand.goodsNum})}">수정</a> | 

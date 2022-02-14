@@ -5,41 +5,48 @@
 <title>Insert title here</title>
 </head>
 <body>
-회원 관리 : 회원수 : [[${count}]]<br/>
-<a href="memberRegist">회원 등록</a> 
-<table border="1">
-	<tr><td>번호</td><td>이름</td><td>아이디</td><td>생일</td></tr>
-	<th:block th:each="dto :${lists}">
-		<tr><td><a th:href="|memberDetail/${dto.memberNum}|">[[${dto.memberNum}]]</a></td>
-			<td>[[${dto.memberName}]]</td>
-			<td>[[${dto.memberId}]]</td>
-			<td><span th:text="${#dates.format(dto.memberBirth,'yyyy-MM-dd')}"></span></td>
-			
-		</tr>
-	</th:block>
-	<tr>
-	<th colspan="5" >
+	회원 관리 : 회원수 : [[${count}]]
+	<br />
+	<a href="memberRegist">회원 등록</a>
+	<form action="memberDels" method="post">
+		<table border="1">
 
-			<th:block th:if="${page <= 1 }">
-			[이전]
-			</th:block>
-			<th:block th:if="${page > 1 }">
-			<a th:href="@{memList(page=${page - 1 })}">[이전]</a>
-			</th:block>
-			
-			<th:block th:each=" i : ${#numbers.sequence(startPage, endPage)}" >
-			[ <a th:href="@{memList(page=${i })}">[[${i }]]</a> ] 
- 			</th:block>
- 			
- 			<th:block th:if="${page < maxPage }">
- 			<a th:href="@{memList(page=${page + 1 })}">[이후]</a>
- 			</th:block>
- 			<th:block th:if="${page >= maxPage }">
- 			[이후]
- 			</th:block>
+			<tr>
+				<td>번호</td>
+				<td>이름</td>
+				<td>아이디</td>
+				<td>생일</td>
+				<td><input type="submit" value="삭제"></td>
+			</tr>
+			<th:block th:each="memberCommand :${lists}">
+				<tr>
+					<td><a th:href="|memberDetail/${memberCommand.memberNum}|">[[${memberCommand.memberNum}]]</a></td>
+					<td>[[${memberCommand.memberName}]]</td>
+					<td>[[${memberCommand.memberId}]]</td>
+					<td><span th:text="${#dates.format(memberCommand.memberBirth,'yyyy-MM-dd')}"></span></td>
+					<td><input type="checkbox" name="memDels" th:value="${memberCommand.memberNum}"></td>
 
-		</th>
-	</tr>
-</table>
+				</tr>
+			</th:block>
+
+			<tr>
+				<th colspan="5"><th:block th:if="${page <= 1 }">
+				[이전]
+				</th:block>
+				<th:block th:if="${page > 1 }">
+					<a th:href="@{memList(page=${page - 1 })}">[이전]</a>
+				</th:block> 
+				<th:block th:each=" i : ${#numbers.sequence(startPage, endPage)}">
+					[ <a th:href="@{memList(page=${i })}">[[${i }]]</a> ] 
+	 			</th:block> 
+	 			<th:block th:if="${page < maxPage }">
+					<a th:href="@{memList(page=${page + 1 })}">[이후]</a>
+				</th:block> 
+				<th:block th:if="${page >= maxPage }">
+	 				[이후]
+	 			</th:block></th>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

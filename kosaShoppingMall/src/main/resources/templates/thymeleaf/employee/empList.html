@@ -6,12 +6,35 @@
 </head>
 <body>
 사원수 : [[${list.size()}]]
-<table>
-	<tr><td>아이디</td><td>이름</td></tr>
-	<tr th:each="dto : ${list}">
-		<td><a th:href="@{empInfo(num=${dto.empId})}">[[${dto.empId}]]</a></td><td>[[${dto.empName}]]</td>
-	</tr>
-</table>
+<form action="empDels" method="post">
+	<table border="1">
+		<tr><td>아이디</td><td>이름</td><td><input type="submit" value="삭제"></td></tr>
+		<tr th:each="dto : ${list}">
+			<td><a th:href="@{empInfo(num=${dto.empId})}">[[${dto.empId}]]</a></td>
+			<td>[[${dto.empName}]]</td>
+			<td><input type="checkbox" name="delete" th:value="${dto.empId}"> </td>
+		</tr>
+		<tr>
+			<th colspan="5"><th:block th:if="${page <=1}">
+				[이전]
+			</th:block>
+			<th:block th:if="${page >1}">
+				<a th:href="@{empList(page=${page -1})}">[이전]</a>
+			</th:block>
+			
+			<th:block th:each=" i :${#numbers.sequence(startPage , endPage)}">
+				[<a th:href="@{empList(page=${i})}">[[${i}]]</a>]
+			</th:block>
+			<th:block th:if="${page<maxPage}">
+				<a th:href="@{empList(page=${page+1})}">이후</a>
+			</th:block>
+			<th:block th:if="${page>=maxPage}">
+				[이후]
+			</th:block>
+			
+		</tr>
+	</table>
+</form>
 <a href="empJoin" >직원등록</a>
 </body>
 </html>

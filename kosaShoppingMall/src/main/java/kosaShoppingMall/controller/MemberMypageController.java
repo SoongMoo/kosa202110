@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kosaShoppingMall.command.MemberCommand;
 import kosaShoppingMall.command.MemberPwCommand;
 import kosaShoppingMall.domain.AuthInfo;
+import kosaShoppingMall.service.MemEmailUpdateCkService;
 import kosaShoppingMall.service.memberJoin.MemberDropService;
 import kosaShoppingMall.service.memberJoin.MemberInfoService;
 import kosaShoppingMall.service.memberJoin.MemberPasswordService;
@@ -34,6 +35,8 @@ public class MemberMypageController {
 	MemberDropService memberDropService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	@Autowired
+	MemEmailUpdateCkService memEmailUpdateCkService;
 	
 	@ModelAttribute
 	public MemberCommand getMemberCommand() {
@@ -88,6 +91,11 @@ public class MemberMypageController {
 		if(result.hasErrors()) {
 			return "thymeleaf/membership/memModify";
 		}
+		Integer i = memEmailUpdateCkService.execute(memberCommand.getMemberEmail(),memberCommand.getMemberId());
+		if(i == 1) {
+			result.rejectValue("memberEmail", "memberCommand.memberEmail", "중복된 이메일입니다.");
+			return "thymeleaf/membership/memModify";
+		} 
 		String path = memberUpdateService.execute(memberCommand, session, result);
 		return path;
 	}

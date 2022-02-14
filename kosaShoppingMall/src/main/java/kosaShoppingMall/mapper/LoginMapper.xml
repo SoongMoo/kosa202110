@@ -16,11 +16,11 @@
 	  and emp_email = #{userEmail}
 </select>
 <select id="findId" parameterType="string" resultType="authInfo">
-	select member_Phone phone, member_id userId
+	select member_Phone phone, member_id userId , MEMBER_EMAIL userEmail
 	from member
 	where lower(member_email) = lower(#{email})
 	union
-	select emp_phone         , emp_id
+	select emp_phone   phone , emp_id userId , emp_email userEmail
 	from employees
 	where lower(emp_email) = lower(#{email})
 </select>

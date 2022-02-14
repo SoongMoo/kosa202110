@@ -27,33 +27,33 @@ $(function(){
 <div id="MemberInfo">
 <h2>상품 입고 등록</h2>
 <form action="ipgoRegist" method="post" th:object="${goodsIpgoCommand}">
-<table>
-	<tr><th>상품번호</th>
-		<td th:if="${goodsIpgoCommand == null}"><input type="text" name="goodsNum" id="num"  readonly="readonly" />
-		<td th:if="${goodsIpgoCommand != null}"><input type="text" name="goodsNum" id="num" 
-												 th:value="${goodsIpgoCommand.goodsNum}" readonly="readonly" />
-		<button type="button" id="btn" >상품 번호 검색</button><br />
-		<span th:if="${#fields.hasErrors('goodsNum')}" th:errors="*{goodsNum}"></span></td>
-	</tr>
-	<tr><th>입고일</th>
-		<td><input type="date" name="ipgoDate" 
-					th:value="${#dates.format(goodsIpgoCommand.ipgoDate,'yyyy-MM-dd')}"/><br />
-		<span th:if="${#fields.hasErrors('ipgoDate')}" th:errors="*{ipgoDate}"></span></td>
-	</tr>
-	<tr><th>입고 수량</th>
-		<td><input type="number" name="ipgoQty" min=1 th:value="${goodsIpgoCommand.ipgoQty}"/><br />
-		<span th:if="${#fields.hasErrors('ipgoQty')}" th:errors="*{ipgoQty}"></span></td>
-	</tr>
-	<tr><th>제조일</th>
-		<td><input type="datetime-local" name="madeDate" 
-		th:value="${goodsIpgoCommand.madeDate}"/><br />
-		<span th:if="${#fields.hasErrors('madeDate')}" th:errors="*{madeDate}"></span></td>
-	</tr>
-	<tr><th colspan="2">
-			<input type="submit" value="등록" />
-		</th>
-	</tr>
-</table>
+	<table>
+		<tr><th>상품번호</th>
+			<td th:if="${goodsIpgoCommand == null}"><input type="text" name="goodsNum" id="num"  readonly="readonly" />
+			<td th:if="${goodsIpgoCommand != null}"><input type="text" name="goodsNum" id="num" 
+													 th:value="${goodsIpgoCommand.goodsNum}" readonly="readonly" />
+			<button type="button" id="btn" >상품 번호 검색</button><br />
+			<span th:if="${#fields.hasErrors('goodsNum')}" th:errors="*{goodsNum}"></span></td>
+		</tr>
+		<tr><th>입고일</th>
+			<td><input type="date" name="ipgoDate" 
+						th:value="${#dates.format(goodsIpgoCommand.ipgoDate,'yyyy-MM-dd')}"/><br />
+			<span th:if="${#fields.hasErrors('ipgoDate')}" th:errors="*{ipgoDate}"></span></td>
+		</tr>
+		<tr><th>입고 수량</th>
+			<td><input type="number" name="ipgoQty" min=1 th:value="${goodsIpgoCommand.ipgoQty}"/><br />
+			<span th:if="${#fields.hasErrors('ipgoQty')}" th:errors="*{ipgoQty}"></span></td>
+		</tr>
+		<tr><th>제조일</th>
+			<td><input type="datetime-local" name="madeDate" 
+			th:value="${goodsIpgoCommand.madeDate}"/><br />
+			<span th:if="${#fields.hasErrors('madeDate')}" th:errors="*{madeDate}"></span></td>
+		</tr>
+		<tr><th colspan="2">
+				<input type="submit" value="등록" />
+			</th>
+		</tr>
+	</table>
 </form>
 </div>
 </div>

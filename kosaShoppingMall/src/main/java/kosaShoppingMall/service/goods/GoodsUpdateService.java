@@ -1,6 +1,7 @@
 package kosaShoppingMall.service.goods;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,18 +36,37 @@ public class GoodsUpdateService {
 		List<FileInfo> list = (List<FileInfo>)session.getAttribute("fileList");
 		/// 이미지 정보를 가져오기 위해서 
 		GoodsDTO lib = goodsMapper.goodsSelectOne(goodsCommand.getGoodsNum());
+		List<String> orgFile = new ArrayList<String>();
+		List<String> strFile = new ArrayList<String>();
+		for(String s : lib.getGoodsOriginal().split("`")) {
+			orgFile.add(s);
+		}
+		for(String s : lib.getGoodsImages().split("`")) {
+			strFile.add(s);
+		}
+		
 		// file삭제 session이 있다면 데이터베이스에서 dto에서 삭제
 		System.out.println(lib.getGoodsOriginal());
 		if(list != null) {
-			for(FileInfo fi : list) {
-				if(fi.getKind().equals("img")) {
-					lib.setGoodsOriginal(lib.getGoodsOriginal().replace(fi.getOrgFile()+"`", ""));
-					lib.setGoodsImages(lib.getGoodsImages().replace(fi.getStrFile() +"`",""));
+			for (FileInfo fi : list) {
+				for (int i = 0; i < orgFile.size(); i++) {
+					if (fi.getOrgFile().equals(orgFile.get(i)) && fi.getKind().equals("img")) {
+						orgFile.remove(i);
+						strFile.remove(i);
+					}
 				}
+
 			}
-			dto.setGoodsOriginal(lib.getGoodsOriginal()); // session에 있는 것은 지우고 session에 없는 것만 저장
-			dto.setGoodsImages(lib.getGoodsImages());
-			System.out.println(dto.getGoodsOriginal());
+			String o = "";
+			String s = "";
+			for(String str : orgFile) {
+				o += str+"`";
+			}
+			for(String str : strFile) {
+				s += str +"`";
+			}
+			dto.setGoodsOriginal(o); // session에 있는 것은 지우고 session에 없는 것만 저장
+			dto.setGoodsImages(s);
 		}
 		
 		String fileDir = "/view/goods/upload";

@@ -8,10 +8,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import kosaShoppingMall.command.GoodsIpgoCommand;
+import kosaShoppingMall.domain.CartDTO;
 import kosaShoppingMall.domain.GoodsDTO;
 import kosaShoppingMall.domain.GoodsIpgoDTO;
 import kosaShoppingMall.domain.GoodsIpgoGoodsDTO;
 import kosaShoppingMall.domain.StartEndPageDTO;
+import kosaShoppingMall.domain.WishDTO;
 
 @Component
 @Repository(value="kosaShoppingMall.mapper.GoodsMapper")
@@ -46,6 +48,9 @@ public interface GoodsMapper {
 	public Integer goodsCount();
 	public Integer goodsItemCount(String goodsWord);
 	public List<GoodsDTO> goodsSelect(HashMap<String, Object> condition);
+	public Integer wishAdd(WishDTO dto);
+	public String wishCount(WishDTO dto);
+	public Integer cartAdd(CartDTO cart);
 }
 
 

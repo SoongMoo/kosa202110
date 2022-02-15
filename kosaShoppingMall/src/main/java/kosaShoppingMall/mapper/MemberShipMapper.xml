@@ -3,6 +3,13 @@
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberShipMapper">
+
+<select id="cartList" parameterType="string"  resultType="cartDTO">
+	select MEMBER_NUM memberNum, GOODS_NUM goodsNum, CART_QTY cartQty
+	from cart
+	where member_num = #{memberNum}
+</select>
+
 <sql id="baseColumns">
 member_Num memberNum,member_Id memberId,member_Pw memberPw,
 member_Name memberName, member_addr memberAddr,member_regist memberRegist,

@@ -3,20 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(function(){
+	$("#cartAdd").click(function(){
+		$.ajax({
+			type : "POST",
+			url : "/cart/goodsCartAdd",
+			dataType : "text",
+			data : {"goodsNum":"[[${goodsCommand.goodsNum}]]", "goodsQty": $("#qty").val()},
+			success : function(result){
+				if(result.trim() == "1"){
+					if(confirm("계속쇼핑하시려면 '아니오'를 누르시오")){
+						location.href="/cart/goodsCartList";
+					}
+				}else{
+					alert("장바구니에 담기지 않았습니다.\n다시 시도 해주세요.")
+				}
+			},
+			error : function(){
+				alert('에러가 나왔다 홀홀홀~');
+				return;
+			}
+		});
+	});
+	
+	
+	$("#qty").change(function(){
+		var qty = $("#qty").val();
+		$("#tot").html(qty * [[${goodsCommand.goodsPrice }]]);
+	});
+	$("#wishBtn").click(function(){
+		if([[${session.authInfo == null}]]){
+			alert("로그인을 하셔야 합니다.");
+			location.href="/";
+			return false;
+		}else{
+			$.ajax({
+				type: "POST",
+				url:"/cart/goodsWishAdd",
+				dataType:"text",
+				data : {"goodsNum" : "[[${goodsCommand.goodsNum}]]"},
+				success:function(result){
+					if(result.trim() == "1"){
+						$("#wishBtn").attr("src", "/static/images/right_arrow.png");
+						alert("관심상품에 등록되었습니다.")
+					}else if(result.trim() == "0"){
+						$("#wishBtn").attr("src", "/static/images/left_arrow.png");
+						alert("관심상품에 삭제되었습니다.")
+					}
+				},
+				error: function(){
+					alert('로그인 아웃 되었습니다.\n다시 로그인 해 주세요.');
+					location.href="/";
+					return false;
+				}
+			});
+		}
+	});
+});
+</script>
 </head>
 <body>
-<table width="800" align = "center" border="1">
+<form action="#" name="frm" method="post">
+<table width="800" align = "center" >
 	<tr><td colspan="2" >[[${goodsCommand.goodsName}]] 상품 설명입니다.</td></tr>
-	<tr><td rowspan="5">
-			<img height="500" width="300" th:src="|/goods/upload/${goodsCommand.goodsMain}|" />
+	<tr><td rowspan="6">
+			<img height="500" width="500" th:src="|/goods/upload/${goodsCommand.goodsMain}|" />
 		</td>
-		<td>[[${goodsCommand.goodsName}]]</td>
+		<td width="300">[[${goodsCommand.goodsName}]] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						관심상품<img src="/static/images/left_arrow.png" id="wishBtn"/></td>
 	</tr>
-	<tr><td align="left">[[${#numbers.formatCurrency(goodsCommand.goodsPrice)}]]원</td></tr>
-	<tr><td align="left"><span th:if="${goodsCommand.deliveryCost == 0}" th:text="무료배송"></span>
-						<span th:if="${goodsCommand.deliveryCost != 0}" th:text="${goodsCommand.deliveryCost}"></span></td></tr>
-	<tr><td align="left"></td></tr>
-	<tr><td align="left"></td></tr>
+	<tr><td align="left">가격 : [[${#numbers.formatCurrency(goodsCommand.goodsPrice)}]]원</td></tr>
+	<tr><td align="left">배송비 : <span th:if="${goodsCommand.deliveryCost == 0}" th:text="무료배송"></span>
+						<span th:if="${goodsCommand.deliveryCost != 0}" th:text="${#numbers.formatCurrency(goodsCommand.deliveryCost)}"></span>원</td></tr>
+	<tr><td align="left"><input type="number" size = "3" min = "1" name="PurchaseQty" value="1" id="qty" /> [[${goodsCommand.goodsPrice }]]원</td></tr>
+	<tr><td align = "left">총 상품금액 &nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;<span id="tot">[[${goodsCommand.goodsPrice }]]</span>원</td></tr>
+	
+	<tr><td align = "center"><input type="button" value="장바구니" id="cartAdd" /> <input type="submit" value="바로구매" /></td></tr>
+	
+	<tr><td colspan = "2">
+		제품 상세 설명
+		<p>
+		<span th:utext="${#strings.replace(goodsCommand.goodsContent, newLineChar ,'&lt;br /&gt;')}" ></span>
+		<p>
+		<th:block th:each="goodsImage : ${#strings.arraySplit(goodsCommand.goodsImages,'`')}">
+			<img th:src="|/goods/upload/${goodsImage}|" />
+		</th:block>
+	</td></tr>
 </table>
+</form>
 </body>
 </html>

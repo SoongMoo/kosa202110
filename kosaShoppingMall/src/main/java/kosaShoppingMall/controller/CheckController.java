@@ -1,5 +1,7 @@
 package kosaShoppingMall.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +12,8 @@ import kosaShoppingMall.service.EmailCheckService;
 import kosaShoppingMall.service.EmpEmailUpdatecheckService;
 import kosaShoppingMall.service.IdcheckService;
 import kosaShoppingMall.service.MemEmailUpdateCkService;
+import kosaShoppingMall.service.goods.GoodsCartService;
+import kosaShoppingMall.service.goods.GoodsWishService;
 
 @RestController
 public class CheckController {
@@ -21,6 +25,22 @@ public class CheckController {
 	EmpEmailUpdatecheckService empEmailUpdatecheckService;
 	@Autowired
 	MemEmailUpdateCkService memEmailUpdateCkService;
+	@Autowired
+	GoodsWishService goodsWishService;
+	@Autowired
+	GoodsCartService goodsCartService;
+	
+	@RequestMapping(value = "/cart/goodsCartAdd")
+	public String goodsCartAdd(@RequestParam(value = "goodsNum") String goodsNum,
+			@RequestParam(value = "goodsQty") Integer goodsQty,HttpSession session) {
+		return goodsCartService.execute(goodsNum, goodsQty, session);
+	}
+	
+	
+	@RequestMapping(value="/cart/goodsWishAdd")
+	public String goodsWishAdd(@RequestParam(value = "goodsNum") String goodsNum, HttpSession session) {
+		return goodsWishService.execute(goodsNum, session);
+	}
 	
 	// member 업데이트
 	@RequestMapping(value = "/mypage/memMyEmailCk", method = RequestMethod.POST)

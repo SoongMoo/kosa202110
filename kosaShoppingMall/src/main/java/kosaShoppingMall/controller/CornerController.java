@@ -15,6 +15,7 @@ public class CornerController {
 	@RequestMapping("/corner/prodInfo")
 	public String prodInfo(@RequestParam(value = "goodsNum") String goodsNum,Model model) {
 		goodsDetailService.execute(goodsNum, model);
+		model.addAttribute("newLineChar", "\n");
 		return "thymeleaf/goods/prodInfo";
 	}
 }

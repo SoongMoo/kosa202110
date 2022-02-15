@@ -4,6 +4,36 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+
+	<insert id="cartAdd" useGeneratedKeys="false" parameterType="cartDTO">
+		MERGE into cart w
+		USING (select goods_num from goods where goods_num = #{goodsNum}) g
+		on (w.GOODS_num = g.GOODS_num and w.member_Num = #{memberNum})
+		When MATCHED THEN
+			update set w.CART_QTY = w.CART_QTY + #{cartQty}
+		When NOT MATCHED THEN
+			insert (w.MEMBER_NUM, w.GOODS_NUM, w.CART_QTY)
+			values(#{memberNum},#{goodsNum},#{cartQty})
+	</insert>
+	
+	<update id="wishAdd"  parameterType="wishDTO" >
+		MERGE into wish w
+		USING (select goods_num from goods where goods_num = #{goodsNum}) g
+		on (w.GOODS_num = g.GOODS_num and w.member_Num = #{memberNum})
+		When MATCHED THEN
+			update set wish_date = sysdate
+			delete where w.goods_num = #{goodsNum} AND w.member_Num = #{memberNum}
+		When NOT MATCHED THEN
+			insert (w.goods_num, w.member_Num, w.wish_date)
+			values(#{goodsNum}, #{memberNum} , sysdate)
+	</update>
+	
+	<select id="wishCount" parameterType="wishDTO" 	resultType="string">
+		select count(*) from wish
+		where goods_num = #{goodsNum} and member_Num = #{memberNum}
+	</select>
+
+
 	<select id="goodsSelect" resultType="goodsDTO" parameterType="hashMap">
 		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
 		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount

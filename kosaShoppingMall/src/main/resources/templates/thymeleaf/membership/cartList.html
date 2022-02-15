@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table width="600" align = "center">
+	<tr><td>제품번호</td><td>수량</td></tr>
+	
+	<tr th:each="dto : ${lists}" >
+	<td>[[${dto.goodsNum}]]</td><td>[[${dto.cartQty}]]</td>
+	</tr>
+</table>
+</body>
+</html>

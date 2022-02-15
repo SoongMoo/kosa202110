@@ -17,17 +17,22 @@ public class GoodsDeleteService {
 	public void execute(String goodsNum, HttpServletRequest request) {
 		
 		GoodsDTO dto = goodsMapper.goodsSelectOne(goodsNum);
-		String fileDir = "/view/goods/upload";
-		String filePath=request.getServletContext().getRealPath(fileDir);
-		String [] fileNames =  dto.getGoodsImages().split("`");
-		String file = dto.getGoodsMain();
-		for(String fileName : fileNames) {
-			File f = new File(filePath + "/" + fileName);
+		Integer i = goodsMapper.goodsDelete(goodsNum);
+		if(i > 0 ) {
+			String fileDir = "/view/goods/upload";
+			String filePath=request.getServletContext().getRealPath(fileDir);
+			
+			if(dto.getGoodsImages() != null) {
+				String [] fileNames =  dto.getGoodsImages().split("`");
+				for(String fileName : fileNames) {
+					File f = new File(filePath + "/" + fileName);
+					if(f.exists()) f.delete();
+				}
+			}
+			
+			String file = dto.getGoodsMain();
+			File f = new File(filePath + "/" + file);
 			if(f.exists()) f.delete();
 		}
-		File f = new File(filePath + "/" + file);
-		if(f.exists()) f.delete();
-		
-		goodsMapper.goodsDelete(goodsNum);
 	}
 }

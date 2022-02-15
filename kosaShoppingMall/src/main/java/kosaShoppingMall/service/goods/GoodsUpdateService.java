@@ -28,8 +28,6 @@ public class GoodsUpdateService {
 		dto.setGoodsPrice(goodsCommand.getGoodsPrice());
 		dto.setGoodsNum(goodsCommand.getGoodsNum());
 		
-		
-		
 		/// session에 삭제하려는 파일 정보
 		List<FileInfo> list = (List<FileInfo>)session.getAttribute("fileList");
 		/// 이미지 정보를 가져오기 위해서 
@@ -98,8 +96,8 @@ public class GoodsUpdateService {
 			String storeTotal = "";
 			String originalTotal = "";
 			if(lib.getGoodsImages() != null) {
-				storeTotal = dto.getGoodsImages();
-				originalTotal =  dto.getGoodsOriginal();
+				storeTotal = lib.getGoodsImages(); 
+				originalTotal =  lib.getGoodsOriginal();
 			}
 			for(MultipartFile mf : goodsCommand.getGoodsImages() ) {
 				String originalFile = mf.getOriginalFilename();

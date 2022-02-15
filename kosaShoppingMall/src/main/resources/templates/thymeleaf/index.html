@@ -5,11 +5,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div>
 
 <span th:if="${session.authInfo == null}">
 
 <form action="/login/loginPro" name="frm" id="frm" method="post" th:object="${loginCommand}" >
-<table border="1">
+<table border="1"  align="center">
 <tr>
 	<td colspan="3">
 		자동 로그인 <input type="checkbox" name="autoLogin" />
@@ -47,7 +48,8 @@
 </form>
 </span>
 
-<span th:if="${session.authInfo != null}">
+<span th:if="${session.authInfo != null}" >
+<div style="text-align:center">
 	<span th:switch="${session.authInfo.grade}">
 	<span th:case="emp">
 		<a href="/goods/goodsList">상품 관리</a>
@@ -59,6 +61,45 @@
 		<a href="/mypage/memberDetail">내 정보 보기</a>
 	</span>
 	<a href="/login/logout">로그아웃</a>
+</div>
 </span>
+
+
+</div>
+
+<div>
+	<table align="center">
+		<tr>
+			<th:block  th:each="goodsDTO , idx : ${lists}">
+			<td>
+				<a th:href="@{/corner/prodInfo(goodsNum=${goodsDTO.goodsNum})}">
+				<img width="200" height="200" th:src="|/goods/upload/${goodsDTO.goodsMain}|"><br />
+				[[${goodsDTO.goodsName}]]<br />
+				가격 : [[${#numbers.formatCurrency(goodsDTO.goodsPrice)}]]
+				</a>
+			</td>
+			<th:block th:if="${idx.count % 3 == 0}" th:utext="'</tr><tr>'" />
+			</th:block>
+		</tr>
+	</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

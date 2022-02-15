@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table width="800" align = "center" border="1">
+	<tr><td colspan="2" >[[${goodsCommand.goodsName}]] 상품 설명입니다.</td></tr>
+	<tr><td rowspan="5">
+			<img height="500" width="300" th:src="|/goods/upload/${goodsCommand.goodsMain}|" />
+		</td>
+		<td>[[${goodsCommand.goodsName}]]</td>
+	</tr>
+	<tr><td align="left">[[${#numbers.formatCurrency(goodsCommand.goodsPrice)}]]원</td></tr>
+	<tr><td align="left"><span th:if="${goodsCommand.deliveryCost == 0}" th:text="무료배송"></span>
+						<span th:if="${goodsCommand.deliveryCost != 0}" th:text="${goodsCommand.deliveryCost}"></span></td></tr>
+	<tr><td align="left"></td></tr>
+	<tr><td align="left"></td></tr>
+</table>
+</body>
+</html>

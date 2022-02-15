@@ -1,5 +1,6 @@
 package kosaShoppingMall.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,11 +41,11 @@ public interface GoodsMapper {
 	// Map을 사용한 방법
 	public Integer goodsRemove(Map<String, Object> condition);
 	
-	
 	public Integer goodsIpgoDels(List<String[]> condition);
 	public Integer count(String goodsWord);
 	public Integer goodsCount();
 	public Integer goodsItemCount(String goodsWord);
+	public List<GoodsDTO> goodsSelect(HashMap<String, Object> condition);
 }
 
 

@@ -4,6 +4,21 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+	<select id="goodsSelect" resultType="goodsDTO" parameterType="hashMap">
+		select  GOODS_NUM goodsNum , GOODS_NAME goodsName , GOODS_PRICE goodsPrice ,
+		GOODS_CONTENT goodsContent , DELIVERY_COST deliveryCost, VISIT_COUNT vistCount
+		,goods_main goodsMain, goods_images goodsImages, goods_Original goodsOriginal
+		,goods_Main_Org goodsMainOrg
+		from goods	
+		<where>
+			GOODS_NUM in 
+			<foreach collection="goodsNums" item="goodsNum" index="index" open="(" close=")" separator="," >
+				#{goodsNum}
+			</foreach>
+		</where>
+	</select>
+
+
 	<delete id="goodsDeletes" parameterType="hashMap">
 		delete from goods
 		<where>
@@ -233,7 +248,10 @@
 		</where>
 		order by goodsNum desc
 	)
+	
+	<if test="startRow != null">
 	where rn between #{startRow} and #{endRow}
+	</if>
 	</select>
 	
 	<insert id="goodsInsert" parameterType="goodsDTO"> 
@@ -274,4 +292,3 @@
 		concat('goods',nvl(max(substr(goods_num,6)),10000)+1)from goods	
 	</select>
 </mapper>
-

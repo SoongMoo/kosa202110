@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+주문서
+<hr />
+1. 주문 상품<br />
+<p>
+<table width="600" align="center">
+	<tr><td>주문 상품 정보</td>	<td>수량/상품금액</td><td>배송비</td></tr>
+	<tr th:each="dto : ${list}" >
+		<td>
+		<img th:src="|/goods/upload/${dto.goodsDTO.goodsMain}|" height="60" />
+		[[${dto.goodsDTO.goodsName}]]
+		</td>
+		<td>[[${dto.cartDTO.cartQty}]]개<br />
+			[[${#numbers.formatCurrency(dto.cartDTO.totalPrice)}]]원</td>
+		<td>
+			<span th:if="${dto.goodsDTO.deliveryCost == 0}" th:text="무료배송" ></span>
+			<span th:if="${dto.goodsDTO.deliveryCost > 0}" th:text="${dto.goodsDTO.deliveryCost}" ></span>
+		</td>
+	</tr>
+</table>
+</p>
+<p>
+<form action="#" >
+<table width="600"  align="center">
+	<tr>
+		<td>
+			<table width="300">
+				<tr><td colspan=2>2. 배송지 정보 입력</td></tr>
+				<tr><td>받는 사람</td>
+					<td><input type="text" name="receiveName" /></td></tr>
+				<tr><td>받는 주소</td>
+					<td><input type="text" name="purchaseAddr" /></td></tr>		
+				<tr><td>받는 사람 연락처</td>
+					<td><input type="text" name="purchasePhone" /></td></tr>
+				<tr><td>주문메세지</td>
+					<td><input type="text" name="purchaseRequest" /></td></tr>
+				<tr><td>결제 방법</td>
+					<td>
+						<select name="purchaseMethod">
+							<option>카드</option>
+							<option>카카오페이</option>
+						</select>
+					</td></tr>
+			</table>
+		</td>
+		<td >
+			<table width="300">
+				<tr><td align="left" colspan=2>3.결제금액</td></tr>
+				<tr><td align="left">상품금액 : </td><td align = "right"> [[${#numbers.formatCurrency(goodsTotalPrice)}]]원</td></tr>
+				<tr><td align="left">배송비 : </td><td align = "right"> [[${#numbers.formatCurrency(goodsTotalDelivery)}]]원</td></tr>
+				<tr><td align="left">총 결제 금액 : </td><td align = "right"> [[${#numbers.formatCurrency(goodsTotalDelivery + goodsTotalPrice)}]]원</td></tr>
+				<tr><td align="center"  colspan=2><input type="submit" value="결제하기"/></td></tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
+</p>
+</body>
+</html>
+
+
+
+

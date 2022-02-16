@@ -28,6 +28,16 @@
 	<association property="cartDTO" javaType="kosaShoppingMall.domain.CartDTO" resultMap="cartResultMap"/>
 </resultMap>
 
+<select id="goodsOrder" parameterType="goodsBuy" resultMap="GoodsCartResultMap">
+	select GOODS_MAIN, g.GOODS_NUM, GOODS_NAME, DELIVERY_COST, CART_QTY, CART_QTY * GOODS_PRICE total_Price
+	from goods g, cart c
+	where g.GOODS_NUM = c.GOODS_NUM and MEMBER_NUM =  #{memberNum}
+	AND g.GOODS_NUM in
+	<foreach collection="goodsNums" item="goodsNum" index="index" open="(" close=")" separator="," >
+			#{goodsNum}
+	</foreach>
+</select>
+
 <select id="cartList" parameterType="string"   resultMap="GoodsCartResultMap">
 	select GOODS_MAIN, g.GOODS_NUM, GOODS_NAME, DELIVERY_COST, CART_QTY, CART_QTY * GOODS_PRICE total_Price
 	from goods g, cart c

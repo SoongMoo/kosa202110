@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import kosaShoppingMall.domain.CartDTO;
+import kosaShoppingMall.domain.GoodsBuy;
 import kosaShoppingMall.domain.GoodsCartDTO;
 import kosaShoppingMall.domain.MemberDTO;
 
@@ -19,4 +20,5 @@ public interface MemberShipMapper {
 	public Integer memberDrop(String memId);
 	public List<GoodsCartDTO> cartList(String memberNum);
 	public Integer goodsCartQtyDown(CartDTO dto);
+	public List<GoodsCartDTO> goodsOrder(GoodsBuy goodsBuy);
 }

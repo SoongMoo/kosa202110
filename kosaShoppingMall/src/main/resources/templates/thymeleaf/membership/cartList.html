@@ -32,20 +32,42 @@ function checkQty(num, qty){
 		return false;
 	}
 }
+function goodsCheck(){
+	var chk = document.getElementsByName("prodCk");
+	var cnt = 0;
+	for(var i = 0; i < chk.length ; i++){
+		if(chk[i].checked){
+			cnt++;
+		}
+	}
+	if(cnt <= 0){
+		alert("구매하시려면 적어도 하나 이상 상품을 선택하셔야 합니다.");
+		return false;
+	}
+}
 </script>
 </head>
 <body>
+<form action="goodsBuy" method="post" onsubmit="return goodsCheck();">
 <table width="600" align = "center">
-	<tr><td>이미지</td><td>제품이름</td><td>수량</td><td>합계금액</td><td>배송비</td></tr>
-	
+	<tr><td><input type="checkbox" /></td><td>이미지</td><td>제품이름</td><td>수량</td><td>합계금액</td><td>배송비</td>
+		<td><input type="button"  value="선택 상품 삭제" /></td>
+	</tr>
 	<tr th:each="dto : ${lists}" >
+	<td><input type="checkbox" name="prodCk" th:value="${dto.goodsDTO.goodsNum}" checked="checked"/></td>
 	<td><img th:src="|/goods/upload/${dto.goodsDTO.goodsMain}|" height ="50"/></td>
 	<td>[[${dto.goodsDTO.goodsName}]]</td>
 	<td> <a th:href="|javascript:checkQty('${dto.goodsDTO.goodsNum}','${dto.cartDTO.cartQty}')|"> - </a>
 			[[${dto.cartDTO.cartQty}]] 
 		 <a th:href="|javascript:goodsCartAdd('${dto.goodsDTO.goodsNum}')|"> + </a> </td>
-	<td>[[${dto.cartDTO.totalPrice}]]</td><td>[[${dto.goodsDTO.deliveryCost}]]</td>
+	<td>[[${dto.cartDTO.totalPrice}]]</td>
+	<td>[[${dto.goodsDTO.deliveryCost}]]</td>
+	<td><input type="button"  value="삭제" /></td>
 	</tr>
+	<tr><td colspan="6" align="center">
+		<input type="submit" value="구매하기"/>
+	</td></tr>
 </table>
+</form>
 </body>
 </html>

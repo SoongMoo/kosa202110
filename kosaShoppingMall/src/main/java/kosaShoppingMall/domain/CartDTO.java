@@ -10,4 +10,5 @@ public class CartDTO {
 	String goodsNum;
 	String memberNum;
 	Long cartQty;
+	Long totalPrice;
 }

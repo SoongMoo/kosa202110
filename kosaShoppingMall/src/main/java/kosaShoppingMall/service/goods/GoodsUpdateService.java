@@ -37,19 +37,19 @@ public class GoodsUpdateService {
 		dto.setGoodsImages(lib.getGoodsOriginal());
 		dto.setGoodsOriginal(lib.getGoodsOriginal());
 		
-		// dto에 저장된 팡리 정보를 스플릿 후 리스트에 저장
-		List<String> orgFile = new ArrayList<String>();
-		List<String> strFile = new ArrayList<String>();
-		for(String s : dto.getGoodsOriginal().split("`")) {
-			orgFile.add(s);
-		}
-		for(String s : dto.getGoodsImages().split("`")) {
-			strFile.add(s);
-		}
-		
-		// file삭제 session이 있다면 데이터베이스에서 dto에서 삭제
-		System.out.println(lib.getGoodsOriginal());
 		if(list != null) {
+			// dto에 저장된 파일 정보를 스플릿 후 리스트에 저장
+			List<String> orgFile = new ArrayList<String>();
+			List<String> strFile = new ArrayList<String>();
+			for(String s : dto.getGoodsOriginal().split("`")) {
+				orgFile.add(s);
+			}
+			for(String s : dto.getGoodsImages().split("`")) {
+				strFile.add(s);
+			}
+			
+			// file삭제 session이 있다면 데이터베이스에서 dto에서 삭제
+			System.out.println(lib.getGoodsOriginal());
 			for (FileInfo fi : list) { // session에 있는 내용과 비교하여 리스트에 있는 파일정보 삭제
 				for (int i = 0; i < orgFile.size(); i++) {
 					if (fi.getOrgFile().equals(orgFile.get(i)) && fi.getKind().equals("img")) {
@@ -57,23 +57,20 @@ public class GoodsUpdateService {
 						strFile.remove(i);
 					}
 				}
-
 			}
 			String o = "";
 			String s = "";
 			// 리스트에 있는 내용을 문자열로 변경
-			for(String str : orgFile) {
-				o += str+"`";
+			for(String ostr : orgFile) {
+				o += ostr+"`";
 			}
-			for(String str : strFile) {
-				s += str +"`";
+			for(String sstr : strFile) {
+				s += sstr +"`";
 			}
 			// 문자열을 dto에 저장
 			dto.setGoodsOriginal(o); // session에 있는 것은 지우고 session에 없는 것만 저장
 			dto.setGoodsImages(s);
 		}
-
-		
 		String fileDir = "/view/goods/upload";
 		String filePath=session.getServletContext().getRealPath(fileDir);
 		// 메인 이미지 저장

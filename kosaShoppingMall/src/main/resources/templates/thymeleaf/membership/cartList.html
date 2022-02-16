@@ -3,13 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+function goodsCartAdd(goodsNum){
+	$.ajax({
+		url : "/cart/goodsCartAdd",
+		type : "POST",
+		dataType : "text",
+		data : {"goodsNum":goodsNum,"goodsQty": 1 },
+		success : function(result){
+			if(result.trim() == "1"){
+				location.href="/cart/goodsCartList";
+			}else{
+				alert("수량이 추가하지 않았습니다.");
+			}
+		},
+		error : function(){
+			alert('에러가 나왔다 홀홀홀~');
+			return;
+		}
+	});
+}
+function checkQty(num, qty){
+	if(qty > 1){
+		location.href="goodsCartQtyDown?goodsNum="+num;
+	}else{
+		alert("최소 수량은 1이어야 합니다.");
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 <table width="600" align = "center">
-	<tr><td>제품번호</td><td>수량</td></tr>
+	<tr><td>이미지</td><td>제품이름</td><td>수량</td><td>합계금액</td><td>배송비</td></tr>
 	
 	<tr th:each="dto : ${lists}" >
-	<td>[[${dto.goodsNum}]]</td><td>[[${dto.cartQty}]]</td>
+	<td><img th:src="|/goods/upload/${dto.goodsDTO.goodsMain}|" height ="50"/></td>
+	<td>[[${dto.goodsDTO.goodsName}]]</td>
+	<td> <a th:href="|javascript:checkQty('${dto.goodsDTO.goodsNum}','${dto.cartDTO.cartQty}')|"> - </a>
+			[[${dto.cartDTO.cartQty}]] 
+		 <a th:href="|javascript:goodsCartAdd('${dto.goodsDTO.goodsNum}')|"> + </a> </td>
+	<td>[[${dto.cartDTO.totalPrice}]]</td><td>[[${dto.goodsDTO.deliveryCost}]]</td>
 	</tr>
 </table>
 </body>

@@ -21,7 +21,8 @@ public class GoodsCartService {
 		CartDTO cart = new CartDTO();
 		cart.setCartQty(Long.valueOf(goodsQty));
 		cart.setGoodsNum(goodsNum);
-		cart.setMemberNum((memberShipMapper.selectOne(((AuthInfo)session.getAttribute("authInfo")).getUserId())).getMemberNum());
+		cart.setMemberNum((memberShipMapper.selectOne(((AuthInfo)session.getAttribute("authInfo"))
+																		.getUserId())).getMemberNum());
 		return goodsMapper.cartAdd(cart).toString();
 	}
 

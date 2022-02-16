@@ -4,11 +4,37 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberShipMapper">
 
-<select id="cartList" parameterType="string"  resultType="cartDTO">
-	select MEMBER_NUM memberNum, GOODS_NUM goodsNum, CART_QTY cartQty
-	from cart
-	where member_num = #{memberNum}
+
+<update id="goodsCartQtyDown" parameterType="kosaShoppingMall.domain.CartDTO">
+	update cart
+	set cart_qty = cart_qty - 1
+	where member_num = #{memberNum} and goods_num = #{goodsNum}
+</update>
+
+<resultMap type="kosaShoppingMall.domain.GoodsDTO" id="goodsResultMap">
+	<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+	<result column="GOODS_MAIN" jdbcType="VARCHAR" property="goodsMain"/>
+	<result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+	<result column="DELIVERY_COST" jdbcType="VARCHAR" property="deliveryCost"/>
+</resultMap>
+<resultMap type="kosaShoppingMall.domain.CartDTO" id="cartResultMap">
+	<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+	<result column="CART_QTY" jdbcType="BIGINT" property="cartQty"/>
+	<result column="total_Price" jdbcType="BIGINT" property="totalPrice"/>
+</resultMap>
+
+<resultMap type="GoodsCartDTO" id="GoodsCartResultMap">
+	<association property="goodsDTO" javaType="kosaShoppingMall.domain.GoodsDTO" resultMap="goodsResultMap" />
+	<association property="cartDTO" javaType="kosaShoppingMall.domain.CartDTO" resultMap="cartResultMap"/>
+</resultMap>
+
+<select id="cartList" parameterType="string"   resultMap="GoodsCartResultMap">
+	select GOODS_MAIN, g.GOODS_NUM, GOODS_NAME, DELIVERY_COST, CART_QTY, CART_QTY * GOODS_PRICE total_Price
+	from goods g, cart c
+	where g.GOODS_NUM = c.GOODS_NUM and MEMBER_NUM =  #{memberNum}
 </select>
+
+
 
 <sql id="baseColumns">
 member_Num memberNum,member_Id memberId,member_Pw memberPw,
@@ -43,13 +69,49 @@ member_email
 	    GENDER = #{gender}, MEMber_BIRTH = #{memberBirth} 
 	where MEMber_NUM = #{memberNum}
 </update>
-<select id="selectOne" parameterType="string" 
-	resultType="memDTO">
+<!-- setter -->
+<resultMap type="memDTO" id="memberResultMap"> 
+	<id column="member_Num" jdbcType="VARCHAR" property="memberNum"/>
+	<result column="member_id" jdbcType="VARCHAR" property="memberId" />
+	<result column="member_Pw" jdbcType="VARCHAR" property="memberPw" />
+	<result column="member_Name" jdbcType="VARCHAR" property="memberName"/>
+	<result column="member_addr" jdbcType="VARCHAR" property="memberAddr"/>
+	<result column="member_regist" jdbcType="DATE" property="memberNum"/>
+	<result column="gender" jdbcType="VARCHAR" property="gender"/>
+	<result column="member_phone" jdbcType="VARCHAR" property="memberPhone"/>
+	<result column="member_birth" jdbcType="DATE" property="memberBirth"/>
+	<result column="member_Email" jdbcType="VARCHAR" property="memberEmail"/>
+</resultMap>
+<!-- 생성자 -->
+<resultMap type="memDTO" id="memberConstructorResultMap">
+	<constructor >
+		<idArg column="member_Num" javaType="string"/>
+		<arg column="member_Num" javaType="string" />
+		<arg column="member_Pw" javaType="string" />
+		<arg column="member_Name" javaType="string" />
+		<arg column="member_addr" javaType="string" />
+		<arg column="member_regist" javaType="java.sql.Timestamp" />
+		<arg column="gender" javaType="string" />
+		<arg column="member_phone" javaType="string" />
+		<arg column="member_birth" javaType="java.util.Date" />
+		<arg column="member_email" javaType="string" />
+		<arg column="member_ok" javaType="string" />
+	</constructor>
+</resultMap>
+<select id="selectOne"  parameterType="string"  resultMap="memberConstructorResultMap">
+	select member_Num ,member_Id ,member_Pw ,member_Name , member_addr,
+		   member_regist ,gender,member_phone ,member_birth, 
+		   member_email, member_ok
+	from member
+	where member_id = #{memberId}
+</select>
+<!--  setter
+<select id="selectOne" parameterType="string"  resultType="memDTO">
 	select <include refid="baseColumns" />
 	from member
 	where member_id = #{memberId}
 </select>
-
+-->
 <insert id="memberInsert" 
 	parameterType="memDTO">
 insert into member( <include refid="baseColumns1" /> )

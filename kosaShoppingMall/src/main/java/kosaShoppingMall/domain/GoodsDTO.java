@@ -23,6 +23,8 @@ public class GoodsDTO {
 	
 	
 	GoodsIpgoDTO goodsIpgoDTO;
+	
+	
 }
 
 

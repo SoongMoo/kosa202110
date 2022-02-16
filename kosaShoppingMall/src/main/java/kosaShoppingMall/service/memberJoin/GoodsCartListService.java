@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import kosaShoppingMall.domain.AuthInfo;
-import kosaShoppingMall.domain.CartDTO;
+import kosaShoppingMall.domain.GoodsCartDTO;
 import kosaShoppingMall.mapper.MemberShipMapper;
 
 @Service
@@ -20,7 +20,7 @@ public class GoodsCartListService {
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
 		String memberNum = 
 				memberShipMapper.selectOne(authInfo.getUserId()).getMemberNum();
-		List<CartDTO> list = memberShipMapper.cartList(memberNum);
+		List<GoodsCartDTO> list = memberShipMapper.cartList(memberNum);
 		model.addAttribute("lists", list);
 	}
 }

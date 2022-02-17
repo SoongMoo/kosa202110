@@ -15,6 +15,7 @@ import kosaShoppingMall.service.memberJoin.GoodsCartDelsService;
 import kosaShoppingMall.service.memberJoin.GoodsCartListService;
 import kosaShoppingMall.service.memberJoin.GoodsCartQtyDownService;
 import kosaShoppingMall.service.memberJoin.GoodsOrderService;
+import kosaShoppingMall.service.memberJoin.OrderProcessListService;
 
 @Controller
 public class GoodsCartController {
@@ -28,6 +29,16 @@ public class GoodsCartController {
 	GoodsCartDelsService goodsCartDelsService;
 	@Autowired
 	GoodsOrderService goodsOrderService;
+	
+	@Autowired
+	OrderProcessListService orderProcessListService;
+	
+	@RequestMapping("/cart/orderList")
+	public String orderList(HttpSession session, Model model) {
+		orderProcessListService.execute(session, model);
+		return "thymeleaf/membership/orderList";
+	}
+	
 	@RequestMapping(value="/cart/goodsOrder", method = RequestMethod.POST)
 	public String goodsOrder(PurchaseCommand purchaseCommand, HttpSession session) {
 		// 주문 내역 저장

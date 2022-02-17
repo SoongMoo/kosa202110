@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import kosaShoppingMall.command.PurchaseCommand;
 import kosaShoppingMall.domain.AuthInfo;
@@ -16,6 +18,7 @@ import kosaShoppingMall.domain.PurchaseDTO;
 import kosaShoppingMall.domain.PurchaseListDTO;
 import kosaShoppingMall.mapper.MemberShipMapper;
 @Service
+@Transactional
 public class GoodsOrderService {
 	@Autowired
 	MemberShipMapper memberShipMapper;
@@ -40,6 +43,7 @@ public class GoodsOrderService {
 		// 구매리스트 : 제품마다 insert를 해야 하므로 반복문을 사용해서 insert문을 실행
 		if(i == 1) {
 			// 구매 리스트에 정보 저장
+			try {
 				for(String goodsNum : purchaseCommand.getGoodsNums().split("/")) {
 					PurchaseListDTO purchaseListDTO = new PurchaseListDTO();
 					purchaseListDTO.setGoodsNum(goodsNum);
@@ -52,6 +56,9 @@ public class GoodsOrderService {
 				goodsBuy.setGoodsNums(purchaseCommand.getGoodsNums().split("/"));
 				goodsBuy.setMemberNum(memberDTO.getMemberNum());
 				memberShipMapper.cartGoodsDel(goodsBuy);
+			}catch(Exception e) {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			}
 		}
 		return purchaseNum;
 	}

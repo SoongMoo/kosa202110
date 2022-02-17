@@ -5,11 +5,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.PurchaseCommand;
+import kosaShoppingMall.service.memberJoin.DoPaymentService;
 import kosaShoppingMall.service.memberJoin.GoodsBuyService;
 import kosaShoppingMall.service.memberJoin.GoodsCartDelsService;
 import kosaShoppingMall.service.memberJoin.GoodsCartListService;
@@ -29,9 +31,23 @@ public class GoodsCartController {
 	GoodsCartDelsService goodsCartDelsService;
 	@Autowired
 	GoodsOrderService goodsOrderService;
-	
 	@Autowired
 	OrderProcessListService orderProcessListService;
+	@Autowired
+	DoPaymentService doPaymentService;
+	
+	@RequestMapping("/cart/puchaseDetail")
+	public String puchaseDetail(@RequestParam(value ="purchaseNum") String purchaseNum) {
+	
+		return "thymeleaf/membership/puchaseDetail";
+	}
+	@RequestMapping("/cart/doPayment")
+	public String doPayment(@RequestParam(value ="purchaseNum") String purchaseNum,
+			@RequestParam(value ="totalPrice") String totalPrice,
+			@RequestParam(value ="cardNumber") String cardNumber, Model model) {
+		doPaymentService.execute(purchaseNum, totalPrice,cardNumber, model );
+		return "thymeleaf/membership/buyfinished";
+	}
 	
 	@RequestMapping("/cart/orderList")
 	public String orderList(HttpSession session, Model model) {
@@ -48,8 +64,8 @@ public class GoodsCartController {
 				"&totalPrice="+purchaseCommand.getTotalPrice();
 	}
 	@RequestMapping("/cart/paymentOk")
-	public String paymentOk(@RequestParam(value="purchaseNum") String purchaseNum,
-			@RequestParam(value = "totalPrice") String totalPrice) {
+	public String paymentOk(@ModelAttribute(value="purchaseNum") String purchaseNum,
+			@ModelAttribute(value = "totalPrice") String totalPrice) {
 		return "thymeleaf/membership/payment";
 	}
 	

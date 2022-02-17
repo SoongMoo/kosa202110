@@ -9,6 +9,8 @@ import kosaShoppingMall.domain.CartDTO;
 import kosaShoppingMall.domain.GoodsBuy;
 import kosaShoppingMall.domain.GoodsCartDTO;
 import kosaShoppingMall.domain.MemberDTO;
+import kosaShoppingMall.domain.PaymentDTO;
+import kosaShoppingMall.domain.PaymentPurchaseGoodsDTO;
 import kosaShoppingMall.domain.PurchaseDTO;
 import kosaShoppingMall.domain.PurchaseListDTO;
 
@@ -29,4 +31,7 @@ public interface MemberShipMapper {
 	public Integer purchase(PurchaseDTO dto);
 	public Integer purchaseList(PurchaseListDTO purchaseListDTO);
 	public Integer cartGoodsDel(GoodsBuy goodsBuy);
+	public List<PaymentPurchaseGoodsDTO> orderList(String memberNum);
+	public Integer payment(PaymentDTO paymentDTO);
+	public Integer purchaseStatus(String purchaseNum);
 }

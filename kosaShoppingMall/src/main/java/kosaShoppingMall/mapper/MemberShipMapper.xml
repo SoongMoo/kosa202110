@@ -4,7 +4,97 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberShipMapper">
 
+<update id="purchaseStatus" parameterType="string">
+	update purchase
+	set purchase_Status = '결제완료' 
+	where purchase_num = #{purchaseNum}
+</update>
 
+<insert id="payment" parameterType="paymentDTO">
+	insert into payment(PURCHASE_NUM,PAYMENT_KIND, PAYMENT_PRICE,PAYMENT_DATE, CONFIRM_NUMBER, CARD_NUMBER )
+	values(#{purchaseNum},#{paymentKind},#{paymentPrice},sysdate,#{confirmNumber},#{cardNumber})
+</insert>
+<!--  
+<select id="purchaseDetail" parameterType="string" resultMap="paymentPurchaseGoodsResultMap">
+SELECT G.GOODS_NAME, G.GOODS_MAIN , G.GOODS_CONTENT , G.GOODS_PRICE, G.DELIVERY_COST,      
+       PU.PURCHASE_NUM, PU.PURCHASE_DATE, PU.TOTAL_PRICE, PU.PURCHASE_ADDR, PU.PURCHASE_PHONE,
+       PU.MESSAGE, PU.RECIEVE_NAME,
+       pl.PURCHASE_QTY, pl.PURCHASE_PRICE,
+       pa.PAYMENT_KIND, pa.PAYMENT_PRICE, pa.PAYMENT_DATE, pa.CARD_NUMBER
+from payment pa right outer join purchase pu
+	on pa.PURCHASE_num = pu.PURCHASE_num join purchase_list pl
+	on pu.PURCHASE_num = pl.purchase_num join goods g
+	on pl.goods_num = g.goods_num
+</select>
+-->
+
+<!-- paymentDTO -->
+<resultMap type="paymentDTO" id="paymentResultMap">
+	<id column="PURCHASE_NUM" jdbcType="VARCHAR" property="purchaseNum"/>
+	<result column="PAYMENT_KIND" jdbcType="VARCHAR" property="paymentKind"/>
+	<result column="PAYMENT_PRICE" jdbcType="BIGINT" property="paymentPrice"/>
+	<result column="PAYMENT_DATE" jdbcType="DATE" property="paymentDate"/>
+	<result column="CARD_NUMBER" jdbcType="VARCHAR" property="cardNumber"/>
+</resultMap>
+<!-- purchaseDTO -->
+<resultMap type="purchaseDTO" id="purchaseResultMap">
+	<id column="PURCHASE_NUM" jdbcType="VARCHAR" property="purchaseNum"/>
+	<result column="PURCHASE_DATE" jdbcType="DATE" property="purchaseDate"/>
+	<result column="TOTAL_PRICE" jdbcType="BIGINT" property="totalPrice"/>
+	<result column="PURCHASE_ADDR" jdbcType="VARCHAR" property="purchaseAddr"/>
+	<result column="PURCHASE_PHONE" jdbcType="VARCHAR" property="purchasePhone"/>
+	<result column="message" jdbcType="VARCHAR" property="message"/>
+	<result column="recieve_Name" jdbcType="VARCHAR" property="recieveName"/>
+</resultMap>
+<!-- GoodsDTO -->
+<resultMap type="kosaShoppingMall.domain.GoodsDTO" id="goodsResultMap1">
+	<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+	<result column="GOODS_MAIN" jdbcType="VARCHAR" property="goodsMain"/>
+	<result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+	<result column="DELIVERY_COST" jdbcType="VARCHAR" property="deliveryCost"/>
+	<result column="goods_content" jdbcType="VARCHAR" property="goodsContent"/>
+	<result column="goods_price" jdbcType="VARCHAR" property="goodsPrice"/>
+</resultMap>
+<!-- paymentPurchaseGoodsDTO -->
+<resultMap type="paymentPurchaseGoodsDTO" id="orderListResultMap">
+	<association property="paymentDTO" javaType="paymentDTO" >
+		<id column="PURCHASE_NUM" jdbcType="VARCHAR" property="purchaseNum"/>
+		<result column="PAYMENT_KIND" jdbcType="VARCHAR" property="paymentKind"/>
+		<result column="PAYMENT_PRICE" jdbcType="BIGINT" property="paymentPrice"/>
+		<result column="PAYMENT_DATE" jdbcType="DATE" property="paymentDate"/>
+		<result column="CARD_NUMBER" jdbcType="VARCHAR" property="cardNumber"/>
+		<result column="confirm_Number" jdbcType="VARCHAR" property="confirmNumber"/>
+	</association>
+	<association property="purchaseDTO" javaType="purchaseDTO" >
+		<id column="PURCHASE_NUM" jdbcType="VARCHAR" property="purchaseNum"/>
+		<result column="PURCHASE_DATE" jdbcType="DATE" property="purchaseDate"/>
+		<result column="TOTAL_PRICE" jdbcType="BIGINT" property="totalPrice"/>
+		<result column="PURCHASE_ADDR" jdbcType="VARCHAR" property="purchaseAddr"/>
+		<result column="PURCHASE_PHONE" jdbcType="VARCHAR" property="purchasePhone"/>
+		<result column="message" jdbcType="VARCHAR" property="message"/>
+		<result column="recieve_Name" jdbcType="VARCHAR" property="recieveName"/>
+		<result column="purchase_Status" jdbcType="VARCHAR" property="purchaseStatus"/>
+	</association>
+	<collection property="goodsDTOs" ofType="goodsDTO" >
+		<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+		<result column="GOODS_MAIN" jdbcType="VARCHAR" property="goodsMain"/>
+		<result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+		<result column="DELIVERY_COST" jdbcType="VARCHAR" property="deliveryCost"/>
+		<result column="goods_content" jdbcType="VARCHAR" property="goodsContent"/>
+		<result column="goods_price" jdbcType="VARCHAR" property="goodsPrice"/>
+	</collection>
+</resultMap>
+<select id="orderList"  parameterType="string"  resultMap="orderListResultMap" >
+	select g.GOODS_NUM, G.GOODS_NAME, G.GOODS_MAIN , G.GOODS_CONTENT , G.GOODS_PRICE, G.DELIVERY_COST,      
+       PU.PURCHASE_NUM, PU.PURCHASE_DATE, PU.TOTAL_PRICE, PU.PURCHASE_ADDR, PU.PURCHASE_PHONE,
+       PU.MESSAGE, PU.RECIEVE_NAME, pu.purchase_Status, 
+       pa.PAYMENT_KIND, pa.PAYMENT_PRICE, pa.PAYMENT_DATE, pa.CARD_NUMBER, pa.confirm_Number
+	from payment pa right outer join purchase pu
+	on pa.PURCHASE_num = pu.PURCHASE_num join purchase_list pl
+	on pu.PURCHASE_num = pl.purchase_num join goods g
+	on pl.goods_num = g.goods_num 
+	where pu.member_num = #{memberNum}
+</select>
 
 <insert id="purchase" parameterType="purchaseDTO">
 	insert into purchase(PURCHASE_NUM, PURCHASE_DATE, TOTAL_PRICE,PURCHASE_ADDR,

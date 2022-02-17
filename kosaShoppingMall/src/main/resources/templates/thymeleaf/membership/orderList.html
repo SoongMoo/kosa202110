@@ -5,14 +5,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table width="800">
+<table width="800" align="center">
 	<tr><td>주문일(결제번호)</td>
 		<td>상품명/주문번호</td>
 		<td>주문상태</td></tr>
 		
-	<tr><td>주문일(결제번호)</td>
-		<td>상품명/주문번호</td>
-		<td>주문상태</td></tr>
+	<tr th:each="dto : ${list}">
+		<td>[[${#dates.format(dto.purchaseDTO.purchaseDate,'yyyy-MM-dd' )}]]
+			(<span th:if="${dto.paymentDTO.confirmNumber !=null}" th:text="${dto.paymentDTO.confirmNumber}" ></span>
+			 <span th:if="${dto.paymentDTO.confirmNumber == null}" th:text="입금대기중" ></span>)</td>
+		<td><th:bolck th:each="goodsDTO : ${dto.goodsDTOs}">
+				<img th:src="|/goods/upload/${goodsDTO.goodsMain}|" width="50"/>[[${goodsDTO.goodsName}]]
+			</th:bolck>
+			 / [[${dto.purchaseDTO.purchaseNum}]]</td>
+		<td><a th:href="@{puchaseDetail(purchaseNum=${dto.purchaseDTO.purchaseNum})}">주문 상세 보기</a><br />결제 금액 : [[${dto.purchaseDTO.totalPrice }]] <br /> 
+				[[${dto.purchaseDTO.purchaseStatus}]]
+
+			<a th:if="${dto.purchaseDTO.purchaseStatus == '결제대기중'}" th:href="@{paymentOk(purchaseNum=${dto.purchaseDTO.purchaseNum }, totalPrice=${dto.purchaseDTO.totalPrice })}">결제하기</a>
+			<a th:if="${dto.purchaseDTO.purchaseStatus == '결제완료'}" th:href="@{paymentCancel(purchaseNum=${dto.purchaseDTO.purchaseNum })}">결제취소</a>
+		</td>
+	</tr>
 </table>
 
 </body>

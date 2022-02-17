@@ -3,7 +3,44 @@
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberShipMapper">
+<insert id="purchase" parameterType="purchaseDTO">
+	insert into purchase(PURCHASE_NUM, PURCHASE_DATE, TOTAL_PRICE,PURCHASE_ADDR,PURCHASE_PHONE,MESSAGE,
+					     PURCHASE_STATUS, MEMBER_NUM,RECIEVE_NAME )
+	values(#{purchaseNum},sysdate,#{totalPrice},#{purchaseAddr},#{purchasePhone},#{message},
+						#{purchaseStatus},#{memberNum},#{recieveName})
+</insert>
 
+<insert id="purchaseList" parameterType="purchaseListDTO">
+	insert into purchase_list (PURCHASE_NUM,GOODS_NUM, PURCHASE_QTY,  PURCHASE_PRICE)
+	select                   #{purchaseNum}, c.GOODS_NUM,  CART_QTY  ,  CART_QTY * goods_Price
+	from cart c , goods g
+	where c.goods_num=g.goods_num and c.goods_num = #{goodsNum}  and c.member_num = #{memberNum}
+</insert>
+
+<delete id="cartGoodsDel" parameterType="goodsBuy">
+	delete from cart
+	<trim prefix="where"  suffixOverrides="AND|OR">
+	 member_num = #{memberNum} and
+		 <if test="goodsNums != null">
+			 goods_num IN
+			<foreach collection="goodsNums" item="goodsNum" index="index" open="(" close=")" separator="," >
+				#{goodsNum}
+			</foreach>
+		</if>
+	</trim> 
+</delete>
+
+<delete id="goodsCartDels" parameterType="hashMap">
+	delete from cart
+	<where>
+		goods_num IN
+		<foreach collection="goodsNum" item="goodsNums" index="index"
+			open="(" close=")" separator=",">
+			#{goodsNums}
+		</foreach>
+
+	</where>
+</delete>
 
 <update id="goodsCartQtyDown" parameterType="kosaShoppingMall.domain.CartDTO">
 	update cart

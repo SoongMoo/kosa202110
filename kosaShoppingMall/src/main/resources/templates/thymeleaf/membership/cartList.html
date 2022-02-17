@@ -5,6 +5,74 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+ /*function del1(){
+	var chk_arr = $("input[name='prodCk']"); 
+	var goodsNums=""; 
+	for( var i=0; i<chk_arr.length; i++ ) 
+	{ 
+		if( chk_arr[i].checked == true ) { 
+			goodsNums += chk_arr[i].value +"/"; 
+		} 
+	}
+	location.href="cartdel?goodsNum="+goodsNums;
+}
+*/
+
+//출처 샛별누나의 구글링
+$(function() {
+    //최상단 체크박스 클릭
+    $("#checkBoxs").click(function(){
+        //클릭되었으면
+        if($("#checkBoxs").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=prodCk]").prop("checked",true);
+         
+            //클릭이 안되있으면
+        }
+        else{
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=prodCk]").prop("checked",false);
+        }
+    });
+    $("input[name=prodCk]").click(function() {
+    	var total = $("input[name=prodCk]").length;
+    	var checked = $("input[name=prodCk]:checked").length;
+
+    	if(total != checked) $("#checkBoxs").prop("checked", false);
+    	else $("#checkBoxs").prop("checked", true); 
+    });
+    
+});  
+    
+
+
+function del1() {
+	var chk_arr = [];
+	$("input:checkbox[id=prodCk]:checked").each(function(){
+		var checkVal = $(this).val();
+		chk_arr.push(checkVal);
+	});
+	$.ajax({
+		type : "post",
+		url:"/cart/cartdel",
+		dataType:"text",
+		data :{"goodsNum" :chk_arr},
+		success : function (result) {
+			if(result >"0"){
+			location.href="/cart/goodsCartList";
+			}else{
+				alert("삭제가 안되었습니다.");
+				
+			}
+		},ereeor : function () {
+			alert("에러 에러 ");
+		}
+		
+		
+	});
+	
+}
+
 function goodsCartAdd(goodsNum){
 	$.ajax({
 		url : "/cart/goodsCartAdd",
@@ -50,11 +118,11 @@ function goodsCheck(){
 <body>
 <form action="goodsBuy" method="post" onsubmit="return goodsCheck();">
 <table width="600" align = "center">
-	<tr><td><input type="checkbox" /></td><td>이미지</td><td>제품이름</td><td>수량</td><td>합계금액</td><td>배송비</td>
-		<td><input type="button"  value="선택 상품 삭제" /></td>
+	<tr><td><input type="checkbox" id="checkBoxs" checked="checked" /></td><td>이미지</td><td>제품이름</td><td>수량</td><td>합계금액</td><td>배송비</td>
+		<td><input type="button"  value="선택 상품 삭제" onclick="del1();"/></td>
 	</tr>
 	<tr th:each="dto : ${lists}" >
-	<td><input type="checkbox" name="prodCk" th:value="${dto.goodsDTO.goodsNum}" checked="checked"/></td>
+	<td><input type="checkbox" name="prodCk" th:value="${dto.goodsDTO.goodsNum}" checked="checked" id="prodCk"/></td>
 	<td><img th:src="|/goods/upload/${dto.goodsDTO.goodsMain}|" height ="50"/></td>
 	<td>[[${dto.goodsDTO.goodsName}]]</td>
 	<td> <a th:href="|javascript:checkQty('${dto.goodsDTO.goodsNum}','${dto.cartDTO.cartQty}')|"> - </a>
@@ -62,7 +130,7 @@ function goodsCheck(){
 		 <a th:href="|javascript:goodsCartAdd('${dto.goodsDTO.goodsNum}')|"> + </a> </td>
 	<td>[[${dto.cartDTO.totalPrice}]]</td>
 	<td>[[${dto.goodsDTO.deliveryCost}]]</td>
-	<td><input type="button"  value="삭제" /></td>
+	<td><input type="button" th:attr="onclick=|javascript:location.href='cartdel?goodsNum[]=${dto.goodsDTO.goodsNum}';|" value="삭제" /></td>
 	</tr>
 	<tr><td colspan="6" align="center">
 		<input type="submit" value="구매하기"/>

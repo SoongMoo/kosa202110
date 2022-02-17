@@ -9,6 +9,8 @@ import kosaShoppingMall.domain.CartDTO;
 import kosaShoppingMall.domain.GoodsBuy;
 import kosaShoppingMall.domain.GoodsCartDTO;
 import kosaShoppingMall.domain.MemberDTO;
+import kosaShoppingMall.domain.PurchaseDTO;
+import kosaShoppingMall.domain.PurchaseListDTO;
 
 @Component
 @Repository(value = "kosaShoppingMall.mapper.MemberShipMapper")
@@ -21,4 +23,10 @@ public interface MemberShipMapper {
 	public List<GoodsCartDTO> cartList(String memberNum);
 	public Integer goodsCartQtyDown(CartDTO dto);
 	public List<GoodsCartDTO> goodsOrder(GoodsBuy goodsBuy);
+	// 성호
+	public Integer goodsCartDels(String[] goodsNum);
+	// 
+	public Integer purchase(PurchaseDTO dto);
+	public Integer purchaseList(PurchaseListDTO purchaseListDTO);
+	public Integer cartGoodsDel(GoodsBuy goodsBuy);
 }

@@ -5,11 +5,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<table width="700" align="center">
+<tr><td>
 주문서
 <hr />
 1. 주문 상품<br />
+</td></tr>
+</table>
 <p>
-<table width="600" align="center">
+<table width="700" align="center">
 	<tr><td>주문 상품 정보</td>	<td>수량/상품금액</td><td>배송비</td></tr>
 	<tr th:each="dto : ${list}" >
 		<td>
@@ -26,20 +30,24 @@
 </table>
 </p>
 <p>
-<form action="#" >
-<table width="600"  align="center">
+<form action="goodsOrder" method="post">
+<input type="hidden" name="goodsNums" th:value="${goodsNums}" />
+<input type="hidden" name="goodsTotalPrice" th:value="${goodsTotalPrice}" />
+<input type="hidden" name="goodsTotalDelivery" th:value="${goodsTotalDelivery}" />
+<input type="hidden" name="totalPrice" th:value="${goodsTotalDelivery + goodsTotalPrice}" />
+<table width="700"  align="center" method="post">
 	<tr>
-		<td>
-			<table width="300">
-				<tr><td colspan=2>2. 배송지 정보 입력</td></tr>
+		<td alignt="left">
+			<table width="350">
+				<tr><th colspan=2>2. 배송지 정보 입력</th></tr>
 				<tr><td>받는 사람</td>
-					<td><input type="text" name="receiveName" /></td></tr>
+					<td><input type="text" name="recieveName" /></td></tr>
 				<tr><td>받는 주소</td>
 					<td><input type="text" name="purchaseAddr" /></td></tr>		
 				<tr><td>받는 사람 연락처</td>
 					<td><input type="text" name="purchasePhone" /></td></tr>
 				<tr><td>주문메세지</td>
-					<td><input type="text" name="purchaseRequest" /></td></tr>
+					<td><input type="text" name="message" /></td></tr>
 				<tr><td>결제 방법</td>
 					<td>
 						<select name="purchaseMethod">
@@ -49,9 +57,9 @@
 					</td></tr>
 			</table>
 		</td>
-		<td >
+		<td alignt="right">
 			<table width="300">
-				<tr><td align="left" colspan=2>3.결제금액</td></tr>
+				<tr><th colspan=2>3.결제금액</th></tr>
 				<tr><td align="left">상품금액 : </td><td align = "right"> [[${#numbers.formatCurrency(goodsTotalPrice)}]]원</td></tr>
 				<tr><td align="left">배송비 : </td><td align = "right"> [[${#numbers.formatCurrency(goodsTotalDelivery)}]]원</td></tr>
 				<tr><td align="left">총 결제 금액 : </td><td align = "right"> [[${#numbers.formatCurrency(goodsTotalDelivery + goodsTotalPrice)}]]원</td></tr>

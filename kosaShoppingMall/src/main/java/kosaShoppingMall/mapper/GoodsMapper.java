@@ -58,6 +58,8 @@ public interface GoodsMapper {
 	public List<OrderListDTO> purchaseList();
 	public List<OrderListDTO> purchaseEmpDetail(String purchaseNum );
 	public Integer statusUpdate(String purchaseNum);
+	
+	//
 	public Integer deliveryInsert(DeliveryCommand deliveryCommand);
 	public Integer deliveryStatus(String purchaseNum);
 }

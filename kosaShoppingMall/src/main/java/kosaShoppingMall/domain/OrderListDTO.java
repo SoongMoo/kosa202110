@@ -29,4 +29,6 @@ public class OrderListDTO {
 	String pymentPrice;
 	Date paymentDate;
 	String cardNumber;
+	String deliveryNumber;
+	String deliveryCompany;
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
+<script>
+$(function(){
+	$("#purchaseNum").val($(opener.document).find("#purchaseNum").val());
+	$("#deliveryCompany").val($(opener.document).find("#deliveryCompany").val()).attr("selected","selected");
+	$("#deliveryNumber").val($(opener.document).find("#deliveryNumber").val());
+	$("#btn").click(function(){
+		$("#frm").ajaxSubmit({
+			type:"post",
+			dataType:"text",
+			beforeSubmit:function(){
+				//유효성검사
+			},
+			success:function(result){
+				if(result.trim() == "0"){
+					alert("수정되지 않았습니다.");
+				}else{
+					alert("수정되지습니다..");
+				}
+				opener.location.reload();
+				window.self.close();
+			},
+			error:function(){
+				alert("오류입니다.");
+				return false;
+			}
+		});
+	});
+	$("#del").click(function(){
+		location.href="deliveryDel?purchaseNum="+$("#purchaseNum").val();
+	});
+});
+</script>
+</head>
+<body>
+<form action="deliveryUpdatePro"  method="post" name="frm" id="frm">
+	주문 번호 : <input type="text" name="purchaseNum"  id="purchaseNum" /><br />
+	배송사 : <select name="deliveryCompany"  id="deliveryCompany">
+					     	<option>이숭무택배</option>
+					     	<option>최성호택배</option>
+					     	<option>김정원택배</option>
+						</select><br />
+	송장번호 : <input type="text" name="deliveryNumber"  id="deliveryNumber"/><br />
+	<input type="button" value="배송정보 수정" id="btn" /><input type="button" value="배송정보 삭제" id="del"/><!-- 상품준비중으로 변경 --> 
+</form>
+</body>
+</html>

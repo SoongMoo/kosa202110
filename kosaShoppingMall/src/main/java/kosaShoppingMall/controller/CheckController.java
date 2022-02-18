@@ -29,7 +29,10 @@ public class CheckController {
 	GoodsWishService goodsWishService;
 	@Autowired
 	GoodsCartService goodsCartService;
-	
+	@RequestMapping("/goods/deliveryUpdatePro")
+	public String deliveryUpdatePro() {
+		return "0";
+	}
 	@RequestMapping(value = "/cart/goodsCartAdd")
 	public String goodsCartAdd(@RequestParam(value = "goodsNum") String goodsNum,
 			@RequestParam(value = "goodsQty") Integer goodsQty,HttpSession session) {

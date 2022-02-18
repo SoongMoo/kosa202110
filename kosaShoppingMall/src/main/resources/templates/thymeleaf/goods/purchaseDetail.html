@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/static/css/memberLayout.css" rel="stylesheet" >
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script>
+$(function(){
+	$("#btn").click(function(){
+		window.open("deliveryUpdate","popup","width=600, height=500");
+	});
+});
+</script>
 </head>
 <body>
 	<div id="wrapper">
@@ -50,16 +58,26 @@
 						카드번호 : [[${list[0].cardNumber}]]<br />
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2"></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><a href="purchaseList">구매
-							내역으로 이동</a></td>
-				</tr>
 			</table>
-			<form action="deliveryAction" method="post" >
-			<input type="hidden" name="purchaseNum" th:value="${list[0].purchaseNum}" />
+			
+			<table  th:if="${list[0].deliveryNumber != null}" width="600">
+				<tr>
+					<td colspan="2"><h2>배송 정보</h2>
+					<input type="hidden" name="purchaseNum" th:value="${list[0].purchaseNum}" id="purchaseNum"/>
+					<input type="hidden" name="deliveryCompany" th:value="${list[0].deliveryCompany}" id="deliveryCompany"/>
+					<input type="hidden" name="deliveryNumber" th:value="${list[0].deliveryNumber}" id="deliveryNumber"/>
+					</td>
+				</tr>
+				<tr><td>택배사</td>
+					<td>[[${list[0].deliveryCompany}]]</td></tr>
+				<tr><td>송장번호</td>
+					<td>[[${list[0].deliveryNumber}]]</td></tr>
+				<tr><td colspan="2" align="center"><button type="button" id="btn" >배송정보수정</button></td></tr>
+			</table>
+			
+			
+			<form action="deliveryAction" method="post" th:if="${list[0].deliveryNumber == null}">
+			<input type="hidden" name="purchaseNum" th:value="${list[0].purchaseNum}" id="purchaseNum1"/>
 			<table width="600" align="center">
 				<tr>
 					<td colspan="2">배송 정보 입력</td>
@@ -83,9 +101,9 @@
 			</form>
 		</div>
 	</div>
+	<a href="purchaseList">구매 내역으로 이동</a>
 </body>
 </html>
-
 
 
 

@@ -4,7 +4,15 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
-	
+	<insert id="deliveryInsert" parameterType="kosaShoppingMall.command.DeliveryCommand">
+		insert into delivery(PURCHASE_NUM,DELIVERY_NUMBER,DELIVERY_COMPANY )
+		values(#{purchaseNum},#{deliveryNumber},#{deliveryCompany} )
+	</insert>
+	<update id="deliveryStatus" parameterType="string">
+		update purchase
+		set purchase_status = '배송완료'
+		where purchase_num = #{purchaseNum}
+	</update>
 	
 	<select id="purchaseEmpDetail" resultType="orderListDTO">
 		select goods_name  goodsName , g.goods_Main goodsMain , g.goods_content  goodsContent , 
@@ -13,12 +21,14 @@
                  pu.purchase_addr purchaseAddr , pu.purchase_phone purchasePhone, 
                  pu.message message, pu.recieve_name recieveName, 
                  pl.purchase_qty purchaseQty, pl.purchase_price purchasePrice, 
-                 pa.payment_kind paymentKind, pa.payment_price paymentPrice, pa.payment_date paymentDate, pa.card_number cardNumber
+                 pa.payment_kind paymentKind, pa.payment_price paymentPrice, pa.payment_date paymentDate, pa.card_number cardNumber,
+				 d.DELIVERY_NUMBER deliveryNumber, d.DELIVERY_COMPANY deliveryCompany
 		from 	payment pa right outer join purchase pu
-				on pa.purchase_num = pu.purchase_num join purchase_list pl
+				on pa.purchase_num = pu.purchase_num left outer join  delivery d
+				on pu.purchase_num = d.purchase_num join purchase_list pl
 				on pu.purchase_num = pl.purchase_num join goods g
-				on pl.goods_num = g.goods_num
-			where pu.purchase_num =#{puchaseNum}
+				on pl.goods_num = g.goods_num 
+		where pu.purchase_num =#{puchaseNum}
 	
 	</select>
 	

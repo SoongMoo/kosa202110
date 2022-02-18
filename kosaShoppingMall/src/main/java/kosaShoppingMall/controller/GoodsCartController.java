@@ -18,6 +18,9 @@ import kosaShoppingMall.service.memberJoin.GoodsCartListService;
 import kosaShoppingMall.service.memberJoin.GoodsCartQtyDownService;
 import kosaShoppingMall.service.memberJoin.GoodsOrderService;
 import kosaShoppingMall.service.memberJoin.OrderProcessListService;
+import kosaShoppingMall.service.memberJoin.PaymentDelService;
+import kosaShoppingMall.service.memberJoin.PuchaseDelService;
+import kosaShoppingMall.service.memberJoin.PuchaseDetailService;
 
 @Controller
 public class GoodsCartController {
@@ -35,10 +38,29 @@ public class GoodsCartController {
 	OrderProcessListService orderProcessListService;
 	@Autowired
 	DoPaymentService doPaymentService;
+	@Autowired
+	PuchaseDetailService puchaseDetailService;
+	@Autowired
+	PaymentDelService paymentDelService;
+	@Autowired
+	PuchaseDelService puchaseDelService;
+	
+	@RequestMapping("/cart/paymentDel")
+	public String paymentDel(@RequestParam(value = "purchaseNum")String purchaseNum) {
+		puchaseDelService.execute(purchaseNum);
+		return "redirect:/cart/orderList";
+	}
+	
+	@RequestMapping("/cart/paymentCancel")
+	public String paymentCancel(@RequestParam(value = "purchaseNum")String purchaseNum) {
+		paymentDelService.execute(purchaseNum);
+		return "redirect:/cart/orderList";
+	}
 	
 	@RequestMapping("/cart/puchaseDetail")
-	public String puchaseDetail(@RequestParam(value ="purchaseNum") String purchaseNum) {
-	
+	public String puchaseDetail(@RequestParam(value ="purchaseNum") String purchaseNum, Model model) {
+		puchaseDetailService.execute(purchaseNum, model);
+		model.addAttribute("newLineChar", "\n");
 		return "thymeleaf/membership/puchaseDetail";
 	}
 	@RequestMapping("/cart/doPayment")
@@ -70,11 +92,11 @@ public class GoodsCartController {
 	}
 	
 	@RequestMapping("/cart/cartdel")
-	public  String cartdel(@RequestParam(value = "goodsNum[]")String[] goodsNum , Model model) {
+	public  String cartdel(@RequestParam(value = "goodsNum[]")String[] goodsNum , Model model , HttpSession session) {
 	//	String [] goodsNums = goodsNum.split("/");
 	//	System.out.println(goodsNums[0]);
 	
-		goodsCartDelsService.execute(goodsNum , model);
+		goodsCartDelsService.execute(goodsNum , model ,session);
 	
 		return "thymeleaf/goods/delPage";
 		 

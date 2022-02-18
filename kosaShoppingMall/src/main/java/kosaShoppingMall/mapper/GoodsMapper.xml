@@ -4,7 +4,41 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
-
+	
+	
+	<select id="purchaseEmpDetail" resultType="orderListDTO">
+		select goods_name  goodsName , g.goods_Main goodsMain , g.goods_content  goodsContent , 
+			   g.goods_price goodsPrice, g.delivery_cost deliveryCost, 
+			     pu.purchase_num purchaseNum, pu.purchase_date purchaseDate, pu.total_price totalPrice,
+                 pu.purchase_addr purchaseAddr , pu.purchase_phone purchasePhone, 
+                 pu.message message, pu.recieve_name recieveName, 
+                 pl.purchase_qty purchaseQty, pl.purchase_price purchasePrice, 
+                 pa.payment_kind paymentKind, pa.payment_price paymentPrice, pa.payment_date paymentDate, pa.card_number cardNumber
+		from 	payment pa right outer join purchase pu
+				on pa.purchase_num = pu.purchase_num join purchase_list pl
+				on pu.purchase_num = pl.purchase_num join goods g
+				on pl.goods_num = g.goods_num
+			where pu.purchase_num =#{puchaseNum}
+	
+	</select>
+	
+	<update id="statusUpdate" parameterType="string">
+		update purchase
+		set purchase_status = '상품준비중'
+		where purchase_num = #{purchaseNum} and purchase_status = '결제완료'
+	</update>
+	
+	<select id="purchaseList" resultType="orderListDTO" >
+		select  pa.confirm_number confirmNumber , pu.purchase_num  purchaseNum
+         ,pu.purchase_date  purchaseDate,   g.goods_Name  goodsName,   pu.purchase_status  purchaseStatus ,
+          g.goods_main goodsMain , pu.Total_price totalPrice
+         from    payment pa  right outer join purchase pu  
+         on pa.purchase_num = pu.purchase_num join purchase_list pl  
+         on pu.purchase_num = pl.purchase_num join goods g  
+         on pl.goods_num = g.goods_num 
+         order by 2 desc
+	</select>
+	
 	<insert id="cartAdd" useGeneratedKeys="false" parameterType="cartDTO">
 		MERGE into cart w
 		USING (select goods_num from goods where goods_num = #{goodsNum}) g

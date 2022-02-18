@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet" >
+</head>
+<body>
+	<div id="wrapper">
+		<div id="leftMenu">
+			<ul>
+				<li><a href="goodsList">상품 리스트</a></li>
+				<li><a href="goodsRegist">상품 등록</a></li>
+				<li><a href="goodsIpgoList">상품 입고 현황</a></li>
+				<li><a href="goodsIpgo">상품 입고</a></li>
+				<li><a href="purchaseList">주문 내역</a></li>
+			</ul>
+		</div>
+		<div id="MemberInfo">
+			<table width="600" align="center">
+				<tr>
+					<td>주문일(결제번호)</td>
+					<td>상품명/주문번호</td>
+					<td>주문상태</td>
+				</tr>
+				<tr th:each="dto : ${list}">
+					<td>[[${#dates.format(dto.purchaseDate,'yyyy-MM-dd' )}]] (<span
+						th:if="${dto.confirmNumber !=null}" th:text="${dto.confirmNumber}"></span>
+						<span th:if="${dto.confirmNumber == null}" th:text="입금대기중"></span>)
+					</td>
+					<td><img th:src="|/goods/upload/${dto.goodsMain}|" width="50" />[[${dto.goodsName}]]
+						/ [[${dto.purchaseNum}]]</td>
+					<td><a
+						th:href="@{puchaseDetail(purchaseNum=${dto.purchaseNum})}">주문	상세 보기</a><br />
+						결제 금액 : [[${dto.totalPrice }]] <br />
+						[[${dto.purchaseStatus}]] 
+						<a th:if="${dto.purchaseStatus == '결제완료' or dto.purchaseStatus == '상품준비중'}"
+						   th:href="@{/cart/paymentCancel(purchaseNum=${dto.purchaseNum })}">결제취소</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

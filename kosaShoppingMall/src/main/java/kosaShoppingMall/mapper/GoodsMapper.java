@@ -7,11 +7,13 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import kosaShoppingMall.command.DeliveryCommand;
 import kosaShoppingMall.command.GoodsIpgoCommand;
 import kosaShoppingMall.domain.CartDTO;
 import kosaShoppingMall.domain.GoodsDTO;
 import kosaShoppingMall.domain.GoodsIpgoDTO;
 import kosaShoppingMall.domain.GoodsIpgoGoodsDTO;
+import kosaShoppingMall.domain.OrderListDTO;
 import kosaShoppingMall.domain.StartEndPageDTO;
 import kosaShoppingMall.domain.WishDTO;
 
@@ -51,6 +53,13 @@ public interface GoodsMapper {
 	public Integer wishAdd(WishDTO dto);
 	public String wishCount(WishDTO dto);
 	public Integer cartAdd(CartDTO cart);
+	
+	//성호 
+	public List<OrderListDTO> purchaseList();
+	public List<OrderListDTO> purchaseEmpDetail(String purchaseNum );
+	public Integer statusUpdate(String purchaseNum);
+	public Integer deliveryInsert(DeliveryCommand deliveryCommand);
+	public Integer deliveryStatus(String purchaseNum);
 }
 
 

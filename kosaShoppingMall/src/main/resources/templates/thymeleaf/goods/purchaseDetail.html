@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet" >
+</head>
+<body>
+	<div id="wrapper">
+		<div id="leftMenu">
+			<ul>
+				<li><a href="goodsList">상품 리스트</a></li>
+				<li><a href="goodsRegist">상품 등록</a></li>
+				<li><a href="goodsIpgoList">상품 입고 현황</a></li>
+				<li><a href="goodsIpgo">상품 입고</a></li>
+				<li><a href="purchaseList">주문 내역</a></li>
+			</ul>
+		</div>
+		<div id="MemberInfo">
+			<table align="center" width="600">
+				<th:block th:each=" orderListDTO : ${list }">
+					<tr>
+						<td width="250"><img
+							th:src="|/goods/upload/${orderListDTO.goodsMain}|" width="50" />[[${orderListDTO.goodsName}]]</td>
+						<td width="350"><br /> 재품 가격 :
+							[[${orderListDTO.goodsPrice}]] 원 | 주문 수량 :
+							[[${orderListDTO.purchaseQty}]] 개 <br /> 주문 금액 :
+							[[${orderListDTO.purchasePrice}]] 원 | 배송비 :
+							[[${orderListDTO.deliveryCost}]]원 <br /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><b>상품 설명</b><br /> <span
+							th:utext="${#strings.replace(orderListDTO.goodsContent, newLineChar ,'&lt;br /&gt;')}"></span>
+						</td>
+					</tr>
+				</th:block>
+				<tr>
+					<td colspan="2">
+						<h2>주문 내용</h2> 주문 번호 : [[${list[0].purchaseNum}]]<br /> 주문 날짜 :
+						[[${#dates.format(list[0].purchaseDate,'yyyy-MM-dd')}]]<br /> 주문
+						금액 : [[${#numbers.formatCurrency(list[0].totalPrice)}]] 원<br />
+						배송지 : [[${list[0].purchaseAddr}]]<br /> 연락처 :
+						[[${list[0].purchasePhone}]]<br /> 받는 사람 :
+						[[${list[0].recieveName}]]<br /> 주문 메세지 : [[${list[0].message}]]<br />
+						<h2>결제 내용</h2> 결제 방법 : [[${list[0].paymentKind}]]<br /> 결제 금액 : <span
+						th:if="${list[0].pymentPrice == null}" th:text="0원"></span> <span
+						th:if="${list[0].pymentPrice != null}"
+						th:text="${#numbers.formatCurrency(list[0].pymentPrice)} +'원'"></span><br />
+						결제 일 : [[${#dates.format(list[0].paymentDate,'yyyy-MM-dd')}]]<br />
+						카드번호 : [[${list[0].cardNumber}]]<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><a href="purchaseList">구매
+							내역으로 이동</a></td>
+				</tr>
+			</table>
+			<form action="deliveryAction" method="post" >
+			<input type="hidden" name="purchaseNum" th:value="${list[0].purchaseNum}" />
+			<table width="600" align="center">
+				<tr>
+					<td colspan="2">배송 정보 입력</td>
+				</tr>
+				<tr>
+					<td>택배사</td>
+					<td><select name="deliveryCompany">
+					     	<option>이숭무택배</option>
+					     	<option>최성호택배</option>
+					     	<option>김정원택배</option>
+						</select></td>
+				</tr>		
+				<tr>
+					<td>송장번호</td>
+					<td><input type="text" name="deliveryNumber" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit" value="송장 등록"/></td>
+				</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

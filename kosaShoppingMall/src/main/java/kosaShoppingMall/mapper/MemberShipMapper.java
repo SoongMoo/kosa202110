@@ -9,6 +9,7 @@ import kosaShoppingMall.domain.CartDTO;
 import kosaShoppingMall.domain.GoodsBuy;
 import kosaShoppingMall.domain.GoodsCartDTO;
 import kosaShoppingMall.domain.MemberDTO;
+import kosaShoppingMall.domain.OrderListDTO;
 import kosaShoppingMall.domain.PaymentDTO;
 import kosaShoppingMall.domain.PaymentPurchaseGoodsDTO;
 import kosaShoppingMall.domain.PurchaseDTO;
@@ -26,7 +27,7 @@ public interface MemberShipMapper {
 	public Integer goodsCartQtyDown(CartDTO dto);
 	public List<GoodsCartDTO> goodsOrder(GoodsBuy goodsBuy);
 	// 성호
-	public Integer goodsCartDels(String[] goodsNum);
+	public Integer goodsCartDels(GoodsBuy goodsBuy);
 	// 
 	public Integer purchase(PurchaseDTO dto);
 	public Integer purchaseList(PurchaseListDTO purchaseListDTO);
@@ -34,4 +35,9 @@ public interface MemberShipMapper {
 	public List<PaymentPurchaseGoodsDTO> orderList(String memberNum);
 	public Integer payment(PaymentDTO paymentDTO);
 	public Integer purchaseStatus(String purchaseNum);
+	public List<OrderListDTO> purchaseDetail(String purchaseNum);
+	//성호
+	public Integer paymentDelete(String purchaseNum);
+	public Integer purchaseStatusBack(String purchaseNum);
+	public Integer puchaseDelete(String purchaseNum);
 }

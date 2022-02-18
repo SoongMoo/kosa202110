@@ -3,14 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+$(function () {
+	$("#del").click(function () {
+	    var chk_arr = [];
+	    $("input:checkbox[id=prodCk]:checked").each(function(){
+	    
+	       var checkVal = $(this).val();
+	       chk_arr.push(checkVal);
+	    });
+	    var chk_arrs = [];
+	    $("input[name=goodsName]:checked").each(function(){
+	    
+	       var checkVal = $(this).val();
+	       chk_arr.push(chk_arrs);
+	    });
+	    console.log(chk_arr);
+	    $.ajax({
+	       type : "post",
+	       url : "/cart/paymentDels",
+	       dataType : "text",
+	       data : {"purchaseNum" :chk_arr},
+	       success : function (result) {
+	          if(result.trim() >'0'){
+	             alert("회원이 정상적으로 삭제 되었습니다.");
+	             location.href="/cart/orderList";
+	          }else{
+	             alert("회원이 삭제가 안댔습니다.");
+	             return false ;
+	          }
+	       }, error: function () {
+	          alert("코드 레드 코드 레드");
+	          return;
+	       }
+	    
+	          
+	    });
+	 });
+});
+
+</script>
 </head>
 <body>
+
 <table width="800" align="center">
 	<tr><td>주문일(결제번호)</td>
 		<td>상품명/주문번호</td>
 		<td>주문상태</td></tr>
-		
-	<tr th:each="dto : ${list}">
+	<tr th:each="dto : ${list}">		
 		<td>[[${#dates.format(dto.purchaseDTO.purchaseDate,'yyyy-MM-dd' )}]]
 			(<span th:if="${dto.paymentDTO.confirmNumber !=null}" th:text="${dto.paymentDTO.confirmNumber}" ></span>
 			 <span th:if="${dto.paymentDTO.confirmNumber == null}" th:text="입금대기중" ></span>)</td>
@@ -20,7 +61,7 @@
 			 / [[${dto.purchaseDTO.purchaseNum}]]</td>
 		<td><a th:href="@{puchaseDetail(purchaseNum=${dto.purchaseDTO.purchaseNum})}">주문 상세 보기</a><br />결제 금액 : [[${dto.purchaseDTO.totalPrice }]] <br /> 
 				[[${dto.purchaseDTO.purchaseStatus}]]
-
+			<a th:if="${dto.purchaseDTO.purchaseStatus != '결제완료'}" th:href="@{paymentDel(purchaseNum=${dto.purchaseDTO.purchaseNum })}">주문 취소</a>
 			<a th:if="${dto.purchaseDTO.purchaseStatus == '결제대기중'}" th:href="@{paymentOk(purchaseNum=${dto.purchaseDTO.purchaseNum }, totalPrice=${dto.purchaseDTO.totalPrice })}">결제하기</a>
 			<a th:if="${dto.purchaseDTO.purchaseStatus == '결제완료'}" th:href="@{paymentCancel(purchaseNum=${dto.purchaseDTO.purchaseNum })}">결제취소</a>
 		</td>

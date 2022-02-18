@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC 	
-	"-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberShipMapper">
+
+	<delete id="puchaseDelete" parameterType="string">
+		delete purchase 
+		where purchase_num = #{purchaseNum}
+	
+	</delete>
+
+	<update id="purchaseStatusBack" parameterType="string">
+		update purchase
+		set purchase_Status = '결제몬해' 
+		where purchase_num = #{purchaseNum}
+	
+	
+	</update>
+ 	<delete id="paymentDelete"  parameterType="string">
+ 		delete payment
+ 		where purchase_num = #{purchaseNum}
+ 
+	 </delete>
+
 
 <update id="purchaseStatus" parameterType="string">
 	update purchase
@@ -14,19 +32,19 @@
 	insert into payment(PURCHASE_NUM,PAYMENT_KIND, PAYMENT_PRICE,PAYMENT_DATE, CONFIRM_NUMBER, CARD_NUMBER )
 	values(#{purchaseNum},#{paymentKind},#{paymentPrice},sysdate,#{confirmNumber},#{cardNumber})
 </insert>
-<!--  
-<select id="purchaseDetail" parameterType="string" resultMap="paymentPurchaseGoodsResultMap">
-SELECT G.GOODS_NAME, G.GOODS_MAIN , G.GOODS_CONTENT , G.GOODS_PRICE, G.DELIVERY_COST,      
-       PU.PURCHASE_NUM, PU.PURCHASE_DATE, PU.TOTAL_PRICE, PU.PURCHASE_ADDR, PU.PURCHASE_PHONE,
-       PU.MESSAGE, PU.RECIEVE_NAME,
-       pl.PURCHASE_QTY, pl.PURCHASE_PRICE,
-       pa.PAYMENT_KIND, pa.PAYMENT_PRICE, pa.PAYMENT_DATE, pa.CARD_NUMBER
+ 
+<select id="purchaseDetail" parameterType="string" resultType="orderListDTO">
+SELECT G.GOODS_NAME goodsName, G.GOODS_MAIN goodsMain, G.GOODS_CONTENT goodsContent, G.GOODS_PRICE goodsPrice, G.DELIVERY_COST deliveryCost,      
+       PU.PURCHASE_NUM purchaseNum, PU.PURCHASE_DATE purchaseDate, PU.TOTAL_PRICE totalPrice, PU.PURCHASE_ADDR purchaseAddr, 
+       PU.PURCHASE_PHONE purchasePhone, PU.MESSAGE message, PU.RECIEVE_NAME recieveName,
+       pl.PURCHASE_QTY purchaseQty, pl.PURCHASE_PRICE purchasePrice,
+       pa.PAYMENT_KIND paymentKind, pa.PAYMENT_PRICE pymentPrice, pa.PAYMENT_DATE paymentDate, pa.CARD_NUMBER cardNumber
 from payment pa right outer join purchase pu
 	on pa.PURCHASE_num = pu.PURCHASE_num join purchase_list pl
 	on pu.PURCHASE_num = pl.purchase_num join goods g
 	on pl.goods_num = g.goods_num
+where pu.PURCHASE_NUM = #{purchaseNum}
 </select>
--->
 
 <!-- paymentDTO -->
 <resultMap type="paymentDTO" id="paymentResultMap">
@@ -94,7 +112,10 @@ from payment pa right outer join purchase pu
 	on pu.PURCHASE_num = pl.purchase_num join goods g
 	on pl.goods_num = g.goods_num 
 	where pu.member_num = #{memberNum}
+	order by purchase_num desc
 </select>
+
+
 
 <insert id="purchase" parameterType="purchaseDTO">
 	insert into purchase(PURCHASE_NUM, PURCHASE_DATE, TOTAL_PRICE,PURCHASE_ADDR,
@@ -128,16 +149,16 @@ from payment pa right outer join purchase pu
 
 
 
-<delete id="goodsCartDels" parameterType="hashMap">
+<delete id="goodsCartDels" parameterType="goodsBuy">
 	delete from cart
-	<where>
-		goods_num IN
-		<foreach collection="goodsNum" item="goodsNums" index="index"
+		
+		where goods_num IN
+		<foreach collection="goodsNums" item="goodsNum" index="index"
 			open="(" close=")" separator=",">
-			#{goodsNums}
+			#{goodsNum}
 		</foreach>
+		and member_num =#{memberNum}
 
-	</where>
 </delete>
 
 <update id="goodsCartQtyDown" parameterType="kosaShoppingMall.domain.CartDTO">

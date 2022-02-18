@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kosaShoppingMall.command.DeliveryCommand;
 import kosaShoppingMall.command.FileInfo;
 import kosaShoppingMall.command.GoodsCommand;
 import kosaShoppingMall.command.GoodsIpgoCommand;
+import kosaShoppingMall.service.goods.DeliveryActionService;
 import kosaShoppingMall.service.goods.FileDelService;
 import kosaShoppingMall.service.goods.GoodsAutoNum;
 import kosaShoppingMall.service.goods.GoodsDeleteService;
@@ -29,6 +31,8 @@ import kosaShoppingMall.service.goods.GoodsModifyService;
 import kosaShoppingMall.service.goods.GoodsSearchService;
 import kosaShoppingMall.service.goods.GoodsUpdateService;
 import kosaShoppingMall.service.goods.GoodsWriteService;
+import kosaShoppingMall.service.goods.PurchaseEmpDetailService;
+import kosaShoppingMall.service.goods.PurchaseListService;
 import kosaShoppingMall.service.goodsIpgo.GoodsIpgoDeleteService;
 import kosaShoppingMall.service.goodsIpgo.GoodsIpgoDelsService;
 import kosaShoppingMall.service.goodsIpgo.GoodsIpgoDetailService;
@@ -75,9 +79,32 @@ public class GoodsController {
 	GoodsIpgoDelsService goodsIpgoDelsService;
 	@Autowired
 	GoodsDelsService goodsDelsService;
-	
 	@Autowired
 	FileDelService fileDelService;
+	@Autowired
+	PurchaseListService purchaseListService;
+	@Autowired
+	PurchaseEmpDetailService purchaseEmpDetailService;
+	@Autowired
+	DeliveryActionService deliveryActionService;
+	@RequestMapping(value="deliveryAction", method = RequestMethod.POST)
+	public String deliveryAction(DeliveryCommand deliveryCommand) {
+		deliveryActionService.execute(deliveryCommand);
+		return "redirect:purchaseList";
+	}
+	
+	@RequestMapping("puchaseDetail")
+	public String puchaseDetail(@RequestParam(value = "purchaseNum")String purchaseNum , Model model) {
+		purchaseEmpDetailService.execute(purchaseNum , model);
+		model.addAttribute("newLineChar" , "\n");
+		return "thymeleaf/goods/purchaseDetail";
+	}
+	
+	@RequestMapping("purchaseList")
+	public String purchaseList(Model model) {
+		purchaseListService.execute(model);
+		return "thymeleaf/goods/purchaseList";
+	}
 	
 	@RequestMapping("fileDel")
 	public String fileDel(FileInfo fileInfo, HttpSession session,Model model) {

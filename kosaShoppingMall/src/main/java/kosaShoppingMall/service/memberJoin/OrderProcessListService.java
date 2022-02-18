@@ -21,7 +21,6 @@ public class OrderProcessListService {
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
 		MemberDTO memberDTO = memberShipMapper.selectOne(authInfo.getUserId());
 		List<PaymentPurchaseGoodsDTO> list = memberShipMapper.orderList(memberDTO.getMemberNum());
-		System.out.println(list.get(0).getGoodsDTOs().get(0).getGoodsNum());
 		model.addAttribute("list", list);
 	}
 

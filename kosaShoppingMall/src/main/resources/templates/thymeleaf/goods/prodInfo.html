@@ -5,22 +5,22 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(function(){
-	$("#inquire").click(function(){
-		$.ajax({
-			type : "POST",
-			url : "/corner/inquireList",
-			dataType : "html",
-			data : {"goodsNum":"[[${goodsCommand.goodsNum}]]"},
-			success : function(result){
-				$("#notice").html(result);
-			},
-			error : function(){
-				alert('에러가 나왔다 홀홀홀~');
-				return;
-			}
-		});
+function inquier(){
+	$.ajax({
+		type : "POST",
+		url : "/corner/inquireList",
+		dataType : "html",
+		data : {"goodsNum":"[[${goodsCommand.goodsNum}]]"},
+		success : function(result){
+			$("#notice").html(result);
+		},
+		error : function(){
+			alert('에러가 나왔다 홀홀홀~');
+			return;
+		}
 	});
+}
+$(function(){
 	$("#review").click(function(){
 		$.ajax({
 			type : "POST",
@@ -126,7 +126,7 @@ $(function(){
 <table width="800" align = "center" ><tr><td >
 <ul>
  <li><span id="review">리뷰</span></li> 
- <li><span id="inquire">상품문의</span></li>
+ <li><span id="inquire" onclick="inquier();">상품문의</span></li>
 </ul>
 <span id="notice" ></span>
 </td></tr></table>

@@ -99,8 +99,6 @@ public class GoodsController {
 	public String deliveryDel(@RequestParam (value = "purchaseNum")String purchaseNum , HttpServletResponse response) {
 		
 			DeliveryDelService.execute(purchaseNum);
-		
-		
 		try {
 			response.setContentType("text/html; charset=utf-8"); 
 			PrintWriter out = response.getWriter();

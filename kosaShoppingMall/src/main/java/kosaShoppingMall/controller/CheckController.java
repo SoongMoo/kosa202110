@@ -1,5 +1,7 @@
 package kosaShoppingMall.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import kosaShoppingMall.service.MemEmailUpdateCkService;
 import kosaShoppingMall.service.goods.DeliveryUpdateService;
 import kosaShoppingMall.service.goods.GoodsCartService;
 import kosaShoppingMall.service.goods.GoodsWishService;
+import net.sf.json.JSONObject;
 
 @RestController
 public class CheckController {

@@ -51,8 +51,10 @@ public class GoodsCartController {
 	@Autowired
 	GoodsReviewUpdateService goodsReviewUpdateService;
 	@RequestMapping(value="/cart/goodsReviewUpdate", method = RequestMethod.POST)
-	public String reviewUpdate1() {
-		
+	public String reviewUpdate1(@RequestParam(value="purchaseNum") String purchaseNum,
+			@RequestParam(value="goodsNum") String goodsNum,
+			@RequestParam(value="reviewContent")String reviewContent) {
+		goodsReviewUpdateService.execute(purchaseNum, goodsNum, reviewContent);
 		return "redirect:/cart/orderList";
 	}
 	@RequestMapping(value="/cart/goodsReviewUpdate", method = RequestMethod.GET)
@@ -63,7 +65,6 @@ public class GoodsCartController {
 		goodsReviewUpdateService.execute(purchaseNum, goodsNum, session, model);
 		return "thymeleaf/membership/goodsReviewUpdate";
 	}
-	
 	
 	@RequestMapping(value="/cart/reviewWrite", method = RequestMethod.POST)
 	public String reviewWrite(@RequestParam(value="goodsNum") String goodsNum,

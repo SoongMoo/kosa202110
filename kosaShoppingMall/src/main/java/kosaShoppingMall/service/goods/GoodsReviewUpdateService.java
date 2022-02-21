@@ -10,7 +10,6 @@ import kosaShoppingMall.domain.AuthInfo;
 import kosaShoppingMall.domain.GoodsReviewDTO;
 import kosaShoppingMall.domain.MemberDTO;
 import kosaShoppingMall.domain.ReviewDTO;
-import kosaShoppingMall.mapper.GoodsMapper;
 import kosaShoppingMall.mapper.MemberShipMapper;
 
 @Service
@@ -25,6 +24,23 @@ public class GoodsReviewUpdateService {
 		reviewDTO.setMemberNum(memberDTO.getMemberNum());
 		reviewDTO.setPurchaseNum(purchaseNum);
 		GoodsReviewDTO dto = memberShipMapper.reviewSelect(reviewDTO);
-		model.addAttribute("dto", dto);
+		model.addAttribute("goodsReviewDTO", dto);
+	}
+	public void execute(String purchaseNum, String goodsNum, String reviewContent) {
+		ReviewDTO reviewDTO = new ReviewDTO();
+		reviewDTO.setGoodsNum(goodsNum);
+		reviewDTO.setPurchaseNum(purchaseNum);
+		reviewDTO.setReviewContent(reviewContent);
+		memberShipMapper.reviewUpdate(reviewDTO);
 	}
 }
+
+
+
+
+
+
+
+
+
+

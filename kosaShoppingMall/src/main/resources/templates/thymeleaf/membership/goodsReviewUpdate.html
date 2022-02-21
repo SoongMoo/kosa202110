@@ -5,13 +5,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+<img th:src="|/goods/upload/${goodsReviewDTO.goodsDTO.goodsMain}|" width="100" /><br />
+상품명 : [[${goodsReviewDTO.goodsDTO.goodsName}]] | 리뷰 등록일 : 
+[[${#dates.format(goodsReviewDTO.reviewDTO.reviewDate,'yyyy-MM-dd')}]]
 <form action="goodsReviewUpdate" method="post" >
-<input type="hidden" name="goodsNum" th:value="${dto.goodsDTO.goodsNum }"/>
-<input type="hidden" name="purchaseNum" th:value="${dto.reviewDTO.purchaseNum }" />
+<input type="hidden" name="goodsNum" th:value="${goodsReviewDTO.goodsDTO.goodsNum }"/>
+<input type="hidden" name="purchaseNum" th:value="${goodsReviewDTO.reviewDTO.purchaseNum }" />
 <table >
-	<tr><td>리뷰작성</td>
-	    <td><textarea rows="5" cols="30" name="reviewContent">${dto.reviewDTO.reviewContent }</textarea></td></tr>
-	<tr><td colspan="2"><input type="submit" value="리뷰등록" /></td></tr>		
+	<tr><td>리뷰수정</td>
+	    <td><textarea rows="5" cols="30" name="reviewContent">[[${goodsReviewDTO.reviewDTO.reviewContent }]]</textarea></td></tr>
+	<tr><td colspan="2"><input type="submit" value="리뷰수정완료" /></td></tr>		
 </table>
 </form>
 </body>

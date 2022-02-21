@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberShipMapper">
 	
+	<update id="reviewUpdate" parameterType="reviewDTO" >
+		update review
+		set REVIEW_CONTENT = #{reviewContent}
+		where goods_num = #{goodsNum} and PURCHASE_NUM = #{purchaseNum}
+	</update>
 
 	<delete id="puchaseDelete" parameterType="string">
 		delete purchase 
@@ -116,12 +121,6 @@ where pu.PURCHASE_NUM = #{purchaseNum}
 	where member_num = #{memberNum} and goods_num = #{goodsNum}
 </update>
 
-<resultMap type="kosaShoppingMall.domain.GoodsDTO" id="goodsResultMap">
-	<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
-	<result column="GOODS_MAIN" jdbcType="VARCHAR" property="goodsMain"/>
-	<result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
-	<result column="DELIVERY_COST" jdbcType="VARCHAR" property="deliveryCost"/>
-</resultMap>
 <resultMap type="kosaShoppingMall.domain.CartDTO" id="cartResultMap">
 	<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
 	<result column="CART_QTY" jdbcType="BIGINT" property="cartQty"/>
@@ -133,12 +132,19 @@ where pu.PURCHASE_NUM = #{purchaseNum}
 	<association property="cartDTO" javaType="cartDTO" resultMap="cartResultMap"/>
 </resultMap>
 
+<resultMap type="kosaShoppingMall.domain.GoodsDTO" id="goodsResultMap">
+	<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+	<result column="GOODS_MAIN" jdbcType="VARCHAR" property="goodsMain"/>
+	<result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+	<result column="DELIVERY_COST" jdbcType="VARCHAR" property="deliveryCost"/>
+</resultMap>
+
 <resultMap type="reviewDTO" id="reviewResultMap">
 	<id column="REVIEW_NUM" jdbcType="BIGINT" property="reviewNum"/>
 	<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
 	<id column="PURCHASE_NUM" jdbcType="VARCHAR" property="purchaseNum"/>
-	<result column="REVIEW_CONTENT" jdbcType="VARCHAR" property="goodsMain"/>
-	<result column="REVIEW_DATE" jdbcType="DATE" property="goodsMain"/>
+	<result column="REVIEW_CONTENT" jdbcType="VARCHAR" property="reviewContent"/>
+	<result column="REVIEW_DATE" jdbcType="DATE" property="reviewDate"/>
 </resultMap>
 
 <resultMap type="goodsReviewDTO" id="goodsReviewResultMap">
@@ -153,7 +159,6 @@ where pu.PURCHASE_NUM = #{purchaseNum}
 	where g.goods_num = r.goods_num 
     and p.PURCHASE_NUM = r.PURCHASE_NUM
     and p.member_num = #{memberNum} and r.goods_num = #{goodsNum} and r.PURCHASE_NUM = #{purchaseNum}
-	
 </select>
 
 

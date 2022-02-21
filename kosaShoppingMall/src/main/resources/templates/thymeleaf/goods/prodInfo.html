@@ -6,6 +6,36 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(function(){
+	$("#inquire").click(function(){
+		$.ajax({
+			type : "POST",
+			url : "/corner/inquireList",
+			dataType : "html",
+			data : {"goodsNum":"[[${goodsCommand.goodsNum}]]"},
+			success : function(result){
+				$("#notice").html(result);
+			},
+			error : function(){
+				alert('에러가 나왔다 홀홀홀~');
+				return;
+			}
+		});
+	});
+	$("#review").click(function(){
+		$.ajax({
+			type : "POST",
+			url : "/corner/reviewList",
+			dataType : "html",
+			data : {"goodsNum":"[[${goodsCommand.goodsNum}]]"},
+			success : function(result){
+				$("#notice").html(result);
+			},
+			error : function(){
+				alert('에러가 나왔다 홀홀홀~');
+				return;
+			}
+		});
+	});
 	$("#cartAdd").click(function(){
 		$.ajax({
 			type : "POST",
@@ -93,5 +123,13 @@ $(function(){
 	</td></tr>
 </table>
 </form>
+<table width="800" align = "center" ><tr><td >
+<ul>
+ <li><span id="review">리뷰</span></li> 
+ <li><span id="inquire">상품문의</span></li>
+</ul>
+<span id="notice" ></span>
+</td></tr></table>
+구매자아이디 리뷰등록일 점수 내용
 </body>
 </html>

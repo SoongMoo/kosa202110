@@ -24,6 +24,8 @@ import kosaShoppingMall.command.FileInfo;
 import kosaShoppingMall.command.GoodsCommand;
 import kosaShoppingMall.command.GoodsIpgoCommand;
 import kosaShoppingMall.service.goods.DeliveryActionService;
+import kosaShoppingMall.service.goods.DeliveryDelService;
+import kosaShoppingMall.service.goods.DeliveryUpdateService;
 import kosaShoppingMall.service.goods.FileDelService;
 import kosaShoppingMall.service.goods.GoodsAutoNum;
 import kosaShoppingMall.service.goods.GoodsDeleteService;
@@ -90,9 +92,15 @@ public class GoodsController {
 	PurchaseEmpDetailService purchaseEmpDetailService;
 	@Autowired
 	DeliveryActionService deliveryActionService;
-
+	@Autowired 
+	DeliveryDelService DeliveryDelService;
+	
 	@RequestMapping("deliveryDel")
-	public String deliveryDel(HttpServletResponse response) {
+	public String deliveryDel(@RequestParam (value = "purchaseNum")String purchaseNum , HttpServletResponse response) {
+		
+			DeliveryDelService.execute(purchaseNum);
+		
+		
 		try {
 			response.setContentType("text/html; charset=utf-8"); 
 			PrintWriter out = response.getWriter();
@@ -106,8 +114,9 @@ public class GoodsController {
 			e.printStackTrace();
 		}
 		return null;
+		
 	}
-	
+		
 	@RequestMapping("deliveryUpdate")
 	public String deliveryUpdate() {
 		return "thymeleaf/goods/deliveryUpdate";

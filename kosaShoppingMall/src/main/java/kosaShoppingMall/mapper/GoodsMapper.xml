@@ -4,6 +4,28 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+	<insert id="reviewWrite" parameterType="reviewDTO">
+		insert into review(REVIEW_NUM, GOODS_NUM, purchase_num, REVIEW_DATE, SCORE, REVIEW_CONTENT)
+		values(seq_num.nextval, #{goodsNum}, #{purchaseNum}, sysdate, 5, #{reviewContent})
+	</insert>
+
+	<update id="goodsStatusModify" parameterType="string">
+		update purchase
+		set purchase_status = '상품준비중'
+		where purchase_num = #{purchaseNum}
+	</update>
+	<delete id="deliveryDelete" parameterType="string">
+		delete from delivery
+		where  PURCHASE_NUM =#{purchaseNum}
+	
+	</delete>
+	
+	<update id="deliveryUpdate" parameterType="deliveryDTO">
+		update delivery
+		set DELIVERY_NUMBER  =#{deliveryNumber} , DELIVERY_COMPANY =#{deliveryCompany}
+		where PURCHASE_NUM =#{purchaseNum}
+	</update>
+	
 	<insert id="deliveryInsert" parameterType="kosaShoppingMall.command.DeliveryCommand">
 		insert into delivery(PURCHASE_NUM,DELIVERY_NUMBER,DELIVERY_COMPANY )
 		values(#{purchaseNum},#{deliveryNumber},#{deliveryCompany} )

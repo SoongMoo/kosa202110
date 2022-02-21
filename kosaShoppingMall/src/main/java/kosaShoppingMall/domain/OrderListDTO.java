@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 @Alias("orderListDTO")
 public class OrderListDTO {
+	String goodsNum;
+	String goodsNun;
 	String confirmNumber;
 	String purchaseStatus;
 	String goodsName;
@@ -31,4 +33,5 @@ public class OrderListDTO {
 	String cardNumber;
 	String deliveryNumber;
 	String deliveryCompany;
+	String reviewContent;
 }

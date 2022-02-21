@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import kosaShoppingMall.command.DeliveryCommand;
 import kosaShoppingMall.service.EmailCheckService;
 import kosaShoppingMall.service.EmpEmailUpdatecheckService;
 import kosaShoppingMall.service.IdcheckService;
 import kosaShoppingMall.service.MemEmailUpdateCkService;
+import kosaShoppingMall.service.goods.DeliveryUpdateService;
 import kosaShoppingMall.service.goods.GoodsCartService;
 import kosaShoppingMall.service.goods.GoodsWishService;
 
@@ -29,9 +31,14 @@ public class CheckController {
 	GoodsWishService goodsWishService;
 	@Autowired
 	GoodsCartService goodsCartService;
+	@Autowired
+	DeliveryUpdateService deliveryUpdateService;
+	
+	
 	@RequestMapping("/goods/deliveryUpdatePro")
-	public String deliveryUpdatePro() {
-		return "0";
+	public String deliveryUpdatePro(DeliveryCommand deliveryCommand) {
+		Integer i = deliveryUpdateService.execute(deliveryCommand);
+		return i.toString();
 	}
 	@RequestMapping(value = "/cart/goodsCartAdd")
 	public String goodsCartAdd(@RequestParam(value = "goodsNum") String goodsNum,

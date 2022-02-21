@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -44,14 +44,15 @@ $(function() {
     
 });  
     
+ function del1() {
+	 var chk_arr = [];
+		$("input:checkbox[name=prodCk]:checked").each(function(){
+			var checkVal = $(this).val();
+			chk_arr.push(checkVal);
+		});
 
+	
 
-function del1() {
-	var chk_arr = [];
-	$("input:checkbox[id=prodCk]:checked").each(function(){
-		var checkVal = $(this).val();
-		chk_arr.push(checkVal);
-	});
 	$.ajax({
 		type : "post",
 		url:"/cart/cartdel",
@@ -59,7 +60,7 @@ function del1() {
 		data :{"goodsNum" :chk_arr},
 		success : function (result) {
 			if(result >"0"){
-			location.href="/cart/goodsCartList";
+				location.reload();
 			}else{
 				alert("삭제가 안되었습니다.");
 				
@@ -71,7 +72,8 @@ function del1() {
 		
 	});
 	
-}
+};
+
 
 function goodsCartAdd(goodsNum){
 	$.ajax({
@@ -92,6 +94,7 @@ function goodsCartAdd(goodsNum){
 		}
 	});
 }
+
 function checkQty(num, qty){
 	if(qty > 1){
 		location.href="goodsCartQtyDown?goodsNum="+num;
@@ -125,6 +128,7 @@ function goodsCheck(){
 	<td><input type="checkbox" name="prodCk" th:value="${dto.goodsDTO.goodsNum}" checked="checked" id="prodCk"/></td>
 	<td><img th:src="|/goods/upload/${dto.goodsDTO.goodsMain}|" height ="50"/></td>
 	<td>[[${dto.goodsDTO.goodsName}]]</td>
+	
 	<td> <a th:href="|javascript:checkQty('${dto.goodsDTO.goodsNum}','${dto.cartDTO.cartQty}')|"> - </a>
 			[[${dto.cartDTO.cartQty}]] 
 		 <a th:href="|javascript:goodsCartAdd('${dto.goodsDTO.goodsNum}')|"> + </a> </td>

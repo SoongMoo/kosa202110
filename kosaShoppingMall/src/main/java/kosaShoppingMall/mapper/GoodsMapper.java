@@ -10,10 +10,12 @@ import org.springframework.stereotype.Repository;
 import kosaShoppingMall.command.DeliveryCommand;
 import kosaShoppingMall.command.GoodsIpgoCommand;
 import kosaShoppingMall.domain.CartDTO;
+import kosaShoppingMall.domain.DeliveryDTO;
 import kosaShoppingMall.domain.GoodsDTO;
 import kosaShoppingMall.domain.GoodsIpgoDTO;
 import kosaShoppingMall.domain.GoodsIpgoGoodsDTO;
 import kosaShoppingMall.domain.OrderListDTO;
+import kosaShoppingMall.domain.ReviewDTO;
 import kosaShoppingMall.domain.StartEndPageDTO;
 import kosaShoppingMall.domain.WishDTO;
 
@@ -62,6 +64,9 @@ public interface GoodsMapper {
 	//
 	public Integer deliveryInsert(DeliveryCommand deliveryCommand);
 	public Integer deliveryStatus(String purchaseNum);
+	public Integer deliveryUpdate(DeliveryDTO dto);
+	public Integer deliveryDelete(String purchaseNum);
+	public Integer reviewWrite(ReviewDTO dto);
 }
 
 

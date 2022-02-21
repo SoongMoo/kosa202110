@@ -15,13 +15,14 @@ $(function(){
 			type:"post",
 			dataType:"text",
 			beforeSubmit:function(){
-				//유효성검사
+				if($("#deliveryCompany").val()==""||$("#deliveryNumber").val()==""){
+					alert(" 최소한의 정보를 써주세요");
+					return false;
+				}
 			},
 			success:function(result){
 				if(result.trim() == "0"){
 					alert("수정되지 않았습니다.");
-				}else{
-					alert("수정되지습니다..");
 				}
 				opener.location.reload();
 				window.self.close();

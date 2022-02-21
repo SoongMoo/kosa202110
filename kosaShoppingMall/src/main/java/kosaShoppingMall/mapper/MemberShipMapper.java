@@ -8,12 +8,14 @@ import org.springframework.stereotype.Repository;
 import kosaShoppingMall.domain.CartDTO;
 import kosaShoppingMall.domain.GoodsBuy;
 import kosaShoppingMall.domain.GoodsCartDTO;
+import kosaShoppingMall.domain.GoodsReviewDTO;
 import kosaShoppingMall.domain.MemberDTO;
 import kosaShoppingMall.domain.OrderListDTO;
 import kosaShoppingMall.domain.PaymentDTO;
 import kosaShoppingMall.domain.PaymentPurchaseGoodsDTO;
 import kosaShoppingMall.domain.PurchaseDTO;
 import kosaShoppingMall.domain.PurchaseListDTO;
+import kosaShoppingMall.domain.ReviewDTO;
 
 @Component
 @Repository(value = "kosaShoppingMall.mapper.MemberShipMapper")
@@ -40,4 +42,6 @@ public interface MemberShipMapper {
 	public Integer paymentDelete(String purchaseNum);
 	public Integer purchaseStatusBack(String purchaseNum);
 	public Integer puchaseDelete(String purchaseNum);
+	public GoodsReviewDTO reviewSelect(ReviewDTO reviewDTO);
+	
 }

@@ -20,11 +20,11 @@ public class CornerController {
 		model.addAttribute("newLineChar", "\n");
 		return "thymeleaf/goods/prodInfo";
 	}
-	@RequestMapping("inquireList")
+	@RequestMapping(value="inquireList" )
 	public String  inquireList(@RequestParam(value = "goodsNum") String goodsNum,Model model) {
 		return "thymeleaf/goods/inquireList";
 	}
-	@RequestMapping(value="inquireWrite", method = RequestMethod.GET)
+	@RequestMapping(value="inquireWrite")
 	public String inquireWrite() {
 		return "thymeleaf/goods/inquireWrite";
 	}

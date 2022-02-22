@@ -18,15 +18,17 @@
 	</ul>
 </div>
 <div id="MemberInfo">
-	<table>
+	<table width="600" border=1>
 		<tr><td>상품명</td><td>종류</td><td>제목</td><td>작성자</td><td>상태</td></tr>
 		
-		<tr>
-			<td>[[]]</td><td>[[]]</td><td>[[]]</td><td>[[]]</td>
-			<td th:if="${dto.inquireAnswer == null">답변 준비중</td>
-			<td th:if="${dto.inquireAnswer != null">답변완료</td>
+		<tr th:each=" GoodsInquireDTO : ${list}">
+			<td>[[${GoodsInquireDTO.goodsDTO.goodsName}]]</td>
+				<td>[[${GoodsInquireDTO.inquireKind}]]</td>
+				<td><a th:href="|goodsInquireDetail/${GoodsInquireDTO.inquireNum}|">[[${GoodsInquireDTO.inquireSubject}]]</a></td>
+				<td>[[${GoodsInquireDTO.memberNum}]]</td>
+			<td th:if="${GoodsInquireDTO.inquireAnswer == nul}">답변 준비중</td>
+			<td th:if="${GoodsInquireDTO.inquireAnswer != null}">답변완료</td>
 		</tr>
-		
 	</table>
 </div>
 </div>

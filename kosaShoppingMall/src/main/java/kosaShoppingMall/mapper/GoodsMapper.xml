@@ -4,6 +4,12 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+	<update id="setInquireAnswer" parameterType="goodsInquireDTO">
+		update goods_inquire
+		set inquire_Answer = #{inquireAnswer} ,
+			answer_Date = sysdate
+		where inquire_Num = #{inquireNum}
+	</update>
 	<resultMap type="goodsInquireDTO" id="goodsInquireAnswerResultMap">
 		<id column="goods_Num" jdbcType="VARCHAR" property="goodsNum"/>
 		<id column="inquire_Num" jdbcType="BIGINT" property="inquireNum"/>
@@ -19,11 +25,14 @@
 			<result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
 		</association>
 	</resultMap>
-	<select id="goodsInquire" resultMap="goodsInquireAnswerResultMap">
-		select goods_name, INQUIRE_NUM, GOODS_NUM, MEMBER_NUM, INQUIRE_SUBJECT, INQUIRE_CONTENT,
+	<select id="goodsInquire" parameterType="string" resultMap="goodsInquireAnswerResultMap">
+		select goods_name, INQUIRE_NUM, gi.GOODS_NUM, MEMBER_NUM, INQUIRE_SUBJECT, INQUIRE_CONTENT,
 			   INQUIRE_KIND, INQUIRE_ANSWER, INQUIRE_DATE, ANSWER_DATE, ANSWER_EMAIL
 		from goods g, goods_inquire gi
 		where g.GOODS_NUM = gi.GOODS_NUM
+		<if test="inquireNum != null">
+			and INQUIRE_NUM = #{inquireNum}
+		</if>
 	</select>
 	
 	<resultMap type="goodsInquireDTO" id="goodsInquireResultMap">

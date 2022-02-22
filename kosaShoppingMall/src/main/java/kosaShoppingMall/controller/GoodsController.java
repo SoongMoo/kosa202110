@@ -30,6 +30,8 @@ import kosaShoppingMall.service.goods.GoodsAutoNum;
 import kosaShoppingMall.service.goods.GoodsDeleteService;
 import kosaShoppingMall.service.goods.GoodsDelsService;
 import kosaShoppingMall.service.goods.GoodsDetailService;
+import kosaShoppingMall.service.goods.GoodsInquireAnswerWriteService;
+import kosaShoppingMall.service.goods.GoodsInquireDetailService;
 import kosaShoppingMall.service.goods.GoodsListService;
 import kosaShoppingMall.service.goods.GoodsModifyService;
 import kosaShoppingMall.service.goods.GoodsQuestionService;
@@ -97,6 +99,26 @@ public class GoodsController {
 	
 	@Autowired
 	GoodsQuestionService goodsQuestionService ;
+	
+	@Autowired
+	GoodsInquireDetailService goodsInquireDetailService ;
+	@Autowired
+	GoodsInquireAnswerWriteService goodsInquireAnswerWriteService;
+	@RequestMapping("answerWrite")
+	public String answerWrite(@RequestParam(value="memberNum") String memberNum,
+			@RequestParam(value="inquireNum") Integer inquireNum,
+			@RequestParam(value="inquireAnswer") String inquireAnswer,
+			@RequestParam(value="answerEmail") String answerEmail,
+			@RequestParam(value="inquireSubject") String inquireSubject) {
+		goodsInquireAnswerWriteService.execute(memberNum, inquireNum, inquireAnswer,answerEmail,inquireSubject);
+		return "redirect:goodsQuestion";
+	}
+	@RequestMapping("goodsInquireDetail/{id}")
+	public String goodsInquireDetail(@PathVariable(value="id") String inquireNum, Model model) {
+		goodsInquireDetailService.execute(inquireNum, model);
+		return "thymeleaf/goods/goodsInquireDetail";
+	}
+	
 	@RequestMapping("goodsQuestion")
 	public String goodsQuestion(Model model) {
 		goodsQuestionService.execute(model);

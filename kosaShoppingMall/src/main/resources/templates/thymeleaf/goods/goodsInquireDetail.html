@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet" >
+</head>
+<body>
+<div id="wrapper">
+<div id="leftMenu">
+	<ul>
+		<li><a href="goodsList">상품 리스트</a></li>
+		<li><a href="goodsRegist">상품 등록</a></li>
+		<li><a href="goodsIpgoList">상품 입고 현황</a></li>
+		<li><a href="goodsIpgo">상품 입고</a></li>
+		<li><a href="purchaseList">주문 내역</a></li>
+		<li><a href="goodsQuestion">상품 문의</a></li>
+	</ul>
+</div>
+<div id="MemberInfo">
+ 상품명 : [[${goodsInquireDTO.goodsDTO.goodsName}]]<br />
+ 상품번호 : [[${goodsInquireDTO.goodsNum}]]<br />
+ 종류 : [[${goodsInquireDTO.inquireKind}]]<br />
+ 제목 : [[${goodsInquireDTO.inquireSubject}]]<br />
+ 내용 : [[${goodsInquireDTO.inquireContent}]]<br />
+ 작성자 : [[${goodsInquireDTO.memberNum}]]<br />
+ 작성일 : [[${#dates.format(goodsInquireDTO.inquireDate,'yyyy-MM-dd')}]]<br />
+ 답변 <br />
+ <form action="../answerWrite" method="post" >
+ 	<input type="hidden" name="memberNum" th:value="${goodsInquireDTO.memberNum}">
+ 	<input type="hidden" name="inquireNum" th:value="${goodsInquireDTO.inquireNum}">
+ 	<input type="hidden" name="answerEmail" th:value="${goodsInquireDTO.answerEmail}">
+ 	<input type="hidden" name="inquireSubject" th:value="${goodsInquireDTO.inquireSubject}">
+ 	<textarea rows="6" cols="50" name="inquireAnswer">[[${goodsInquireDTO.inquireAnswer}]]</textarea><br />
+ 	<input type="submit" value="답변 등록" />  
+ </form>
+ </div>
+ </div>
+</body>
+</html>

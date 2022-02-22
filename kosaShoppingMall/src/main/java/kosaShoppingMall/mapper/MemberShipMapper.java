@@ -44,5 +44,6 @@ public interface MemberShipMapper {
 	public Integer puchaseDelete(String purchaseNum);
 	public GoodsReviewDTO reviewSelect(ReviewDTO reviewDTO);
 	public Integer reviewUpdate(ReviewDTO reviewDTO);
+	public Integer reviewDelete(ReviewDTO dto);
 	
 }

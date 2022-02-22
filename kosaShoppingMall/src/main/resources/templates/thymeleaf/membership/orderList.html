@@ -69,6 +69,7 @@ $(function () {
 			</th:block>
 			<th:block  th:if="${dto.reviewContent != null}">
 			<a th:href="@{goodsReviewUpdate(goodsNum=${dto.goodsNum},purchaseNum=${dto.purchaseNum})}" >리뷰 수정</a>
+			<a th:href="@{goodsReviewDelete(goodsNum=${dto.goodsNum},purchaseNum=${dto.purchaseNum})}" >리뷰 삭제</a>
 			</th:block>
 		</td>
 	</tr>

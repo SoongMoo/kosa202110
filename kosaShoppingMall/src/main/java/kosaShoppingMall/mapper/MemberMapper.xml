@@ -31,8 +31,14 @@
 	where member_id = #{userId}
 </update>
 
-<select id="memberCount"  resultType="int">
+<select id="memberCount"  resultType="int" parameterType="string">
 	select count(*) from member
+	<where>
+			<if test="goodsWord != null">
+				member_NAME like '%'||#{memberWord}||'%'
+		   		or member_id like '%'||#{memberWord}||'%'
+			</if>
+		</where>
 </select>
 <delete id="memberDelete" parameterType="string">
 	delete from member
@@ -52,7 +58,14 @@ select concat('kosa',nvl(max(substr(member_Num,5)),100000) + 1) from member
 <select id="selectAll" resultType="memDTO" parameterType="StartEndPageDTO">
 select *
 from (select rownum rn, <include refid="baseColumns" />
-	from member)
+	from member
+	<where>
+		<if test="goodsWord != null">
+				member_id like '%'||#{goodsWord}||'%'
+		   		or member_name like '%'||#{goodsWord}||'%'
+		</if>
+	</where>
+	)
 where rn between #{startRow} and #{endRow}
 </select>
 <sql id="baseColumns">

@@ -17,7 +17,7 @@ public interface MemberMapper {
 	public MemberDTO selectDTO(String memberNum);
 	public Integer memberUpdate(MemberDTO dto);
 	public Integer memberDelete(String memberNum);
-	public int memberCount();
+	public int memberCount(String memberWord);
 	public Integer changPw(AuthInfo authInfo);
 	public Integer joinOkUpdate(MemberDTO dto);
 	public Integer memberRemove(HashMap<String, Object> conditioncondition);

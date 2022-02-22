@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.PurchaseCommand;
+import kosaShoppingMall.service.goods.GoodsReviewDeleteService;
 import kosaShoppingMall.service.goods.GoodsReviewUpdateService;
 import kosaShoppingMall.service.goods.ReviewWriteService;
 import kosaShoppingMall.service.memberJoin.DoPaymentService;
@@ -50,6 +51,20 @@ public class GoodsCartController {
 	ReviewWriteService reviewWriteService;
 	@Autowired
 	GoodsReviewUpdateService goodsReviewUpdateService;
+	@Autowired
+	GoodsReviewDeleteService goodsReviewDeleteService;
+	
+	@RequestMapping(value = "/cart/goodsReviewDelete")
+		public String goodsReviewDelete(
+			@RequestParam(value="purchaseNum") String purchaseNum,
+			@RequestParam(value="goodsNum") String goodsNum) {
+				goodsReviewDeleteService.execute(purchaseNum , goodsNum);
+				return "redirect:/cart/orderList";
+			
+		}
+		
+	
+	
 	@RequestMapping(value="/cart/goodsReviewUpdate", method = RequestMethod.POST)
 	public String reviewUpdate1(@RequestParam(value="purchaseNum") String purchaseNum,
 			@RequestParam(value="goodsNum") String goodsNum,

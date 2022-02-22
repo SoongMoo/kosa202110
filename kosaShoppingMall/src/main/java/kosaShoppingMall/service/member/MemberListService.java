@@ -13,9 +13,9 @@ import kosaShoppingMall.mapper.MemberMapper;
 public class MemberListService {
 	@Autowired
 	MemberMapper memberMapper;
-	public void execute(Model model, Integer page) {
+	public void execute(Model model, Integer page, String memberWord) {
 		int limit = 3; 
-		int limitPage = 10 ;
+		int limitPage = 3 ;
 		// page = 2;  startRow = 11, endRow = 20
 		// page = 3;  startRow = 21, endRow = 30
 		// page = 4;  startRow = 31, endRow = 40
@@ -24,8 +24,9 @@ public class MemberListService {
 		StartEndPageDTO dto = new StartEndPageDTO();
 		dto.setStartRow(startRow);
 		dto.setEndRow(endRow);
+		dto.setGoodsWord(memberWord);
 	    //  레코드의 전체의 갯수 
-		int count = memberMapper.memberCount();
+		int count = memberMapper.memberCount(memberWord);
 		List<MemberDTO> lists = memberMapper.selectAll(dto);
 		int maxPage = (int)((double)count / limit + 0.9); // 22 / 10 = 2.2 + 0.9
 		// page = 4;  startPage = 1,   endPage 10
@@ -41,7 +42,7 @@ public class MemberListService {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("page", page);
-		
+		model.addAttribute("memberWord", memberWord);
 		model.addAttribute("lists", lists);
 	}
 }

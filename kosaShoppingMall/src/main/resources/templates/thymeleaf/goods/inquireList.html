@@ -5,6 +5,10 @@
 <title>Insert title here</title>
 
 <script > 
+
+function inquireUpdate(as) {
+	location.href="inquireDelte?unquireNum="+as.val();
+}
 $(function(){
 	$("#inquire1").click(function(){
 		window.open("inquireWrite?goodsNum=[[${goodsNum}]]","문의하기","width=700, height=650, top=100, left=100");
@@ -13,7 +17,7 @@ $(function(){
 </script>
 </head>
 <body>
-<table width="600" align="center">
+<table width="600" align="center" border="1">
 	<tr><td colspan="4" align="right"><button type="button" id="inquire1" >문의 하기</button></td></tr>
 	<tr><th width="15%">답변 상태</th><th>문의유형</th><th>작성자</th><th>작성일자</th></tr>	
 	
@@ -32,6 +36,9 @@ $(function(){
 		<td colspan="4" >[[${#dates.format(goodsInquireDTO.inquireDate , 'yyyy-MM-dd')}]]<br />
 		[[${goodsInquireDTO.inquireAnswer}]]
 		</td>
+			<th:block th:if="${session.authInfo.userId == goodsInquireDTO.memberDTO.memberId}">
+			<td><input type="button"  th:onclick="javascript:inquireUpdate(${goodsInquireDTO.inquireNum});" value="삭제 하기"></td>
+			</th:block>
 	</tr>
 	
 	<tr><td  colspan="4">&nbsp;&nbsp;&nbsp;</td></tr>

@@ -32,9 +32,15 @@ public class CornerController {
 	@Autowired
 	GoodsReviewListService goodsReviewListService;
 	
+	
+	@RequestMapping("inquireDelte")
+	public String inquireDelte(@RequestParam(value = "inquireDelte")String inquireDelte) {
+		return "redirect/reviewList";
+	}
+	
 	@RequestMapping("reviewList")
-	public String reviewList(@RequestParam(value = "goodsNum") String goodsNum , Model model) {
-		goodsReviewListService.execute(goodsNum ,model);
+	public String reviewList(@RequestParam(value = "goodsNum") String goodsNum , Model model , HttpSession session) {
+		goodsReviewListService.execute(goodsNum ,model , session);
 		model.addAttribute("newLineChar", "\n");
 		return "thymeleaf/goods/reviewList";
 	}

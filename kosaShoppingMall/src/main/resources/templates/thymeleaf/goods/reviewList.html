@@ -3,14 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 </head>
 <body>
 <table border="1" width="600" align="center" >
 	<tr><th>아이디</th><th>별점</th><th>내용</th><th>리뷰 준 날짜</th></tr>
-	<th:block  th:each="reviewDTO : ${list}">
+	<th:block  th:each="reviewDTO  : ${list}">
 		<tr>
-			<td align="center">[[${reviewDTO.memberDTO.memberId}]]	</td>
-			<td align="center">[[${reviewDTO.score}]]</td>
+			<td align="center">[[${reviewDTO.memberDTO.memberId}]]</td>
+			<th:block th:if="${reviewDTO.score == 1}">
+			<td align="center">★</td>
+			</th:block>
+			<th:block th:if="${reviewDTO.score == 2}">
+			<td align="center">★★</td>
+			</th:block>
+			<th:block th:if="${reviewDTO.score == 3}">
+			<td align="center">★★★</td>
+			</th:block>
+			<th:block th:if="${reviewDTO.score == 4}">
+			<td align="center">★★★★</td>
+			</th:block>
+			<th:block th:if="${reviewDTO.score == 5}">
+			<td align="center">★★★★★</td>
+			</th:block>
+		
 			<td align="center"><span th:utext="${#strings.replace(reviewDTO.reviewContent, newLineChar, '&lt;br /&gt;')}"></span></td>
 			<td align="center">[[${#dates.format(reviewDTO.reviewDate , 'yyyy-MM-dd')}]]</td>
 		</tr>

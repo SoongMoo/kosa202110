@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.MemberShipMapper">
 	
+	<delete id="reviewDelete" parameterType="reviewDTO">
+		delete from review
+		
+		where goods_num = #{goodsNum} and PURCHASE_NUM = #{purchaseNum}
+	</delete>
+	
 	<update id="reviewUpdate" parameterType="reviewDTO" >
 		update review
 		set REVIEW_CONTENT = #{reviewContent}

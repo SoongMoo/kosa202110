@@ -105,11 +105,11 @@ public class GoodsController {
 	@Autowired
 	GoodsInquireAnswerWriteService goodsInquireAnswerWriteService;
 	@RequestMapping("answerWrite")
-	public String answerWrite(@RequestParam(value="memberNum") String memberNum,
-			@RequestParam(value="inquireNum") Integer inquireNum,
-			@RequestParam(value="inquireAnswer") String inquireAnswer,
-			@RequestParam(value="answerEmail") String answerEmail,
-			@RequestParam(value="inquireSubject") String inquireSubject) {
+	public String answerWrite(@RequestParam(value="memberNum") String memberNum
+			,@RequestParam(value="inquireNum") Integer inquireNum
+			,@RequestParam(value="inquireAnswer") String inquireAnswer
+			,@RequestParam(value="answerEmail") String answerEmail
+			,@RequestParam(value="inquireSubject") String inquireSubject) {
 		goodsInquireAnswerWriteService.execute(memberNum, inquireNum, inquireAnswer,answerEmail,inquireSubject);
 		return "redirect:goodsQuestion";
 	}

@@ -1,6 +1,8 @@
 package kosaShoppingMall.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +31,23 @@ public class LoginController {
 	}
 	@RequestMapping(value = "/login/loginPro", method = RequestMethod.POST)
 	public String loginPro(@Validated LoginCommand loginCommand ,
-			BindingResult result, Model model, HttpSession session) {
+			BindingResult result, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
 		if(result.hasErrors()) {
 	
-			goodsListPageSerivce.execute(model); /////
+			goodsListPageSerivce.execute(request); 
 			
 			return "thymeleaf/index";
 		}
-		String path = loginService.execute(loginCommand, result, model, session);
+		String path = loginService.execute(loginCommand, result, request, session, response);
 		return path;
 	}
 	@RequestMapping("/login/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session , HttpServletResponse response) {
+		Cookie cookie = new Cookie("autoLogin","");
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		
 		session.invalidate();
 		return "redirect:/";
 	}

@@ -14,7 +14,6 @@ import kosaShoppingMall.domain.GoodsInquireDTO;
 import kosaShoppingMall.domain.MemberDTO;
 import kosaShoppingMall.mapper.GoodsMapper;
 import kosaShoppingMall.mapper.MemberMapper;
-import kosaShoppingMall.mapper.MemberShipMapper;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
@@ -33,7 +32,6 @@ public class GoodsInquireAnswerWriteService {
 		goodsMapper.setInquireAnswer(goodsInquireDTO);
 		MemberDTO memberDTO = memberMapper.selectDTO(memberNum);
 		
-		
 		MimeMessage msg = mailSender.createMimeMessage();
 		String content = "<html><body>"
 				+ "안녕하세요. 숭무 쇼핑몰입니다. <BR />"
@@ -45,8 +43,7 @@ public class GoodsInquireAnswerWriteService {
 			msg.setContent(content,"text/html; charset=UTF-8");
 			msg.setSubject(subject);
 			msg.setFrom(new InternetAddress("sender@gmail.com")); // 보내는 사람
-			msg.setRecipient(MimeMessage.RecipientType.TO , 
-					new InternetAddress(answerEmail)); // 받는 사람
+			msg.setRecipient(MimeMessage.RecipientType.TO , new InternetAddress(answerEmail)); // 받는 사람
 			mailSender.send(msg); // 메일보내기
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -61,7 +58,7 @@ public class GoodsInquireAnswerWriteService {
 		params.put("to", memberDTO.getMemberPhone());// 수신번호
 		params.put("from", "01071461970");// 발신번호
 		content = "안녕하세요. 숭무쇼핑몰입니다.\n" + memberDTO.getMemberName() 
-		        + "님이 문의하신 " + inquireSubject + "에 대한 답변이 등록 되었습니다.";
+		        + "님이 문의하신 '" + inquireSubject + "'에 대한 답변이 등록 되었습니다.";
 		if(content.length() > 80) {
 			params.put("type", "LMS");
 		}else {

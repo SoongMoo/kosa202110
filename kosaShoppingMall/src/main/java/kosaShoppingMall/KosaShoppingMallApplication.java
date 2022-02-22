@@ -1,12 +1,14 @@
 package kosaShoppingMall;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kosaShoppingMall.command.LoginCommand;
@@ -21,8 +23,8 @@ public class KosaShoppingMallApplication {
 	GoodsListPageSerivce goodsListPageSerivce;
 	
 	@RequestMapping(value = "/")
-	public String test(LoginCommand loginCommand, Model model) {
-		goodsListPageSerivce.execute(model);
+	public String test(LoginCommand loginCommand, HttpServletRequest request) {
+		goodsListPageSerivce.execute(request);
 		return "thymeleaf/index";
 	}
 	

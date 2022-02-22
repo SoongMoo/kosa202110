@@ -276,7 +276,9 @@ public class GoodsController {
 	}
 	
 	@RequestMapping(value = "goodsModify" , method = RequestMethod.GET)
-	public String goodsNum(GoodsCommand goodsCommand ,Model model ) {
+	public String goodsNum(GoodsCommand goodsCommand ,Model model
+			,HttpSession session) {
+		session.removeAttribute("fileList");
 		goodsModifyService.execute(goodsCommand , model );
 		return "thymeleaf/goods/goodsUpdate";
 	}

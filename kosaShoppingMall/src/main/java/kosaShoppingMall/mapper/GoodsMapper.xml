@@ -4,6 +4,37 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+	<select id="goodsInquireList" parameterType="string" resultType="goodsInquireDTO">
+		select INQUIRE_NUM inquireNum   ,
+				 INQUIRE_KIND inquireKind , INQUIRE_SUBJECT  inquireSubject,
+				 INQUIRE_CONTENT inquireContent,
+				 INQUIRE_DATE inquireDate , m.member_id memberId,
+				 INQUIRE_ANSWER inquireAnswer, ANSWER_DATE answerDate
+		from goods_inquire gi join member m
+   			 on gi.member_num = m.member_num 
+   		 where gi.goods_num = #{goodsNum}
+	</select>
+	
+	<select id="goodsReviewList" parameterType="string" resultType="reviewDTO">
+		   select 	review_date  reviewDate	, score , review_Content reviewContent  , m.member_id memberId
+			from review r join purchase_list pl
+				 on r.purchase_num = pl.purchase_num and r.goods_num = pl.goods_num join  purchase  p
+				 on pl.purchase_num = p.purchase_num join member m
+         	     on p.member_num = m.member_num
+         	 where r.goods_num =#{goodsNum}
+		
+	
+	</select>
+	
+	<insert id="goodsInquireWriteService" parameterType="goodsInquireDTO">
+		insert into goods_inquire (INQUIRE_NUM, inquire_kind, inquire_subject ,  
+    inquire_content, member_num, inquire_date, goods_num)
+	
+		values ((select nvl(max(inquire_num),0) + 1 from goods_inquire) ,#{inquireKind}, 
+		#{inquireSubject},  #{inquireContent}, #{memberNum}, sysdate,  #{goodsNum})
+	
+	</insert>
+	
 	<insert id="reviewWrite" parameterType="reviewDTO">
 		insert into review(REVIEW_NUM, GOODS_NUM, purchase_num, REVIEW_DATE, SCORE, REVIEW_CONTENT)
 		values(seq_num.nextval, #{goodsNum}, #{purchaseNum}, sysdate, 5, #{reviewContent})

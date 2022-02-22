@@ -12,6 +12,7 @@ import kosaShoppingMall.command.GoodsIpgoCommand;
 import kosaShoppingMall.domain.CartDTO;
 import kosaShoppingMall.domain.DeliveryDTO;
 import kosaShoppingMall.domain.GoodsDTO;
+import kosaShoppingMall.domain.GoodsInquireDTO;
 import kosaShoppingMall.domain.GoodsIpgoDTO;
 import kosaShoppingMall.domain.GoodsIpgoGoodsDTO;
 import kosaShoppingMall.domain.OrderListDTO;
@@ -67,6 +68,9 @@ public interface GoodsMapper {
 	public Integer deliveryUpdate(DeliveryDTO dto);
 	public Integer deliveryDelete(String purchaseNum);
 	public Integer reviewWrite(ReviewDTO dto);
+	public Integer goodsInquireWriteService(GoodsInquireDTO dto);
+	public List<GoodsInquireDTO> goodsInquireList(String goodsNum);
+	public List<ReviewDTO> goodsReviewList(String goodsNum);
 }
 
 

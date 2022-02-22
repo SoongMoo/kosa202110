@@ -16,5 +16,6 @@ public class ReviewDTO {
 	String reviewContent;
 	String purchaseNum;
 	
+	String memberId;
 	String memberNum;
 }

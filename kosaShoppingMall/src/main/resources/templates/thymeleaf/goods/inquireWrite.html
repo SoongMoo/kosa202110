@@ -3,16 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script>
+$(function(){
+	$("#frmMain").submit(function(){
+		if([[${session.authInfo == null}]]){
+			alert("로그인을 하셔야 합니다.");
+			opener.location.href="/";
+			window.self.close();
+			return false;
+		}
+	});
+});
+</script>
 </head>
 <body>
-	<form method="post" action="" id="frmMain">
+	<form method="post" action="inquireWrite" id="frmMain">
+	<input type="hidden" name="goodsNum" th:value="${goodsCommand.goodsNum}">
 		<div id="body" class="withname">
 			<h1 class="fl"> 판매자에게 문의하기 </h1>
 			<hr>
 			<div id="maxzone" >
 				<div id="contents" >
 					<p class="product-seller">
-						<strong>상품명 : </strong>300ml 환자용 계량 빨대컵 PP빨대 물병 물통 병원용
+						<strong>상품명 : [[${goodsCommand.goodsName}]]</strong>
 					</p>
 					<div >
 						<table class="tbl-qna" >
@@ -24,11 +38,11 @@
 								<tr>
 									<th>문의유형</th>
 									<td class="type">
-										<input type="radio" id="hchkQueryType1"	name="hchkQueryType" />상품(성능/사이즈) 
-										<input type="radio" id="hchkQueryType2" name="hchkQueryType" />배송
-										<input type="radio" id="hchkQueryType3" name="hchkQueryType" />교환
-										<input type="radio" id="hchkQueryType4" name="hchkQueryType" />반품/취소/환불 
-										<input type="radio" id="hchkQueryType5" name="hchkQueryType" />기타
+										<input type="radio" id="hchkQueryType1"	name="hchkQueryType" value="상품"/>상품(성능/사이즈) 
+										<input type="radio" id="hchkQueryType2" name="hchkQueryType" value="배송"/>배송
+										<input type="radio" id="hchkQueryType3" name="hchkQueryType" value="교환"/>교환
+										<input type="radio" id="hchkQueryType4" name="hchkQueryType" value="반품/취소/환불"/>반품/취소/환불 
+										<input type="radio" id="hchkQueryType5" name="hchkQueryType" value="기타"/>기타
 									</td>
 								</tr>
 								<tr class="cont">

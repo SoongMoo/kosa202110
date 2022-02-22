@@ -15,7 +15,7 @@ public class ReviewDTO {
 	Integer score;
 	String reviewContent;
 	String purchaseNum;
-	
-	String memberId;
 	String memberNum;
+
+	MemberDTO memberDTO;
 }

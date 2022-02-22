@@ -16,23 +16,27 @@ $(function(){
 <table width="600" align="center">
 	<tr><td colspan="4" align="right"><button type="button" id="inquire1" >문의 하기</button></td></tr>
 	<tr><th width="15%">답변 상태</th><th>문의유형</th><th>작성자</th><th>작성일자</th></tr>	
-	<th:block th:each="dto, idx : ${list}">
-	<tr ><td>[[${idx.count}]]</td><td colspan="3">[[${dto.inquireSubject}]] </td></tr>
+	
+	<th:block th:each="goodsInquireDTO, idx : ${list}">
+	<tr ><td>[[${idx.count}]]</td><td colspan="3">[[${goodsInquireDTO.inquireSubject}]] </td></tr>
 	<tr>
 		<td> 검토중</td>
-		<td> [[${dto.inquireKind}]]</td>
+		<td> [[${goodsInquireDTO.inquireKind}]]</td>
 
-		<td> [[${dto.memberId}]]</td>
-		<td> [[${#dates.format(dto.inquireDate , 'yyyy-MM-dd')}]]</td>
+		<td> [[${goodsInquireDTO.memberDTO.memberId}]]</td>
+		<td> [[${#dates.format(goodsInquireDTO.inquireDate , 'yyyy-MM-dd')}]]</td>
 	</tr>
-	<tr><td colspan="4">[[${dto.inquireContent}]]</td></tr>
-	<tr th:if="${dto.inquireAnswer != null}" th:id="ing+${idx.count}" style="display:none">
-		<td colspan="4" >[[${#dates.format(dto.inquireDate , 'yyyy-MM-dd')}]]<br />
-		[[${dto.inquireAnswer}]]
+	<tr><td colspan="4">[[${goodsInquireDTO.inquireContent}]]</td></tr>
+	
+	<tr th:if="${goodsInquireDTO.inquireAnswer != null}" >
+		<td colspan="4" >[[${#dates.format(goodsInquireDTO.inquireDate , 'yyyy-MM-dd')}]]<br />
+		[[${goodsInquireDTO.inquireAnswer}]]
 		</td>
 	</tr>
+	
 	<tr><td  colspan="4">&nbsp;&nbsp;&nbsp;</td></tr>
 	</th:block>
+	
 </table>
 </body>
 </html>

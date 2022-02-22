@@ -16,9 +16,10 @@ public class GoodsInquireDTO {
 	String inquireSubject;
 	String inquireContent;
 	Date inquireDate;
-	String email1;
-	String email2;
-	String memberId;
+	String answerEmail;
 	String inquireAnswer;
 	Date answerDate;
+	
+	GoodsDTO goodsDTO;
+	MemberDTO memberDTO;
 }

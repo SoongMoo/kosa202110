@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet" >
+</head>
+<body>
+<div id="wrapper">
+<div id="leftMenu">
+	<ul>
+		<li><a href="goodsList">상품 리스트</a></li>
+		<li><a href="goodsRegist">상품 등록</a></li>
+		<li><a href="goodsIpgoList">상품 입고 현황</a></li>
+		<li><a href="goodsIpgo">상품 입고</a></li>
+		<li><a href="purchaseList">주문 내역</a></li>
+		<li><a href="goodsQuestion">상품 문의</a></li>
+	</ul>
+</div>
+<div id="MemberInfo">
+	<table>
+		<tr><td>상품명</td><td>종류</td><td>제목</td><td>작성자</td><td>상태</td></tr>
+		
+		<tr>
+			<td>[[]]</td><td>[[]]</td><td>[[]]</td><td>[[]]</td>
+			<td th:if="${dto.inquireAnswer == null">답변 준비중</td>
+			<td th:if="${dto.inquireAnswer != null">답변완료</td>
+		</tr>
+		
+	</table>
+</div>
+</div>
+</body>
+</html>

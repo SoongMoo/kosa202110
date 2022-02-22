@@ -25,7 +25,6 @@ import kosaShoppingMall.command.GoodsCommand;
 import kosaShoppingMall.command.GoodsIpgoCommand;
 import kosaShoppingMall.service.goods.DeliveryActionService;
 import kosaShoppingMall.service.goods.DeliveryDelService;
-import kosaShoppingMall.service.goods.DeliveryUpdateService;
 import kosaShoppingMall.service.goods.FileDelService;
 import kosaShoppingMall.service.goods.GoodsAutoNum;
 import kosaShoppingMall.service.goods.GoodsDeleteService;
@@ -33,6 +32,7 @@ import kosaShoppingMall.service.goods.GoodsDelsService;
 import kosaShoppingMall.service.goods.GoodsDetailService;
 import kosaShoppingMall.service.goods.GoodsListService;
 import kosaShoppingMall.service.goods.GoodsModifyService;
+import kosaShoppingMall.service.goods.GoodsQuestionService;
 import kosaShoppingMall.service.goods.GoodsSearchService;
 import kosaShoppingMall.service.goods.GoodsUpdateService;
 import kosaShoppingMall.service.goods.GoodsWriteService;
@@ -94,6 +94,14 @@ public class GoodsController {
 	DeliveryActionService deliveryActionService;
 	@Autowired 
 	DeliveryDelService DeliveryDelService;
+	
+	@Autowired
+	GoodsQuestionService goodsQuestionService ;
+	@RequestMapping("goodsQuestion")
+	public String goodsQuestion(Model model) {
+		goodsQuestionService.execute(model);
+		return "thymeleaf/goods/goodsQuestion";
+	}
 	
 	@RequestMapping("deliveryDel")
 	public String deliveryDel(@RequestParam (value = "purchaseNum")String purchaseNum , HttpServletResponse response) {

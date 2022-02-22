@@ -25,6 +25,7 @@ public class GoodsInquireWriteService {
 		dto.setInquireKind(goodsInquireCommand.getHchkQueryType());
 		dto.setInquireSubject(goodsInquireCommand.getInquireSubject());
 		dto.setMemberNum(memberId);
+		dto.setAnswerEmail(goodsInquireCommand.getEmail1() + "@" + goodsInquireCommand.getEmail2());
 		goodsMapper.goodsInquireWriteService(dto);
 	}
 

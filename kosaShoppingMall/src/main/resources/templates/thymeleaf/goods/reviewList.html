@@ -7,12 +7,12 @@
 <body>
 <table border="1" width="600" align="center" >
 	<tr><th>아이디</th><th>별점</th><th>내용</th><th>리뷰 준 날짜</th></tr>
-	<th:block  th:each="dto : ${list}">
+	<th:block  th:each="reviewDTO : ${list}">
 		<tr>
-			<td align="center">[[${dto.memberId}]]	</td>
-			<td align="center">[[${dto.score}]]</td>
-			<td align="center"><span th:utext="${#strings.replace(dto.reviewContent, newLineChar, '&lt;br /&gt;')}"></span></td>
-			<td align="center">[[${#dates.format(dto.reviewDate , 'yyyy-MM-dd')}]]</td>
+			<td align="center">[[${reviewDTO.memberDTO.memberId}]]	</td>
+			<td align="center">[[${reviewDTO.score}]]</td>
+			<td align="center"><span th:utext="${#strings.replace(reviewDTO.reviewContent, newLineChar, '&lt;br /&gt;')}"></span></td>
+			<td align="center">[[${#dates.format(reviewDTO.reviewDate , 'yyyy-MM-dd')}]]</td>
 		</tr>
 	</th:block>
 </table>

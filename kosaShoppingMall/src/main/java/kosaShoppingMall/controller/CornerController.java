@@ -33,9 +33,9 @@ public class CornerController {
 	GoodsReviewListService goodsReviewListService;
 	
 	@RequestMapping("reviewList")
-	public String reviewList(@RequestParam(value = "goodsNum")String goodsNum , Model model) {
-		model.addAttribute("newLineChar", "\n");
+	public String reviewList(@RequestParam(value = "goodsNum") String goodsNum , Model model) {
 		goodsReviewListService.execute(goodsNum ,model);
+		model.addAttribute("newLineChar", "\n");
 		return "thymeleaf/goods/reviewList";
 	}
 	
@@ -48,8 +48,8 @@ public class CornerController {
 	}
 	@RequestMapping(value="inquireList" )
 	public String  inquireList(@ModelAttribute(value = "goodsNum") String goodsNum, Model model ) {
-		model.addAttribute("newLineChar", "\n");
 		goodsInquireListService.execute(goodsNum ,model );
+		model.addAttribute("newLineChar", "\n");
 		return "thymeleaf/goods/inquireList";
 	}
 	@RequestMapping(value="inquireWrite" , method = RequestMethod.GET)

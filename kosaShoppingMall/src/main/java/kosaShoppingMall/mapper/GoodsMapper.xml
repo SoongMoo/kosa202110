@@ -4,34 +4,80 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
-	<select id="goodsInquireList" parameterType="string" resultType="goodsInquireDTO">
+	<resultMap type="goodsInquireDTO" id="goodsInquireAnswerResultMap">
+		<id column="goods_Num" jdbcType="VARCHAR" property="goodsNum"/>
+		<id column="inquire_Num" jdbcType="BIGINT" property="inquireNum"/>
+		<id column="member_Num" jdbcType="VARCHAR" property="memberNum"/>
+		<result column="inquire_Subject" jdbcType="VARCHAR" property="inquireSubject"/>
+		<result column="inquire_Content" jdbcType="VARCHAR" property="inquireContent"/>
+		<result column="inquire_Kind" jdbcType="VARCHAR" property="inquireKind"/>
+		<result column="inquire_Answer" jdbcType="VARCHAR" property="inquireAnswer"/>
+		<result column="inquire_Date" jdbcType="DATE" property="inquireDate"/>
+		<result column="answer_Date" jdbcType="DATE" property="answerDate"/>
+		<result column="answer_Email" jdbcType="VARCHAR" property="answerEmail"/>
+		<association property="goodsDTO" javaType="goodsDTO" >
+			<result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+		</association>
+	</resultMap>
+	<select id="goodsInquire" resultMap="goodsInquireAnswerResultMap">
+		select goods_name, INQUIRE_NUM, GOODS_NUM, MEMBER_NUM, INQUIRE_SUBJECT, INQUIRE_CONTENT,
+			   INQUIRE_KIND, INQUIRE_ANSWER, INQUIRE_DATE, ANSWER_DATE, ANSWER_EMAIL
+		from goods g, goods_inquire gi
+		where g.GOODS_NUM = gi.GOODS_NUM
+	</select>
+	
+	<resultMap type="goodsInquireDTO" id="goodsInquireResultMap">
+		<id column="goodsNum" jdbcType="VARCHAR" property="goodsNum"/>
+		<id column="inquireNum" jdbcType="BIGINT" property="inquireNum"/>
+		<id column="memberNum" jdbcType="VARCHAR" property="memberNum"/>
+		<result column="inquireSubject" jdbcType="VARCHAR" property="inquireSubject"/>
+		<result column="inquireContent" jdbcType="VARCHAR" property="inquireContent"/>
+		<result column="inquireKind" jdbcType="VARCHAR" property="inquireKind"/>
+		<result column="inquireAnswer" jdbcType="VARCHAR" property="inquireAnswer"/>
+		<result column="inquireDate" jdbcType="DATE" property="inquireDate"/>
+		<result column="answerDate" jdbcType="DATE" property="answerDate"/>
+		<result column="answerEmail" jdbcType="VARCHAR" property="answerEmail"/>
+		<association property="memberDTO" javaType="memDTO" >
+			<result column="memberId" jdbcType="VARCHAR" property="memberId"/>
+		</association>
+	</resultMap>
+	<select id="goodsInquireList" parameterType="string" resultMap="goodsInquireResultMap">
 		select INQUIRE_NUM inquireNum   ,
 				 INQUIRE_KIND inquireKind , INQUIRE_SUBJECT  inquireSubject,
 				 INQUIRE_CONTENT inquireContent,
 				 INQUIRE_DATE inquireDate , m.member_id memberId,
 				 INQUIRE_ANSWER inquireAnswer, ANSWER_DATE answerDate
-		from goods_inquire gi join member m
-   			 on gi.member_num = m.member_num 
-   		 where gi.goods_num = #{goodsNum}
+		from goods_inquire gi , member m
+   		where gi.member_num = m.member_num and gi.goods_num = #{goodsNum}
+   		order by inquireNum desc
 	</select>
 	
-	<select id="goodsReviewList" parameterType="string" resultType="reviewDTO">
-		   select 	review_date  reviewDate	, score , review_Content reviewContent  , m.member_id memberId
-			from review r join purchase_list pl
-				 on r.purchase_num = pl.purchase_num and r.goods_num = pl.goods_num join  purchase  p
-				 on pl.purchase_num = p.purchase_num join member m
-         	     on p.member_num = m.member_num
-         	 where r.goods_num =#{goodsNum}
-		
+	<resultMap type="reviewDTO" id="reviewResultMap">
+		<id column="reviewNum"  jdbcType="BIGINT" property="reviewNum"/>
+		<id column="goodsNum"  jdbcType="VARCHAR" property="goodsNum"/>
+		<id column="reviewDate"  jdbcType="DATE" property="reviewDate"/>
+		<result column="score"  jdbcType="BIGINT" property="score"/>
+		<result column="reviewContent"  jdbcType="VARCHAR" property="reviewContent"/>
+		<result column="purchaseNum"  jdbcType="VARCHAR" property="purchaseNum"/>
+		<result column="memberNum"  jdbcType="VARCHAR" property="memberNum"/>
+		<association property="memberDTO" javaType="memDTO" >
+			<result column="memberId" jdbcType="VARCHAR" property="memberId"/>
+		</association>
+	</resultMap>
 	
+	<select id="goodsReviewList" parameterType="string" resultMap="reviewResultMap">
+		    select 	review_date  reviewDate	, score , review_Content reviewContent  , m.member_id memberId
+			from review r  ,  purchase  p , member m 
+			where r.purchase_num = p.purchase_num and  p.member_num = m.member_num
+         	  and r.goods_num =#{goodsNum}
 	</select>
 	
 	<insert id="goodsInquireWriteService" parameterType="goodsInquireDTO">
 		insert into goods_inquire (INQUIRE_NUM, inquire_kind, inquire_subject ,  
-    inquire_content, member_num, inquire_date, goods_num)
+    inquire_content, member_num, inquire_date, goods_num , ANSWER_EMAIL)
 	
-		values ((select nvl(max(inquire_num),0) + 1 from goods_inquire) ,#{inquireKind}, 
-		#{inquireSubject},  #{inquireContent}, #{memberNum}, sysdate,  #{goodsNum})
+		values (seq_num.nextval ,#{inquireKind}, 
+		#{inquireSubject},  #{inquireContent}, #{memberNum}, sysdate,  #{goodsNum}, #{answerEmail})
 	
 	</insert>
 	

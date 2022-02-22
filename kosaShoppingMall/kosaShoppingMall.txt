@@ -248,8 +248,20 @@ REFERENCES purchase_list(purchase_num, goods_num) on delete CASCADE;
 /*  sequence */
 create SEQUENCE seq_num;
 
+alter table goods_inquire
+add (ANSWER_EMAIL             VARCHAR2(50));  
 
 
+/*  오라클 시퀀스를 사용하지 않고 자동 증가하는 id 값 만들기 */
+create table TEST (
+
+  ID NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+
+  CONTENT VARCHAR2(255),
+
+);
+
+iNSERT INTO TEST (CONTENT) VALUES ('TEST');
 
 
 

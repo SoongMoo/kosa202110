@@ -40,6 +40,7 @@ public class FileDelService {
 			list.add(fileInfo);
 			num = 1;
 		}
+		System.out.println(list.size());
 		session.setAttribute("fileList", list);
 		model.addAttribute("val", num);
 	}

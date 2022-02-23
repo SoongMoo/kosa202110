@@ -278,7 +278,7 @@ iNSERT INTO TEST (CONTENT) VALUES ('TEST');
 
 insert aLL 
             into education(EMP_ID , SCHOOL_YEAR, SCHOOL) values('2222','02/03/2022 ','디지털 대학교')
-            into education(EMP_ID , SCHOOL_YEAR, SCHOOL) values('2222','02/03/2022 ','디지털 대학교')
+            into education(EMP_ID , SCHOOL_YEAR, SCHOOL) values('2222','01/03/2021 ','디지털')
 SELECT *
 FROM DUAL;
 

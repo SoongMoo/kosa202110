@@ -1,5 +1,7 @@
 package kosaShoppingMall.domain;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
@@ -13,4 +15,6 @@ public class EmployeeDTO {
 	String empAddr;
 	String empPhone;
 	String empEmail;
+	
+	List<EducationDTO> educations;	
 }

@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+	function open(id, id1){
+		status = $(id).css("display");
+		if (status == "none") { 
+			$(id).css("display", ""); 
+			$(id1).text("답변  닫기");
+		} else { 
+			$(id).css("display", "none"); 
+			$(id1).text("답변  열기");
+		}
+	}
+</script>
 <script > 
 
 function inquireUpdate(as) {
@@ -22,26 +34,27 @@ $(function(){
 	<tr><th width="15%">답변 상태</th><th>문의유형</th><th>작성자</th><th>작성일자</th></tr>	
 	
 	<th:block th:each="goodsInquireDTO, idx : ${list}">
-	<tr ><td>[[${idx.count}]]</td><td colspan="3">[[${goodsInquireDTO.inquireSubject}]] </td></tr>
+	<tr ><td>[[${idx.count}]]</td><td colspan="3">[[${goodsInquireDTO.inquireSubject}]] | 
+		 <a th:href="|javascript:open('#inq${idx.count}', ingu${idx.count})|"><span th:id = "ingu + ${idx.count}">답변 열기</span></a></td></tr>
 	<tr>
 		<td> 검토중</td>
 		<td> [[${goodsInquireDTO.inquireKind}]]</td>
 
 		<td> [[${goodsInquireDTO.memberDTO.memberId}]]</td>
-		<td> [[${#dates.format(goodsInquireDTO.inquireDate , 'yyyy-MM-dd')}]]</td>
+		<td> [[${#dates.format(goodsInquireDTO.inquireDate , 'yyyy-MM-dd')}]]
+			<th:block th:if="${session.authInfo.userId == goodsInquireDTO.memberDTO.memberId}">
+				<input type="button"  th:attr="onclick=|inquireUpdate('${goodsInquireDTO.inquireNum}');|" value="삭제 하기">
+			</th:block>
+		</td>
 	</tr>
 	<tr><td colspan="4">[[${goodsInquireDTO.inquireContent}]]</td></tr>
 	
-	<tr th:if="${goodsInquireDTO.inquireAnswer != null}" >
+	<tr th:if="${goodsInquireDTO.inquireAnswer != null}" th:id="inq + ${idx.count}" style="display:none;">
 		<td colspan="4" >[[${#dates.format(goodsInquireDTO.inquireDate , 'yyyy-MM-dd')}]]<br />
 		[[${goodsInquireDTO.inquireAnswer}]]
 		</td>
-			<th:block th:if="${session.authInfo.userId == goodsInquireDTO.memberDTO.memberId}">
-			<td><input type="button"  th:onclick="javascript:inquireUpdate('${goodsInquireDTO.inquireNum}');" value="삭제 하기"></td>
-			</th:block>
 	</tr>
-	
-	<tr><td  colspan="4">&nbsp;&nbsp;&nbsp;</td></tr>
+	<tr><td  colspan="4" >&nbsp;&nbsp;&nbsp;</td></tr>
 	</th:block>
 	
 </table>

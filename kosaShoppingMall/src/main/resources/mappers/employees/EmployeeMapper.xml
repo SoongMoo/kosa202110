@@ -4,6 +4,15 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosaShoppingMall.mapper.EmployeeMapper">
 
+<insert id="educationInsert" parameterType="hashMap" >
+	insert  aLL  
+		<foreach collection="listss" item="educationDTO" index="index" >
+				into education(EMP_ID , SCHOOL_YEAR, SCHOOL)
+				values(#{educationDTO.empId},#{educationDTO.schoolYear},#{educationDTO.school})
+		</foreach>
+	SELECT * FROM DUAL
+</insert>
+
 	<delete id="empDeletes" parameterType="hashMap">
 		delete from employees
 		<where>
@@ -40,11 +49,27 @@
 		emp_phone = #{empPhone},emp_email = #{empEmail}
 	where emp_id = #{empId}
 </update>
-<select id="selectOne" resultType="empDTO" parameterType="string" >
-	select emp_id empId, emp_pw empPw, emp_name empName,
-			emp_addr empAddr, emp_phone empPhone, emp_email empEmail
-	from employees
-	where emp_id = #{empId}
+
+<resultMap type="empDTO" id="employeeBaseResultMap">
+	<id column="empId" jdbcType="VARCHAR" property="empId"/>
+	<result column="empPw" jdbcType="VARCHAR" property="empPw"/>
+	<result column="empName" jdbcType="VARCHAR" property="empName"/>
+	<result column="empAddr" jdbcType="VARCHAR" property="empAddr"/>
+	<result column="empPhone" jdbcType="VARCHAR" property="empPhone"/>
+	<result column="empEmail" jdbcType="VARCHAR" property="empEmail"/>
+	<collection property="educations" ofType="educationDTO">
+		<id column="empId" jdbcType="VARCHAR" property="empId"/>
+		<id column="SCHOOL_YEAR" jdbcType="DATE" property="schoolYear"/>
+		<id column="SCHOOL" jdbcType="VARCHAR" property="school"/>
+	</collection>
+</resultMap>
+
+<select id="selectOne" resultMap="employeeBaseResultMap" parameterType="string" >
+	select em.emp_id empId, emp_pw empPw, emp_name empName,
+			emp_addr empAddr, emp_phone empPhone, emp_email empEmail,
+		    SCHOOL_YEAR, SCHOOL
+	from employees em , education ed
+	where em.emp_id = ed.emp_id(+) and em.emp_id = #{empId}
 </select>
 	<select id="count" resultType="integer">
 		select count(*) from employees

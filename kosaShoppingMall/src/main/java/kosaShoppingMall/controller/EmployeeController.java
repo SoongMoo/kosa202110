@@ -117,14 +117,12 @@ public class EmployeeController {
 		}
 		Integer i = emailCheckService.execute(employeeCommand.getEmpEmail());
 		if(i == 1) {
-			result.rejectValue("empEmail", "employeeCommand.empEmail", 
-					"사용중인 이메일 입니다아앙.");
+			result.rejectValue("empEmail", "employeeCommand.empEmail", "사용중인 이메일 입니다아앙.");
 			return "thymeleaf/employee/empForm";
 		}
-		 i = idcheckService.execute(employeeCommand.getEmpId());
+		i = idcheckService.execute(employeeCommand.getEmpId());
 		if(i == 1) {
-			result.rejectValue("empId", "memberCommand.empId", 
-					"중복 아이디입니다.");
+			result.rejectValue("empId", "memberCommand.empId", "중복 아이디입니다.");
 			return "thymeleaf/employee/empForm";
 		}
 		

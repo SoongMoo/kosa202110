@@ -3,60 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script src="/static/js/jquery-latest.js"></script>
+<script src="/static/js/notice.js"></script>
 <script type="text/javascript">
-$(function () {
-	$("#empEmail").keyup(function(){
-		$.ajax({
-			type : "post",
-			url : "emailCheck",
-			dataType : "text",
-			data: {"empEmail":$("#empEmail").val()},
-			success : function(result){
-				$("#emailCk").html(result);
-				if(result == "사용가능한 이메일입니다."){
-					$("#emailCk").css("color","blue");
-				}else{
-					$("#emailCk").css("color","red");
-				}
-			},
-			error : function(){
-				alert('에러가 나왔다 홀홀홀~');
-				return;
-			}
-		});
-	});
-	$("#empId").keyup(function() {
-		$.ajax({
-			type:"post",
-			url:"empIdCheck",
-			dataType:"text",
-			data:{"empId" :$("#empId").val()},
-			success: function (result) {
-				$("#IdCk").html(result);
-				if(result=="사용 가능한 아이디입니다."){
-					$("#IdCk").css("color","blue");
-				}else{
-					$("#IdCk").css("color","red");
-				}
-			},error : function () {
-				alert("에러에러 에러에러");
-			}
-		
-		});
+$(function(){
+	$("#btn").click(function(){
+		$("#appd").append(
+				"<div id = 'appd'>졸업년도 : <input type='date'  name='schoolYear'/>"
+				+"학교 : <input type='text' size='15' name='school'/>"
+				+"<button id='btn' onclick='del(this)' type='button'>삭제</button></div>");
 	});
 });
-/*
-	$(function(){
-		$("#frm").submit(function(){
-			if($("#empPw").val() != $("#empPwCon").val()){
-				alert("비밀번호 확인이 다릅니다.");
-				return false;
-			}
-		});
-	});
-*/
+function del(eee){
+	$(eee).parent().remove();
+}
 </script>
 </head>
 <body>
@@ -84,7 +44,17 @@ $(function () {
 	<span id="emailCk"></span>
 <span th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span><br />
 
+학력 : 
+ <div id = "appd">
+	졸업년도 : <input type="date" name="schoolYear"/>
+    학교 : <input type="text" size="15" name="school"/><button type='button' id="btn">추가</button>
+ </div>
 <input type="submit" value="등록" />
 </form>
 </body>
 </html>
+
+
+
+
+

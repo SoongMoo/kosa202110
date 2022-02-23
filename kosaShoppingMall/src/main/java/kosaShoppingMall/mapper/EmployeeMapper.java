@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import kosaShoppingMall.domain.AuthInfo;
+import kosaShoppingMall.domain.EducationDTO;
 import kosaShoppingMall.domain.EmployeeDTO;
 import kosaShoppingMall.domain.StartEndPageDTO;
 
@@ -22,5 +23,6 @@ public interface EmployeeMapper {
 	/// employeesMyPage서비스
 	public Integer employeePwChange(EmployeeDTO dto);
 	public Integer changPw(AuthInfo authInfo);
+	public Integer educationInsert(List<EducationDTO> listss);
 	
 }

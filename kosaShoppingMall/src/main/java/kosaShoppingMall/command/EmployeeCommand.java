@@ -1,8 +1,12 @@
 package kosaShoppingMall.command;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -24,6 +28,11 @@ public class EmployeeCommand {
 	String empPhone;
 	@NotBlank(message = "이메일을 입력해주세요!")
 	String empEmail;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	Date [] schoolYear;
+	String [] school;
+	
 	public boolean isEmpPwEqualsEmpPwCon() {
 		return empPw.equals(empPwCon);
 	}

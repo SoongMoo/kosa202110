@@ -45,6 +45,19 @@ $(function () {
 		});
 	});
 });
+
+
+
+$(function(){
+	$("#btn").click(function(){
+		$("#appd").append("<div id = 'appd'><input type='text' size='15' name='ddd'/><button id='btn' onclick='del(this)' type='button'>삭제</button></div>");
+	});
+});
+function del(eee){
+	$(eee).parent().remove();
+}
+
+
 </script>
 </head>
 <body>
@@ -84,7 +97,6 @@ $(function () {
 회원 이메일 : <input type="email" name="memberEmail" th:value="${memberCommand.memberEmail}" id="memberEmail"/>
 			<span id="emailCk"></span>
 			<span th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></span><br/>
-			
 
 <input type="submit" value="회원 등록"/>
 </form>

@@ -46,17 +46,12 @@ public class GoodsUpdateService {
 				orgFile.add(s.trim());
 			}
 			for(String s : dto.getGoodsImages().split("`")) {
-				System.out.println("dto.getGoodsImages().split('`') " + s);
 				strFile.add(s.trim());
 			}
-			System.out.println(strFile.size());
-			// file삭제 session이 있다면 데이터베이스에서 dto에서 삭제
-			
+			// file삭제 session이 있다면 데이터베이스 dto에서 삭제
 			for (FileInfo fi : list) { // session에 있는 내용과 비교하여 리스트에 있는 파일정보 삭제
 				for (int i = 0; i < orgFile.size(); i++) {
-					
 					if (fi.getOrgFile().equals(orgFile.get(i)) && fi.getKind().trim().equals("img")) {
-						System.out.println("getKind() : " + fi.getKind());
 						orgFile.remove(fi.getOrgFile().trim()); 
 						strFile.remove(fi.getStrFile().trim());
 					}
@@ -66,7 +61,6 @@ public class GoodsUpdateService {
 			String s = "";
 			// 리스트에 있는 내용을 문자열로 변경
 			for(String ostr : orgFile) {
-				System.out.println();
 				o += ostr+"`";
 			}
 			for(String sstr : strFile) {
@@ -76,9 +70,6 @@ public class GoodsUpdateService {
 			dto.setGoodsOriginal(o); // session에 있는 것은 지우고 session에 없는 것만 저장
 			dto.setGoodsImages(s);
 		}
-		
-		System.out.println("getGoodsOriginal " + dto.getGoodsOriginal());
-		System.out.println("getGoodsImages " + dto.getGoodsImages());
 		
 		
 		String fileDir = "/view/goods/upload";

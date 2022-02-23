@@ -1,108 +1,182 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Industrious by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div>
+	<head>
+		<title>Industrious by TEMPLATED</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="/static/assets/css/main.css" />
+		<style type="text/css">
+			*{
+				padding : 0;
+				margin : auto;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
 
-<span th:if="${session.authInfo == null}">
+		<!-- Header -->
+			<header id="header">
+				<a class="logo" href="/">Industrious</a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
 
-<form action="/login/loginPro" name="frm" id="frm" method="post" th:object="${loginCommand}" >
-<table border="1"  align="center">
-<tr>
-	<td colspan="3">
-		자동 로그인 <input type="checkbox" name="autoLogin" />
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		아이디 저장 <input type="checkbox" name="idStore" th:checked="${isId}" >
-	</td>
-</tr>
-<tr>
-	<td>아이디</td>
-	<td>
-		<input type="text" name="userId" id="userId" th:if="${isId != null}" th:value="${isId}"/>
-		<input type="text" name="userId" id="userId" th:if="${isId == null}" th:value="${loginCommand.userId}"/><br />
-		<span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" ></span>
-	</td>
-	<td rowspan=2>
-						<!-- src="/static/images/img1.jpg" -->
-		<input type="image" th:src="@{/static/images/img1.jpg}" 
-			width="80" height="80" >
-	</td>
-</tr>
-	<tr>
-		<td>비밀번호</td>
-		<td>
-			<input type="password" name="userPw" id="userPw"><br />
-			<span th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}" ></span>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3">
-			<a href="/register/agree">회원가입</a>&nbsp;
-			<a href="/help/findId">아이디 찾기</a>&nbsp;
-			<a href="/help/findPassword">비밀번호 찾기</a>&nbsp;
-		</td>
-	</tr>
-</table>
-</form>
-</span>
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<th:block th:if="${session.authInfo != null}" >
+						<th:block th:switch="${session.authInfo.grade}">
+							<th:block th:case="emp">
+								<li><a href="/">Home</a></li>
+								<li><a href="/goods/goodsList">상품 관리</a></li>
+								<li><a href="/emp/empList">직원 관리</a> </li>
+								<li><a href="/mem/memList">회원 관리</a> </li>
+								<li><a href="/empMypage/empDetail">직원 내 정보 보기</a> </li>
+							</th:block>
+							<th:block th:case="mem">
+								<li><a href="/">Home</a></li>
+								<li><a href="/cart/orderList" >주문목록</a></li>
+								<li><a href="/cart/goodsCartList" >장바구니</a></li>
+								<li><a href="/mypage/memberDetail">내 정보 보기</a></li>
+							</th:block>
+						</th:block>
+						<li><a href="generic.html"><a href="/login/logout">로그아웃</a></a></li>
+					</span>
+				</ul>
+			</nav>
 
-<span th:if="${session.authInfo != null}" >
-<div style="text-align:center">
-	<span th:switch="${session.authInfo.grade}">
-	<span th:case="emp">
-		<a href="/goods/goodsList">상품 관리</a>
-		<a href="/emp/empList">직원 관리</a> 
-		<a href="/mem/memList">회원 관리</a>
-		<a href="/empMypage/empDetail">직원 내 정보 보기</a>
-	</span>
-	<span th:case="mem">
-		<a href="/cart/orderList" >주문목록</a>
-		<a href="/cart/goodsCartList" >장바구니</a>
-		<a href="/mypage/memberDetail">내 정보 보기</a>
-	</span>
-	<a href="/login/logout">로그아웃</a>
-</div>
-</span>
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<h1>Industrious</h1>
+					<p>A responsive business oriented template with a video background<br />
+					designed by <a href="https://templated.co/">TEMPLATED</a> and released under the Creative Commons License.</p>
+				</div>
+				<video autoplay loop muted playsinline src="images/banner.mp4"></video>
+			</section>
 
+		<!-- Highlights -->
+			<section class="wrapper">
+				<div class="inner">
+					<span th:if="${session.authInfo == null}">
+						<form action="/login/loginPro" name="frm" id="frm" method="post" th:object="${loginCommand}" >
+						<table border="1"  align="center" class="alt" >
+						<tr>
+							<td colspan="3">
+								<input type="checkbox" id="autoLogin" name="autoLogin">
+								<label for="autoLogin">자동 로그인</label>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="checkbox"  id="idStore" name="idStore" th:checked="${isId}" >
+								<label for="idStore">아이디 저장 </label>
+							</td>
+						</tr>
+						<tr>
+							<td>아이디</td>
+							<td>
+								<input type="text" name="userId" id="userId" th:if="${isId != null}" th:value="${isId}"/>
+								<input type="text" name="userId" id="userId" th:if="${isId == null}" th:value="${loginCommand.userId}"/><br />
+								<span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" ></span>
+							</td>
+							<td rowspan=2>
+												<!-- src="/static/images/img1.jpg" -->
+								<input type="image" th:src="@{/static/images/img1.jpg}" width="10" height="10" class="primary"  >
+								
+								</td>
+						</tr>
+							<tr>
+								<td>비밀번호</td>
+								<td>
+									<input type="password" name="userPw" id="userPw"><br />
+									<span th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}" ></span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<a href="/register/agree">회원가입</a>&nbsp;
+									<a href="/help/findId">아이디 찾기</a>&nbsp;
+									<a href="/help/findPassword">비밀번호 찾기</a>&nbsp;
+								</td>
+							</tr>
+						</table>
+						</form>
+						</span>
+				</div>
+			</section>
 
-</div>
+		<!-- CTA -->
+			<section id="cta" class="wrapper">
+				<div class="inner">
+					<h2>Curabitur ullamcorper ultricies</h2>
+					<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
+				</div>
+			</section>
 
-<div>
-	<table align="center">
-		<tr>
-			<th:block  th:each="goodsDTO , idx : ${lists}">
-			<td>
-				<a th:href="@{/corner/prodInfo(goodsNum=${goodsDTO.goodsNum})}">
-				<img width="200" height="200" th:src="|/goods/upload/${goodsDTO.goodsMain}|"><br />
-				[[${goodsDTO.goodsName}]]<br />
-				가격 : [[${#numbers.formatCurrency(goodsDTO.goodsPrice)}]]
-				</a>
-			</td>
-			<th:block th:if="${idx.count % 3 == 0}" th:utext="'</tr><tr>'" />
-			</th:block>
-		</tr>
-	</table>
-</div>
+		<!-- Testimonials -->
+			<section class="wrapper">
+				<div class="inner">
+					<table align="center">
+						<tr>
+							<th:block  th:each="goodsDTO , idx : ${lists}">
+							<td>
+								<a th:href="@{/corner/prodInfo(goodsNum=${goodsDTO.goodsNum})}">
+								<img width="200" height="200" th:src="|/goods/upload/${goodsDTO.goodsMain}|"><br />
+								[[${goodsDTO.goodsName}]]<br />
+								가격 : [[${#numbers.formatCurrency(goodsDTO.goodsPrice)}]]
+								</a>
+							</td>
+							<th:block th:if="${idx.count % 3 == 0}" th:utext="'</tr><tr>'" />
+							</th:block>
+						</tr>
+					</table>
+				</div>
+			</section>
 
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="content">
+						<section>
+							<h3>Accumsan montes viverra</h3>
+							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
+						</section>
+						<section>
+							<h4>Sem turpis amet semper</h4>
+							<ul class="alt">
+								<li><a href="#">Dolor pulvinar sed etiam.</a></li>
+								<li><a href="#">Etiam vel lorem sed amet.</a></li>
+								<li><a href="#">Felis enim feugiat viverra.</a></li>
+								<li><a href="#">Dolor pulvinar magna etiam.</a></li>
+							</ul>
+						</section>
+						<section>
+							<h4>Magna sed ipsum</h4>
+							<ul class="plain">
+								<li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
+								<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
+								<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
+								<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+							</ul>
+						</section>
+					</div>
+					<div class="copyright">
+						&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
+					</div>
+				</div>
+			</footer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
+		<!-- Scripts -->
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/browser.min.js"></script>
+			<script src="/static/assets/js/breakpoints.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
+	</body>
 </html>

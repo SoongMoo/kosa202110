@@ -254,6 +254,13 @@ alter table goods_inquire
 add (ANSWER_EMAIL             VARCHAR2(50));  
 
 
+create table education(
+    EMP_ID VARCHAR2(10),
+    school_Year Date,
+    school varchar2(100)
+);
+
+
 /*  오라클 시퀀스를 사용하지 않고 자동 증가하는 id 값 만들기 */
 create table TEST (
 
@@ -269,7 +276,11 @@ iNSERT INTO TEST (CONTENT) VALUES ('TEST');
 
 
 
-
+insert aLL 
+            into education(EMP_ID , SCHOOL_YEAR, SCHOOL) values('2222','02/03/2022 ','디지털 대학교')
+            into education(EMP_ID , SCHOOL_YEAR, SCHOOL) values('2222','02/03/2022 ','디지털 대학교')
+SELECT *
+FROM DUAL;
 
 
 

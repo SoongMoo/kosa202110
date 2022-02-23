@@ -38,7 +38,7 @@ public class EmployeesWriteService {
 			educationDTO.setEmpId(employeeCommand.getEmpId());
 			educationDTO.setSchool(school);
 			educationDTO.setSchoolYear(employeeCommand.getSchoolYear()[i]);
-			list.add(educationDTO);
+			lists.add(educationDTO);
 			i++;
 		}
 		employeeMapper.educationInsert(lists);

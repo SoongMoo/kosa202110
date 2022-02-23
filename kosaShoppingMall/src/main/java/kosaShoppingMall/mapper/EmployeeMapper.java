@@ -23,5 +23,4 @@ public interface EmployeeMapper {
 	public Integer employeePwChange(EmployeeDTO dto);
 	public Integer changPw(AuthInfo authInfo);
 	
-;
 }

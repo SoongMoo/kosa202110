@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import kosaShoppingMall.command.LoginCommand;
@@ -18,11 +17,12 @@ import kosaShoppingMall.domain.AuthInfo;
 import kosaShoppingMall.domain.GoodsDTO;
 import kosaShoppingMall.domain.StartEndPageDTO;
 import kosaShoppingMall.mapper.GoodsMapper;
-import kosaShoppingMall.mapper.LoginMapper;
+import kosaShoppingMall.repository.LoginRepository;
 @Service
 public class LoginService {
 	@Autowired
-	LoginMapper loginMapper;
+	//LoginMapper loginMapper;
+	LoginRepository loginRepository;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
@@ -37,7 +37,7 @@ public class LoginService {
 		
 		
 		String aaa="thymeleaf/index";
-		AuthInfo authInfo = loginMapper.loginSelect(loginCommand.getUserId());
+		AuthInfo authInfo = loginRepository.loginSelect(loginCommand.getUserId());
 		
 		if(authInfo != null) {
 			

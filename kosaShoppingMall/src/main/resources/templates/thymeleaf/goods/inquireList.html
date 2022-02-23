@@ -7,7 +7,7 @@
 <script > 
 
 function inquireUpdate(as) {
-	location.href="inquireDelte?unquireNum="+as.val();
+	location.href="inquireDelte?unquireNum="+as;
 }
 $(function(){
 	$("#inquire1").click(function(){
@@ -37,7 +37,7 @@ $(function(){
 		[[${goodsInquireDTO.inquireAnswer}]]
 		</td>
 			<th:block th:if="${session.authInfo.userId == goodsInquireDTO.memberDTO.memberId}">
-			<td><input type="button"  th:onclick="javascript:inquireUpdate(${goodsInquireDTO.inquireNum});" value="삭제 하기"></td>
+			<td><input type="button"  th:onclick="javascript:inquireUpdate('${goodsInquireDTO.inquireNum}');" value="삭제 하기"></td>
 			</th:block>
 	</tr>
 	

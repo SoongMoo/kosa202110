@@ -95,7 +95,8 @@ $(function(){
 </script>
 </head>
 <body>
-<form action="#" name="frm" method="post">
+<form action="checkout" name="frm" method="post">
+<input type="hidden" name="goodsNum" th:value="${goodsCommand.goodsNum}" />
 <table width="800" align = "center" >
 	<tr><td colspan="2" >[[${goodsCommand.goodsName}]] 상품 설명입니다.</td></tr>
 	<tr><td rowspan="6">
@@ -107,7 +108,7 @@ $(function(){
 	<tr><td align="left">가격 : [[${#numbers.formatCurrency(goodsCommand.goodsPrice)}]]원</td></tr>
 	<tr><td align="left">배송비 : <span th:if="${goodsCommand.deliveryCost == 0}" th:text="무료배송"></span>
 						<span th:if="${goodsCommand.deliveryCost != 0}" th:text="${#numbers.formatCurrency(goodsCommand.deliveryCost)}"></span>원</td></tr>
-	<tr><td align="left"><input type="number" size = "3" min = "1" name="PurchaseQty" value="1" id="qty" /> [[${goodsCommand.goodsPrice }]]원</td></tr>
+	<tr><td align="left"><input type="number" size = "3" min = "1" name="purchaseQty" value="1" id="qty" /> [[${goodsCommand.goodsPrice }]]원</td></tr>
 	<tr><td align = "left">총 상품금액 &nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;<span id="tot">[[${goodsCommand.goodsPrice }]]</span>원</td></tr>
 	
 	<tr><td align = "center"><input type="button" value="장바구니" id="cartAdd" /> <input type="submit" value="바로구매" /></td></tr>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.GoodsInquireCommand;
+import kosaShoppingMall.service.goods.CheckoutService;
 import kosaShoppingMall.service.goods.GoodsDetailService;
 import kosaShoppingMall.service.goods.GoodsInquireListService;
 import kosaShoppingMall.service.goods.GoodsInquireWriteService;
@@ -31,7 +32,16 @@ public class CornerController {
 	GoodsInquireListService goodsInquireListService;
 	@Autowired
 	GoodsReviewListService goodsReviewListService;
+	@Autowired
+	CheckoutService checkoutService ;
 	
+	
+	@RequestMapping("checkout")
+	public String checkout(@RequestParam(value="goodsNum") String goodsNum,
+			@RequestParam(value="purchaseQty") Integer purchaseQty, HttpSession session) {
+		checkoutService.execute(goodsNum,purchaseQty, session);
+		return "redirect:/cart/goodsBuy?prodCk="+goodsNum;
+	}
 	
 	@RequestMapping("inquireDelte")
 	public String inquireDelte(@RequestParam(value = "inquireDelte")String inquireDelte) {

@@ -151,7 +151,7 @@ public class GoodsCartController {
 		return "thymeleaf/goods/delPage";
 		 
 	}
-	@RequestMapping(value="/cart/goodsBuy" , method = RequestMethod.POST)
+	@RequestMapping(value="/cart/goodsBuy")
 	public String goodsBuy(@RequestParam(value = "prodCk") String [] goodsNums,
 			HttpSession session, Model model) {
 		goodsBuyService.execute(goodsNums, session, model);

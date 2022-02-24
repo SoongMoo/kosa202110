@@ -251,11 +251,11 @@ public class GoodsController {
 	}
 	//여기까지
 	
-	@RequestMapping("goodsSearch")
-	public String goodsSearch(@RequestParam(value = "goodsWord")String goodsWord , Model model){
-		goodsSearchService.execute(goodsWord ,model);
-		return "thymeleaf/goods/goodsList";
-	}
+//	@RequestMapping("goodsSearch")
+///	public String goodsSearch(@RequestParam(value = "goodsWord")String goodsWord , Model model){
+//		goodsSearchService.execute(goodsWord ,model);
+//		return "thymeleaf/goods/goodsList";
+//	}
 	
 	@RequestMapping(value = "goodsDelete/{goodsNum}",method = RequestMethod.GET)
 	public String goodsDelete(@PathVariable(value="goodsNum")String goodsNum

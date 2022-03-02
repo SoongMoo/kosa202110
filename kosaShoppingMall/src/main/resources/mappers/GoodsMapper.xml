@@ -4,6 +4,31 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosaShoppingMall.mapper.GoodsMapper">
+
+	<update id="goodsInquireUpdate" parameterType="goodsInquireDTO"  >
+		update goods_inquire
+		set  INQUIRE_SUBJECT =#{inquireSubject}  ,  ANSWER_EMAIL  =#{answerEmail}  ,
+		 INQUIRE_KIND =#{inquireKind} ,  INQUIRE_CONTENT =#{inquireContent}
+		where inquire_Num =#{inquireNum}
+	</update>
+	
+	<select id="goodsInquireSelectOne" parameterType="string" resultType="goodsInquireDTO"> 
+		select INQUIRE_NUM  inquireNum ,  INQUIRE_SUBJECT inquireSubject ,  INQUIRE_CONTENT inquireContent ,  INQUIRE_KIND inquireKind , 
+				INQUIRE_ANSWER inquireAnswer , INQUIRE_DATE inquireDate , ANSWER_DATE answerDate , ANSWER_EMAIL answerEmail
+		from goods_inquire
+		where INQUIRE_NUM =#{inquireNum}
+	
+	
+	</select>
+
+	<delete id="goodsInquireDelete" parameterType="string">
+		delete from goods_inquire
+		where inquire_Num = #{inquireNum}
+	
+	
+	</delete>
+
+
 	<update id="setInquireAnswer" parameterType="goodsInquireDTO">
 		update goods_inquire
 		set inquire_Answer = #{inquireAnswer} ,

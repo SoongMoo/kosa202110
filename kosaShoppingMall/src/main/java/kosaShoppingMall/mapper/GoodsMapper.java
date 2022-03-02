@@ -74,6 +74,9 @@ public interface GoodsMapper {
 	public List<GoodsInquireDTO> goodsInquire();
 	public GoodsInquireDTO goodsInquire(String inquireNum);
 	public Integer setInquireAnswer(GoodsInquireDTO goodsInquireDTO);
+	public Integer goodsInquireDelete(String unquireNum);
+	public GoodsInquireDTO goodsInquireSelectOne(String inquireNum);
+	public Integer goodsInquireUpdate(GoodsInquireDTO dto);
 
 }
 

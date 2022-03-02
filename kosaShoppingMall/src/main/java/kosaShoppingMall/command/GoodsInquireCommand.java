@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class GoodsInquireCommand {
+	Integer inquireNum;
 	String goodsNum;
 	String hchkQueryType;
 	String inquireSubject;

@@ -1,24 +1,29 @@
 package kosaShoppingMall.controller;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kosaShoppingMall.command.DeliveryCommand;
+import kosaShoppingMall.domain.GoodsDTO;
 import kosaShoppingMall.service.EmailCheckService;
 import kosaShoppingMall.service.EmpEmailUpdatecheckService;
 import kosaShoppingMall.service.IdcheckService;
 import kosaShoppingMall.service.MemEmailUpdateCkService;
 import kosaShoppingMall.service.goods.DeliveryUpdateService;
 import kosaShoppingMall.service.goods.GoodsCartService;
+import kosaShoppingMall.service.goods.GoodsListService;
 import kosaShoppingMall.service.goods.GoodsWishService;
-import net.sf.json.JSONObject;
 
 @RestController
 public class CheckController {
@@ -36,7 +41,15 @@ public class CheckController {
 	GoodsCartService goodsCartService;
 	@Autowired
 	DeliveryUpdateService deliveryUpdateService;
-	
+	@Autowired
+	GoodsListService goodsListService;
+
+	@RequestMapping(value= "/android",  produces="application/json;charset=utf-8")
+	public @ResponseBody String json(Model model) {
+		Gson gson = new Gson();
+		List<GoodsDTO> dailyBoxOfficeList = goodsListService.execute(model,null,1);
+		return gson.toJson(dailyBoxOfficeList);
+	}
 	
 	@RequestMapping("/goods/deliveryUpdatePro")
 	public String deliveryUpdatePro(DeliveryCommand deliveryCommand) {

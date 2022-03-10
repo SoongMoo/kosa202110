@@ -15,7 +15,7 @@ import kosaShoppingMall.mapper.GoodsMapper;
 public class GoodsListService {
 	@Autowired
 	GoodsMapper goodsMapper;
-	public void execute(Model model, String goodsWord, int page) {
+	public List<GoodsDTO> execute(Model model, String goodsWord, int page) {
 		int limit = 3; 
 		int limitPage = 10 ;
 		Long startRow = ((long)page - 1 ) * limit + 1 ;
@@ -41,6 +41,7 @@ public class GoodsListService {
 		model.addAttribute("goodsWord", goodsWord);
 
 		model.addAttribute("list",list);
+		return list;
 	}
 	
 }

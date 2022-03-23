@@ -67,6 +67,8 @@
 			<section class="wrapper">
 				<div class="inner">
 					<span th:if="${session.authInfo == null}">
+						<a href="jsonMian">jsonTest</a>
+					
 						<form action="/login/loginPro" name="frm" id="frm" method="post" th:object="${loginCommand}" >
 						<table border="1"  align="center" class="alt" >
 						<tr>
@@ -103,6 +105,7 @@
 									<a href="/register/agree">회원가입</a>&nbsp;
 									<a href="/help/findId">아이디 찾기</a>&nbsp;
 									<a href="/help/findPassword">비밀번호 찾기</a>&nbsp;
+						
 								</td>
 							</tr>
 						</table>

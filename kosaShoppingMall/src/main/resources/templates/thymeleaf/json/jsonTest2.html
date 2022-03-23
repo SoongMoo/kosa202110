@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#joinOk").bind("click",function(){
+	    $.ajax({
+	    	type:"post",
+	    	data : {"id":$("#id").val()},
+	    	url:"ajax2",
+	    	success : function(responseData){
+	    		console.log(responseData);
+	    		if(!responseData){
+	    			alert("데이터가 어뵷습니다.");
+	    			return false;
+	    		}
+	    		var html = "이름 : " + responseData.memberName;
+	    			html += "주소 : " + responseData.memberAddr;
+	    		console.log(html);
+	    		$("#container").html(html);
+	    	}
+	    });
+	});
+});
+</script>
+</head>
+<body>
+<div id="container"></div>
+<input type="text" id="id" />
+<button  id="joinOk" >@ResponseBody사용</button>
+<button  onclick="javascript:history.back();" >뒤로가기</button>
+</body>
+</html>

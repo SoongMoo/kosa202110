@@ -11,8 +11,9 @@ import kosaShoppingMall.mapper.MemberMapper;
 public class MemberDetailService {
 	@Autowired
 	MemberMapper memberMapper;
-	public void execute(String memberNum, Model model) {
+	public MemberDTO execute(String memberNum, Model model) {
 		MemberDTO dto = memberMapper.selectDTO(memberNum);
 		model.addAttribute("memberCommand", dto);
+		return dto;
 	}
 }

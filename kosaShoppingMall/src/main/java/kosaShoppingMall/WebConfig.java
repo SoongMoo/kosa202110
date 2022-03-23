@@ -1,15 +1,11 @@
 package kosaShoppingMall;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import kosaShoppingMall.Interceptor.CertificationInterceptor;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @Configuration
 public class WebConfig implements WebMvcConfigurer{	
   
@@ -45,6 +41,14 @@ public class WebConfig implements WebMvcConfigurer{
 		source.setDefaultEncoding("utf-8");
 		return source;
 	}
-	
+
+	@Bean(name="jsonView")
+    public MappingJackson2JsonView jsonView() {
+        return new MappingJackson2JsonView();
+    }
+
 	
 }
+
+
+

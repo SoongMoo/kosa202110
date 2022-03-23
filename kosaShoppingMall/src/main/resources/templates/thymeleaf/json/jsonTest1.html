@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+
+</head>
+<body>
+<div id="container"></div>
+<input type="text" id="id" />
+<button  id="joinOk" >ObjectMapper사용</button>
+<button  onclick="javascript:history.back();" >뒤로가기</button>
+</body>
+</html>
+<script type="text/javascript">
+		$("#joinOk").on("click",function(){
+			$.ajax({
+				url : "ajax1",
+				type: "post",
+				data : { "id" : $("#id").val() },
+				success : function(ObjectMapperResult){
+					var data = JSON.parse(ObjectMapperResult);
+					if(!data){
+			                alert("존재하지 않는 ID입니다");
+			                return false;
+			        }
+					var html = "이름 : " + data.memberName;
+	    			html += "주소 : " + data.memberAddr;
+	    			$("#container").html(html)
+				}
+			});
+		});
+</script>
+

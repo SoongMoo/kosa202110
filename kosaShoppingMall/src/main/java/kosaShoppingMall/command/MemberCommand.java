@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,7 +20,9 @@ public class MemberCommand {
 	@NotBlank(message = "아이디를 입력하여 주세요.")
 	@Size(min = 3, max = 20)
 	String memberId;
-	@NotBlank(message = "비밀번호를 입력하여 주세요.")
+	//@NotBlank(message = "비밀번호를 입력하여 주세요.")
+	@Pattern(regexp = "^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
+			message = "영문자와 숫자 그리고 특수문자가 포함된 8글자 이상")
 	String memberPw;
 	@NotBlank(message = "비밀번호확인 입력하여 주세요.")
 	String memberPwCon;

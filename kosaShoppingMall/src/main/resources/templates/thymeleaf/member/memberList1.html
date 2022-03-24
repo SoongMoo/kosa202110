@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script>
+	$(function(){
+		$.ajax({
+			url : "memList1", // 어디로 갈거니? // 갈 때 데이터
+			type : "get", // 타입은 뭘 쓸거니?
+			datatype : "json",
+			success : function(data) { // 갔다온 다음 결과값
+				console.log(data);
+				var items = "<table border='1'>";
+				items += "<tr><td>번호</td><td>이름</td><td>아이디</td><td>생일</td><td><input type='submit' value='삭제'></td></tr>";
+				$.each(data.lists, function(index, item) { // 데이터 =item // index가 끝날때까지
+					items += "<tr>";
+					items += "<td><a href='memberDetail/" + item.memberNum + "'>" + item.memberNum + "</a></td>";
+					items += "<td>" + item.memberName + "</td>";
+					items += "<td>"+ item.memberId + "</td>";
+					items += "<td>"+ item.memberBirth + "</td>";
+					items += "<td><input type='checkbox' name='memDels' value='" + item.memberNum + "'></td>";
+					items += "</tr>";
+				});
+				items += "<table>"
+				$("#table1").html(items);
+				
+			},
+			error : function() {
+				alert('error');			
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<br />
+	<a href="memberRegist">회원 등록</a>
+	
+	<form action="memList" method="get" >
+		상품 조회 : <input type="search" name="memberWord" size="50"/> 
+				<input type="submit" value="검색" />
+	</form>
+	<form action="memberDels" method="post">
+	<div id="table1">
+	
+	</div>
+	</form>
+</body>
+</html>

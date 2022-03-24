@@ -25,7 +25,7 @@ $("#joinOk").bind("click",function(){
                 return false;
             }
             var html = "이름 : " + data.memberName;
-			html += "주소 : " + data1.memberAddr;
+			html += ", 주소 : " + data.memberAddr;
 			$("#container").html(html)
         }
     });

@@ -47,11 +47,22 @@ $(function(){
 		});
 	});
 });
+
+function aaa(){
+	var reg = /^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+	if(!reg.test($("#memberPw").val())) {
+		alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+		return false;
+	}else {
+		console.log("통과");
+	}
+}
+
 </script>
 </head>
 <body>
 
-<form action="memberJoinAction" method="post" name='frm' id="frm" th:object="${memberCommand}">
+<form action="memberJoinAction" method="post" name='frm' id="frm" th:object="${memberCommand}" >
 <input type="hidden" name="memberNum" value="1234567890"> 
 <span th:if="${#fields.hasErrors('memberNum')}" th:errors="*{memberNum}"></span>
 <input type="hidden" name="memberRegist" value="1999-12-30T00:00"> 

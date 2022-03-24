@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kosaShoppingMall.command.MemberCommand;
 import kosaShoppingMall.service.EmailCheckService;
@@ -18,6 +19,7 @@ import kosaShoppingMall.service.MemEmailUpdateCkService;
 import kosaShoppingMall.service.member.MemberDeleteService;
 import kosaShoppingMall.service.member.MemberDelsService;
 import kosaShoppingMall.service.member.MemberDetailService;
+import kosaShoppingMall.service.member.MemberList1Service;
 import kosaShoppingMall.service.member.MemberListService;
 import kosaShoppingMall.service.member.MemberModifyService;
 import kosaShoppingMall.service.member.MemberNumberService;
@@ -46,11 +48,12 @@ public class MemberConteroller {
 	EmailCheckService emailCheckService;
 	@Autowired
 	MemEmailUpdateCkService memEmailUpdateCkService;
-	
+	/*
 	@ModelAttribute
 	MemberCommand setMemberCommand() {
 		return new MemberCommand();
 	}
+	*/
 	
 	@RequestMapping(value = "memberDels" , method = RequestMethod.POST)
 	public String memberDels(@RequestParam(value = "memDels") String[] memDels) {
@@ -94,13 +97,25 @@ public class MemberConteroller {
 		return "thymeleaf/member/memberDetail";
 	//	return "member/memberDetail";
 	}
-	@RequestMapping("memList")
-	public String memList(@RequestParam(value = "memberWord" ,required = false)String memberWord,
+	@RequestMapping(value="memList1")
+	public ModelAndView memList1(@RequestParam(value = "memberWord" ,required = false)String memberWord,
 			@RequestParam(value="page", defaultValue = "1", required = false) Integer page, Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");	
 		memberListService.execute(model, page ,memberWord);
-		return "thymeleaf/member/memberList";
+	    return mav;
+	}
+	@RequestMapping(value="memList")
+	public String memList(
+			@RequestParam(value = "memberWord" ,required = false)String memberWord,
+			@RequestParam(value="page", defaultValue = "1", required = false) Integer page, Model model
+			) {
+		memberListService.execute(model, page ,memberWord);
+		return "thymeleaf/member/memberList1";
+		//return "thymeleaf/member/memberList";
 		//return "member/memberList";
 	}
+
 	@RequestMapping(value="memberRegist" ,method = RequestMethod.GET)
 	public String memberForm(MemberCommand memberCommand,Model model) {
 		memberNumberService.execute(memberCommand,model);

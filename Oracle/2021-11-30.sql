@@ -1,54 +1,53 @@
---- Å×ÀÌºí º¹»ç (Å×ÀÌºí°ú µ¥ÀÌÅÍ¸¦ º¹»ç)
+--- í…Œì´ë¸” ë³µì‚¬ (í…Œì´ë¸”ê³¼ ë°ì´í„°ë¥¼ ë³µì‚¬)
 create table emp3_7
 as
 select * from employees;
 
 select * from emp3_7;
 
---- Å×ÀÌºí ±¸Á¶¸¸ º¹»ç(µ¥ÀÌÅÍ´Â º¹»ç ¾ÈµÊ)
+--- í…Œì´ë¸” êµ¬ì¡°ë§Œ ë³µì‚¬(ë°ì´í„°ëŠ” ë³µì‚¬ ì•ˆë¨)
 create table emp3_8
 as
 select * from employees where 1=2;
 
 select * from emp3_8;
 
--- employees¿¡ ÀÖ´Â µ¥ÀÌÅÍ¸¦ emp3_8¿¡ º¹»ç
-insert into emp3_8 --- µ¥ÀÌºíÀÌ Á¸ÀçÇÒ ¶§ µ¥ÀÌÅÍº¹»ç 
+-- employeesì— ìžˆëŠ” ë°ì´í„°ë¥¼ emp3_8ì— ë³µì‚¬
+insert into emp3_8 --- ë°ì´ë¸”ì´ ì¡´ìž¬í•  ë•Œ ë°ì´í„°ë³µì‚¬ 
 select * from employees;
 
 select * from emp3_8;
 
---ÀÏºÎ ÄÃ·³¸¸ µ¥ÀÌÅÍ º¹»ç
+--ì¼ë¶€ ì»¬ëŸ¼ë§Œ ë°ì´í„° ë³µì‚¬
 insert into emp3_8(employee_id, last_name, email, hire_date, job_id,salary)
 select employee_id, last_name, email, hire_date, job_id,salary
 from employees;
 
------º¯¼ö ¼±¾ð°ú ÃÊ±âÈ­
+-----ë³€ìˆ˜ ì„ ì–¸ê³¼ ì´ˆê¸°í™”
 DECLARE 
-    Myname VARCHAR2(20);--- º¯¼ö¼±¾ð 
+    Myname VARCHAR2(20);--- ë³€ìˆ˜ì„ ì–¸ 
 BEGIN
     DBMS_OUTPUT.PUT_LINE('My name is: '||Myname);
-    Myname := 'John'; --  °ªÀ» ÃÊ±âÈ­
+    Myname := 'John'; --  ê°’ì„ ì´ˆê¸°í™”
     DBMS_OUTPUT.PUT_LINE('My name is: '||Myname);
 END;
 /
-print Myname;
 
 
 DECLARE 
-    Myname VARCHAR2(20) := 'Rhee';--- º¯¼ö¼±¾ð 
+    Myname VARCHAR2(20) := 'Rhee';--- ë³€ìˆ˜ì„ ì–¸ 
 BEGIN
     DBMS_OUTPUT.PUT_LINE('My name is: '||Myname);
-    Myname := q'\ John's day \'; --  °ªÀ» ´ëÀÔ
+    Myname := q'\ John's day \'; --  ê°’ì„ ëŒ€ìž…
     DBMS_OUTPUT.PUT_LINE('My name is: '||Myname);
-    Myname := q'[ John's day ]'; --  °ªÀ» ´ëÀÔ
+    Myname := q'[ John's day ]'; --  ê°’ì„ ëŒ€ìž…
     DBMS_OUTPUT.PUT_LINE('My name is: '||Myname);
 END;
 /
 
 DECLARE
     first_name varchar2(20) := 'SoongMoo';
-    last_name varchar2(20) default 'Rhee';--default¸¦ ÀÌ¿ëÇØ¼­ º¯¼öÃÊ±âÈ­
+    last_name varchar2(20) default 'Rhee';--defaultë¥¼ ì´ìš©í•´ì„œ ë³€ìˆ˜ì´ˆê¸°í™”
 begin
     DBMS_OUTPUT.PUT_LINE(first_name);
     DBMS_OUTPUT.PUT_LINE(last_name);
@@ -58,13 +57,13 @@ end;
 declare
     valid BOOLEAN := true;
 BEGIN
-    DBMS_OUTPUT.PUT_LINE(valid); --- ¹®ÀÚ³ª ¼ýÀÚ¸¸ Ãâ·Â°¡´É
+    DBMS_OUTPUT.PUT_LINE(valid); --- ë¬¸ìžë‚˜ ìˆ«ìžë§Œ ì¶œë ¥ê°€ëŠ¥
     valid := false;
 end;
 /
 
 
-DECLARE --- %type:Å×ÀÌºíÀÇ ÄÃ·³Å¸ÀÔÀ» »ç¿ëÇÒ ¶§ 
+DECLARE --- %type:í…Œì´ë¸”ì˜ ì»¬ëŸ¼íƒ€ìž…ì„ ì‚¬ìš©í•  ë•Œ 
     empno employees.employee_id%type;
 BEGIN
     empno := 10;
@@ -72,14 +71,14 @@ BEGIN
 end;
 /
 
---- ¹ÙÀÎµå º¯¼ö
+--- ë°”ì¸ë“œ ë³€ìˆ˜
 VARIABLE emp_salary NUMBER
 BEGIN
     select salary into :emp_salary
     from employees where employee_id = 107;
 end;
 /
-print emp_salary; --- ¹ÙÀÎµå º¯¼ö¸¦ »ç¿ëÇÑ °æ¿ì ÇÁ·Î½ÃÁ®°¡ Á¾·áµÈ ÈÄ¿¡µµ »ç¿ë°¡´É
+print emp_salary; --- ë°”ì¸ë“œ ë³€ìˆ˜ë¥¼ ì‚¬ìš©í•œ ê²½ìš° í”„ë¡œì‹œì ¸ê°€ ì¢…ë£Œëœ í›„ì—ë„ ì‚¬ìš©ê°€ëŠ¥
 select * from employees
 where salary = :emp_salary;
 
@@ -96,17 +95,17 @@ print lname
     
 
 VARIABLE deptno NUMBER
-SET AUTOPRINT ON --- ¹ÙÀÎµå º¯¼ö°¡ °¡Áø °ªÀ» Ãâ·Â
+SET AUTOPRINT ON --- ë°”ì¸ë“œ ë³€ìˆ˜ê°€ ê°€ì§„ ê°’ì„ ì¶œë ¥
 BEGIN
 SELECT department_id INTO :deptno
 FROM employees WHERE employee_id = 100; 
 END;
 /
 
---- PL/SQL ·¹ÄÚµå »ý¼º
--- ÇÊµå ¸ðÀ½À» ³í¸®Àû ´ÜÀ§·Î Ã³¸®
+--- PL/SQL ë ˆì½”ë“œ ìƒì„±
+-- í•„ë“œ ëª¨ìŒì„ ë…¼ë¦¬ì  ë‹¨ìœ„ë¡œ ì²˜ë¦¬
 DECLARE
-    TYPE emp_record_type  is RECORD( --- »ç¿ëÀÚ ÀÚ·áÇü
+    TYPE emp_record_type  is RECORD( --- ì‚¬ìš©ìž ìžë£Œí˜•
         employee_id NUMBER  NOT NULL := 100, 
         last_name employees.last_name%TYPE,
         job_id employees.job_id%TYPE
@@ -123,7 +122,7 @@ end;
 /
 
 DECLARE
-    TYPE emp_record_type  is RECORD( --- »ç¿ëÀÚ ÀÚ·áÇü
+    TYPE emp_record_type  is RECORD( --- ì‚¬ìš©ìž ìžë£Œí˜•
         employee_id NUMBER  NOT NULL := 100, 
         last_name employees.last_name%TYPE,
         job_id employees.job_id%TYPE
@@ -140,8 +139,8 @@ end;
 /
 
 --- %ROWTYPE
--- ±âº» µ¥ÀÌÅÍº£ÀÌ½º ¿­°ú µ¥ÀÌÅÍ À¯Çü
--- SELECT * ¹®À» »ç¿ëÇÏ¿© ÇàÀ» °Ë»öÇÒ ¶§ À¯¿ëÇÕ´Ï´Ù.
+-- ê¸°ë³¸ ë°ì´í„°ë² ì´ìŠ¤ ì—´ê³¼ ë°ì´í„° ìœ í˜•
+-- SELECT * ë¬¸ì„ ì‚¬ìš©í•˜ì—¬ í–‰ì„ ê²€ìƒ‰í•  ë•Œ ìœ ìš©í•©ë‹ˆë‹¤.
 DECLARE
     emp_rec employees%ROWTYPE;
 BEGIN
@@ -168,7 +167,7 @@ end;
     
 select * from emp3_7 where employee_id = 178;
 
---- ·¹ÄÚµå¸¦ »ç¿ëÇÏ¿© Å×ÀÌºíÀÇ Çà °»½Å
+--- ë ˆì½”ë“œë¥¼ ì‚¬ìš©í•˜ì—¬ í…Œì´ë¸”ì˜ í–‰ ê°±ì‹ 
 DECLARE 
     emp_rec emp3_7%rowtype;
 BEGIN
@@ -180,12 +179,12 @@ end;
 /
 select * from emp3_7 where employee_id = 100;
 
--- INDEX BY Å×ÀÌºí : 
--- Á¤¼ö ¶Ç´Â ¹®ÀÚ¿­ µ¥ÀÌÅÍ À¯ÇüÀÇ Primary Key 
---   : BINARY_INTEGER ¹× PLS_INTEGER : Å©±â ÀÛ¾Æ¾ß ÇÏ¹Ç·Î
+-- INDEX BY í…Œì´ë¸” : 
+-- ì •ìˆ˜ ë˜ëŠ” ë¬¸ìžì—´ ë°ì´í„° ìœ í˜•ì˜ Primary Key 
+--   : BINARY_INTEGER ë° PLS_INTEGER : í¬ê¸° ìž‘ì•„ì•¼ í•˜ë¯€ë¡œ
 DECLARE
     TYPE dept_table_type IS TABLE OF
-        departments%ROWTYPE -- departments¿¡ ÀÖ´Â ¸ðµç ÄÃ·³
+        departments%ROWTYPE -- departmentsì— ìžˆëŠ” ëª¨ë“  ì»¬ëŸ¼
         INDEX BY PLS_INTEGER;
     dept_table dept_table_type;
     max_count NUMBER(3) := 20;
@@ -223,13 +222,13 @@ DECLARE
         select * from employees where department_id = &deptid;
     emp employees%rowtype;
 BEGIN
-    if not emp_cursor%isopen then -- Ä¿¼­°¡ ¿­·Á ÀÖ´ÂÁö Å×½ºÆ®
+    if not emp_cursor%isopen then -- ì»¤ì„œê°€ ì—´ë ¤ ìžˆëŠ”ì§€ í…ŒìŠ¤íŠ¸
         OPEN emp_cursor;
     end if;
     loop 
         FETCH emp_cursor into emp;
-        -- %rowcount:Ä¿¼­°¡ ¿òÁ÷ÀÏ ¶§ ¸¶´Ù 1¾¿ Áõ°¡ÇÏ´Â °ªÀ» °¡Áø´Ù.
-        --           Áö±Ý±îÁö ¹ÝÈ¯µÈ ÇàÀÇ ¼ö
+        -- %rowcount:ì»¤ì„œê°€ ì›€ì§ì¼ ë•Œ ë§ˆë‹¤ 1ì”© ì¦ê°€í•˜ëŠ” ê°’ì„ ê°€ì§„ë‹¤.
+        --           ì§€ê¸ˆê¹Œì§€ ë°˜í™˜ëœ í–‰ì˜ ìˆ˜
         EXIT WHEN emp_cursor%notfound or emp_cursor%rowcount > 10;
         DBMS_OUTPUT.PUT_LINE(
             emp.first_name || '  ' || emp.last_name||' '
@@ -239,7 +238,7 @@ BEGIN
 end;
 /
 
---- subquery¸¦ »ç¿ëÇÏ´Â Ä¿¼­ FOR ·çÇÁ
+--- subqueryë¥¼ ì‚¬ìš©í•˜ëŠ” ì»¤ì„œ FOR ë£¨í”„
 BEGIN
     for emp_record in (select employee_id, last_name
                        from employees where department_id = 30) loop
@@ -250,7 +249,7 @@ end;
 /
 
 
---- ÆÄ¶ó¹ÌÅÍ°¡ Æ÷ÇÔµÈ Ä¿¼­
+--- íŒŒë¼ë¯¸í„°ê°€ í¬í•¨ëœ ì»¤ì„œ
 DECLARE
     CURSOR emp_cursor(deptno NUMBER) is
         SELECT * FROM employees
@@ -280,8 +279,8 @@ end;
 /
 
 
---- ÆÄ¶ó¹ÌÅÍ°¡ ÀÖ´Â Ä¿¼­¸¦ ¸¸µé ¶§ ºÎ¼­ ¹øÈ£¿Í Á÷¹«¸¦ ¹Þµµ·Ï ÇÏ°í
---- ÀÌ¸§, Á÷¹« ºÎ¼­¹øÈ£¸¦ ºÎ¼­¹øÈ£¿Í Á÷¹«¿¡ ÇØ´çÇÏ´Â »ç¿øÀÌ Ãâ·ÂµÇ°Ô ÇÏ¼¼¿ä.
+--- íŒŒë¼ë¯¸í„°ê°€ ìžˆëŠ” ì»¤ì„œë¥¼ ë§Œë“¤ ë•Œ ë¶€ì„œ ë²ˆí˜¸ì™€ ì§ë¬´ë¥¼ ë°›ë„ë¡ í•˜ê³ 
+--- ì´ë¦„, ì§ë¬´ ë¶€ì„œë²ˆí˜¸ë¥¼ ë¶€ì„œë²ˆí˜¸ì™€ ì§ë¬´ì— í•´ë‹¹í•˜ëŠ” ì‚¬ì›ì´ ì¶œë ¥ë˜ê²Œ í•˜ì„¸ìš”.
 DECLARE
     CURSOR emp_cursor(deptno NUMBER, jobid varchar2) is
         SELECT * FROM employees
@@ -312,7 +311,7 @@ end;
 /
 
 select * from emp3_7
-for update nowait; --- Àá±Ý
+for update nowait; --- ìž ê¸ˆ
 
 DECLARE
     CURSOR emp_cursor IS 
@@ -341,7 +340,7 @@ begin
         EXIT when emp_cursor%notfound;
         update emp3_7 
         set salary = salary * 1.1
-        where  CURRENT of emp_cursor; -- ÇöÀç Ä¿¼­¿¡ ÇØ´çÇÏ´Â ÇàÀ» update
+        where  CURRENT of emp_cursor; -- í˜„ìž¬ ì»¤ì„œì— í•´ë‹¹í•˜ëŠ” í–‰ì„ update
     end loop;
 end;
 /
@@ -354,13 +353,13 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE (lname);
     EXCEPTION 
     when TOO_MANY_ROWS then
-    DBMS_OUTPUT.PUT_LINE('ÇàÀÇ ¼ö°¡ ³Ê¹« ¸¹¾Æ¿ä');     
+    DBMS_OUTPUT.PUT_LINE('í–‰ì˜ ìˆ˜ê°€ ë„ˆë¬´ ë§Žì•„ìš”');     
     when NO_DATA_FOUND then
-    DBMS_OUTPUT.PUT_LINE('µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.');   
+    DBMS_OUTPUT.PUT_LINE('ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.');   
     when INVALID_CURSOR or  ZERO_DIVIDE  or DUP_VAL_ON_INDEX then
-    DBMS_OUTPUT.PUT_LINE('Ä¿¼­°¡ Á¤È®ÇÏÁö ¾Ê´Ù. 0À¸·Î ³ª´©Áö ¸øÇÔ.');
+    DBMS_OUTPUT.PUT_LINE('ì»¤ì„œê°€ ì •í™•í•˜ì§€ ì•Šë‹¤. 0ìœ¼ë¡œ ë‚˜ëˆ„ì§€ ëª»í•¨.');
     WHEN OTHERS THEN
-    DBMS_OUTPUT.PUT_LINE('³ª¸ÓÁö.');
+    DBMS_OUTPUT.PUT_LINE('ë‚˜ë¨¸ì§€.');
 END;
 /
 
@@ -368,14 +367,14 @@ create SEQUENCE dept_NUM
 INCREMENT BY 10
 start WITH 400;
 
--- ÇÁ·Î½ÃÀú ¹× ÇÔ¼ö
+-- í”„ë¡œì‹œì € ë° í•¨ìˆ˜
 CREATE or REPLACE PROCEDURE add_dept 
 is
     dept_id dept.department_id%TYPE;
     dept_name dept.department_name%TYPE;
 BEGIN
     dept_id := 320;
-    dept_name:='°³¹ßºÎ';
+    dept_name:='ê°œë°œë¶€';
     INSERT INTO dept(department_id, department_name)
     values(DEPT_NUM.nextval, dept_name);
     DBMS_OUTPUT.PUT_LINE(' Inserted '|| SQL%ROWCOUNT ||' row ');
@@ -452,11 +451,11 @@ end;
 /
 exec emp_del_proc(300);
 
---- 1. ÇÁ·Î½ÃÁ®¸¦ ÀÌ¿ëÇØ¼­ emp3_7¿¡ Á÷¿øÁ¤º¸¸¦ ÀÔ·ÂÇÏ¼¼¿ä.
+--- 1. í”„ë¡œì‹œì ¸ë¥¼ ì´ìš©í•´ì„œ emp3_7ì— ì§ì›ì •ë³´ë¥¼ ìž…ë ¥í•˜ì„¸ìš”.
 
---- 2. jobs_examÀ» ¸¸µé¾î¼­ 'AD_PRES'¸¦ ÇÁ·Î½ÃÀú¿¡ ÀÎÀÚ°ªÀ¸·Î Àü´ÞÇÏ°í
---- ¾øÀ¸¸é jobs ¿¡¼­  insert ÀÖÀ¸¸é min_salary´Â 2000, max_salary´Â 6000
---- À¸·Î update ÇÏ½Ã¿À
+--- 2. jobs_examì„ ë§Œë“¤ì–´ì„œ 'AD_PRES'ë¥¼ í”„ë¡œì‹œì €ì— ì¸ìžê°’ìœ¼ë¡œ ì „ë‹¬í•˜ê³ 
+--- ì—†ìœ¼ë©´ jobs ì—ì„œ  insert ìžˆìœ¼ë©´ min_salaryëŠ” 2000, max_salaryëŠ” 6000
+--- ìœ¼ë¡œ update í•˜ì‹œì˜¤
 --- EXEC my_new_job_proc ('AD_PRES', 2000, 6000);
 
 

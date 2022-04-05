@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kosaShoppingMall.command.DeliveryCommand;
 import kosaShoppingMall.command.FileInfo;
@@ -309,11 +313,38 @@ public class GoodsController {
 		goodsWriteService.execute(goodsCommand, request);
 		return "redirect:goodsList";
 	}
-	
+	@RequestMapping(value="goodsRegist1" ,method = RequestMethod.POST)
+	public Map<String, Object> goodsRegist1(
+			@RequestParam(value = "body") Map<String, Object> body,
+			@RequestParam(value = "goodsImages",required = false) List<MultipartFile> goodsImages,
+			@RequestParam(value = "goodsMain",required = false) MultipartFile goodsMain
+			,HttpServletRequest request) {
+		
+		GoodsCommand goodsCommand = new GoodsCommand();
+		goodsCommand.setDeliveryCost(Integer.parseInt(body.get("deliveryCost").toString()));
+		goodsCommand.setGoodsContent(body.get("goodsContent").toString());
+		goodsCommand.setGoodsName(body.get("goodsName").toString());
+		goodsCommand.setGoodsNum(body.get("goodsNum").toString());
+		goodsCommand.setGoodsPrice(Integer.parseInt(body.get("goodsPrice").toString()));
+		goodsCommand.setGoodsMain(goodsMain);
+		Integer size = goodsImages.size();
+		MultipartFile [] mf = new MultipartFile[size];
+		
+		for(int i = 0 ; i < size ; i++) {
+			mf[i] = goodsImages.get(i);
+		}
+		goodsCommand.setGoodsImages(mf);
+		goodsWriteService.execute(goodsCommand, request);
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("SUCCESS", true);
+		return result;
+	}
 	@RequestMapping(value="goodsRegist", method = RequestMethod.GET)
 	public String goods(GoodsCommand goodsCommand) {
 		goodsAutoNum.execute(goodsCommand);
-		return "thymeleaf/goods/goodsForm";
+		return "thymeleaf/goods/goodsForm2";
+		//return "thymeleaf/goods/goodsForm";
 	}
 	
 	@RequestMapping("goodsList")

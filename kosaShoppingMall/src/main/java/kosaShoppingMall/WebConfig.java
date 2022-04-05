@@ -23,9 +23,9 @@ public class WebConfig implements WebMvcConfigurer{
 		list.add("/help/**/*");
 		list.add("/login/**/*");
 		list.add("/corner/**/*");
-		registry.addInterceptor(new CertificationInterceptor())
+		//registry.addInterceptor(new CertificationInterceptor())
 		//        .addPathPatterns("/**/*") //모든 주소
-    			.excludePathPatterns(list);
+    	//		.excludePathPatterns(list);
 		// 로그인 세션이 없어도 되는 주소들을 적어 준다.
 	}
 	

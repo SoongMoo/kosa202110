@@ -83,17 +83,17 @@
 	</ul>
 </div>
 <div id="MemberInfo">
-<form action="goodsRegist" method="post" th:object="${goodsCommand}" enctype="multipart/form-data" id="frm">
+<form action="goodsRegist" method="post" enctype="multipart/form-data" id="frm">
 <table border=1>
 	<tr><th>제품 번호</th>
-		<td><input type="text" name="goodsNum" id="goodsNum" th:value="${goodsCommand.goodsNum}"  readonly="readonly" /><br/>
+		<td><input type="text" name="goodsNum" id="goodsNum"   readonly="readonly" /><br/>
 			
 			goods10001번 부터 자동 부여
 		</td>
 	</tr>
 	<tr>
 		<th>상품명</th>
-		<td><input type="text" name="goodsName" id="goodsName" th:value="${goodsCommand.goodsName}" /><br/>
+		<td><input type="text" name="goodsName" id="goodsName"  /><br/>
 			
 		</td>
 	</tr>
@@ -106,7 +106,7 @@
 	<tr>
 		<th>상품 내용</th>
 		<td>
-			<br/><textarea rows="6" cols="30" id="goodsContent" name="goodsContent">[[${goodsCommand.goodsName}]]</textarea>
+			<br/><textarea rows="6" cols="30" id="goodsContent" name="goodsContent"></textarea>
 			
 		 </td>
 	</tr>

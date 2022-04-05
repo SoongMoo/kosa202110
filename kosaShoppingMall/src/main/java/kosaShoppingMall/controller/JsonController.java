@@ -82,7 +82,7 @@ public class JsonController {
 	}
 	
 	@RequestMapping(value= "/ajax3")
-	public ModelAndView ajax3( @RequestParam("id") String id, Model model)  {  
+	public @ResponseBody ModelAndView ajax3( @RequestParam("id") String id, Model model)  {  
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");	
 		//memberDetailService.execute(id, model);

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kosaShoppingMall.command.DeliveryCommand;
@@ -314,7 +315,7 @@ public class GoodsController {
 		return "redirect:goodsList";
 	}
 	@RequestMapping(value="goodsRegist1" ,method = RequestMethod.POST)
-	public Map<String, Object> goodsRegist1(
+	public @ResponseBody Map<String, Object> goodsRegist1(
 			@RequestParam(value = "body") Map<String, Object> body,
 			@RequestParam(value = "goodsImages",required = false) List<MultipartFile> goodsImages,
 			@RequestParam(value = "goodsMain",required = false) MultipartFile goodsMain

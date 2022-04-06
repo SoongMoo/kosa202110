@@ -9,41 +9,13 @@
 
 <script type="text/javascript">
 	$(function(){
-		$("#frm").on("submit",function(){
-			var body = {   
-				    "goodsNum"    : $("#goodsNum").val(),
-				    "goodsName"     : $("#goodsName").val(),
-				    "goodsPrice"  :  $("#goodsPrice").val(),
-				    "goodsContent" : $("#goodsContent").val(),
-				    "deliveryCost" :$("#deliveryCost").val()
-			}
-			var formData = new FormData();
-			var goodsMain = $('.goodsMain');
-			var goodsImages = $(".goodsImages");
-			if (goodsImages.files.length > 0) {
-				for (var j = 0; j < goodsImages.files.length; j++) {
-					console.log(" fgoodsImages.files[j] :::"+ goodsImages.files[j]);
-					
-					// formData에 'file'이라는 키값으로 fileInput 값을 append 시킨다.  
-					formData.append('goodsMain', goodsImages.files[j]);
-				}
-			}
+		$("#btn").on("click",function(){
 			
+			var formData = new FormData($("#frm")[0]);
 			
-			for (var i = 0; i < goodsImages.length; i++) {
-				if (goodsImages[i].files.length > 0) {
-					for (var j = 0; j < goodsImages[i].files.length; j++) {
-						console.log(" fileInput[i].files[j] :::"+ goodsImages[i].files[j]);
-						
-						// formData에 'goodsImages'이라는 키값으로 goodsImages 값을 append 시킨다.  
-						formData.append('goodsImages', goodsImages[i].files[j]);
-					}
-				}
-			}
-			// 'goodsInfo'라는 이름으로 위에서 담은 data를 formData에 append한다. type은 json  
-			formData.append('body', new Blob([ JSON.stringify(body) ], {type : "application/json"}));
 			
 			var option = {
+					type: "POST",
 				    dataType : 'json', //JSON형태로 전달도 가능합니다.
 				    url: "goodsRegist1",
 				    data: formData,
@@ -53,6 +25,7 @@
 				    //processData : false로 선언 시 formData를 string으로 변환하지 않음
 				    enctype : 'multipart/form-data',  // * 중요 *
 				    success: function(data) {
+				    	console.log(data);
 				    	if (data.SUCCESS == true) {
 				         	alert("성공");
 				         	location.href="goodsList";
@@ -61,10 +34,11 @@
 				        }
 				    },
 				    error: function(res){
+				    	console.log(res);
 				        alert("에러가 발생했습니다.")
 				    }
 			}
-			$(this).ajaxSubmit(option); //옵션값대로 ajax비동기 동작을 시키고
+			$.ajax(option); //옵션값대로 ajax비동기 동작을 시키고
 		    return false; //기본 동작인 submit의 동작을 막아 페이지 reload를 막는다.
 		});
 	});
@@ -83,7 +57,7 @@
 	</ul>
 </div>
 <div id="MemberInfo">
-<form action="goodsRegist" method="post" enctype="multipart/form-data" id="frm">
+<form  id="frm">
 <table border=1>
 	<tr><th>제품 번호</th>
 		<td><input type="text" name="goodsNum" id="goodsNum" th:value="${goodsCommand.goodsNum}"  readonly="readonly" /><br/>
@@ -131,7 +105,7 @@
 	</tr>
 	<tr>
 		<th colspan="2" > 
-			<input type="submit" value="상품등록" />
+			<input type="button" id="btn" value="상품등록" />
 			<input type="reset" value="다시 작성" />
 		</th>
 	</tr>

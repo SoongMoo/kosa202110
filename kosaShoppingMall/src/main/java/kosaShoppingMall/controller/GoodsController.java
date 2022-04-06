@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -320,22 +322,24 @@ public class GoodsController {
 		return "redirect:goodsList";
 	}
 	@RequestMapping(value="goodsRegist1" ,method = RequestMethod.POST)
+	
 	public @ResponseBody Map<String, Object> goodsRegist1(
-			@RequestParam(value = "body") Map<String, Object> body,
-			@RequestParam(value = "goodsImages",required = false) List<MultipartFile> goodsImages,
-			@RequestParam(value = "goodsMain",required = false) MultipartFile goodsMain
-			,HttpServletRequest request) {
+			MultipartHttpServletRequest request) {
 		
 		GoodsCommand goodsCommand = new GoodsCommand();
-		goodsCommand.setDeliveryCost(Integer.parseInt(body.get("deliveryCost").toString()));
-		goodsCommand.setGoodsContent(body.get("goodsContent").toString());
-		goodsCommand.setGoodsName(body.get("goodsName").toString());
-		goodsCommand.setGoodsNum(body.get("goodsNum").toString());
-		goodsCommand.setGoodsPrice(Integer.parseInt(body.get("goodsPrice").toString()));
+		goodsCommand.setDeliveryCost(Integer.parseInt(request.getParameter("deliveryCost")));
+		goodsCommand.setGoodsContent(request.getParameter("goodsContent"));
+		goodsCommand.setGoodsName(request.getParameter("goodsName"));
+		goodsCommand.setGoodsNum(request.getParameter("goodsNum"));
+		goodsCommand.setGoodsPrice(Integer.parseInt(request.getParameter("goodsPrice")));
+		
+		MultipartFile goodsMain = request.getFile("goodsMain");
+		List<MultipartFile> goodsImages = request.getFiles("goodsImages");
+		
 		goodsCommand.setGoodsMain(goodsMain);
+		
 		Integer size = goodsImages.size();
 		MultipartFile [] mf = new MultipartFile[size];
-		
 		for(int i = 0 ; i < size ; i++) {
 			mf[i] = goodsImages.get(i);
 		}
@@ -343,7 +347,7 @@ public class GoodsController {
 		goodsWriteService.execute(goodsCommand, request);
 		
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("SUCCESS", 200);
+		result.put("SUCCESS", true);
 		return result;
 	}
 	@RequestMapping(value="goodsRegist2" ,method = RequestMethod.POST)
@@ -379,8 +383,8 @@ public class GoodsController {
 	@RequestMapping(value="goodsRegist", method = RequestMethod.GET)
 	public String goods(GoodsCommand goodsCommand) {
 		goodsAutoNum.execute(goodsCommand);
-		return "thymeleaf/goods/goodsForm3";
-		//return "thymeleaf/goods/goodsForm2";
+		//return "thymeleaf/goods/goodsForm3";
+		return "thymeleaf/goods/goodsForm2";
 		//return "thymeleaf/goods/goodsForm";
 	}
 	

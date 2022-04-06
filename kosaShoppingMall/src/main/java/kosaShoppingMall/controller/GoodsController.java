@@ -18,11 +18,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import kosaShoppingMall.command.DeliveryCommand;
 import kosaShoppingMall.command.FileInfo;
@@ -341,10 +346,41 @@ public class GoodsController {
 		result.put("SUCCESS", true);
 		return result;
 	}
+	@RequestMapping(value="goodsRegist2" ,method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> goodsRegist1(
+			@RequestBody Map<String, Object> param){
+		//전달 된 값
+		Map<String, Object> head =(Map<String, Object>) param.get("head");
+		Map<String, Object> body =(Map<String, Object>) param.get("body");
+		
+		System.out.println(head.get("screen_id"));
+		System.out.println(body.get("goodsNum"));
+		System.out.println(body.get("goodsName"));
+		System.out.println(body.get("goodsPrice"));
+		System.out.println(body.get("goodsContent"));
+		System.out.println(body.get("deliveryCost"));
+		
+		// 결과 확인 리턴 값
+		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> head1 = new HashMap<String, Object>();
+		head1.put("screen_id", "174");
+		head1.put("result_code", "200");
+		
+		Map<String, Object> body1 = new HashMap<String, Object>();
+		body1.put("rsltCode", "0000");
+		body1.put("rsltMsg", "Success.");
+		body1.put("userNm", "홍길동");
+		
+		result.put("head", head1);
+		result.put("body", body1);
+		result.put("SUCCESS", true);
+		return result;
+	}
 	@RequestMapping(value="goodsRegist", method = RequestMethod.GET)
 	public String goods(GoodsCommand goodsCommand) {
 		goodsAutoNum.execute(goodsCommand);
-		return "thymeleaf/goods/goodsForm2";
+		return "thymeleaf/goods/goodsForm3";
+		//return "thymeleaf/goods/goodsForm2";
 		//return "thymeleaf/goods/goodsForm";
 	}
 	

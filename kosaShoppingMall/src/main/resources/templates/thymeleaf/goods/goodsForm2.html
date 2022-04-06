@@ -53,7 +53,7 @@
 				    //processData : false로 선언 시 formData를 string으로 변환하지 않음
 				    enctype : 'multipart/form-data',  // * 중요 *
 				    success: function(data) {
-				    	if (result.SUCCESS == true) {
+				    	if (data.SUCCESS == true) {
 				         	alert("성공");
 				         	location.href="goodsList";
 				        } else {
@@ -86,7 +86,7 @@
 <form action="goodsRegist" method="post" enctype="multipart/form-data" id="frm">
 <table border=1>
 	<tr><th>제품 번호</th>
-		<td><input type="text" name="goodsNum" id="goodsNum"   readonly="readonly" /><br/>
+		<td><input type="text" name="goodsNum" id="goodsNum" th:value="${goodsCommand.goodsNum}"  readonly="readonly" /><br/>
 			
 			goods10001번 부터 자동 부여
 		</td>

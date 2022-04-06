@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/static/css/memberLayout.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").on("click",function(){
+		var jsonData = {
+				"head" : {
+			            "screen_id": "174"
+			        },
+			    "body" :  {
+					"goodsNum"    : $("#goodsNum").val(),
+				    "goodsName"     : $("#goodsName").val(),
+				    "goodsPrice"  :  $("#goodsPrice").val(),
+				    "goodsContent" : $("#goodsContent").val(),
+				    "deliveryCost" :$("#deliveryCost").val()	
+				}     
+		}
+		var option = {
+				type: "POST",
+			    dataType : 'json', //JSON형태로 전달도 가능합니다.
+			    url:"goodsRegist2",
+			    data: JSON.stringify(jsonData),
+			    contentType: "application/json",
+			    success: function(result1) {
+			    	console.log(result1);
+			    	if (result1.SUCCESS == true) {
+			         	alert("성공");
+			        } else {
+			         	alert("실패 : 억울해...");
+			        }
+			    },
+			    error: function(res){
+			        alert("에러가 발생했습니다.")
+			    }
+		}
+		$.ajax(option); //옵션값대로 ajax비동기 동작을 시키고
+	    return false;
+	});
+});
+</script>
+</head>
+<body>
+<div id="wrapper">
+<div id="leftMenu">
+	<ul>
+		<li><a href="goodsList">상품 리스트</a></li>
+		<li><a href="goodsRegist">상품 등록</a></li>
+		<li><a href="goodsIpgoList">상품 입고 현황</a></li>
+		<li><a href="goodsIpgo">상품 입고</a></li>
+		<li><a href="purchaseList">주문 내역</a></li>
+		<li><a href="goodsQuestion">상품 문의</a></li>
+	</ul>
+</div>
+<div id="MemberInfo">
+<form  id="frm">
+<table border=1>
+	<tr><th>제품 번호</th>
+		<td><input type="text" name="goodsNum" id="goodsNum" th:value="${goodsCommand.goodsNum}"   readonly="readonly" /><br/>
+			goods10001번 부터 자동 부여
+		</td>
+	</tr>
+	<tr>
+		<th>상품명</th>
+		<td><input type="text" name="goodsName" id="goodsName"/><br/>
+		</td>
+	</tr>
+	<tr>
+		<th>상품 가격</th>
+		<td><input type="number" name="goodsPrice" id="goodsPrice" min="1000" step="1000" value="1000"/><br/>
+		</td>
+	</tr>
+	<tr>
+		<th>상품 내용</th>
+		<td>
+			<br/><textarea rows="6" cols="30" name="goodsContent" id="goodsContent"></textarea>
+			
+		 </td>
+	</tr>
+	<tr>
+		<th>배송비</th>
+		<td><input type="number" name="deliveryCost" id="deliveryCost" min="2000" step="500" value="2000"/><br/>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2" > 
+			<input type="button" id="btn" value="상품등록" />
+			<input type="reset" value="다시 작성" />
+		</th>
+	</tr>
+</table>
+</form>
+</div>
+</div>
+</body>
+</html>

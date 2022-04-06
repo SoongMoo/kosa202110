@@ -338,7 +338,7 @@ public class GoodsController {
 		goodsWriteService.execute(goodsCommand, request);
 		
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("SUCCESS", true);
+		result.put("SUCCESS", 200);
 		return result;
 	}
 	@RequestMapping(value="goodsRegist", method = RequestMethod.GET)

@@ -1,5 +1,6 @@
 package kosaShoppingMall.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -326,6 +328,7 @@ public class GoodsController {
 	public @ResponseBody Map<String, Object> goodsRegist1(
 			MultipartHttpServletRequest request) {
 		
+		
 		GoodsCommand goodsCommand = new GoodsCommand();
 		goodsCommand.setDeliveryCost(Integer.parseInt(request.getParameter("deliveryCost")));
 		goodsCommand.setGoodsContent(request.getParameter("goodsContent"));
@@ -334,6 +337,35 @@ public class GoodsController {
 		goodsCommand.setGoodsPrice(Integer.parseInt(request.getParameter("goodsPrice")));
 		
 		MultipartFile goodsMain = request.getFile("goodsMain");
+		/*
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("deliveryCost", request.getParameter("deliveryCost"));
+		map.put("deliveryCost", request.getParameter("deliveryCost"));
+		map.put("deliveryCost", request.getParameter("deliveryCost"));
+		
+		
+		String fileDir = "/view/goods/upload";
+		String filePath = request.getServletContext().getRealPath(fileDir);
+		
+		
+		String originalFile = goodsMain.getOriginalFilename();
+		
+		//.png
+		String extension = originalFile.substring(originalFile.lastIndexOf("."));
+		
+		//7b2582aca35e4525b4a579d84e8b6c9d
+		String storeName = UUID.randomUUID().toString().replace("-", "");
+		
+		String storeFileName=storeName + extension;
+		
+		File file = new File(filePath + "/" + storeFileName);
+		try {
+			goodsMain.transferTo(file); // 파일을 저장
+		}catch(Exception e) {e.printStackTrace();}
+		map.put("originalFile", originalFile);
+		map.put("originalFile",storeFileName);
+		*/
+		
 		List<MultipartFile> goodsImages = request.getFiles("goodsImages");
 		
 		goodsCommand.setGoodsMain(goodsMain);

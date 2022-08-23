@@ -6,3 +6,12 @@ grant resource,create session, connect, dba  to 사용자계정;
 
 
 alter user 사용자계정 default tablespace users quota unlimited on users;
+
+
+
+
+샘플 데이터 : 
+https://github.com/oracle-samples/db-sample-schemas/releases
+
+맥에 오라클 설치 : 
+https://goldencrab.tistory.com/entry/oracle-%EC%84%A4%EC%B9%98
